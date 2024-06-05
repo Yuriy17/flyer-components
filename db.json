@@ -1,0 +1,29 @@
+{
+  "airports": [
+    {
+      "id": 1,
+      "name": "Los Angeles International Airport",
+      "code": "LAX"
+    },
+    {
+      "id": 2,
+      "name": "John F. Kennedy International Airport",
+      "code": "JFK"
+    },
+    {
+      "id": 3,
+      "name": "Chicago O'Hare International Airport",
+      "code": "ORD"
+    },
+    {
+      "id": 4,
+      "name": "San Francisco International Airport",
+      "code": "SFO"
+    },
+    {
+      "id": 5,
+      "name": "Miami International Airport",
+      "code": "MIA"
+    }
+  ]
+}
