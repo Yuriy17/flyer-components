@@ -1,7 +1,10 @@
-@use './_vars.scss';
-@use './_loading-icon.scss';
+//flyers styles
 @use './_flyer-styles.scss';
 @use './_flyer-form.scss';
+
+@use './config/_vars.scss';
+@use './components/_loading-icon.scss';
+@use './layouts/_nav.scss';
 
 body {
     font-family: Arial, sans-serif;
@@ -28,4 +31,17 @@ body {
 }
 .search-input {
     position: relative;
+}
+.link {
+    color: var(--sl-color-neutral-1000);
+    transition: color 0.3s ease-in-out;
+    &.active {
+        color: var(--sl-color-primary-600);
+    }
+    &:hover {
+        color: var(--sl-color-primary-400);
+    }
+    &:focus, &:active {
+        color: var(--sl-color-primary-200);
+    }
 }

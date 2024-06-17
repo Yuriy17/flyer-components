@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{> head}}
+</head>
+
+<body>
+  <main>
+    {{> header }}
+    {{> preloader }}
+    <!-- Passenger Field Template -->
+    <script id="passengerField-template" type="text/x-handlebars-template">
+          {{> passengerField }}
+      </script>
+
+    <!-- Drops Container Template -->
+    <script id="dropsContainer-template" type="text/x-handlebars-template">
+          {{> dropsContainer }}
+      </script>
+
+    <!-- Form Template -->
+    <script id="form-template" type="text/x-handlebars-template">
+          {{> form }}
+      </script>
+
+    <!-- Placeholder for the form -->
+    <div class="company-partners" id="sectionMainForm">
+      <div id="sectionMainForm"></div>
+    </div>
+  </main>
+  {{> footer }}
+</body>
+
+</html>

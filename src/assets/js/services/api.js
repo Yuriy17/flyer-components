@@ -1,23 +1,21 @@
 import { debounce } from '../utils/debounce';
 import { base_api_url, options } from '../helpers/constants';
 import { showLoadingIcon, hideLoadingIcon } from '../utils/loadingIcon.js';
+
 // Debounced version of the fetchAirports function
 const debouncedFetchAirports = debounce(async ({ query, listBox, item }) => {
   try {
     showLoadingIcon(item);
     await fetchAirports({ query, listBox, item });
-    // setTimeout(() => {
-    //   // hideLoadingIcon();
-    //   displaySuggestions(airports);
-    // }, 1000);
   } catch (error) {
     console.error(error.message);
   } finally {
-    // Hide loading icon after 1 second
+    // Hide loading icon after 0.5 second
     setTimeout(() => {
-      // hideLoadingIcon(item);
-    }, 1000);
+      hideLoadingIcon(item);
+    }, 500);
   }
+  // fetch after 0.3 second one time final variant
 }, 300);
 //получение данных аэропортов
 
@@ -25,6 +23,7 @@ export function getAllInputSearch() {
   let getAllformRows = document.querySelectorAll('[data-container-field-row-id]');
 
   let inputSearch = getAllformRows[getAllformRows.length - 1].querySelectorAll('.search-input');
+  console.log("🚀 ~ getAllInputSearch ~ inputSearch:", inputSearch)
 
   inputSearch.forEach((item) => {
     let inputBox;
@@ -32,7 +31,7 @@ export function getAllInputSearch() {
     inputBox = item.querySelector('input');
 
     inputBox.addEventListener('input', (event) => {
-      console.log('🚀 ~ inputBox.addEventListener ~ event:', event);
+      console.log("🚀 ~ inputBox.addEventListener ~ event:", event)
       item.querySelectorAll('input[type="hidden"]').forEach((itemHidden) => (itemHidden.value = ''));
       getAirports({
         inputBox,
@@ -42,7 +41,6 @@ export function getAllInputSearch() {
   });
 }
 export const fetchAirports = async ({ query, listBox, item }) => {
-  console.log("🚀 ~ fetchAirports ~ item:", item)
   // get value api
   await fetch(`${base_api_url}api/search_location?query=${query}`)
   .then((res) => res.json())
@@ -252,3 +250,10 @@ export async function findFlightsDetails(itineraryId, leg, children, infants, ad
     .catch((err) => console.error(err));
   //console.log(flightData);
 }
+// window.getAllInputSearch = getAllInputSearch;
+// window.fetchAirports = fetchAirports;
+window.getAirports = getAirports;
+window.checkSanctionPlaces = checkSanctionPlaces;
+window.valueInputAirport = valueInputAirport;
+window.findFlights = findFlights;
+window.findFlightsDetails = findFlightsDetails;
