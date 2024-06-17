@@ -7,6 +7,9 @@ import { initValidation } from './services/validation.js';
 import { fade, preloader, setPreloader } from './services/preloader.js';
 import { getAllInputSearch } from './services/api.js';
 import { initShoelace } from './services/initShoelace.js';
+import e from '../../templates/mainForm/dropsContainer.ejs';
+console.log('🚀 ~ e:', e);
+console.log('🚀 ~ e:', e({'nn': 12}));
 
 const airDates = [
   {

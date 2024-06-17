@@ -18,7 +18,8 @@
     "air-datepicker": "^3.5.3",
     "dotenv": "^16.4.5",
     "sass": "^1.77.2",
+    "vite-plugin-ejs": "^1.7.0",
     "vite-plugin-handlebars": "^2.0.0",
-    "vite-plugin-html": "^3.2.2"
+    "vite-plugin-html-template": "^1.2.2"
   }
 }
