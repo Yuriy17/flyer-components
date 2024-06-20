@@ -2,34 +2,21 @@
 <html lang="en">
 
 <head>
-  {{> head}}
+  <%- include('templates/head') %>
 </head>
 
 <body>
   <main>
-    {{> header }}
-    {{> preloader }}
-    <!-- Passenger Field Template -->
-    <script id="passengerField-template" type="text/x-handlebars-template">
-          {{> passengerField }}
-      </script>
+    <%- include('templates/header.ejs') %>
+      <%- include('templates/preloader.ejs') %>
 
-    <!-- Drops Container Template -->
-    <script id="dropsContainer-template" type="text/x-handlebars-template">
-          {{> dropsContainer }}
-      </script>
 
-    <!-- Form Template -->
-    <script id="form-template" type="text/x-handlebars-template">
-          {{> form }}
-      </script>
-
-    <!-- Placeholder for the form -->
-    <div class="company-partners" id="sectionMainForm">
-      <div id="sectionMainForm"></div>
+        <!-- Placeholder for the form -->
+    <div class="company-partners" id="sectionFillQuote">
+      <div id="sectionFillQuote"></div>
     </div>
   </main>
-  {{> footer }}
+  <%- include('templates/footer.ejs') %>
 </body>
 
 </html>

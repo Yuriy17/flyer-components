@@ -1,9 +1,6 @@
 <div class="section-special-offer-main">
-<h1>!!{{baseUrl}} | {{form_name}} | {{#each passengers}}
-    {{../baseUrl}} {{label}} 
-{{/each}}</h1>
   <div class="save-up">Save up to $3,000</div>
-  <form class="form-valid-tab white mainForm" id="searchflights" novalidate name="{{form_name}}">
+  <form class="form-valid-tab white mainForm" id="searchflights" novalidate name="<%= env.formName %>">
     <div class="fly-trip-types">
       <div class="fly-trip-type-block">
         <input id="fly-trip-radio-1" type="radio" name="fly_trip_type" value="Round-trip" class="fly-trip-radio"
@@ -57,7 +54,7 @@
                 </div>
                 <div class="block_photo">
                   <div class="icon">
-                    <img src="{{baseUrl}}assets/mainForm/img/airplane-1.svg" alt="Airplane" title="Airplane"
+                    <img src="<%=  env.baseUrl %>assets/mainForm/img/airplane-1.svg" alt="Airplane" title="Airplane"
                       class="from_airplane_img" />
                   </div>
                 </div>
@@ -79,7 +76,7 @@
                 </div>
                 <div class="block_photo">
                   <div class="icon icon_to">
-                    <img src="{{baseUrl}}assets/mainForm/img/airplane-1.svg" alt="Airplane" title="Airplane"
+                    <img src="<%=  env.baseUrl %>assets/mainForm/img/airplane-1.svg" alt="Airplane" title="Airplane"
                       class="to_airplane_img" />
                   </div>
                 </div>
@@ -109,11 +106,11 @@
                 </div>
               </div>
             </div>
-            {{> dropsContainer}}
+            <%- env.dropsContainer %>
           </div>
         </div>
       </div>
     </div>
-    {{> standartForm}}
+    <%- env.standartForm %>
   </form>
 </div>

@@ -20,9 +20,7 @@
     <div class="block-drop-down">
       <div class="passenger">
         <div class="drop-passenger-title">Passenger</div>
-        {{#each passengers}}
-        {{> passengerField}}
-        {{/each}}
+        <%- env.passengers %>
       </div>
       <div class="class_f">
         <div class="drop-passenger-title">Class</div>

@@ -1,16 +1,10 @@
-import Handlebars from 'handlebars';
+import dropsContainerTemplate from '../../../templates/mainForm/dropsContainer.ejs';
+import standartFormTemplate from '../../../templates/mainForm/standartForm.ejs';
+import formTemplate from '../../../templates/mainForm/form.ejs';
+import passengerFieldTemplate from '../../../templates/mainForm/passengerField.ejs';
+
 
 export const initMainForm = () => {
-  // Compile Handlebars templates
-  var passengerFieldTemplate = Handlebars.compile(document.getElementById('passengerField-template').innerHTML);
-  var dropsContainerTemplate = Handlebars.compile(document.getElementById('dropsContainer-template').innerHTML);
-  var formTemplate = Handlebars.compile(document.getElementById('form-template').innerHTML);
-
-  // Register partials
-  Handlebars.registerPartial('passengerField', passengerFieldTemplate);
-  Handlebars.registerPartial('dropsContainer', dropsContainerTemplate);
-  Handlebars.registerPartial('form', formTemplate);
-
   // Data for templates
   var data = {
     form_name: 'searchflights',
@@ -24,7 +18,29 @@ export const initMainForm = () => {
 
   // Function to create the main form
   function createMainForm(selector, formType) {
-    var formHtml = formTemplate({ ...data, formType: formType + '' });
+    const div = document.createElement('div');
+    const arr = [
+      { label: 'Adults', aged: '(12+ years)', id: 'adults', value: '1', class: 'adults' },
+      { label: 'Children', aged: '(2-11 years)', id: 'children', value: '0', class: 'children' },
+      { label: 'Infants', aged: '(Under 2 years)', id: 'infants', value: '0', class: 'infants' }
+    ].map((passenger) => passengerFieldTemplate(passenger));
+    console.log('🚀 ~ createMainForm ~ arr:', arr);
+    div.innerHTML = arr.join('\n');
+    console.log("🚀 ~ createMainForm ~ div.innerHTML:", div.innerHTML)
+    
+    const formHtml = formTemplate({
+      baseUrl: '/',
+      dropsContainer: dropsContainerTemplate({
+        passengers: div.innerHTML
+      }),
+      standartForm: standartFormTemplate({
+        formType
+      }),
+      formName: 'searchflights'
+    }).trim();
+
+
+    // var formHtml = formTemplate({ ...data, formType: formType + '' });
     document.querySelector(selector).innerHTML = formHtml;
 
     // Additional logic for form initialization based on formType
@@ -49,6 +65,8 @@ export const initMainForm = () => {
   //   } else {
   //     createMainForm('#sectionFillQuote', 2);
   //     document.addEventListener('DOMContentLoaded', () => {
+    
+    
   //       inputTel('.form-valid-tab');
   //     });
   //   }

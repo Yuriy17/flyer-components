@@ -1,10 +1,8 @@
 import { defineConfig } from 'vite';
-// import { createHtmlPlugin } from 'vite-plugin-html';
 import dotenv from 'dotenv';
 import { resolve, join, relative } from 'path';
 import { compile } from 'ejs';
 import { readFile } from 'node:fs/promises';
-// import htmlTemplate from 'vite-plugin-html-template';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
 
 // Load environment variables from .env file
@@ -12,82 +10,14 @@ dotenv.config();
 
 export default defineConfig({
   plugins: [
-    // handlebars({
-    //   partialDirectory: [resolve(__dirname, 'src/templates'), resolve(__dirname, 'src/templates/mainForm')],
-    //   helpers: {
-    //     ifEqual: (a, b, options) => {
-    //       console.log('ifEqual helper called with:', a, b);
-    //       if (a == b) {
-    //         return options.fn(this);
-    //       } else {
-    //         return options.inverse(this);
-    //       }
-    //     }
-    //   },
-    //   context: {
-    //     title: 'Hello, world!'
-    //   }
-    // })
-    // createHtmlPlugin({
-    //   minify: true,
-    //   pages: [
-    //     {
-    //       entry: 'src/pages/main.js',
-    //       filename: 'index.html',
-    //       template: 'src/pages/index.html',
-    //       injectOptions: {
-    //         // ejsOptions: {
-    //         //   root: 'src/templates'
-    //         // },
-    //         data: {
-    //           title: 'index',
-    //           injectScript: `<script src="./main.js"></script>`
-    //         },
-    //         // tags: [
-    //         //   {
-    //         //     injectTo: 'body-prepend',
-    //         //     tag: 'div',
-    //         //     attrs: {
-    //         //       id: 'tag1'
-    //         //     }
-    //         //   }
-    //         // ]
-    //       }
-    //     },
-    //     // {
-    //     //   entry: 'pages/booking/main.js',
-    //     //   filename: 'booking/index.html',
-    //     //   template: 'pages/booking/index.html',
-    //     //   injectOptions: {
-    //     //     ejsOptions: {
-    //     //       root: 'src/templates'
-    //     //     },
-    //     //     data: {
-    //     //       title: 'booking page',
-    //     //       injectScript: `<script src="./main.js"></script>`
-    //     //     },
-    //     //     tags: [
-    //     //       {
-    //     //         injectTo: 'body-prepend',
-    //     //         tag: 'div',
-    //     //         attrs: {
-    //     //           id: 'tag2'
-    //     //         }
-    //     //       }
-    //     //     ]
-    //     //   }
-    //     // }
-    //   ]
-    // }),
     ViteEjsPlugin(
-      { title: 'My vue project!' },
+      // { title: 'My vue project!' },
       {
         ejs: (viteConfig) => {
           // viteConfig is the current viteResolved config.
           return {
             root: viteConfig.root,
             domain: 'example.com',
-            title: 'My vue project!',
             beautify: true
           };
         }
@@ -111,25 +41,6 @@ export default defineConfig({
         }
       }
     }
-    // htmlTemplate.default({
-    //   // where is the pages' root directory?
-    //   pagesDir: 'src/pages',
-    //   // define pages like it is done in vue-cli
-    //   pages: {
-    //     index: {
-    //       template: './src/pages/index.html',
-    //       title: 'Homepage'
-    //     },
-    //     subpage: {
-    //       template: './src/pages/booking/index.html',
-    //       title: 'booking'
-    //     }
-    //   },
-    //   // expose to template
-    //   data: {
-    //     title: 'Homepage'
-    //   }
-    // }),
   ],
   build: {
     emptyOutDir: false,

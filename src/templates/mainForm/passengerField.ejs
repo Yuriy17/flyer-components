@@ -1,7 +1,7 @@
 <div class="passenger_field">
   <div class="field__inf">
-    <p>{{label}}</p>
-    <p class="field__inf__aged">{{aged}}</p>
+    <p><%= env.label %></p>
+    <p class="field__inf__aged"><%= env.aged %></p>
   </div>
   <div class="field__num">
     <div class="quantity_inner">
@@ -15,8 +15,8 @@
         </svg>
       </div>
       <div class="quantity_inner_label">
-        <input id="{{id}}" name="{{id}}" type="hidden" value="{{value}}" class="quantity {{class}}" />
-        <label for="{{id}}" class="quantity_label">{{value}}</label>
+        <input id="<%= env.id %>" name="<%= env.id %>" type="hidden" value="<%= env.value %>" class="quantity <%= env.class %>" />
+        <label for="<%= env.id %>" class="quantity_label"><%= env.value %></label>
       </div>
       <div class="bt_plus">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24" width="24" aria-hidden="true"

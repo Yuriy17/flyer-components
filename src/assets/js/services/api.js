@@ -23,7 +23,6 @@ export function getAllInputSearch() {
   let getAllformRows = document.querySelectorAll('[data-container-field-row-id]');
 
   let inputSearch = getAllformRows[getAllformRows.length - 1].querySelectorAll('.search-input');
-  console.log("🚀 ~ getAllInputSearch ~ inputSearch:", inputSearch)
 
   inputSearch.forEach((item) => {
     let inputBox;
@@ -31,7 +30,6 @@ export function getAllInputSearch() {
     inputBox = item.querySelector('input');
 
     inputBox.addEventListener('input', (event) => {
-      console.log("🚀 ~ inputBox.addEventListener ~ event:", event)
       item.querySelectorAll('input[type="hidden"]').forEach((itemHidden) => (itemHidden.value = ''));
       getAirports({
         inputBox,

@@ -7,10 +7,8 @@ import { initValidation } from './services/validation.js';
 import { fade, preloader, setPreloader } from './services/preloader.js';
 import { getAllInputSearch } from './services/api.js';
 import { initShoelace } from './services/initShoelace.js';
-import e from '../../templates/mainForm/dropsContainer.ejs';
-console.log('🚀 ~ e:', e);
-console.log('🚀 ~ e:', e({'nn': 12}));
-
+const baseUrl = '/';
+window.baseUrl = baseUrl;
 const airDates = [
   {
     id: 0,
@@ -44,7 +42,7 @@ const airLlocale = {
 const airStartDate = new Date();
 const airMinDate = new Date();
 document.addEventListener('DOMContentLoaded', async () => {
-  initShoelace
+  initShoelace();
   initMainForm();
   getAllInputSearch();
   initFlightSearch({ AirDatepicker, airStartDate, airMinDate, airLlocale });

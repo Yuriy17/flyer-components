@@ -468,7 +468,6 @@ export const initFlightSearch = ({ airStartDate, airMinDate, airLlocale, AirDate
     });
 
     last_row_container_fields++;
-    console.log(2);
     getAllInputSearch();
   }
 
