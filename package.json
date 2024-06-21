@@ -15,8 +15,8 @@
     "format": "prettier --write ."
   },
   "lint-staged": {
-    "*.{ts,tsx,js}": "npm run lint",
-    "*.css": "npm run format"
+    "src/**/*.js": "npm run lint",
+    "src/**/*.css": "npm run format"
   },
   "husky": {
     "hooks": {
