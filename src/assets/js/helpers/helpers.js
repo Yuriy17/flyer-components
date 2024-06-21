@@ -1,4 +1,5 @@
-import { checkValidate, validateText } from "../services/validation";
+import { checkValidate, validateText } from '../services/validation';
+import { mainRules } from './constants';
 
 export const getValidationClasses = (form) => {
   if (form.classList.contains('white')) {
@@ -6,14 +7,14 @@ export const getValidationClasses = (form) => {
       errorValid: 'errorValid_1',
       errorValidText: 'errorValidText_1',
       errorBlock: 'error_block_1',
-      errorNumberValid: 'errorNumberValid_1'
+      errorNumberValid: 'errorNumberValid_1',
     };
   }
   return {
     errorValid: 'errorValid_2',
     errorValidText: 'errorValidText_2',
     errorBlock: 'error_block_2',
-    errorNumberValid: 'errorNumberValid_2'
+    errorNumberValid: 'errorNumberValid_2',
   };
 };
 
@@ -79,6 +80,7 @@ const getErrorMessage = (rule) => {
     const countChars = rule.match(/\[(.*?)\]/)[1];
     return `Required number of characters in the field ${countChars} character(s)!`;
   }
+
   return mainRules[rule];
 };
 

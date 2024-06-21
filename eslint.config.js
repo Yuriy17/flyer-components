@@ -1,6 +1,5 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-
+import globals from 'globals';
+import pluginJs from '@eslint/js';
 
 export default [
   {
@@ -16,12 +15,6 @@ export default [
       'no-unused-vars': 'warn',
     },
     files: ['src/**/*.js'],
-    // ignores: ['dist/**/*.js', 'node_modules/**/*.js'],
-    // env: {
-    //   browser: true,
-    //   es2021: true,
-    // },
-    // extends: 'eslint:recommended',
   },
   pluginJs.configs.recommended,
 ];
