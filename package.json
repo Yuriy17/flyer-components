@@ -15,7 +15,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
+      "eslint --max-warnings 0",
       "git add"
     ],
     "*.{js, jsx, json, html, css}": [
