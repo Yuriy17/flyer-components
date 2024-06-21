@@ -11,17 +11,12 @@
     "lint": "eslint src -c eslint.config.js",
     "lint-fix": "eslint src -c eslint.config.js --fix",
     "precommit": "lint-staged",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "format": "prettier --write ."
   },
   "lint-staged": {
-    "*.js": [
-      "eslint src -c eslint.config.js --max-error 0",
-      "git add"
-    ],
-    "*.{js, jsx, json, html, css}": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.{ts,tsx,js}": "npm run lint",
+    "*.css": "npm run format"
   },
   "husky": {
     "hooks": {
