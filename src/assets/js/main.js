@@ -7,40 +7,9 @@ import { initValidation } from './services/validation.js';
 import { fade, preloader, setPreloader } from './services/preloader.js';
 import { getAllInputSearch } from './services/api.js';
 import { initShoelace } from './services/initShoelace.js';
-const baseUrl = '/';
-window.baseUrl = baseUrl;
-const airDates = [
-  {
-    id: 0,
-    from: '',
-    to: ''
-  }
-];
+import { airDates, airLlocale, airMinDate, airStartDate } from './helpers/constants.js';
 
-const airLlocale = {
-  days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-  daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-  daysMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-  months: [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ],
-  monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-  dateFormat: 'MM/dd/yyyy',
-  firstDay: 0
-};
-const airStartDate = new Date();
-const airMinDate = new Date();
+
 document.addEventListener('DOMContentLoaded', async () => {
   initShoelace();
   initMainForm();
@@ -50,7 +19,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const state = window.location.hash === '#searchflights' ? 'searchingFinish' : 'loading';
   await setPreloader(state);
   await fade(preloader, false);
-  console.log('🚀 ~ document.addEventListener ~ AirDatepicker:', AirDatepicker);
   const indexAir = airDates.findIndex(({ id }) => id === 0);
   airDates[indexAir].from = new AirDatepicker('.from', {
     startDate: airStartDate,
@@ -78,7 +46,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 });
 
-window.airDates = airDates;
 
 // document.addEventListener('DOMContentLoaded', () => {
 //   const searchInput = document.getElementById('search-input');

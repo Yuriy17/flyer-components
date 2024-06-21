@@ -1,16 +1,95 @@
-import { unfade, setPreloader, fade } from './preloader.js';
+import { mainRules } from '../helpers/constants.js';
+import { findFlights } from './api.js';
+import { addLeadToSalesForce } from './modal.js';
+import { unfade, setPreloader, fade, preloader } from './preloader.js';
 import { formSubmit, formSubmitTicket } from './send-mail.js';
+
+export function validateText(item, countChars) {
+  let isValidate = false;
+  const value = item.value;
+  isValidate = value.length >= countChars;
+  if (item.closest('.date')) {
+    isValidate = isValidDate(value);
+  }
+  return isValidate;
+}
+function validateMail(email) {
+  if (email.trim() === 'florante_torres@yahoo.com') {
+    return false;
+  }
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+}
+export function checkValidate(rule = null, item) {
+  let fieldType = item.getAttribute('type');
+  let value = item.value.trim();
+  let isValidate = true;
+  if (rule == 'required') {
+    value = value.replaceAll(' ', '');
+    if (value == '') {
+      isValidate = false;
+    }
+  } else if (rule == 'mail' && fieldType == 'email') {
+    if (!validateMail(value)) {
+      isValidate = false;
+    }
+  } else if (rule.indexOf('min') != -1) {
+    value = value.replaceAll(' ', '');
+    let minLength = rule.slice(rule.indexOf('[') + 1, rule.indexOf(']'));
+    if (value.length < minLength) {
+      isValidate = false;
+    }
+  } else if (rule.indexOf('max') != -1) {
+    value = value.replaceAll(' ', '');
+    let maxLength = rule.slice(rule.indexOf('[') + 1, rule.indexOf(']'));
+    if (value.length > maxLength) {
+      isValidate = false;
+    }
+  } else if (rule.indexOf('countChars') != -1) {
+    value = value.replaceAll(' ', '');
+    let countChars = rule.slice(rule.indexOf('[') + 1, rule.indexOf(']'));
+    if (value.length != countChars) {
+      isValidate = false;
+    }
+  } else if (rule == 'checked' && fieldType == 'checkbox' && !item.checked) {
+    isValidate = false;
+  } else if (rule == 'number') {
+    value = value.replaceAll(' ', '');
+    if (isNaN(value) || value == '') {
+      isValidate = false;
+    }
+  } else if (rule == 'date') {
+    value = value.replaceAll(' ', '');
+    isValidate = isValidDate(value);
+  }
+
+  return isValidate;
+}
+
+function isValidDate(dateString) {
+  if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) return false;
+  const parts = dateString.split('/');
+  const day = parseInt(parts[1], 10);
+  const month = parseInt(parts[0], 10);
+  const year = parseInt(parts[2], 10);
+  if (year < 1000 || year > 3000 || month === 0 || month > 12) return false;
+  const monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) monthLength[1] = 29;
+  return day > 0 && day <= monthLength[month - 1];
+}
 
 // Your validation code here...
 export const initValidation = () => {
-
   const forms = document.querySelectorAll('form');
   forms.forEach((form) => {
     form.addEventListener('submit', async function (e) {
       console.log(e.currentTarget);
       console.log(e);
-      alert('sdf')
-      alert(e.toJSON())
+      alert('sdf');
+      alert(e.toJSON());
       e.preventDefault();
       const formFields = Array.from(form.elements);
       let isValidate = true;
@@ -48,14 +127,15 @@ export const initValidation = () => {
         const formType = form.classList.contains('mainForm');
         let messageTitle = 'We appreciate your inquiry!';
         let message = 'You will be contacted by one of our travel experts shortly.';
+        let isSubscription = 0;
 
         if (!formType) {
           await setPreloader('loading');
           const formEl = new FormData(form);
           const json = Object.fromEntries(formEl.entries());
 
-          let findPersonInPipedrive = 0;
-          let isSubscription = 0;
+          // TODO: uncomment when added logic for findPersonInPipedrive vars if require
+          // let findPersonInPipedrive = 0;
 
           if (formName === 'subscription') {
             isSubscription = 1;
@@ -73,8 +153,7 @@ export const initValidation = () => {
           const formEl = new FormData(form);
           const formElements = Object.fromEntries(formEl.entries());
           const rowsOfDeparture = document.querySelectorAll('[data-container-field-row-id]');
-          const totalDepartureCount =
-            rowsOfDeparture[rowsOfDeparture.length - 1].getAttribute('data-container-field-row-id');
+          const totalDepartureCount = rowsOfDeparture[rowsOfDeparture.length - 1].getAttribute('data-container-field-row-id');
           const objFrom = [],
             objTo = [],
             objDepartureDate = [],
@@ -86,26 +165,26 @@ export const initValidation = () => {
                 cityName: formElements[`flight[${i}]['from']`],
                 airportName: formElements[`flight[${i}]['cityAirport']`],
                 cityCode: formElements[`flight[${i}]['cityCode']`],
-                entityId: formElements[`flight[${i}]['originEntityId']`]
+                entityId: formElements[`flight[${i}]['originEntityId']`],
               });
               objTo.push({
                 cityName: formElements[`flight[${i}]['to']`],
                 airportName: formElements[`flight[${i}]['cityAirportTo']`],
                 cityCode: formElements[`flight[${i}]['cityCodeTo']`],
-                entityId: formElements[`flight[${i}]['destinationEntityId']`]
+                entityId: formElements[`flight[${i}]['destinationEntityId']`],
               });
               objDepartureDate.push({
-                date: formElements[`flight[${i}]['date_start']`]
+                date: formElements[`flight[${i}]['date_start']`],
               });
             }
           }
           objReturnDate.push({
-            date: formElements["flight[0]['date_end']"]
+            date: formElements["flight[0]['date_end']"],
           });
 
           const formData = {
             flyTripType: {
-              flyTripType: formElements.fly_trip_type
+              flyTripType: formElements.fly_trip_type,
             },
             from: objFrom,
             to: objTo,
@@ -116,8 +195,8 @@ export const initValidation = () => {
               allPassenger: passengerValue[0],
               adults: formElements.adults,
               children: formElements.children,
-              infants: formElements.infants
-            }
+              infants: formElements.infants,
+            },
           };
           localStorage.setItem('flightTicketInfo', JSON.stringify(formData));
           if (formName !== 'flightTickets') {
@@ -141,8 +220,8 @@ export const initValidation = () => {
             const formEl = new FormData(form);
             const json = Object.fromEntries(formEl.entries());
 
-            let findPersonInPipedrive = 0;
-            let isSubscription = 0;
+            // let findPersonInPipedrive = 0;
+            isSubscription = 0;
             await formSubmitTicket(json);
             await addLeadToSalesForce(json);
           }
@@ -167,53 +246,9 @@ export const initValidation = () => {
     location.href = '../thankyou/';
   }
 
-  function validateText(item, countChars) {
-    let isValidate = false;
-    const value = item.value;
-    isValidate = value.length >= countChars;
-    if (item.closest('.date')) {
-      isValidate = isValidDate(value);
-    }
-    return isValidate;
-  }
-
   function validateTextMax(value, countChars) {
     return value.length <= countChars;
   }
-
-  function validateMail(email) {
-    if (email.trim() === 'florante_torres@yahoo.com') {
-      return false;
-    }
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  }
-
-  function isValidDate(dateString) {
-    if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) return false;
-    const parts = dateString.split('/');
-    const day = parseInt(parts[1], 10);
-    const month = parseInt(parts[0], 10);
-    const year = parseInt(parts[2], 10);
-    if (year < 1000 || year > 3000 || month === 0 || month > 12) return false;
-    const monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) monthLength[1] = 29;
-    return day > 0 && day <= monthLength[month - 1];
-  }
-
-  const mainRules = {
-    required: 'Field is required!',
-    mail: 'Incorrect Format',
-    min: 'Minimum field length ',
-    max: 'Maximum field length ',
-    countChars: 'Required number of characters in the field',
-    phone: 'Invalid phone number format',
-    select: 'Please select from list',
-    date: 'Please enter a valid date'
-  };
 
   function main_validation(item, errorValid, errorNumberValid, error_block) {
     let isValidate = false;
@@ -247,18 +282,12 @@ export const initValidation = () => {
       if (validate.includes('min')) {
         item
           .closest('form')
-          .insertAdjacentHTML(
-            'beforeend',
-            `<div class="${error_block}">${mainRules.min}${validate[validate.indexOf('min') + 1]}</div>`
-          );
+          .insertAdjacentHTML('beforeend', `<div class="${error_block}">${mainRules.min}${validate[validate.indexOf('min') + 1]}</div>`);
       }
       if (validate.includes('max')) {
         item
           .closest('form')
-          .insertAdjacentHTML(
-            'beforeend',
-            `<div class="${error_block}">${mainRules.max}${validate[validate.indexOf('max') + 1]}</div>`
-          );
+          .insertAdjacentHTML('beforeend', `<div class="${error_block}">${mainRules.max}${validate[validate.indexOf('max') + 1]}</div>`);
       }
       if (validate.includes('countChars')) {
         item

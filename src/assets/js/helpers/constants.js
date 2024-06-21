@@ -5,7 +5,7 @@ export const options = {
       'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Yzc1YWI5OWQxNzhjMTEwOTUyZmRkNCIsImlhdCI6MTY5MDc4NjQ4OX0.G7db8-OXCFQBmmDgCYJYF6pJ9LtUVHaro-mBdOHSnW8'
   }
 };
-export let base_api_url = 'https://flyer-club.com/';
+export const base_api_url = 'https://flyer-club.com/';
 export const mainRules = {
   required: 'Field is required!',
   mail: 'Incorrect Format',
@@ -18,3 +18,25 @@ export const mainRules = {
   equalTotalPrice: 'The amount of credit cards must be equal Total price'
 };
 
+export const airDates = [
+  {
+    id: 0,
+    from: '',
+    to: '',
+  },
+];
+
+export const airLlocale = {
+  days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+  daysMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+  months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  dateFormat: 'MM/dd/yyyy',
+  firstDay: 0,
+};
+
+export const baseUrl = '/';
+
+export const airStartDate = new Date();
+export const airMinDate = new Date();

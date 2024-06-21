@@ -29,7 +29,7 @@ export function getAllInputSearch() {
 
     inputBox = item.querySelector('input');
 
-    inputBox.addEventListener('input', (event) => {
+    inputBox.addEventListener('input', () => {
       item.querySelectorAll('input[type="hidden"]').forEach((itemHidden) => (itemHidden.value = ''));
       getAirports({
         inputBox,
@@ -53,7 +53,7 @@ export const fetchAirports = async ({ query, listBox, item }) => {
         return;
       }
       let sanctionPlaces = 0;
-      let newAllPlaces = allPlaces.map(({ name, city, country, iataCityCode, id }) => {
+      let newAllPlaces = allPlaces.map(({ name, country, iataCityCode, id }) => {
         let airportInfo, placeId, countryName, entityId;
 
         airportInfo = name;
@@ -236,7 +236,8 @@ export async function findFlights(
 }
 
 export async function findFlightsDetails(itineraryId, leg, children, infants, adults, currency) {
-  const flightData = {};
+  // TODO uncomment when it require
+  // const flightData = {};
   const urlFlightDetails = `${base_api_url}api/v1/getFlightDetails?itineraryId=${itineraryId}&legs=${leg}&children=${children}&infants=${infants}&adults=${adults}&currency=${currency}`;
   await fetch(urlFlightDetails, options)
     .then((res) => res.json())

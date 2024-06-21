@@ -2,53 +2,44 @@ import dropsContainerTemplate from '../../../templates/mainForm/dropsContainer.e
 import standartFormTemplate from '../../../templates/mainForm/standartForm.ejs';
 import formTemplate from '../../../templates/mainForm/form.ejs';
 import passengerFieldTemplate from '../../../templates/mainForm/passengerField.ejs';
-
+import { inputTel } from './phones';
 
 export const initMainForm = () => {
-  // Data for templates
-  var data = {
-    form_name: 'searchflights',
-    baseUrl: '/',
-    passengers: [
-      { label: 'Adults', aged: '(12+ years)', id: 'adults', value: '1', class: 'adults' },
-      { label: 'Children', aged: '(2-11 years)', id: 'children', value: '0', class: 'children' },
-      { label: 'Infants', aged: '(Under 2 years)', id: 'infants', value: '0', class: 'infants' }
-    ]
-  };
-
   // Function to create the main form
   function createMainForm(selector, formType) {
-    const div = document.createElement('div');
-    const arr = [
-      { label: 'Adults', aged: '(12+ years)', id: 'adults', value: '1', class: 'adults' },
-      { label: 'Children', aged: '(2-11 years)', id: 'children', value: '0', class: 'children' },
-      { label: 'Infants', aged: '(Under 2 years)', id: 'infants', value: '0', class: 'infants' }
-    ].map((passenger) => passengerFieldTemplate(passenger));
-    console.log('🚀 ~ createMainForm ~ arr:', arr);
-    div.innerHTML = arr.join('\n');
-    console.log("🚀 ~ createMainForm ~ div.innerHTML:", div.innerHTML)
+    const formContainer = document.querySelector(selector);
     
-    const formHtml = formTemplate({
-      baseUrl: '/',
-      dropsContainer: dropsContainerTemplate({
-        passengers: div.innerHTML
-      }),
-      standartForm: standartFormTemplate({
-        formType
-      }),
-      formName: 'searchflights'
-    }).trim();
+    if (formContainer) {
+      const passengersData = [
+        { label: 'Adults', aged: '(12+ years)', id: 'adults', value: '1', class: 'adults' },
+        { label: 'Children', aged: '(2-11 years)', id: 'children', value: '0', class: 'children' },
+        { label: 'Infants', aged: '(Under 2 years)', id: 'infants', value: '0', class: 'infants' }
+      ];
 
+      const dropsContainer = dropsContainerTemplate({
+          passengers: passengersData.map((passenger) => passengerFieldTemplate(passenger)).join('\n')
+      })
 
-    // var formHtml = formTemplate({ ...data, formType: formType + '' });
-    document.querySelector(selector).innerHTML = formHtml;
+      const formHtml = formTemplate({
+        baseUrl: '/',
+        dropsContainer,
+        standartForm: standartFormTemplate({
+          formType,
+          dropsContainer
+        }),
+        formName: 'searchflights'
+      }).trim();
+      
+      formContainer.innerHTML = formHtml;
 
-    // Additional logic for form initialization based on formType
-    if (formType === 2) {
-      inputTel('.form-valid-tab');
+      // Additional logic for form initialization based on formType
+      if (formType === 2) {
+        inputTel('.form-valid-tab');
+      }
+
+      // Add your other event listeners and JS logic here
     }
 
-    // Add your other event listeners and JS logic here
   }
 
   // Logic to determine where to create the form
@@ -65,8 +56,7 @@ export const initMainForm = () => {
   //   } else {
   //     createMainForm('#sectionFillQuote', 2);
   //     document.addEventListener('DOMContentLoaded', () => {
-    
-    
+
   //       inputTel('.form-valid-tab');
   //     });
   //   }

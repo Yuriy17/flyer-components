@@ -51,7 +51,11 @@ export const unfade = async (element) => {
 export const setPreloader = async (state) => {
   let i = 2;
   const flightInfo = JSON.parse(localStorage.getItem('flightTicketInfo'));
-
+  let way1 = null,
+    way2 = null,
+    from = null,
+    to = null;
+  // let way2 = null;
   switch (state) {
     case 'loading':
       loaderText.innerHTML = 'Loading<span>.</span><span>.</span><span>.</span>';
@@ -60,8 +64,10 @@ export const setPreloader = async (state) => {
       loaderText.innerHTML =
         "We're searching for the best options<span>.</span><span>.</span><span>.</span><br>Please don't close this window";
       ways.style.display = 'flex';
-      const [way1, way2] = [ways.querySelector('.loader-plane-ways-1'), ways.querySelector('.loader-plane-ways-2')];
-      const [from, to] = [flightInfo.from[0], flightInfo.to[0]];
+      way1 = ways.querySelector('.loader-plane-ways-1');
+      way2 = ways.querySelector('.loader-plane-ways-2');
+      from = flightInfo.from[0];
+      to = flightInfo.to[0];
       way1.querySelector('.loader-plane-ways-airport').textContent = from.cityName.split(' (')[0];
       way1.querySelector('.loader-plane-ways-code').textContent = from.cityCode;
       way2.querySelector('.loader-plane-ways-airport').textContent = to.cityName.split(' (')[0];

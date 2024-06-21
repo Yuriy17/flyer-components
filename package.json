@@ -7,10 +7,30 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start:json-server": "node -r dotenv/config ./node_modules/.bin/json-server --watch db.json --port 3000"
+    "start:json-server": "node -r dotenv/config ./node_modules/.bin/json-server --watch db.json --port 3000",
+    "lint": "eslint src -c eslint.config.js",
+    "lint-fix": "eslint src -c eslint.config.js --fix",
+    "precommit": "lint-staged",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts}": [
+      "eslint --fix"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn precommit"
+    }
   },
   "devDependencies": {
+    "@eslint/js": "^9.5.0",
+    "eslint": "^9.5.0",
+    "globals": "^15.6.0",
+    "husky": "^9.0.11",
     "json-server": "^1.0.0-beta.0",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.2",
     "vite": "^5.2.0"
   },
   "dependencies": {

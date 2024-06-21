@@ -1,3 +1,5 @@
+import { checkValidate, validateText } from "../services/validation";
+
 export const getValidationClasses = (form) => {
   if (form.classList.contains('white')) {
     return {
@@ -30,7 +32,7 @@ export const validateField = (element, errorValid, errorNumberValid, errorBlock)
   const rules = element.getAttribute('data-validation').split('|');
 
   for (const rule of rules) {
-    const isRuleValid = checkRule(rule, element);
+    const isRuleValid = checkValidate(rule, element);
     if (!isRuleValid) {
       isValid = false;
       showError(element, rule, errorValid, errorBlock);

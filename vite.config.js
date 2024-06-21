@@ -27,8 +27,6 @@ export default defineConfig({
       name: 'ejs',
       async transform(_, id) {
         if (id.endsWith('.ejs')) {
-          console.log("🚀 ~ transform ~ id:", id)
-          console.log("🚀 ~ transform ~ _:", _)
           const src = await readFile(id, 'utf-8');
           const code = compile(src, {
             client: true,

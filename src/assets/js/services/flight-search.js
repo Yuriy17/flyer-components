@@ -1,261 +1,99 @@
+import AirDatepicker from 'air-datepicker';
+import { airDates, airLlocale, airMinDate, airStartDate, baseUrl } from '../helpers/constants';
 import { getAllInputSearch } from './api';
 
-export const initFlightSearch = ({ airStartDate, airMinDate, airLlocale, AirDatepicker }) => {
-  const dropdowns = document.querySelectorAll('.drop');
-  dropdowns.forEach((item) => {
-    item.addEventListener('click', (e) => {
-      dropdowns.forEach((drop) => {
-        if (drop != e.currentTarget) {
-          drop.querySelector('.block-drop-down').classList.remove('show');
-          drop.querySelector('.block_photo').classList.remove('open');
+// утсановка значений после поиска
+export function settingFormValues() {
+  let flightSearchForm = document.querySelector('form[name="flightTickets"]');
+  let dataFlight = JSON.parse(localStorage.getItem('flightTicketInfo'));
+  if (dataFlight) {
+    let lastSearchTicket = JSON.parse(localStorage.getItem('lastSearchTicket'));
+
+    if (lastSearchTicket && lastSearchTicket.length > 0) {
+      document.querySelector('.search-results-img').style.display = 'none';
+      document.querySelector('.search-results-table').style.display = 'flex';
+      document.querySelector('.search-results-table-flights').insertAdjacentHTML('afterbegin', setTableTicketInfo(dataFlight.passenger.type));
+      //блок с информацией о билете, вывод заголовка
+      if (dataFlight.from[0]?.cityName != undefined && lastSearchTicket && lastSearchTicket.length > 0) {
+        document.querySelector('.search-results-table-title').textContent = dataFlight.from[0].cityName + ' - ' + dataFlight.to[0].cityName;
+      }
+    }
+    // inf pers
+    flightSearchForm.adults.value = dataFlight.passenger.adults;
+    flightSearchForm.children.value = dataFlight.passenger.children;
+    flightSearchForm.infants.value = dataFlight.passenger.infants;
+
+    document.querySelector('.adult').nextElementSibling.innerHTML = dataFlight.passenger.adults;
+    document.querySelector('.children').nextElementSibling.innerHTML = dataFlight.passenger.children;
+    document.querySelector('.infants').nextElementSibling.innerHTML = dataFlight.passenger.infants;
+
+    document.querySelectorAll('input[name=type_ticket]').forEach((item) => {
+      item.removeAttribute('checked');
+      item.nextElementSibling.classList.remove('active_radio');
+    });
+
+    document.querySelector('input[name=type_ticket][value=' + dataFlight.passenger.type + ']').checked = true;
+    document.querySelector('.flight_class').textContent = dataFlight.passenger.type;
+
+    sumPassenger();
+
+    document.querySelector('input[name=fly_trip_type][value=' + dataFlight.flyTripType.flyTripType + ']').checked = true;
+    changeFrlyTripType(document.querySelector('input[name=fly_trip_type][value=' + dataFlight.flyTripType.flyTripType + ']'));
+
+    for (let i = 0; i < dataFlight.departureDate.length; i++) {
+      if (i == 0) {
+        flightSearchForm['flight[' + i + "]['from']"].value = dataFlight.from[i].cityName;
+        flightSearchForm['flight[' + i + "]['cityAirport']"].value = dataFlight.from[i].airportName;
+        flightSearchForm['flight[' + i + "]['cityCode']"].value = dataFlight.from[i].cityCode;
+        flightSearchForm['flight[' + i + "]['originEntityId']"].value = dataFlight.from[i].entityId;
+
+        flightSearchForm['flight[' + i + "]['to']"].value = dataFlight.to[i].cityName;
+        flightSearchForm['flight[' + i + "]['cityAirportTo']"].value = dataFlight.to[i].airportName;
+        flightSearchForm['flight[' + i + "]['cityCodeTo']"].value = dataFlight.to[i].cityCode;
+        flightSearchForm['flight[' + i + "]['destinationEntityId']"].value = dataFlight.to[i].entityId;
+
+        //document.querySelectorAll('.input_departure')[0].value=dataFlight.departureDate[i].date;
+        airDates[0].from.selectDate(dataFlight.departureDate[i].date.replaceAll('-', '/'));
+
+        if (dataFlight.returnDate[i].date) {
+          airDates[0].to.selectDate(dataFlight.returnDate[i].date.replaceAll('-', '/'));
         }
-      });
-
-      if (!e.target.closest('.block-drop-down')) {
-        item.querySelector('.block-drop-down').classList.toggle('show');
-        item.querySelector('.block_photo').classList.toggle('open');
-      }
-    });
-  });
-  //input plus and minus для изменения количества пассажиров
-  document.querySelectorAll('.quantity_inner .bt_minus').forEach((item) => {
-    item.addEventListener('click', function (e) {
-      const parent = e.currentTarget.closest('.quantity_inner');
-      let input = parent.querySelector('.quantity');
-      let count = Number(input.value) - 1;
-      count = count < 1 ? 0 : count;
-      if (input.getAttribute('name') == 'adults' && count < 1) {
-        count = 1;
-      }
-      input.value = Number(count);
-      parent.querySelector('.quantity_label').innerHTML = Number(count);
-      sumPassenger();
-    });
-  });
-  document.querySelectorAll('.quantity_inner .bt_plus').forEach((item) => {
-    item.addEventListener('click', function (e) {
-      const parent = e.currentTarget.closest('.quantity_inner');
-      let input = parent.querySelector('.quantity');
-      let count = parseInt(input.value) + 1;
-
-      count = count < 1 ? 0 : count;
-      if (input.getAttribute('name') == 'adults' && count < 1) {
-        count = 1;
-      }
-      if (Number(parent.closest('.block_arrow').querySelector('.number_passengers-all').innerHTML) < 8) {
-        input.value = Number(count);
-        parent.querySelector('.quantity_label').innerHTML = Number(count);
-      }
-      sumPassenger();
-    });
-  });
-
-  //Отслеживание события переключения типа полета
-  //изменение состояния radio при выборе типа билетов
-  const radioTypeTickets = document.querySelectorAll('.form_radio_btn');
-  //class
-  radioTypeTickets.forEach((item) => {
-    item.addEventListener('click', (e) => {
-      radioTypeTickets.forEach((el) => el.querySelector('input[type="radio"]').removeAttribute('checked'));
-      let itemValue = item.querySelector('input[type="radio"]').value;
-      document.querySelector('.flight_class').textContent = itemValue;
-
-      radioTypeTickets.forEach((el) => {
-        el.querySelector('label').classList.remove('active_radio');
-        if (el.querySelector('input[type="radio"]').value == itemValue) {
-          el.querySelector('input[type="radio"]').setAttribute('checked', true);
-          el.querySelector('label').classList.add('active_radio');
-        }
-      });
-    });
-    item.querySelector('label').classList.remove('active_radio');
-    if (item.querySelector('input[type="radio"]').checked) {
-      item.querySelector('label').classList.add('active_radio');
-    }
-  });
-
-  const fly_trip_type = document.querySelectorAll('input[name=fly_trip_type]');
-  fly_trip_type.forEach((el) => {
-    el.addEventListener('change', () => {
-      for (let i = 0; i < fly_trip_type.length; i++) {
-        fly_trip_type[i].nextElementSibling.classList.remove('active_radio');
-      }
-      changeFrlyTripType(el);
-    });
-    el.nextElementSibling.classList.remove('active_radio');
-    if (el.checked) {
-      el.nextElementSibling.classList.add('active_radio');
-    }
-  });
-  changeFrlyTripType(fly_trip_type[0]);
-
-  //заполнение поля с общим количеством пассажиров
-
-  let sum;
-  function sumPassenger() {
-    sum = 0;
-    let elements = document.querySelectorAll('.number_passengers-all');
-    elements.forEach((el) => {
-      sum = 0;
-      let parent = el.closest('.block_arrow');
-      let quantities = parent.querySelectorAll('.quantity');
-      for (let i = 0; i < quantities.length; i++) {
-        sum = sum + Number(quantities[i].value);
-      }
-      el.innerHTML = sum;
-    });
-  }
-
-  // Close the dropdown menu if the user clicks outside of it
-  window.onclick = function (event) {
-    if (!event.target.closest('.drop')) {
-      let dropdowns = document.getElementsByClassName('block-drop-down');
-      let i;
-      for (i = 0; i < dropdowns.length; i++) {
-        let openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-          openDropdown.closest('.drop').querySelector('.block_photo').classList.remove('open');
-        }
-      }
-    }
-
-    const activeSearchInput = document.querySelectorAll('.search-input.active');
-
-    if (activeSearchInput) {
-      activeSearchInput.forEach((item) => {
-        const autocomBox = item.querySelector('.autocom-box');
-
-        if (autocomBox.classList.contains('active')) {
-          const itemParentInputs = item.querySelectorAll('input');
-
-          const list = autocomBox.querySelectorAll('li');
-          list.forEach((li) => {
-            if (
-              itemParentInputs[0].value !== '' &&
-              itemParentInputs[1].value !== '' &&
-              itemParentInputs[2].value !== '' &&
-              itemParentInputs[3].value !== ''
-            ) {
-              if (
-                itemParentInputs[0].value == li.querySelector('h5').textContent &&
-                itemParentInputs[1].value == li.querySelector('h4').textContent &&
-                itemParentInputs[2].value == li.querySelector('h5 span').textContent &&
-                itemParentInputs[3].value == li.getAttribute('class')
-              ) {
-              } else {
-                itemParentInputs[0].value = '';
-                itemParentInputs[1].value = '';
-                itemParentInputs[2].value = '';
-                itemParentInputs[3].value = '';
-              }
-            } else {
-              itemParentInputs[0].value = '';
-              itemParentInputs[1].value = '';
-              itemParentInputs[2].value = '';
-              itemParentInputs[3].value = '';
-            }
-          });
-        }
-        item.classList.remove('active');
-        autocomBox.classList.remove('active');
-      });
-    }
-
-    if (event.target.classList.contains('switch') || event.target.closest('.switch')) {
-      const parent = event.target.closest('.container-field-row');
-      const element1 = parent.querySelector('.input_from').value;
-      const elementCityName1 = parent.querySelector('.cityAirport').value;
-      const elementCityCode1 = parent.querySelector('.cityCode').value;
-      const elementCityEntitiId1 = parent.querySelector('.originEntityId').value;
-      const element2 = parent.querySelector('.input_to').value;
-      const elementCityName2 = parent.querySelector('.cityAirportTo').value;
-      const elementCityCode2 = parent.querySelector('.cityCodeTo').value;
-      const elementCityEntitiId2 = parent.querySelector('.destinationEntityId').value;
-
-      parent.querySelector('.input_from').value = element2;
-      parent.querySelector('.cityAirport').value = elementCityName2;
-      parent.querySelector('.cityCode').value = elementCityCode2;
-      parent.querySelector('.originEntityId').value = elementCityEntitiId2;
-
-      parent.querySelector('.input_to').value = element1;
-      parent.querySelector('.cityAirportTo').value = elementCityName1;
-      parent.querySelector('.cityCodeTo').value = elementCityCode1;
-      parent.querySelector('.destinationEntityId').value = elementCityEntitiId1;
-    }
-
-    event.stopPropagation();
-  };
-
-  function changeFrlyTripType(el) {
-    el.nextElementSibling.classList.add('active_radio');
-    if (document.querySelector('.btn_add')) {
-      document.querySelector('.btn_add').remove();
-    }
-    const container_fields = document.querySelectorAll('.fly-trip-pane');
-    container_fields.forEach((item) => {
-      if (item.getAttribute('data-container-field-row-id') != 0) {
-        item.remove();
-      }
-    });
-
-    document.querySelectorAll('.fly-trip-type').forEach((item) => item.classList.remove('active'));
-
-    el.closest('.fly-trip-type-block').querySelector('.fly-trip-type').classList.add('active');
-
-    const dateTo = document.querySelector('.to');
-    if (el.value === 'Round-trip') {
-      dateTo.removeAttribute('disabled');
-    } else if (el.value === 'One-way' || el.value === 'Multi-city') {
-      //убираем данные со второго поля даты
-      dateTo.closest('.date').classList.remove('errorValid_1');
-      dateTo.classList.remove('errorValid');
-      dateTo.setAttribute('disabled', 'disabled');
-
-      dateTo.classList.remove('errorValid');
-      dateTo.closest('.field').classList.remove('errorValid');
-      dateTo.closest('.block_input').classList.add('disabled');
-
-      airDates[0].from.update({
-        maxDate: 0
-      });
-      airDates[0].to.clear();
-
-      //отслеживаем если несколько полетов
-
-      if (el.value === 'Multi-city') {
-        if (document.querySelector('form[name="flightTickets"]')) {
-          const drops_container = document.querySelector('.fly-trip-content');
-          drops_container.insertAdjacentHTML('afterend', `<div class="btn_add"><h3>+ Add flight</h3></div>`);
-        } else {
-          const drops_container = document.querySelector('.form-main-btn-block');
-          drops_container.insertAdjacentHTML('beforebegin', `<div class="btn_add"><h3>+ Add flight</h3></div>`);
-        }
-
-        document
-          .querySelector('.btn_add')
-          .addEventListener('click', () => add_flight_row('', '', '', '', '', '', '', '', ''));
+      } else {
+        add_flight_row(
+          dataFlight.from[i].cityName,
+          dataFlight.from[i].airportName,
+          dataFlight.from[i].entityId,
+          dataFlight.from[i].cityCode,
+          dataFlight.to[i].cityName,
+          dataFlight.to[i].airportName,
+          dataFlight.to[i].cityCode,
+          dataFlight.to[i].entityId,
+          dataFlight.departureDate[i].date.replaceAll('-', '/')
+        );
       }
     }
   }
-  //добавление поля в выборе рейса (multi city)
-  let last_row_container_fields = 1;
-  function add_flight_row(
-    fromVal = '',
-    cityAirportVal = '',
-    originEntityIdVal = '',
-    cityCodeVal = '',
-    toVal = '',
-    cityAirportToVal = '',
-    cityCodeToVal = '',
-    destinationEntityId = '',
-    dateDepartureVal = ''
-  ) {
-    const container_fields = document.querySelectorAll('[data-container-field-row-id]');
-    let fromSearchResult,
-      btn_delete_1 = '',
-      btn_delete_2 = '';
-    const btn_delete = `<div class="block_to_delete_flight">
+}
+
+let sum;
+//добавление поля в выборе рейса (multi city)
+let last_row_container_fields = 1;
+function add_flight_row(
+  fromVal = '',
+  cityAirportVal = '',
+  originEntityIdVal = '',
+  cityCodeVal = '',
+  toVal = '',
+  cityAirportToVal = '',
+  cityCodeToVal = '',
+  destinationEntityId = '',
+  dateDepartureVal = ''
+) {
+  const container_fields = document.querySelectorAll('[data-container-field-row-id]');
+  let fromSearchResult,
+    btn_delete_1 = '',
+    btn_delete_2 = '';
+  const btn_delete = `<div class="block_to_delete_flight">
 						<div class="btn_delete">
 							<div class="icon">
 							<i class="icon-delete"></i>
@@ -263,13 +101,13 @@ export const initFlightSearch = ({ airStartDate, airMinDate, airLlocale, AirDate
 							<h3>Delete flight</h3>
 						</div>
 					</div>`;
-    if (document.querySelector('#sectionFillQuote')) {
-      fromSearchResult = 'fromSearchResult';
-      btn_delete_2 = btn_delete;
-    } else {
-      btn_delete_1 = btn_delete;
-    }
-    let newFormRow = `
+  if (document.querySelector('#sectionFillQuote')) {
+    fromSearchResult = 'fromSearchResult';
+    btn_delete_2 = btn_delete;
+  } else {
+    btn_delete_1 = btn_delete;
+  }
+  let newFormRow = `
 		<div class="fly-trip-pane" data-container-field-row-id="${last_row_container_fields}">
 			<div class="container-field container-field-row" style="margin-top:20px;" >
 				<div class="block-city-row">
@@ -432,135 +270,119 @@ export const initFlightSearch = ({ airStartDate, airMinDate, airLlocale, AirDate
 		</div>
 			`;
 
-    const btn_add = document.querySelector('.btn_add');
-    document.querySelector('.fly-trip-content').insertAdjacentHTML('beforeend', newFormRow);
+  const btn_add = document.querySelector('.btn_add');
+  document.querySelector('.fly-trip-content').insertAdjacentHTML('beforeend', newFormRow);
 
-    //функция на логику калькулятора
-    //addCalendar();
+  //функция на логику калькулятора
+  //addCalendar();
 
-    if (container_fields.length >= 3) {
-      btn_add.style.display = 'none';
-    } else {
+  if (container_fields.length >= 3) {
+    btn_add.style.display = 'none';
+  } else {
+    btn_add.style.display = 'inline-block';
+  }
+
+  airDates.push({
+    id: last_row_container_fields,
+    from: '',
+    to: '',
+  });
+  const indexAir = airDates.findIndex(({ id }) => id == last_row_container_fields);
+  airDates[indexAir].from = new AirDatepicker(`[data-container-field-from-id="${last_row_container_fields}"]`, {
+    startDate: airStartDate,
+    minDate: airMinDate,
+    autoClose: true,
+    addon: 'right',
+    locale: airLlocale,
+  });
+
+  const btns_dalete = document.querySelectorAll('.btn_delete');
+  btns_dalete[btns_dalete.length - 1].addEventListener('click', (e) => {
+    e.currentTarget.closest('[data-container-field-row-id]').remove();
+    const container_fields = document.querySelectorAll('[data-container-field-row-id]');
+    if (container_fields.length < 4) {
       btn_add.style.display = 'inline-block';
     }
+  });
 
-    airDates.push({
-      id: last_row_container_fields,
-      from: '',
-      to: ''
-    });
-    const indexAir = airDates.findIndex(({ id }) => id == last_row_container_fields);
-    airDates[indexAir].from = new AirDatepicker(`[data-container-field-from-id="${last_row_container_fields}"]`, {
-      startDate: airStartDate,
-      minDate: airMinDate,
-      autoClose: true,
-      addon: 'right',
-      locale: airLlocale
-    });
+  last_row_container_fields++;
+  getAllInputSearch();
+}
 
-    const btns_dalete = document.querySelectorAll('.btn_delete');
-    btns_dalete[btns_dalete.length - 1].addEventListener('click', (e) => {
-      e.currentTarget.closest('[data-container-field-row-id]').remove();
-      const container_fields = document.querySelectorAll('[data-container-field-row-id]');
-      if (container_fields.length < 4) {
-        btn_add.style.display = 'inline-block';
-      }
-    });
-
-    last_row_container_fields++;
-    getAllInputSearch();
+function changeFrlyTripType(el) {
+  el.nextElementSibling.classList.add('active_radio');
+  if (document.querySelector('.btn_add')) {
+    document.querySelector('.btn_add').remove();
   }
+  const container_fields = document.querySelectorAll('.fly-trip-pane');
+  container_fields.forEach((item) => {
+    if (item.getAttribute('data-container-field-row-id') != 0) {
+      item.remove();
+    }
+  });
 
-  // утсановка значений после поиска
-  function settingFormValues() {
-    let flightSearchForm = document.querySelector('form[name="flightTickets"]');
-    let dataFlight = JSON.parse(localStorage.getItem('flightTicketInfo'));
-    if (dataFlight) {
-      let lastSearchTicket = JSON.parse(localStorage.getItem('lastSearchTicket'));
+  document.querySelectorAll('.fly-trip-type').forEach((item) => item.classList.remove('active'));
 
-      if (lastSearchTicket && lastSearchTicket.length > 0) {
-        document.querySelector('.search-results-img').style.display = 'none';
-        document.querySelector('.search-results-table').style.display = 'flex';
-        document
-          .querySelector('.search-results-table-flights')
-          .insertAdjacentHTML('afterbegin', setTableTicketInfo(dataFlight.passenger.type));
-        //блок с информацией о билете, вывод заголовка
-        if (dataFlight.from[0]?.cityName != undefined && lastSearchTicket && lastSearchTicket.length > 0) {
-          document.querySelector('.search-results-table-title').textContent =
-            dataFlight.from[0].cityName + ' - ' + dataFlight.to[0].cityName;
-        }
+  el.closest('.fly-trip-type-block').querySelector('.fly-trip-type').classList.add('active');
+
+  const dateTo = document.querySelector('.to');
+  if (el.value === 'Round-trip') {
+    dateTo.removeAttribute('disabled');
+  } else if (el.value === 'One-way' || el.value === 'Multi-city') {
+    //убираем данные со второго поля даты
+    dateTo.closest('.date').classList.remove('errorValid_1');
+    dateTo.classList.remove('errorValid');
+    dateTo.setAttribute('disabled', 'disabled');
+
+    dateTo.classList.remove('errorValid');
+    dateTo.closest('.field').classList.remove('errorValid');
+    dateTo.closest('.block_input').classList.add('disabled');
+
+    airDates[0].from.update({
+      maxDate: 0,
+    });
+    airDates[0].to.clear();
+
+    //отслеживаем если несколько полетов
+
+    if (el.value === 'Multi-city') {
+      if (document.querySelector('form[name="flightTickets"]')) {
+        const drops_container = document.querySelector('.fly-trip-content');
+        drops_container.insertAdjacentHTML('afterend', `<div class="btn_add"><h3>+ Add flight</h3></div>`);
+      } else {
+        const drops_container = document.querySelector('.form-main-btn-block');
+        drops_container.insertAdjacentHTML('beforebegin', `<div class="btn_add"><h3>+ Add flight</h3></div>`);
       }
-      // inf pers
-      flightSearchForm.adults.value = dataFlight.passenger.adults;
-      flightSearchForm.children.value = dataFlight.passenger.children;
-      flightSearchForm.infants.value = dataFlight.passenger.infants;
 
-      document.querySelector('.adult').nextElementSibling.innerHTML = dataFlight.passenger.adults;
-      document.querySelector('.children').nextElementSibling.innerHTML = dataFlight.passenger.children;
-      document.querySelector('.infants').nextElementSibling.innerHTML = dataFlight.passenger.infants;
-
-      document.querySelectorAll('input[name=type_ticket]').forEach((item) => {
-        item.removeAttribute('checked');
-        item.nextElementSibling.classList.remove('active_radio');
-      });
-
-      document.querySelector('input[name=type_ticket][value=' + dataFlight.passenger.type + ']').checked = true;
-      document.querySelector('.flight_class').textContent = dataFlight.passenger.type;
-
-      sumPassenger();
-
-      document.querySelector(
-        'input[name=fly_trip_type][value=' + dataFlight.flyTripType.flyTripType + ']'
-      ).checked = true;
-      changeFrlyTripType(
-        document.querySelector('input[name=fly_trip_type][value=' + dataFlight.flyTripType.flyTripType + ']')
-      );
-
-      for (let i = 0; i < dataFlight.departureDate.length; i++) {
-        if (i == 0) {
-          flightSearchForm['flight[' + i + "]['from']"].value = dataFlight.from[i].cityName;
-          flightSearchForm['flight[' + i + "]['cityAirport']"].value = dataFlight.from[i].airportName;
-          flightSearchForm['flight[' + i + "]['cityCode']"].value = dataFlight.from[i].cityCode;
-          flightSearchForm['flight[' + i + "]['originEntityId']"].value = dataFlight.from[i].entityId;
-
-          flightSearchForm['flight[' + i + "]['to']"].value = dataFlight.to[i].cityName;
-          flightSearchForm['flight[' + i + "]['cityAirportTo']"].value = dataFlight.to[i].airportName;
-          flightSearchForm['flight[' + i + "]['cityCodeTo']"].value = dataFlight.to[i].cityCode;
-          flightSearchForm['flight[' + i + "]['destinationEntityId']"].value = dataFlight.to[i].entityId;
-
-          //document.querySelectorAll('.input_departure')[0].value=dataFlight.departureDate[i].date;
-          airDates[0].from.selectDate(dataFlight.departureDate[i].date.replaceAll('-', '/'));
-
-          if (dataFlight.returnDate[i].date) {
-            airDates[0].to.selectDate(dataFlight.returnDate[i].date.replaceAll('-', '/'));
-          }
-        } else {
-          add_flight_row(
-            dataFlight.from[i].cityName,
-            dataFlight.from[i].airportName,
-            dataFlight.from[i].entityId,
-            dataFlight.from[i].cityCode,
-            dataFlight.to[i].cityName,
-            dataFlight.to[i].airportName,
-            dataFlight.to[i].cityCode,
-            dataFlight.to[i].entityId,
-            dataFlight.departureDate[i].date.replaceAll('-', '/')
-          );
-        }
-      }
+      document.querySelector('.btn_add').addEventListener('click', () => add_flight_row('', '', '', '', '', '', '', '', ''));
     }
   }
-  function setTableTicketInfo(cabin = '') {
-    let lastSearchTicket = JSON.parse(localStorage.getItem('lastSearchTicket'));
+}
 
-    let tableBody = '';
-    if (lastSearchTicket && lastSearchTicket.length > 0) {
-      let fireExpireBlock = '',
-        fireExpireClass = '';
-      for (let i = 0; i < lastSearchTicket.length; i++) {
-        if (lastSearchTicket[i]) {
-          if (i == 0) {
-            fireExpireBlock = `<div class="search-results-table-partner_name search-results-table-partner_name-first">${lastSearchTicket[i]['partner_name']}</div>
+function sumPassenger() {
+  sum = 0;
+  let elements = document.querySelectorAll('.number_passengers-all');
+  elements.forEach((el) => {
+    sum = 0;
+    let parent = el.closest('.block_arrow');
+    let quantities = parent.querySelectorAll('.quantity');
+    for (let i = 0; i < quantities.length; i++) {
+      sum = sum + Number(quantities[i].value);
+    }
+    el.innerHTML = sum;
+  });
+}
+function setTableTicketInfo(cabin = '') {
+  let lastSearchTicket = JSON.parse(localStorage.getItem('lastSearchTicket'));
+
+  let tableBody = '';
+  if (lastSearchTicket && lastSearchTicket.length > 0) {
+    let fireExpireBlock = '',
+      fireExpireClass = '';
+    for (let i = 0; i < lastSearchTicket.length; i++) {
+      if (lastSearchTicket[i]) {
+        if (i == 0) {
+          fireExpireBlock = `<div class="search-results-table-partner_name search-results-table-partner_name-first">${lastSearchTicket[i]['partner_name']}</div>
 									<div class="search-results-table-flights-item-fire">
 										<div class="search-results-table-flights-item-fire-icon">
 											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" viewBox="0 0 20 25" fill="none">
@@ -572,12 +394,12 @@ export const initFlightSearch = ({ airStartDate, airMinDate, airLlocale, AirDate
 											<div class="search-results-table-flights-item-fire-expire">Expires in 30 min</div>
 										</div>
 									</div>`;
-            fireExpireClass = 'fire-expire';
-          } else {
-            fireExpireBlock = `<div class="search-results-table-partner_name">${lastSearchTicket[i]['partner_name']}</div>`;
-            fireExpireClass = '';
-          }
-          tableBody += `
+          fireExpireClass = 'fire-expire';
+        } else {
+          fireExpireBlock = `<div class="search-results-table-partner_name">${lastSearchTicket[i]['partner_name']}</div>`;
+          fireExpireClass = '';
+        }
+        tableBody += `
 				<div class="search-results-table-flights-item">
 					<div class="search-results-table-flights-item-img">
 						<img src="${lastSearchTicket[i]['partner_logo']}" height="30" alt="partner logo" />
@@ -585,14 +407,187 @@ export const initFlightSearch = ({ airStartDate, airMinDate, airLlocale, AirDate
 					${fireExpireBlock}
 					<div class="search-results-table-flights-item-price">
 						<div class="search-results-table-flights-item-price-amount ${fireExpireClass}">${Math.round(
-            Number(lastSearchTicket[i]['price']) * Number(`1.0${i}`)
-          )}*</div>
+              Number(lastSearchTicket[i]['price']) * Number(`1.0${i}`)
+            )}*</div>
 						<div class="search-results-table-flights-item-price-ticket-type">${cabin} class, r/t, total</div>
 					</div>
 				</div>`;
+      }
+    }
+  }
+  return tableBody;
+}
+
+export const initFlightSearch = () => {
+  const dropdowns = document.querySelectorAll('.drop');
+  dropdowns.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      dropdowns.forEach((drop) => {
+        if (drop != e.currentTarget) {
+          drop.querySelector('.block-drop-down').classList.remove('show');
+          drop.querySelector('.block_photo').classList.remove('open');
+        }
+      });
+
+      if (!e.target.closest('.block-drop-down')) {
+        item.querySelector('.block-drop-down').classList.toggle('show');
+        item.querySelector('.block_photo').classList.toggle('open');
+      }
+    });
+  });
+  //input plus and minus для изменения количества пассажиров
+  document.querySelectorAll('.quantity_inner .bt_minus').forEach((item) => {
+    item.addEventListener('click', function (e) {
+      const parent = e.currentTarget.closest('.quantity_inner');
+      let input = parent.querySelector('.quantity');
+      let count = Number(input.value) - 1;
+      count = count < 1 ? 0 : count;
+      if (input.getAttribute('name') == 'adults' && count < 1) {
+        count = 1;
+      }
+      input.value = Number(count);
+      parent.querySelector('.quantity_label').innerHTML = Number(count);
+      sumPassenger();
+    });
+  });
+  document.querySelectorAll('.quantity_inner .bt_plus').forEach((item) => {
+    item.addEventListener('click', function (e) {
+      const parent = e.currentTarget.closest('.quantity_inner');
+      let input = parent.querySelector('.quantity');
+      let count = parseInt(input.value) + 1;
+
+      count = count < 1 ? 0 : count;
+      if (input.getAttribute('name') == 'adults' && count < 1) {
+        count = 1;
+      }
+      if (Number(parent.closest('.block_arrow').querySelector('.number_passengers-all').innerHTML) < 8) {
+        input.value = Number(count);
+        parent.querySelector('.quantity_label').innerHTML = Number(count);
+      }
+      sumPassenger();
+    });
+  });
+
+  //Отслеживание события переключения типа полета
+  //изменение состояния radio при выборе типа билетов
+  const radioTypeTickets = document.querySelectorAll('.form_radio_btn');
+  //class
+  radioTypeTickets.forEach((item) => {
+    item.addEventListener('click', () => {
+      radioTypeTickets.forEach((el) => el.querySelector('input[type="radio"]').removeAttribute('checked'));
+      let itemValue = item.querySelector('input[type="radio"]').value;
+      document.querySelector('.flight_class').textContent = itemValue;
+
+      radioTypeTickets.forEach((el) => {
+        el.querySelector('label').classList.remove('active_radio');
+        if (el.querySelector('input[type="radio"]').value == itemValue) {
+          el.querySelector('input[type="radio"]').setAttribute('checked', true);
+          el.querySelector('label').classList.add('active_radio');
+        }
+      });
+    });
+    item.querySelector('label').classList.remove('active_radio');
+    if (item.querySelector('input[type="radio"]').checked) {
+      item.querySelector('label').classList.add('active_radio');
+    }
+  });
+
+  const fly_trip_type = document.querySelectorAll('input[name=fly_trip_type]');
+  fly_trip_type.forEach((el) => {
+    el.addEventListener('change', () => {
+      for (let i = 0; i < fly_trip_type.length; i++) {
+        fly_trip_type[i].nextElementSibling.classList.remove('active_radio');
+      }
+      changeFrlyTripType(el);
+    });
+    el.nextElementSibling.classList.remove('active_radio');
+    if (el.checked) {
+      el.nextElementSibling.classList.add('active_radio');
+    }
+  });
+  changeFrlyTripType(fly_trip_type[0]);
+
+  //заполнение поля с общим количеством пассажиров
+
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = function (event) {
+    if (!event.target.closest('.drop')) {
+      let dropdowns = document.getElementsByClassName('block-drop-down');
+      let i;
+      for (i = 0; i < dropdowns.length; i++) {
+        let openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+          openDropdown.closest('.drop').querySelector('.block_photo').classList.remove('open');
         }
       }
     }
-    return tableBody;
-  }
+
+    const activeSearchInput = document.querySelectorAll('.search-input.active');
+
+    if (activeSearchInput) {
+      activeSearchInput.forEach((item) => {
+        const autocomBox = item.querySelector('.autocom-box');
+
+        if (autocomBox.classList.contains('active')) {
+          const itemParentInputs = item.querySelectorAll('input');
+
+          const list = autocomBox.querySelectorAll('li');
+          list.forEach((li) => {
+            if (
+              itemParentInputs[0].value !== '' &&
+              itemParentInputs[1].value !== '' &&
+              itemParentInputs[2].value !== '' &&
+              itemParentInputs[3].value !== ''
+            ) {
+              if (
+                !(
+                  itemParentInputs[0].value == li.querySelector('h5').textContent &&
+                  itemParentInputs[1].value == li.querySelector('h4').textContent &&
+                  itemParentInputs[2].value == li.querySelector('h5 span').textContent &&
+                  itemParentInputs[3].value == li.getAttribute('class')
+                )
+              ) {
+                itemParentInputs[0].value = '';
+                itemParentInputs[1].value = '';
+                itemParentInputs[2].value = '';
+                itemParentInputs[3].value = '';
+              }
+            } else {
+              itemParentInputs[0].value = '';
+              itemParentInputs[1].value = '';
+              itemParentInputs[2].value = '';
+              itemParentInputs[3].value = '';
+            }
+          });
+        }
+        item.classList.remove('active');
+        autocomBox.classList.remove('active');
+      });
+    }
+
+    if (event.target.classList.contains('switch') || event.target.closest('.switch')) {
+      const parent = event.target.closest('.container-field-row');
+      const element1 = parent.querySelector('.input_from').value;
+      const elementCityName1 = parent.querySelector('.cityAirport').value;
+      const elementCityCode1 = parent.querySelector('.cityCode').value;
+      const elementCityEntitiId1 = parent.querySelector('.originEntityId').value;
+      const element2 = parent.querySelector('.input_to').value;
+      const elementCityName2 = parent.querySelector('.cityAirportTo').value;
+      const elementCityCode2 = parent.querySelector('.cityCodeTo').value;
+      const elementCityEntitiId2 = parent.querySelector('.destinationEntityId').value;
+
+      parent.querySelector('.input_from').value = element2;
+      parent.querySelector('.cityAirport').value = elementCityName2;
+      parent.querySelector('.cityCode').value = elementCityCode2;
+      parent.querySelector('.originEntityId').value = elementCityEntitiId2;
+
+      parent.querySelector('.input_to').value = element1;
+      parent.querySelector('.cityAirportTo').value = elementCityName1;
+      parent.querySelector('.cityCodeTo').value = elementCityCode1;
+      parent.querySelector('.destinationEntityId').value = elementCityEntitiId1;
+    }
+
+    event.stopPropagation();
+  };
 };
