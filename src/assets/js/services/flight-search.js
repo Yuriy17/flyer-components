@@ -157,7 +157,7 @@ function add_flight_row(
 							<div class="block_photo">
 								<div class="icon">
 									<img
-										src="${baseUrl}assets/mainForm/img/airplane-1.svg"
+										src="${baseUrl}assets/icons/airplane-1.svg"
 										alt="Airplane"
 										title="Airplane"
 										class="from_airplane_img"
@@ -208,7 +208,7 @@ function add_flight_row(
 							<div class="block_photo">
 								<div class="icon icon_to">
 									<img
-										src="${baseUrl}assets/mainForm/img/airplane-1.svg"
+										src="${baseUrl}assets/icons/airplane-1.svg"
 										alt="Airplane"
 										title="Airplane"
 										class="to_airplane_img"

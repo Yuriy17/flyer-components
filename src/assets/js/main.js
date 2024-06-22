@@ -9,7 +9,6 @@ import { getAllInputSearch } from './services/api.js';
 import { initShoelace } from './services/initShoelace.js';
 import { airDates, airLlocale, airMinDate, airStartDate } from './helpers/constants.js';
 
-
 document.addEventListener('DOMContentLoaded', async () => {
   initShoelace();
   initMainForm();
@@ -27,11 +26,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     locale: airLlocale,
     onSelect({ date }) {
       airDates[indexAir].to.update({
-        minDate: date
+        minDate: date,
       });
-    }
+    },
   });
-  console.log(document.querySelectorAll('.to'));
+
   airDates[indexAir].to = new AirDatepicker('.to', {
     startDate: airStartDate,
     minDate: airMinDate,
@@ -40,12 +39,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     locale: airLlocale,
     onSelect({ date }) {
       airDates[indexAir].from.update({
-        maxDate: date
+        maxDate: date,
       });
-    }
+    },
   });
 });
-
 
 // document.addEventListener('DOMContentLoaded', () => {
 //   const searchInput = document.getElementById('search-input');

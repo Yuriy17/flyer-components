@@ -1,4 +1,3 @@
-
 <sl-tab-group class="nav">
   <sl-tab slot="nav" panel="general">
     <a class="link" href="/">Home</a>
@@ -11,3 +10,8 @@
   <sl-tab-panel name="custom">This is the booking page.</sl-tab-panel>
 </sl-tab-group>
 
+<%- include('templates/components/button.ejs', {
+  env: {
+    content: 'Get a Quote'
+  }
+}) %>

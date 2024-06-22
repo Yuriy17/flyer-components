@@ -3,33 +3,34 @@ import standartFormTemplate from '../../../templates/mainForm/standartForm.ejs';
 import formTemplate from '../../../templates/mainForm/form.ejs';
 import passengerFieldTemplate from '../../../templates/mainForm/passengerField.ejs';
 import { inputTel } from './phones';
+import { baseUrl } from '../helpers/constants';
 
 export const initMainForm = () => {
   // Function to create the main form
   function createMainForm(selector, formType) {
     const formContainer = document.querySelector(selector);
-    
+
     if (formContainer) {
       const passengersData = [
         { label: 'Adults', aged: '(12+ years)', id: 'adults', value: '1', class: 'adults' },
         { label: 'Children', aged: '(2-11 years)', id: 'children', value: '0', class: 'children' },
-        { label: 'Infants', aged: '(Under 2 years)', id: 'infants', value: '0', class: 'infants' }
+        { label: 'Infants', aged: '(Under 2 years)', id: 'infants', value: '0', class: 'infants' },
       ];
 
       const dropsContainer = dropsContainerTemplate({
-          passengers: passengersData.map((passenger) => passengerFieldTemplate(passenger)).join('\n')
-      })
+        passengers: passengersData.map((passenger) => passengerFieldTemplate({ ...passenger, baseUrl })).join('\n'),
+      });
 
       const formHtml = formTemplate({
-        baseUrl: '/',
+        baseUrl,
         dropsContainer,
         standartForm: standartFormTemplate({
           formType,
-          dropsContainer
+          dropsContainer,
         }),
-        formName: 'searchflights'
+        formName: 'searchflights',
       }).trim();
-      
+
       formContainer.innerHTML = formHtml;
 
       // Additional logic for form initialization based on formType
@@ -39,7 +40,6 @@ export const initMainForm = () => {
 
       // Add your other event listeners and JS logic here
     }
-
   }
 
   // Logic to determine where to create the form
@@ -397,7 +397,7 @@ export const initMainForm = () => {
   //                                 <div class="block_photo">
   //                                     <div class="icon">
   //                                         <img
-  //                                             src="${baseUrl}assets/mainForm/img/airplane-1.svg"
+  //                                             src="${baseUrl}assets/icons/airplane-1.svg"
   //                                             alt="Airplane"
   //                                             title="Airplane"
   //                                             class="from_airplane_img"
@@ -444,7 +444,7 @@ export const initMainForm = () => {
   //                                 <div class="block_photo">
   //                                     <div class="icon icon_to">
   //                                         <img
-  //                                             src="${baseUrl}assets/mainForm/img/airplane-1.svg"
+  //                                             src="${baseUrl}assets/icons/airplane-1.svg"
   //                                             alt="Airplane"
   //                                             title="Airplane"
   //                                             class="to_airplane_img"

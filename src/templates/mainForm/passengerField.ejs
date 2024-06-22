@@ -6,26 +6,14 @@
   <div class="field__num">
     <div class="quantity_inner">
       <div class="bt_minus">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24" width="24" aria-hidden="true"
-          fill="currentcolor" color="#006dd2" tabindex="-1" focusable="false" role="img"
-          class="Svg-sc-12lgb6u-0 gHvJpT RadioMinus__SvgRadioMinus-sc-pyt6vi-0 leZWKJ">
-          <path
-            d="M7 11v2h10v-2H7zm5-9C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z">
-          </path>
-        </svg>
+        <img src="<%=  env.baseUrl %>assets/icons/rounded-minus.svg"" alt=" rounded minus">
       </div>
       <div class="quantity_inner_label">
         <input id="<%= env.id %>" name="<%= env.id %>" type="hidden" value="<%= env.value %>" class="quantity <%= env.class %>" />
         <label for="<%= env.id %>" class="quantity_label"><%= env.value %></label>
       </div>
       <div class="bt_plus">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24" width="24" aria-hidden="true"
-          fill="currentcolor" color="#006dd2" tabindex="-1" focusable="false" role="img"
-          class="Svg-sc-12lgb6u-0 gHvJpT RadioPlus__SvgRadioPlus-sc-g798wf-0 cyONYp">
-          <path
-            d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 8-8 8-8z">
-          </path>
-        </svg>
+        <img src="<%=  env.baseUrl %>assets/icons/rounded-plus.svg"" alt="rounded plus">
       </div>
     </div>
   </div>
