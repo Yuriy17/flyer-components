@@ -10,6 +10,7 @@ import { initShoelace } from './assets/js/services/initShoelace.js';
 import { airDates, airLlocale, airMinDate, airStartDate } from './assets/js/helpers/constants.js';
 
 export const dynamicImport = async (path) => {
+  /* @vite-ignore */
   return (await import(path))?.default;
 };
 

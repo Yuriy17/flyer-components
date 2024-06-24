@@ -5,8 +5,9 @@ import { compile } from 'ejs';
 import { readFile } from 'node:fs/promises';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import { fileURLToPath } from 'url';
-const __dirname = fileURLToPath(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
 
+const __dirname = path.dirname(__filename);
 // Load environment variables from .env file
 dotenv.config();
 
