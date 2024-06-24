@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
-// import { viteStaticCopy } from 'vite-plugin-static-copy';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 const __dirname = path.dirname(__filename);
 export default defineConfig(({ mode }) => {
@@ -20,16 +20,16 @@ export default defineConfig(({ mode }) => {
       __APP_ENV__: JSON.stringify(env.APP_ENV),
     },
     plugins: [
-      // mode === 'production' &&
-      //   viteStaticCopy({
-      //     targets: [
-      //       {
-      //         // copy for dynamic import ejs
-      //         src: path.resolve(__dirname, 'src/templates/components/input.ejs'),
-      //         dest: 'assets/templates/components',
-      //       },
-      //     ],
-      //   }),
+      mode === 'production' &&
+        viteStaticCopy({
+          targets: [
+            {
+              // copy for dynamic import ejs
+              src: path.resolve(__dirname, 'src/templates/components/input.ejs'),
+              dest: 'assets/templates/components',
+            },
+          ],
+        }),
       // render in html ejs templates
       ViteEjsPlugin(
         // { title: 'My vue project!' },
