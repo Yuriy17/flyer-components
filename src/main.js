@@ -1,17 +1,21 @@
-import '../css/styles.scss';
+import './assets/css/styles.scss';
 import 'air-datepicker/air-datepicker.css';
 import AirDatepicker from 'air-datepicker';
-import { initMainForm } from './services/mainForm.js';
-import { initFlightSearch } from './services/flight-search.js';
-import { initValidation } from './services/validation.js';
-import { fade, preloader, setPreloader } from './services/preloader.js';
-import { getAllInputSearch } from './services/api.js';
-import { initShoelace } from './services/initShoelace.js';
-import { airDates, airLlocale, airMinDate, airStartDate } from './helpers/constants.js';
+import { initMainForm } from './assets/js/services/mainForm.js';
+import { initFlightSearch } from './assets/js/services/flight-search.js';
+import { initValidation } from './assets/js/services/validation.js';
+import { fade, preloader, setPreloader } from './assets/js/services/preloader.js';
+import { getAllInputSearch } from './assets/js/services/api.js';
+import { initShoelace } from './assets/js/services/initShoelace.js';
+import { airDates, airLlocale, airMinDate, airStartDate } from './assets/js/helpers/constants.js';
+
+export const dynamicImport = async (path) => {
+  return (await import(path))?.default;
+};
 
 document.addEventListener('DOMContentLoaded', async () => {
   initShoelace();
-  initMainForm();
+  await initMainForm();
   getAllInputSearch();
   initFlightSearch({ AirDatepicker, airStartDate, airMinDate, airLlocale });
   initValidation();

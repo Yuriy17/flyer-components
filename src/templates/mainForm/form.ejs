@@ -3,14 +3,11 @@
   <form class="form-valid-tab white mainForm" id="searchflights" novalidate name="<%= env.formName %>">
     <div class="fly-trip-types">
       <div class="fly-trip-type-block">
-        <input id="fly-trip-radio-1" type="radio" name="fly_trip_type" value="Round-trip" class="fly-trip-radio"
-          checked />
-        <label for="fly-trip-radio-1">
-          <span class="fly-trip-type">
-            <span class="icon"><i class="icon-round-trip"></i></span>
-            <p>Round-trip</p>
-          </span>
-        </label>
+        <%- await include('templates/components/input.ejs', {
+          env: {
+            content: 'Get a Quote'
+          }
+        }) %>
       </div>
       <div class="fly-trip-type-block">
         <input id="fly-trip-radio-2" type="radio" name="fly_trip_type" class="fly-trip-radio" value="One-way" />

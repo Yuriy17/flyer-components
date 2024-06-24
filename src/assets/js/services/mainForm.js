@@ -4,10 +4,11 @@ import formTemplate from '../../../templates/mainForm/form.ejs';
 import passengerFieldTemplate from '../../../templates/mainForm/passengerField.ejs';
 import { inputTel } from './phones';
 import { baseUrl } from '../helpers/constants';
+import { includeCallback } from '../helpers/helpers';
 
-export const initMainForm = () => {
+export const initMainForm = async () => {
   // Function to create the main form
-  function createMainForm(selector, formType) {
+  async function createMainForm(selector, formType) {
     const formContainer = document.querySelector(selector);
 
     if (formContainer) {
@@ -21,15 +22,21 @@ export const initMainForm = () => {
         passengers: passengersData.map((passenger) => passengerFieldTemplate({ ...passenger, baseUrl })).join('\n'),
       });
 
-      const formHtml = formTemplate({
-        baseUrl,
-        dropsContainer,
-        standartForm: standartFormTemplate({
-          formType,
-          dropsContainer,
-        }),
-        formName: 'searchflights',
-      }).trim();
+      const formHtml = (
+        await formTemplate(
+          {
+            baseUrl,
+            dropsContainer,
+            standartForm: standartFormTemplate({
+              formType,
+              dropsContainer,
+            }),
+            formName: 'searchflights',
+          },
+          null,
+          includeCallback
+        )
+      ).trim();
 
       formContainer.innerHTML = formHtml;
 
@@ -44,9 +51,9 @@ export const initMainForm = () => {
 
   // Logic to determine where to create the form
   if (document.querySelector('#sectionMainForm')) {
-    createMainForm('#sectionMainForm', 1);
+    await createMainForm('#sectionMainForm', 1);
   } else {
-    createMainForm('#sectionFillQuote', 2);
+    await createMainForm('#sectionFillQuote', 2);
     inputTel('.form-valid-tab');
   }
   //   const baseUrl = '/';

@@ -1,3 +1,4 @@
+import { dynamicImport } from '../../../main';
 import { checkValidate, validateText } from '../services/validation';
 import { mainRules } from './constants';
 
@@ -84,4 +85,11 @@ const getErrorMessage = (rule) => {
   return mainRules[rule];
 };
 
-// Other helper functions like validateText, validateMail, checkRule, etc. will be defined here as well.
+export const includeCallback = async (filename, data) => {
+  const template = await dynamicImport(`./${filename}`);
+
+  if (template) {
+    return await template(data); // basically a call to ejs.render(contents, data);
+  }
+  return 'Error loading ' + filename;
+};

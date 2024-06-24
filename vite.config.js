@@ -1,15 +1,18 @@
 import { defineConfig } from 'vite';
 import dotenv from 'dotenv';
-import { resolve, join, relative } from 'path';
+import path from 'path';
 import { compile } from 'ejs';
 import { readFile } from 'node:fs/promises';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
+import { fileURLToPath } from 'url';
+const __dirname = fileURLToPath(import.meta.url);
 
 // Load environment variables from .env file
 dotenv.config();
 
 export default defineConfig({
   plugins: [
+    // render in html ejs templates
     ViteEjsPlugin(
       // { title: 'My vue project!' },
       {
@@ -17,12 +20,14 @@ export default defineConfig({
           // viteConfig is the current viteResolved config.
           return {
             root: viteConfig.root,
-            domain: 'example.com',
-            beautify: true
+            beautify: true,
+            // domain: 'example.com',
           };
-        }
+        },
       }
     ),
+    // render in js ejs templates
+    // https://medium.com/@koistya/using-ejs-with-vite-7502a4f79e44
     {
       name: 'ejs',
       async transform(_, id) {
@@ -32,36 +37,38 @@ export default defineConfig({
             client: true,
             strict: true,
             localsName: 'env',
-            views: [resolve(__dirname, 'views')],
-            filename: relative(__dirname, id)
+            async: 'true',
+            // views: [path.resolve(__dirname, 'views')],
+            filename: path.relative(__dirname, id),
           }).toString();
           return `export default ${code}`;
         }
-      }
-    }
+      },
+    },
   ],
   build: {
     emptyOutDir: false,
-    outDir: join(__dirname, 'dist'),
+    outDir: path.join(__dirname, 'dist'),
     rollupOptions: {
       input: {
-        index: resolve(__dirname, 'src/index.html'),
-        booking: resolve(__dirname, 'src/booking/index.html')
+        index: path.resolve(__dirname, 'src/index.html'),
+        booking: path.resolve(__dirname, 'src/booking/index.html'),
       },
       output: {
         // entryFileNames: `[name].js`,
         // chunkFileNames: `[name].js`,
         // assetFileNames: `[name].[ext]`
-      }
-    }
+      },
+    },
   },
   root: 'src',
   server: {
-    port: process.env.VITE_PORT || 5173 // Use the port from the .env file or default to 5173
+    // eslint-disable-next-line no-undef
+    port: process.env.VITE_PORT || 5173, // Use the port from the .env file or default to 5173
   },
   css: {
     preprocessorOptions: {
-      scss: {}
-    }
-  }
+      scss: {},
+    },
+  },
 });
