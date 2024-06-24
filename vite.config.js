@@ -6,6 +6,7 @@ import { readFile } from 'node:fs/promises';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 const __dirname = path.dirname(__filename);
 // Load environment variables from .env file
@@ -13,6 +14,16 @@ dotenv.config();
 
 export default defineConfig({
   plugins: [
+    import.meta.env.PROD &&
+      viteStaticCopy({
+        targets: [
+          {
+            // copy for dynamic import ejs
+            src: path.resolve(__dirname, 'src/templates/components/input.ejs'),
+            dest: 'assets/templates/components',
+          },
+        ],
+      }),
     // render in html ejs templates
     ViteEjsPlugin(
       // { title: 'My vue project!' },
@@ -64,8 +75,7 @@ export default defineConfig({
   },
   root: 'src',
   server: {
-    // eslint-disable-next-line no-undef
-    port: process.env.VITE_PORT || 5173, // Use the port from the .env file or default to 5173
+    port: import.meta.env.VITE_PORT || 5173, // Use the port from the .env file or default to 5173
   },
   css: {
     preprocessorOptions: {
