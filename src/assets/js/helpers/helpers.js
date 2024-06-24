@@ -86,7 +86,7 @@ const getErrorMessage = (rule) => {
 };
 
 export const includeCallback = async (filename, data) => {
-  const template = await dynamicImport(`./${filename}`);
+  const template = await dynamicImport(`/${filename}`);
 
   if (template) {
     return await template(data); // basically a call to ejs.render(contents, data);
