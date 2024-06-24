@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => {
             {
               // copy for dynamic import ejs
               src: path.resolve(__dirname, 'src/templates/components/input.ejs'),
-              dest: 'assets/templates/components',
+              dest: 'templates/components',
             },
           ],
         }),
