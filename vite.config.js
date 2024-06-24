@@ -65,7 +65,8 @@ export default defineConfig(({ mode }) => {
       },
     ],
     build: {
-      emptyOutDir: false,
+      emptyOutDir: true,
+      minify: false,
       outDir: path.join(__dirname, 'dist'),
       rollupOptions: {
         input: {
