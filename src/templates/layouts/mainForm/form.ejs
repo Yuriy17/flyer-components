@@ -1,32 +1,10 @@
 <div class="section-special-offer-main">
   <div class="save-up">Save up to $3,000</div>
-  <form class="form-valid-tab white mainForm" id="searchflights" novalidate name="<%= env.formName %>">
+  <form class="form-valid-tab white mainForm" id="searchflights" novalidate name="<%= env.constants.formName %>">
     <div class="fly-trip-types">
-      <div class="fly-trip-type-block">
-        <%- await include('templates/components/input.ejs', {
-          env: {
-            content: 'Get a Quote'
-          }
-        }) %>
-      </div>
-      <div class="fly-trip-type-block">
-        <input id="fly-trip-radio-2" type="radio" name="fly_trip_type" class="fly-trip-radio" value="One-way" />
-        <label for="fly-trip-radio-2">
-          <span class="fly-trip-type">
-            <span class="icon"><i class="icon-direct-flight"></i></span>
-            <p>One-way</p>
-          </span>
-        </label>
-      </div>
-      <div class="fly-trip-type-block">
-        <input id="fly-trip-radio-3" type="radio" name="fly_trip_type" class="fly-trip-radio" value="Multi-city" />
-        <label for="fly-trip-radio-3">
-          <span class="fly-trip-type">
-            <span class="icon"><i class="icon-airplane-2"></i></span>
-            <p>Multi-city</p>
-          </span>
-        </label>
-      </div>
+      <%- env.inputRoundTrip %>
+      <%- env.inputOneWay %>
+      <%- env.inputMultiCity %>
     </div>
     <div class="fly-trip-content">
       <div class="fly-trip-pane" data-container-field-row-id="0">
@@ -51,7 +29,7 @@
                 </div>
                 <div class="block_photo">
                   <div class="icon">
-                    <img src="<%=  env.baseUrl %>assets/icons/airplane-1.svg" alt="Airplane" title="Airplane"
+                    <img src="<%=  env.constants.baseUrl %>assets/icons/airplane-1.svg" alt="Airplane" title="Airplane"
                       class="from_airplane_img" />
                   </div>
                 </div>
@@ -73,7 +51,7 @@
                 </div>
                 <div class="block_photo">
                   <div class="icon icon_to">
-                    <img src="<%=  env.baseUrl %>assets/icons/airplane-1.svg" alt="Airplane" title="Airplane"
+                    <img src="<%=  env.constants.baseUrl %>assets/icons/airplane-1.svg" alt="Airplane" title="Airplane"
                       class="to_airplane_img" />
                   </div>
                 </div>

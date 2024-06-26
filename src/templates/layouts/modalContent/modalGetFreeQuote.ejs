@@ -1,0 +1,35 @@
+<form action="send_mail.php" novalidate method="post" class="modal-form white" name="modal">
+  <div class="section-contact__header">
+    <div class="section-contact__title">
+      Get a free quote
+    </div>
+    <div class="close closeBTN">&times;</div>
+  </div>
+
+  <div class="section-contact__inputs">
+    <p>
+      <label for="name2">Name</label>
+      <input type="text" name="name" id="name2" data-validation="required|min[3]" placeholder="Enter name">
+    </p>
+    <p>
+      <label for="phone2">Phone number</label>
+      <input type="tel" name="phone" data-validation="required|min[3]" id="phone2" class="phone">
+    </p>
+    <p>
+      <label for="email2">Email address</label>
+      <input type="email" name="email" data-validation="required|mail" id="email2"
+        placeholder="Enter email address">
+    </p>
+  </div>
+
+  <div class="section-contact__policy">
+    <label for="policy2"><span class="text">*I give consent to the processing of my personal data given in the
+        contact form above
+        under the terms and conditions of <a href="https://flyer-club.com/privacypolicy/">Privacy Policy</a></span>
+    </label>
+  </div>
+  <div>
+    <button class="section-contact__button" type="submit">Submit</button>
+  </div>
+</form>
+

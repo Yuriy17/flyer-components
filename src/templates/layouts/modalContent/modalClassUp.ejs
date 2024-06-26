@@ -1,0 +1,37 @@
+<form action="send_mail.php" novalidate method="post" class="modal-subscribe-form white" name="subscription">
+  <div class="section-contact__header section-contact__header-subscribe">
+    <div>
+      <div class="section-contact__title subscribe-title">
+        Business & First Class up to <span>70%</span>
+      </div>
+      <div class="close closeBTN">&times;</div>
+    </div>
+    <div>
+      <p class="section-contact__description">
+        Fill out the form and receive exclusive flight offers with discounts by email every week
+      </p>
+    </div>
+  </div>
+
+  <div class="section-contact__inputs">
+    <p>
+      <label for="name3">Your city*</label>
+      <input type="text" name="city" id="name3" placeholder="New York" data-validation="required|min[3]|max[40]">
+    </p>
+    <p>
+      <label for="email3">Email address*</label>
+      <input type="email" name="email_active" id="email3" data-validation="required|mail"
+        placeholder="Enter email address">
+    </p>
+  </div>
+
+  <div class="section-contact__policy">
+    <label for="policy3"><span class="text">*I give consent to the processing of my personal data given in the
+        contact form above
+        under the terms and conditions of <a href="https://flyer-club.com/privacypolicy/">Privacy Policy</a>
+      </span></label>
+  </div>
+  <div>
+    <button class="section-contact__button" type="submit">Sign Up Now</button>
+  </div>
+</form>

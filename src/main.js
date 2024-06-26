@@ -1,25 +1,22 @@
 import './assets/css/styles.scss';
 import 'air-datepicker/air-datepicker.css';
 import AirDatepicker from 'air-datepicker';
-import { initMainForm } from './assets/js/services/mainForm.js';
+import { initMainForm } from './assets/js/services/initMainForm.js';
 import { initFlightSearch } from './assets/js/services/flight-search.js';
 import { initValidation } from './assets/js/services/validation.js';
 import { fade, preloader, setPreloader } from './assets/js/services/preloader.js';
 import { getAllInputSearch } from './assets/js/services/api.js';
 import { initShoelace } from './assets/js/services/initShoelace.js';
 import { airDates, airLlocale, airMinDate, airStartDate } from './assets/js/helpers/constants.js';
-
-export const dynamicImport = async (path) => {
-  /* @vite-ignore */
-  return (await import(path))?.default;
-};
+import initModal from './assets/js/services/initModal.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   initShoelace();
-  await initMainForm();
+  initMainForm();
   getAllInputSearch();
   initFlightSearch({ AirDatepicker, airStartDate, airMinDate, airLlocale });
   initValidation();
+  initModal();
   const state = window.location.hash === '#searchflights' ? 'searchingFinish' : 'loading';
   await setPreloader(state);
   await fade(preloader, false);

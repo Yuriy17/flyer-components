@@ -1,14 +1,9 @@
-import dropsContainerTemplate from '../../../templates/mainForm/dropsContainer.ejs';
-import standartFormTemplate from '../../../templates/mainForm/standartForm.ejs';
-import formTemplate from '../../../templates/mainForm/form.ejs';
-import passengerFieldTemplate from '../../../templates/mainForm/passengerField.ejs';
 import { inputTel } from './phones';
-import { baseUrl } from '../helpers/constants';
-import { includeCallback } from '../helpers/helpers';
+import MainForm from '../layouts/MainForm';
 
 export const initMainForm = async () => {
   // Function to create the main form
-  async function createMainForm(selector, formType) {
+  function createMainForm(selector, formType) {
     const formContainer = document.querySelector(selector);
 
     if (formContainer) {
@@ -18,42 +13,18 @@ export const initMainForm = async () => {
         { label: 'Infants', aged: '(Under 2 years)', id: 'infants', value: '0', class: 'infants' },
       ];
 
-      const dropsContainer = dropsContainerTemplate({
-        passengers: passengersData.map((passenger) => passengerFieldTemplate({ ...passenger, baseUrl })).join('\n'),
+      formContainer.innerHTML = MainForm({
+        passengersData,
+        formType,
       });
-
-      const formHtml = (
-        await formTemplate(
-          {
-            baseUrl,
-            dropsContainer,
-            standartForm: standartFormTemplate({
-              formType,
-              dropsContainer,
-            }),
-            formName: 'searchflights',
-          },
-          null,
-          includeCallback
-        )
-      ).trim();
-
-      formContainer.innerHTML = formHtml;
-
-      // Additional logic for form initialization based on formType
-      if (formType === 2) {
-        inputTel('.form-valid-tab');
-      }
-
-      // Add your other event listeners and JS logic here
     }
   }
 
   // Logic to determine where to create the form
   if (document.querySelector('#sectionMainForm')) {
-    await createMainForm('#sectionMainForm', 1);
+    createMainForm('#sectionMainForm', 1);
   } else {
-    await createMainForm('#sectionFillQuote', 2);
+    createMainForm('#sectionFillQuote', 2);
     inputTel('.form-valid-tab');
   }
   //   const baseUrl = '/';

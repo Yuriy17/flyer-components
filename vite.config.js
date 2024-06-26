@@ -5,7 +5,6 @@ import { readFile } from 'node:fs/promises';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 const __dirname = path.dirname(__filename);
 export default defineConfig(({ mode }) => {
@@ -15,21 +14,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
 
   return {
-    // vite config
-    define: {
-      __APP_ENV__: JSON.stringify(env.APP_ENV),
-    },
     plugins: [
-      mode === 'production' &&
-        viteStaticCopy({
-          targets: [
-            {
-              // copy for dynamic import ejs
-              src: path.resolve(__dirname, 'src/templates/components/input.ejs'),
-              dest: 'templates/components',
-            },
-          ],
-        }),
       // render in html ejs templates
       ViteEjsPlugin(
         // { title: 'My vue project!' },
@@ -55,7 +40,7 @@ export default defineConfig(({ mode }) => {
               client: true,
               strict: true,
               localsName: 'env',
-              async: 'true',
+              // async: 'true',
               // views: [path.resolve(__dirname, 'views')],
               filename: path.relative(__dirname, id),
             }).toString();
@@ -78,7 +63,33 @@ export default defineConfig(({ mode }) => {
           // entryFileNames: `[name].js`,
           // chunkFileNames: `[name].js`,
           // assetFileNames: `[name].[ext]`
+          manualChunks: (id) => {
+            if (id.includes('node_modules')) {
+              if (id.includes('air-datepicker')) {
+                return 'air-datepicker';
+              }
+              if (id.includes('@shoelace-style')) {
+                return '@shoelace-style';
+              }
+              if (id.includes('intl-tel-input')) {
+                return 'intl-tel-input';
+              }
+              // TODO check where is lit
+              if (id.includes('/lit/') || id.includes('/@lit/') || id.includes('/lit-html/') || id.includes('/lit-element/')) {
+                return 'lit';
+              }
+              // eslint-disable-next-line no-undef
+              console.log('🚀 ~ defineConfig ~ vendor id:', id);
+              return 'vendor';
+            }
+          },
         },
+      },
+    },
+    resolve: {
+      alias: {
+        // for absolute path solution
+        src: path.resolve('src/'),
       },
     },
     root: 'src',
