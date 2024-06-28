@@ -2,8 +2,8 @@ export const options = {
   method: 'GET',
   headers: {
     Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Yzc1YWI5OWQxNzhjMTEwOTUyZmRkNCIsImlhdCI6MTY5MDc4NjQ4OX0.G7db8-OXCFQBmmDgCYJYF6pJ9LtUVHaro-mBdOHSnW8'
-  }
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0Yzc1YWI5OWQxNzhjMTEwOTUyZmRkNCIsImlhdCI6MTY5MDc4NjQ4OX0.G7db8-OXCFQBmmDgCYJYF6pJ9LtUVHaro-mBdOHSnW8',
+  },
 };
 export const base_api_url = 'https://flyer-club.com/';
 export const mainRules = {
@@ -15,7 +15,7 @@ export const mainRules = {
   checked: 'Field is required!',
   date: 'Wrong Format!',
   number: 'Field needs to be a Number!',
-  equalTotalPrice: 'The amount of credit cards must be equal Total price'
+  equalTotalPrice: 'The amount of credit cards must be equal Total price',
 };
 
 export const airDates = [
@@ -30,7 +30,20 @@ export const airLlocale = {
   days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
   daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
   daysMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-  months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  months: [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ],
   monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
   dateFormat: 'MM/dd/yyyy',
   firstDay: 0,
@@ -40,3 +53,10 @@ export const baseUrl = '/';
 
 export const airStartDate = new Date();
 export const airMinDate = new Date();
+export const insertPosition = {
+  afterbegin: 'afterbegin',
+  afterend: 'afterend',
+  beforebegin: 'beforebegin',
+  beforeend: 'beforeend',
+  inner: 'inner',
+};

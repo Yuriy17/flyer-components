@@ -6,7 +6,7 @@ import inputTypeTemplate from 'src/templates/layouts/mainForm/typeBlock.ejs';
 import { baseUrl } from '../helpers/constants';
 import { inputTel } from '../services/phones';
 
-export default function MainForm({ passengersData, formType }) {
+export const MainForm = ({ passengersData, formType }) => {
   const dropsContainer = dropsContainerTemplate({
     passengers: passengersData.map((passenger) => passengerFieldTemplate({ ...passenger, baseUrl })).join('\n'),
   });
@@ -45,4 +45,4 @@ export default function MainForm({ passengersData, formType }) {
       icon: 'icon-airplane-2',
     }),
   }).trim();
-}
+};

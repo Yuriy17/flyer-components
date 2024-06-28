@@ -1,0 +1,9 @@
+<sl-input 
+  class="form__input <%= env.classes %>"
+  name="<%= env.name %>" 
+  label="<%= env.label %>" 
+  placeholder="<%= env.placeholder %>" 
+  autocomplete="<%= env.autocomplete %>"
+  <% if(env.required) {%>required<% } %>
+>
+</sl-input>

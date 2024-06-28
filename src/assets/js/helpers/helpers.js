@@ -1,5 +1,5 @@
 import { checkValidate, validateText } from '../services/validation';
-import { mainRules } from './constants';
+import { insertPosition, mainRules } from './constants';
 
 export const getValidationClasses = (form) => {
   if (form.classList.contains('white')) {
@@ -82,4 +82,34 @@ const getErrorMessage = (rule) => {
   }
 
   return mainRules[rule];
+};
+
+export const pasteByInsertPosition = ({ insertPositionType, parentElement, child, callbackAfterPaste }) => {
+  const isChildElement = typeof child !== 'string';
+
+  switch (insertPositionType) {
+    case insertPosition.afterbegin:
+    case insertPosition.beforebegin:
+    case insertPosition.afterend:
+    case insertPosition.beforeend:
+      if (isChildElement) {
+        parentElement.insertAdjacentElement(insertPositionType, child);
+      } else {
+        parentElement.insertAdjacentHTML(insertPositionType, child);
+      }
+      break;
+
+    case insertPosition.inner:
+      if (isChildElement) {
+        parentElement.append(child);
+      } else {
+        parentElement.innerHtml = child;
+      }
+      break;
+
+    default:
+      break;
+  }
+
+  callbackAfterPaste && callbackAfterPaste(child);
 };

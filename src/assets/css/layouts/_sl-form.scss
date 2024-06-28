@@ -1,0 +1,79 @@
+// .form {
+//   display: flex;
+//   flex-direction: column;
+//   > *:not(:last-child) {
+//     margin-bottom: var(--sl-spacing-medium);
+//   }
+//   .has-error::part(form-control-label),
+//   .has-error::part(form-control-help-text) {
+//     color: var(--sl-color-danger-700);
+//   }
+
+//   sl-input.has-error::part(base) {
+//     border-color: var(--sl-color-danger-700);
+//   }
+// }
+
+.inline-validation {
+  .form__field {
+    min-height: 76px;
+    margin-bottom: 10px;
+  }
+  div[id$='-error'] {
+    font-size: var(--sl-input-help-text-font-size-medium);
+    color: var(--sl-color-danger-700);
+  }
+
+  div[id$='-error'] ~ sl-button {
+    margin-top: var(--sl-spacing-medium);
+  }
+  // form-control-input
+  sl-input,
+  sl-select,
+  sl-textarea,
+  sl-checkbox {
+    display: block;
+    /* user invalid styles */
+
+    &[data-user-invalid] {
+      &::part(base),
+      &::part(combobox) {
+        border-color: var(--sl-color-danger-600);
+      }
+    }
+    &:focus-within[data-user-invalid] {
+      &::part(base),
+      &::part(combobox) {
+        border-color: var(--sl-color-danger-600);
+        box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-danger-300);
+      }
+    }
+    /* User valid styles */
+    &[data-user-valid] {
+      &::part(base),
+      &::part(combobox) {
+        border-color: var(--sl-color-success-600);
+      }
+    }
+    &:focus-within[data-user-valid] {
+      &::part(base),
+      &::part(combobox) {
+        border-color: var(--sl-color-success-600);
+        box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-color-success-300);
+      }
+    }
+  }
+
+  /* user invalid styles */
+  [data-user-invalid]::part(form-control-label),
+  [data-user-invalid]::part(form-control-help-text) {
+    color: var(--sl-color-danger-700);
+  }
+
+  /* User valid styles */
+
+  [data-user-valid]::part(form-control-label),
+  [data-user-valid]::part(form-control-help-text) {
+    color: var(--sl-color-success-700);
+  }
+}

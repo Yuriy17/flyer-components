@@ -2,28 +2,31 @@ import { inputTel } from './phones';
 import modalGetFreeQuote from '../../../templates/layouts/modalContent/modalGetFreeQuote.ejs';
 import modalSuccess from '../../../templates/layouts/modalContent/modalSuccess.ejs';
 import modalClassUp from '../../../templates/layouts/modalContent/modalClassUp.ejs';
-import Modal from '../layouts/Modal';
+import { Modal } from '../components/Modal.js';
+import { insertPosition } from '../helpers/constants.js';
 
-export default function initModal() {
+export function initModal() {
   const openModalBtns = document.querySelectorAll('.btn');
   const link_infos = document.querySelectorAll('.link_info');
   const body = document.querySelector('body');
-  body.insertAdjacentHTML(
-    'beforeend',
-    Modal({
+
+  Modal({
+    parentElement: body,
+    insertPositionType: insertPosition.beforeend,
+    templateProps: {
       content: modalGetFreeQuote(),
-    })
-  );
+    },
+  });
 
   inputTel('.modal-form');
 
-  body.insertAdjacentHTML(
-    'beforeend',
-    Modal({
+  Modal({
+    parentElement: body,
+    insertPositionType: insertPosition.beforeend,
+    templateProps: {
       content: modalClassUp(),
-    })
-  );
-
+    },
+  });
   inputTel('.modal-subscribe-form');
 
   const btnSubscribe = document.querySelectorAll('.btn-subscribe');
@@ -31,13 +34,14 @@ export default function initModal() {
     item.addEventListener('click', () => openModal('.modal-subscribe-form'));
   });
 
-  body.insertAdjacentHTML(
-    'beforeend',
-    Modal({
+  Modal({
+    parentElement: body,
+    insertPositionType: insertPosition.beforeend,
+    templateProps: {
       classes: 'modal-success',
       content: modalSuccess(),
-    })
-  );
+    },
+  });
 
   const modals = document.querySelectorAll('.modal');
   const closeModals = document.querySelectorAll('.closeBTN');

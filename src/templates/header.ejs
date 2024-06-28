@@ -9,9 +9,14 @@
   <sl-tab-panel name="general">This is the home page.</sl-tab-panel>
   <sl-tab-panel name="custom">This is the booking page.</sl-tab-panel>
 </sl-tab-group>
+<ol>
+  <li>
+    <%- include('templates/components/button.ejs', { env: { content: 'Get a Quote' } }) %>
+  </li>
+  <br>
+  <li>
+    <%- include('templates/components/slButton.ejs', { env: { content: 'Shoelace modal' , classes: 'sl-button' , } }) %>
+  </li>
+</ol>
 
-<%- include('templates/components/button.ejs', {
-  env: {
-    content: 'Get a Quote'
-  }
-}) %>
+

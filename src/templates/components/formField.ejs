@@ -1,0 +1,6 @@
+<div class="form__field <%= env.classes %>">
+  <%- env.content %>
+  <% if(env.errorText){ %>
+    <div id="<%= env.name %>-error" aria-live="polite" hidden data-text="<%= env.errorText %>"></div>
+  <% } %>
+</div>
