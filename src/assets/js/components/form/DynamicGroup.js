@@ -1,7 +1,5 @@
-// import '@shoelace-style/shoelace/dist/components/formField/formField.js';
-import formFieldTemplate from 'src/templates/components/formField.ejs';
-
-import { Component } from './Component';
+import dynamicGroupTemplate from 'src/templates/components/form/dynamicGroup.ejs';
+import { Component } from '../Component';
 
 /**
  ** props object
@@ -15,9 +13,9 @@ import { Component } from './Component';
  * @return {Element | string}
  */
 
-export const FormField = (props) => {
+export const DynamicGroup = (props) => {
   const returnValue = Component({
-    template: formFieldTemplate,
+    template: dynamicGroupTemplate,
     ...props,
   });
 

@@ -1,5 +1,7 @@
-import formTemplate from 'src/templates/components/form.ejs';
-import { Component } from './Component';
+// import '@shoelace-style/shoelace/dist/components/formField/formField.js';
+import formFieldTemplate from 'src/templates/components/form/formField.ejs';
+
+import { Component } from '../Component';
 
 /**
  ** props object
@@ -13,9 +15,9 @@ import { Component } from './Component';
  * @return {Element | string}
  */
 
-export const Form = (props) => {
+export const FormField = (props) => {
   const returnValue = Component({
-    template: formTemplate,
+    template: formFieldTemplate,
     ...props,
   });
 

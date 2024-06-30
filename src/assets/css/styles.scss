@@ -4,7 +4,10 @@
 
 @use './config/_vars.scss';
 @use './config/_intl-tel-input.scss';
+
 @use './components/_loading-icon.scss';
+@use './components/_sl-dialog.scss';
+
 @use './layouts/_nav.scss';
 @use './layouts/_sl-form.scss';
 

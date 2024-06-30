@@ -1,11 +1,10 @@
 <sl-textarea 
-  name="comment" 
-  label="Comment" 
   class="form__textarea <%= env.classes %>"
   name="<%= env.name %>" 
   label="<%= env.label %>" 
   placeholder="<%= env.placeholder %>" 
   autocomplete="<%= env.autocomplete %>"
-  <% if(env.required) {%>required<% } %>
+  id="<%= env.id %>"
+  data-validate="<%= env.validate %>"
 >
 </sl-textarea>

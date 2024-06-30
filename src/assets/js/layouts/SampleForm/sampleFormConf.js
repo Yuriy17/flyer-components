@@ -1,0 +1,42 @@
+export const formConf = {
+  nameInput: {
+    name: 'name',
+    id: 'name',
+    placeholder: 'type name',
+    required: true,
+    label: 'Name',
+    autocomplete: 'off',
+    errorText: 'custom error of Name',
+  },
+  animalSelect: {
+    name: 'animalSelect',
+    id: 'animalSelect',
+    placeholder: 'select animal',
+    required: true,
+    label: 'Select animal',
+    autocomplete: 'off',
+    errorText: 'custom error of animal select',
+  },
+  commentTextarea: {
+    name: 'comment',
+    id: 'comment',
+    placeholder: 'type in textarea',
+    required: true,
+    label: 'Comment',
+    autocomplete: 'off',
+    errorText: 'custom error of comment textarea',
+  },
+  submitCheckbox: {
+    name: 'checkbox',
+    id: 'checkbox',
+    required: true,
+    label: 'Checkbox',
+    autocomplete: 'off',
+    errorText: 'custom error of Checkbox',
+  },
+  submitButton: {
+    type: 'submit',
+    variant: 'primary',
+    content: 'Submit',
+  },
+};

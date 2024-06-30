@@ -5,7 +5,8 @@
   label="<%= env.label %>" 
   placeholder="<%= env.placeholder %>" 
   autocomplete="<%= env.autocomplete %>"
-  <% if(env.required) {%>required<% } %>
+  id="<%= env.id %>"
+  data-validate="<%= env.validate %>"
   <% if(env.clearable) {%>clearable<% } %>
 >
   <sl-option value="birds">Birds</sl-option>

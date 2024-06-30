@@ -1,0 +1,25 @@
+<div class="dynamic-group container-field-row">
+  <div class="form__field">
+    <sl-input label="Dynamic Field" class="dynamic-input" name="dynamicField<%= env.groupIndex %>"
+      data-validate="required"></sl-input>
+    <div class="error-message"></div>
+  </div>
+  <div class="form__field">
+    <sl-select label="Select Option" name="dynamicSelect<%= env.groupIndex %>" data-validate="required">
+      <sl-menu-item value="">Select an option</sl-menu-item>
+      <sl-menu-item value="option1">Option 1</sl-menu-item>
+      <sl-menu-item value="option2">Option 2</sl-menu-item>
+      <sl-menu-item value="option3">Option 3</sl-menu-item>
+    </sl-select>
+    <div class="error-message"></div>
+  </div>
+  <div class="form__field">
+    <input type="tel" name="dynamicPhone<%= env.groupIndex %>" data-validate="required">
+    <div class="error-message"></div>
+  </div>
+  <div class="form__field">
+    <input type="text" name="dynamicDate<%= env.groupIndex %>" data-validate="required">
+    <div class="error-message"></div>
+  </div>
+  <sl-button class="delete-button" type="button">Delete</sl-button>
+</div>

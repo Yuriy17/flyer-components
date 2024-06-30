@@ -1,6 +1,6 @@
 import { Dialog } from '../components/Dialog';
 import { insertPosition } from '../helpers/constants';
-import { SampleForm } from '../layouts/SampleForm';
+import { SampleForm } from '../layouts/SampleForm/SampleForm';
 
 export const initSampleDialog = () => {
   const body = document.querySelector('body');
@@ -13,7 +13,7 @@ export const initSampleDialog = () => {
       content: '',
     },
   });
-  console.log('🚀 ~ initSampleDialog ~ dialogElement:', dialogElement);
+
   SampleForm({
     parentElement: dialogElement,
   });

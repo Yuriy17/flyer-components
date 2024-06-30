@@ -77,3 +77,22 @@
     color: var(--sl-color-success-700);
   }
 }
+
+.error-message {
+  color: red;
+  margin-top: 4px;
+}
+.dynamic-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.dynamic-group .form__field {
+  flex: 1;
+  margin-right: 10px;
+}
+.dynamic-group .delete-button {
+  flex-shrink: 0;
+  margin-left: 10px;
+}

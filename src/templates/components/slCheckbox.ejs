@@ -2,7 +2,8 @@
   class="form__checkbox <%= env.classes %>"
   name="<%= env.name %>" 
   label="<%= env.label %>" 
-  <% if(env.required) {%>required<% } %>
+  id="<%= env.id %>"
+  data-validate="<%= env.validate %>"
 >
   Check me before submitting
 </sl-checkbox>
