@@ -63,10 +63,18 @@ export default defineConfig(({ mode }) => {
           // entryFileNames: `[name].js`,
           // chunkFileNames: `[name].js`,
           // assetFileNames: `[name].[ext]`
+          chunkFileNames: `assets/[name].js`,
+          assetFileNames: `assets/[name].[ext]`,
           manualChunks: (id) => {
             if (id.includes('node_modules')) {
-              if (id.includes('air-datepicker')) {
-                return 'air-datepicker';
+              if (id.includes('axios')) {
+                return 'axios';
+              }
+              if (id.includes('axios')) {
+                return 'axios';
+              }
+              if (id.includes('swiper')) {
+                return 'swiper';
               }
               if (id.includes('@shoelace-style')) {
                 return '@shoelace-style';

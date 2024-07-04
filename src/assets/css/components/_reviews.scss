@@ -48,7 +48,9 @@
     position: relative;
     margin-top: 20px;
     max-width: 100%;
-    padding: 0 32px;
+    @include grid-mn('md') {
+      padding: 0 32px;
+    }
   }
   &__slide {
     display: flex;
