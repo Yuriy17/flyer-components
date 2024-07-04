@@ -1,15 +1,17 @@
 //flyers styles
-@use './_flyer-styles.scss';
-@use './_flyer-form.scss';
+@import './_flyer-styles.scss';
+@import './_flyer-form.scss';
 
-@use './config/_vars.scss';
-@use './config/_intl-tel-input.scss';
+// @use './config/_vars.scss';
+// @use './config/_functions.scss';
+// @use './config/_mixins.scss';
 
-@use './components/_loading-icon.scss';
-@use './components/_sl-dialog.scss';
+@import './components/_loading-icon.scss';
+@import './components/_sl-dialog.scss';
+@import './components/_reviews.scss';
 
-@use './layouts/_nav.scss';
-@use './layouts/_sl-form.scss';
+@import './layouts/_nav.scss';
+@import './layouts/_sl-form.scss';
 
 body {
   font-family: Arial, sans-serif;

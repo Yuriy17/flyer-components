@@ -1,29 +1,50 @@
 :root {
-  --primary-blue-5: #F2F5FE;
-  --primary-blue-100: #0A74D7;
+  --primary-blue-5: #f2f5fe;
+  --primary-blue-100: #0a74d7;
   --primary-blue-200: #044786;
-  --bg-color-500: #1034A6;
-  --bg-color-footer: #E9EEFE;
+  --bg-color-500: #1034a6;
+  --bg-color-footer: #e9eefe;
 
-  --black-8: #ECEDEE;
-  --black-5: #FAFAFA;
-  --black-10: #BABBBD;
-  --black-40: #7C8089;
+  --black-8: #ecedee;
+  --black-5: #fafafa;
+  --black-10: #babbbd;
+  --black-40: #7c8089;
   --black-60: #535966;
-  --black-80: #2A3243;
-  --black-100: #00091C;
-  --white: #FFFDFD;
+  --black-80: #2a3243;
+  --black-100: #00091c;
+  --white: #fffdfd;
 
-  --seconady-gradient: #0A74D7;
+  --seconady-gradient: #0a74d7;
 
   --max-width: 1276px;
-  --primary-yellow-50: #FFF7DF;
-  --primary-yellow-500: #FFC000;
-  --primary-yellow-700: #FD9F00;
+  --primary-yellow-50: #fff7df;
+  --primary-yellow-500: #ffc000;
+  --primary-yellow-700: #fd9f00;
 
   --large-screen: 1024px;
   --medium-screen: 768px;
   --small-screen: 480px;
   --tiny-screen: 360px;
-  --danger:#E40000;
+  --danger: #e40000;
 }
+
+$grid-bp: (
+  xs: 0,
+  sm: 360,
+  xsm: 480,
+  md: 768,
+  lg: 1024,
+  xlg: 1440,
+  xl: 1680,
+  xxl: 1920,
+);
+$grid-breakpoints: (
+  xs: 0,
+  sm: 360px,
+  xsm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xlg: 1440px,
+  xl: 1680px,
+  xxl: 1920px,
+);

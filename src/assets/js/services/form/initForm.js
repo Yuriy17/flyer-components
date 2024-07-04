@@ -23,7 +23,8 @@ export const initForm = (formElement) => {
 
         const inputs = dynamicGroup.querySelectorAll('[data-validate]');
         inputs.forEach((input) => {
-          input.addEventListener('input', () => {
+          // input
+          input.addEventListener('change', () => {
             if (validationStarted) {
               const rules = input.getAttribute('data-validate').split(';');
               // const {parentElement} = input.getAttribute('type') === 'phone' ? input.parentElement : input;
@@ -34,18 +35,12 @@ export const initForm = (formElement) => {
         });
 
         // Initialize intl-tel-input and AirDatepicker for dynamic fields
-        setupField(
-          {
-            fieldName: `dynamicPhone${groupIndex}`,
-          },
-          formElement
-        );
-        setupField(
-          {
-            fieldName: `dynamicDate${groupIndex}`,
-          },
-          formElement
-        );
+        setupField(formElement, {
+          fieldName: `dynamicPhone${groupIndex}`,
+        });
+        setupField(formElement, {
+          fieldName: `dynamicDate${groupIndex}`,
+        });
       },
     });
   };

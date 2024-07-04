@@ -16,14 +16,14 @@ export const validateField = (field, rules, errorElement) => {
   });
 
   if (errorMessage) {
-    field.setCustomValidity(errorMessage);
+    // field.setCustomValidity(errorMessage);
     if (errorElement) {
       errorElement.textContent = errorMessage;
     } else {
       console.log('🚀 ~ validateField ~ field:', field);
     }
   } else {
-    field.setCustomValidity('');
+    // field.setCustomValidity('');
     errorElement.textContent = '';
   }
 

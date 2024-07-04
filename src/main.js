@@ -11,8 +11,10 @@ import { initShoelaceComponents } from './assets/js/services/initShoelaceCompone
 import { initModal } from './assets/js/services/initModal.js';
 import { initFormAirDatepicker } from './assets/js/services/initFormAirDatepicker.js';
 import { initSampleDialog } from './assets/js/services/initSampleDialog.js';
+import { initReviews } from './assets/js/services/initReviews.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
+  initReviews();
   initShoelaceComponents();
   initMainForm();
   getAllInputSearch();

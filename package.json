@@ -35,8 +35,10 @@
   "dependencies": {
     "@shoelace-style/shoelace": "^2.15.1",
     "air-datepicker": "^3.5.3",
+    "axios": "^1.7.2",
     "intl-tel-input": "^23.1.0",
     "sass": "^1.77.2",
+    "swiper": "^11.1.4",
     "vite-plugin-ejs": "^1.7.0"
   }
 }

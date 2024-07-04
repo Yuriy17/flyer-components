@@ -1,0 +1,15 @@
+<div class="trustpilot-review">
+  <a href="<%= env.reviewLink %>" class="trustpilot-review__link">
+    <div class="trustpilot-review__stars stars">
+      <%- env.starElements %>
+    </div>
+    <div class="trustpilot-review__content">
+      <p class="trustpilot-review__title"><%= env.title %></p>
+      <p class="trustpilot-review__text"><%= env.text %></p>
+      <address>
+        <span class="trustpilot-review__author"><%= env.clientName %></span> |
+        <span class="trustpilot-review__date"><%= env.date %></span>
+      </address>
+    </div>
+  </a>
+</div>

@@ -1,0 +1,66 @@
+// !TO PERCENT %:
+@function prc($pxOne, $pxTwo) {
+  $result: math.div($pxOne, $pxTwo) * 100%;
+  @return $result;
+}
+
+// !TO REM:
+@function rem($px) {
+  $result: math.div($px, 16) + rem;
+  @return $result;
+}
+
+// !TO EM:
+@function em($px) {
+  $result: math.div($px, 16) + em;
+  @return $result;
+}
+
+// !TO VW:
+@function vw($px-vw, $base-vw: 'sm', $type: min) {
+  // @return max(calc(($px-vw * 100vw) / map.get($grid-breakpoints, $base-vw)), px-vw);
+
+  @return #{$type }(calc(($px-vw * 100vw) / map.get($grid-breakpoints, $base-vw)), $px-vw);
+}
+// !TO VH:
+@function vh($px-vh, $base-vh: 'sm', $type: min) {
+  // @debug "#{$base-vh}";
+  @return #{$type }(calc(($px-vh * 100vh) / map.get($base-heights, $base-vh)), $px-vh);
+}
+
+// !TO VW with css var:
+// @function vwv($px-vw, $base-vw: 'sm') {
+//   @return calc((#{var($px-vw)} * 100vw) / map.get($grid-breakpoints, $base-vw));
+// }
+// !TO VH  with css var:
+// @function vhv($px-vh, $base-vh: 'sm') {
+//   @return calc((var($px-vh) * 100vh) / map.get($base-heights, $base-vh));
+// }
+
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace +
+      str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+@function px-to-rem($px) {
+  $rems: math.div($px, 16px) * 1rem;
+  @return $rems;
+}
+
+// !Адаптивное свойство (clamp)
+
+// https://www.smashingmagazine.com/2022/10/fluid-typography-clamp-sass-functions/
+@function fluid($min-size, $max-size, $min-value: 'sm', $max-value: 'xl', $unit: vw) {
+  $min-breakpoint: map.get($grid-breakpoints, $min-value);
+  $max-breakpoint: map.get($grid-breakpoints, $max-value);
+  $slope: math.div($max-size - $min-size, $max-breakpoint - $min-breakpoint);
+  $slope-to-unit: $slope * 100;
+  $intercept-rem: px-to-rem($min-size - $slope * $min-breakpoint);
+  $min-size-rem: px-to-rem($min-size);
+  $max-size-rem: px-to-rem($max-size);
+  @return clamp(#{$min-size-rem}, #{$slope-to-unit}#{$unit} + #{$intercept-rem}, #{$max-size-rem});
+}

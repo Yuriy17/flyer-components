@@ -1,0 +1,167 @@
+@use 'sass:map';
+
+// !gradient for text
+@mixin text-gradient($gradient) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin media-mx($value) {
+  $width: em($value);
+
+  @media (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin media-mn($value) {
+  $width: em($value + 0.98);
+
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin grid-mx($value: 'sm') {
+  $width: map.get($grid-breakpoints, $value);
+
+  @media (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin grid-mn($value: 'sm') {
+  $width: map.get($grid-breakpoints, $value);
+
+  @media (min-width: $width) {
+    @content;
+  }
+}
+@mixin any-hover() {
+  @media (any-hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+// !:not (last-child)
+@mixin not-last() {
+  &:not(:last-child) {
+    @content;
+  }
+}
+
+// !:not (first-child)
+@mixin not-first() {
+  &:not(:first-child) {
+    @content;
+  }
+}
+
+// !обрезает текст до определенного кол-ва строк, остаток заменяет на 3 точки (...)
+@mixin line-clamp($value) {
+  display: -webkit-box;
+  -webkit-line-clamp: $value;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// !styled placeholder for TextArea
+@mixin styled-placeholder($color, $fontSize: inherit, $lineHeight: normal) {
+  &:-moz-placeholder,
+  &::-moz-placeholder,
+  &::-webkit-input-placeholder,
+  &:-ms-input-placeholder {
+    color: $color;
+    font-size: $fontSize;
+    line-height: $lineHeight;
+  }
+}
+
+// !плавное убирание placeholder
+@mixin hide-placeholder($time: 300, $effect: ease) {
+  &::-webkit-input-placeholder,
+  &::-moz-placeholder,
+  &:-moz-placeholder,
+  &:-ms-input-placeholder {
+    opacity: 1;
+    transition: opacity #{$time} + ms $effect;
+  }
+
+  &:focus {
+    &::-webkit-input-placeholder,
+    &::-moz-placeholder,
+    &:-moz-placeholder,
+    &:-ms-input-placeholder {
+      opacity: 0;
+      transition: opacity #{$time} + ms $effect;
+    }
+  }
+}
+
+// !after-before
+@mixin pseudo-cell($type, $pos: absolute) {
+  &::#{$type} {
+    content: '';
+    position: $pos;
+    @content;
+  }
+}
+
+@mixin highlight($selector) {
+  #{$selector} {
+    position: relative;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: var(--link-color, #19376b);
+      transition:
+        transform 0.4s,
+        transform-origin 0s;
+      transform: scaleX(0);
+      transform-origin: right center;
+      height: 1px;
+    }
+  }
+
+  #{$selector}:hover {
+    &::before {
+      transform: scaleX(1);
+      transform-origin: left center;
+    }
+  }
+}
+// ex $props: ("eye": "\f112", "start": "\f12e", "stop": "\f12f");
+// ex $mediaBreakpoints: ('sm', 'lg': max)
+@mixin propsPxToVp($props, $mediaBreakpoints, $viewport: 'vw') {
+  // @debug "#{$viewport}";
+  @each $mediaBreakpoint, $type in $mediaBreakpoints {
+    @include grid-mn($mediaBreakpoint) {
+      // @debug "#{$mediaBreakpoint}";
+
+      @each $name, $value in $props {
+        // @debug "#{$name} - #{$value}";
+        @if $viewport == 'vw' {
+          @if $mediaBreakpoint == 'xs' {
+            #{$name}: vw($value);
+          } @else {
+            #{$name}: vw($value, $mediaBreakpoint);
+          }
+        } @else {
+          @if $mediaBreakpoint == 'xs' {
+            #{$name}: vh($value);
+          } @else {
+            #{$name}: vh($value, $mediaBreakpoint, $type);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,206 @@
+.trustpilot-reviews {
+  margin-top: 80px;
+  @include grid-mn('md') {
+    margin-top: 100px;
+  }
+  .swiper-slide {
+    width: auto;
+  }
+  .swiper-button-next:after,
+  .swiper-rtl .swiper-button-prev:after,
+  .swiper-button-prev:after,
+  .swiper-rtl .swiper-button-next:after {
+    content: none;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+  }
+  .swiper-button-next,
+  .swiper-rtl .swiper-button-prev {
+    --swiper-navigation-sides-offset: 0;
+  }
+  .swiper-button-prev,
+  .swiper-rtl .swiper-button-next {
+    --swiper-navigation-sides-offset: 0;
+  }
+  &__title {
+    color: var(--Dark-blue, #2a3243);
+    font-size: 24px;
+    line-height: 36px;
+    font-style: normal;
+    font-weight: 600;
+    text-align: center;
+  }
+  &__subtitle {
+    text-align: center;
+    margin-top: 16px;
+    color: var(--Dark-blue, #2a3243);
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    a {
+      color: var(--Azure-Blue, #0a74d7);
+      font-weight: 600;
+    }
+  }
+  &__slider {
+    position: relative;
+    margin-top: 20px;
+    max-width: 100%;
+    padding: 0 32px;
+  }
+  &__slide {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    @include grid-mn('md') {
+      flex-direction: column;
+      gap: 12px;
+    }
+    @include grid-mn('xlg') {
+      gap: 16px;
+    }
+  }
+  &__text {
+    margin-top: 16px;
+    color: #191919;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 100% */
+  }
+  &__logo {
+    display: block;
+    height: 21px;
+    width: auto;
+    margin: 4px auto 0;
+  }
+}
+.trustpilot-review {
+  border-radius: 10px;
+  border: 1px solid var(--Light-Gray, #cecece);
+  width: 260px;
+  @include grid-mn('md') {
+    width: auto;
+  }
+  &__link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  &__title {
+    color: #1f2936;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px; /* 114.286% */
+    @include line-clamp(1);
+    @include grid-mn('md') {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 150%; /* 24px */
+      letter-spacing: -0.32px;
+    }
+  }
+  &__text {
+    margin-top: 9px;
+    color: var(--Steel-Blue, #667085);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 123.077% */
+    @include line-clamp(3);
+    @include grid-mn('md') {
+      font-size: 16px;
+      line-height: 120%; /* 19.2px */
+    }
+  }
+  address {
+    color: var(--Slate-Gray, #7c8089);
+    font-size: 12px;
+    font-style: normal;
+    line-height: 16px; /* 133.333% */
+    font-weight: 400;
+    margin-top: 8px;
+    @include grid-mn('md') {
+      font-size: 10px;
+      line-height: 16px; /* 160% */
+    }
+  }
+  &__author {
+    color: var(--Dark-blue, #2a3243);
+    font-weight: 700;
+  }
+  &__date {
+  }
+}
+
+.stars {
+  display: flex;
+  flex-direction: row;
+  gap: 1px;
+  &__star {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 18px;
+    width: 18px;
+    height: 18px;
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      min-width: 100%;
+      background-color: #dcdce6;
+    }
+    &_active {
+      &::after {
+        background-color: #00b67a;
+      }
+    }
+    img {
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+  }
+  &_blue {
+    .stars__star::after {
+      background-color: linear-gradient(198deg, #279aff 9.91%, #006dd2 75.55%, #0a549a 92.96%);
+    }
+  }
+  &_sm {
+    .stars__star {
+      min-width: 10px;
+      width: 10px;
+      height: 10px;
+      background-color: #dcdce6;
+    }
+  }
+
+  &,
+  &_sm {
+    .stars__star {
+      @include grid-mn('md') {
+        min-width: 16px;
+        width: 16px;
+        height: 16px;
+      }
+      @include grid-mn('xlg') {
+        min-width: 18px;
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}
