@@ -1,7 +1,7 @@
 {
   "*.js": [
     "prettier --write",
-    "eslint -c eslint.config.js"
+    "eslint -c eslint.config.mjs"
   ],
   "*.html": [
     "eslint",

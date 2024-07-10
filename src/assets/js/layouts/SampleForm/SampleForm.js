@@ -4,7 +4,7 @@ import { Select } from '../../components/Select';
 import { Textarea } from '../../components/Textarea';
 import { Checkbox } from '../../components/Checkbox';
 import { Button } from '../../components/Button';
-import sampleFormContentTemplate from 'src/templates/layouts/sampleFormContent.ejs';
+import sampleFormContentTemplate from 'src/templates/layouts/forms/sampleForm/sampleFormContent.ejs';
 import { FormField } from '../../components/form/FormField';
 import { formConf } from './sampleFormConf';
 import { initForm } from '../../services/form/initForm';

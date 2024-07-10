@@ -1,0 +1,28 @@
+<section class="logos">
+  <div class="conatainer">
+    <div class="logos__block">
+      <img src="assets/icons/sections/logos/logo-1.svg" alt="BBB Accredited Business icon" class="logos__block-image">
+      <div class="logos__block-content">
+        BBB <br> Accredited <br> Business
+      </div>
+    </div>
+    <div class="logos__block">
+      <img src="assets/icons/sections/logos/logo-2.svg" alt="Affiliated with ARC icon" class="logos__block-image">
+      <div class="logos__block-content">
+        Affiliated with<br>ARC
+      </div>
+    </div>
+    <div class="logos__block">
+      <img src="assets/icons/sections/logos/logo-3.svg" alt="trustpilot icon" class="logos__block-image">
+      <div class="logos__block-content">
+        <%- include('templates/components/reviewStars/reviewStars.ejs', { 
+          "classes" : 'stars_blue' , 
+          "starElements" : [
+            { classes: 'stars__star_active' }, { classes: 'stars__star_active' }, { classes: 'stars__star_active' }, { classes: 'stars__star_active' }, { } 
+          ] 
+        }) %>
+      </div>
+    </div>
+  </div>
+  <button class="btn"></button>
+</section>

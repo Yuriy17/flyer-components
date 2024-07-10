@@ -1,55 +1,59 @@
 //flyers styles
-@import './_flyer-styles.scss';
-@import './_flyer-form.scss';
+// @import './_flyer-styles.scss';
+// @import './_flyer-form.scss';
 
-// @use './config/_vars.scss';
-// @use './config/_functions.scss';
-// @use './config/_mixins.scss';
+// @import './components/_loading-icon.scss';
+// @import './components/_sl-dialog.scss';
+@import './components/_stars.scss';
 
-@import './components/_loading-icon.scss';
-@import './components/_sl-dialog.scss';
-@import './components/_reviews.scss';
+// @import './layouts/_nav.scss';
+// @import './layouts/_sl-form.scss';
 
-@import './layouts/_nav.scss';
-@import './layouts/_sl-form.scss';
+@import './layouts/sections/_logos.scss';
+@import './layouts/sections/_hero.scss';
+@import './layouts/sections/_reviews.scss';
 
 body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  // padding: 20px;
 }
 
-.search-container {
-  margin-bottom: 20px;
+a {
+  text-decoration: none;
 }
 
-.suggestions {
-  border: 1px solid #ccc;
-  max-width: 300px;
-  margin-top: 5px;
-  padding: 10px;
-}
+// .search-container {
+//   margin-bottom: 20px;
+// }
 
-.suggestion-item {
-  padding: 5px;
-  cursor: pointer;
-  &:hover {
-    background-color: #f0f0f0;
-  }
-}
-.search-input {
-  position: relative;
-}
-.link {
-  color: var(--sl-color-neutral-1000);
-  transition: color 0.3s ease-in-out;
-  &.active {
-    color: var(--sl-color-primary-600);
-  }
-  &:hover {
-    color: var(--sl-color-primary-400);
-  }
-  &:focus,
-  &:active {
-    color: var(--sl-color-primary-200);
-  }
-}
+// .suggestions {
+//   border: 1px solid #ccc;
+//   max-width: 300px;
+//   margin-top: 5px;
+//   padding: 10px;
+// }
+
+// .suggestion-item {
+//   padding: 5px;
+//   cursor: pointer;
+//   &:hover {
+//     background-color: #f0f0f0;
+//   }
+// }
+// .search-input {
+//   position: relative;
+// }
+// .link {
+//   color: var(--sl-color-neutral-1000);
+//   transition: color 0.3s ease-in-out;
+//   &.active {
+//     color: var(--sl-color-primary-600);
+//   }
+//   &:hover {
+//     color: var(--sl-color-primary-400);
+//   }
+//   &:focus,
+//   &:active {
+//     color: var(--sl-color-primary-200);
+//   }
+// }

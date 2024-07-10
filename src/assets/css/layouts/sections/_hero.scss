@@ -1,0 +1,39 @@
+.hero {
+  max-width: 100%;
+  // .hero__bg
+
+  &__bg {
+    display: block;
+    max-width: 100%;
+  }
+
+  // .hero__bg_desktop
+
+  &__bg_desktop {
+    display: none;
+    @include grid-mn('md') {
+      display: block;
+    }
+  }
+
+  // .hero__bg_mobile
+
+  &__bg_mobile {
+    display: block;
+    @include grid-mn('md') {
+      display: none;
+    }
+  }
+
+  // .hero__content
+
+  &__content {
+  }
+
+  // .hero__footer
+
+  &__footer {
+  }
+}
+.container {
+}

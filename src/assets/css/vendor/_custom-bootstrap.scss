@@ -1,0 +1,83 @@
+$grid-breakpoints: (
+  // xs: 0,
+  // sm: 375px,
+  // smd: 600px,
+  // md: 768px,
+  // lg: 1140px,
+  // xlg: 1400px,
+  // xl: 1680px,
+  // xxl: 1936px
+  xs: 0,
+  sm: 360px,
+  xsm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xlg: 1440px,
+  xl: 1680px,
+  xxl: 1920px
+);
+$container-max-widths: (
+  // sm: 540px,
+  // md: 920px,
+  // lg: 1390px,
+  // xl: 1392px,
+  // xxl: 1600px
+  // xs: 0,
+  // sm: 328px,
+  // xsm: 448px,
+  // md: 648px,
+  // lg: 864px,
+  // xlg: 1224px,
+  // xl: 1680px,
+  xxl: 1920px
+) !default;
+
+// @import 'libs/bootstrap/bootstrap';
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+// @import "~bootstrap/scss/functions";
+
+// // 2. Include any default variable overrides here
+
+// // 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
+// @import "~bootstrap/scss/variables";
+// @import "~bootstrap/scss/variables-dark";
+
+// // 4. Include any default map overrides here
+
+// // 5. Include remainder of required parts
+// @import "~bootstrap/scss/maps";
+// @import "~bootstrap/scss/mixins";
+// @import "~bootstrap/scss/root";
+
+// // 6. Optionally include any other parts as needed
+// @import "~bootstrap/scss/utilities";
+// @import "~bootstrap/scss/reboot";
+// @import "~bootstrap/scss/type";
+// @import "~bootstrap/scss/images";
+// @import "~bootstrap/scss/containers";
+// @import "~bootstrap/scss/grid";
+// @import "~bootstrap/scss/helpers";
+
+// // 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+// @import "~bootstrap/scss/utilities/api";
+
+// // 8. Add additional custom code here
+@import '~bootstrap/scss/bootstrap';
+
+.container,
+.container-fluid,
+.container-xxl,
+.container-xl,
+.container-lg,
+.container-md {
+  --bs-gutter-x: 56px;
+  @include grid-mn('md') {
+    --bs-gutter-x: 120px;
+  }
+  @include grid-mn('xlg') {
+    --bs-gutter-x: 216px;
+  }
+  @include grid-mn('xxl') {
+    --bs-gutter-x: 288px;
+  }
+}

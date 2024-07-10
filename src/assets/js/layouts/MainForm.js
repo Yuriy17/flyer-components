@@ -1,8 +1,8 @@
-import dropsContainerTemplate from 'src/templates/layouts/mainForm/dropsContainer.ejs';
-import standartFormTemplate from 'src/templates/layouts/mainForm/standartForm.ejs';
-import formTemplate from 'src/templates/layouts/mainForm/form.ejs';
-import passengerFieldTemplate from 'src/templates/layouts/mainForm/passengerField.ejs';
-import inputTypeTemplate from 'src/templates/layouts/mainForm/typeBlock.ejs';
+import dropsContainerTemplate from 'src/templates/layouts/forms/mainForm/dropsContainer.ejs';
+import standartFormTemplate from 'src/templates/layouts/forms/mainForm/standartForm.ejs';
+import formTemplate from 'src/templates/layouts/forms/mainForm/form.ejs';
+import passengerFieldTemplate from 'src/templates/layouts/forms/mainForm/passengerField.ejs';
+import inputTypeTemplate from 'src/templates/layouts/forms/mainForm/typeBlock.ejs';
 import { baseUrl } from '../helpers/constants';
 import { inputTel } from '../services/phones';
 

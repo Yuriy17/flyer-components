@@ -1,18 +1,20 @@
-<h2 class="trustpilot-reviews__title">Reviews</h2>
-<p class="trustpilot-reviews__subtitle">
-  Trusted by <a href="https://www.trustpilot.com/review/flyer-club.com"><%- env.percentOfTrusted %>% of Travelers</a>
-</p>
-<div class="trustpilot-reviews__slider">
-  <div class="swiper">
-    <!-- Additional required wrapper -->
-    <div class="swiper-wrapper">
-      <!-- Slides -->
-      <%- env.reviewSlides %>
+<div class="container">
+  <h2 class="trustpilot-reviews__title">Reviews</h2>
+  <p class="trustpilot-reviews__subtitle">
+    Trusted by <a href="https://www.trustpilot.com/review/flyer-club.com"><%- env.percentOfTrusted %>% of Travelers</a>
+  </p>
+  <div class="trustpilot-reviews__slider">
+    <div class="swiper">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        <%- env.reviewSlides %>
+      </div>
     </div>
+    <%- env.reviewNav %>
   </div>
-  <%- env.reviewNav %>
+  <p class="trustpilot-reviews__text">
+    Rated <%- env.reviewsRate %> / 5 based on  <%- env.reviewsCount %> reviews.
+  </p>
+  <img src="assets/icons/sections/reviews/trustpilot-logo.svg" alt="trustpilot logo" class="trustpilot-reviews__logo">
 </div>
-<p class="trustpilot-reviews__text">
-  Rated <%- env.reviewsRate %> / 5 based on  <%- env.reviewsCount %> reviews.
-</p>
-<img src="assets/images/trustpilot-logo.svg" alt="trustpilot logo" class="trustpilot-reviews__logo">

@@ -1,0 +1,15 @@
+<% if(typeof env !== 'undefined'){ %>
+  <div class="<% if(env.classes){ %><%=env.classes%><% } %> stars">
+    <%- env.starElements %>
+  </div>
+<% } else{ %>  
+  <div class="<% if(classes){ %><%=classes%><% } %> stars">
+    <% starElements.forEach(function(starElement){ %>
+      <%- include('reviewStar.ejs', {
+        env: {
+          classes: starElement.classes
+        }
+      }); %>
+    <% }) %>
+  </div>
+<% } %>

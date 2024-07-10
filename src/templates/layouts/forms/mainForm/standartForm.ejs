@@ -1,0 +1,55 @@
+<% if(env.formType == 1){ %>
+  <div class='form-main-btn-block'>
+    <button class='button btn-main-form'>Get a Free Quote</button>
+  </div>
+<%}%>
+
+<% if(env.formType == 2){ %>
+  <div class='container-field'>
+    <div class='field_calendar'>
+      <div class='flex flex-two-fields'>
+        <div class='flex'>
+          <div class='field'>
+            <p>
+              <label for='name'>Name</label>
+              <input type='text' name='name' id='name' data-validation='required|min[3]' placeholder='First, Last Name' />
+            </p>
+          </div>
+        </div>
+        <%= env.dropsContainer %>
+      </div>
+    </div>
+  
+  </div>
+  <div class='container-field'>
+    <div class='field_calendar'>
+      <div class='flex flex-two-fields'>
+        <div class='field'>
+          <p>
+            <label for='phone'>Phone number</label>
+            <input type='tel' data-validation='required|min[3]' name='phone' id='phone' class='phone' />
+          </p>
+        </div>
+  
+        <div class='field'>
+          <p>
+            <label for='email'>Email address</label>
+            <input type='email' data-validation='required|mail' name='email' id='email'
+              placeholder='Enter email address' />
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class='container-field' style='margin:10px 0;'>
+  
+    <label for='modal_checkbox-5'>
+      <span class='text'>
+        ** By submitting my details I agree to be contacted to discuss my travel plans
+        <a href='../privacyPolicy' target='blank'>Privacy Policy</a>
+      </span>
+    </label>
+  </div>
+  <button class='button btn-fill' id='submit_flight' name='submit_flight'>Submit</button>
+<% } %>

@@ -1,19 +1,16 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <%- include('templates/head') %>
+    <%- include('templates/layouts/head') %>
   </head>
 
   <body>
     <main>
-      <%- include('templates/header.ejs') %> <%- include('templates/preloader.ejs') %>
+      <%- include('templates/layouts/sections/logos/logos.ejs') %> <%- include('templates/layouts/header.ejs') %> <%-
+      include('templates/layouts/sections/hero/hero.ejs') %>
 
-      <!-- Placeholder for the form -->
-      <div class="company-partners" id="sectionMainForm">
-        <div id="sectionMainForm"></div>
-      </div>
-      <section class="trustpilot-reviews"></section>
+      <section id="trustpilotReviews" class="trustpilot-reviews"></section>
     </main>
-    <%- include('templates/footer.ejs') %>
+    <%- include('templates/layouts/footer.ejs') %>
   </body>
 </html>
