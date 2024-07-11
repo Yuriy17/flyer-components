@@ -60,3 +60,12 @@ export const insertPosition = {
   beforeend: 'beforeend',
   inner: 'inner',
 };
+export const ShoelaceComponents = {
+  button: 'button',
+  checkbox: 'checkbox',
+  dialog: 'dialog',
+  input: 'input',
+  select: 'select',
+  textarea: 'textarea',
+  nav: 'nav',
+};

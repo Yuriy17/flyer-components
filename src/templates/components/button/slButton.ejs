@@ -1,7 +1,7 @@
 
 <sl-button
-  variant="<% if(env.variant){ %><%=env.variant%><%} else { %>default<% } %>" 
-  size="<% if(env.size){ %><%=env.size%><%} else { %>medium<% } %>" 
+  <% if(env.variant){ %>variant="<%=env.size%>" <% } %>
+  <% if(env.size){ %>size="<%=env.variant%>" <% } %>
   <% if(env.outline){ %>outline <% } %>
   <% if(env.pill){ %>pill<% } %>
   <% if(env.classes){ %>class="<%=env.classes%>"<% } %>

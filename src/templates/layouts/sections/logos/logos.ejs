@@ -1,5 +1,5 @@
 <section class="logos">
-  <div class="conatainer">
+  <div class="container">
     <div class="logos__block">
       <img src="assets/icons/sections/logos/logo-1.svg" alt="BBB Accredited Business icon" class="logos__block-image">
       <div class="logos__block-content">
@@ -24,5 +24,10 @@
       </div>
     </div>
   </div>
-  <button class="btn"></button>
+  <%- include('templates/components/button/slButton.ejs', {
+    env: {
+      classes: 'btn-light btn-arrow',
+      content: 'hello'
+    }
+  })%>
 </section>

@@ -7,15 +7,18 @@ import './assets/css/styles.scss';
 // import { initValidation } from './assets/js/services/validation.js';
 // import { fade, preloader, setPreloader } from './assets/js/services/preloader.js';
 // import { getAllInputSearch } from './assets/js/services/api.js';
-// import { initShoelaceComponents } from './assets/js/services/initShoelaceComponents.js';
+import { initShoelaceComponents } from './assets/js/services/shoelace/initShoelaceComponents.js';
 // import { initModal } from './assets/js/services/initModal.js';
 // import { initFormAirDatepicker } from './assets/js/services/initFormAirDatepicker.js';
 // import { initSampleDialog } from './assets/js/services/initSampleDialog.js';
 import { initReviews } from './assets/js/services/initReviews.js';
+import { ShoelaceComponents } from './assets/js/helpers/constants.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   initReviews();
-  // initShoelaceComponents();
+  initShoelaceComponents({
+    components: [ShoelaceComponents.button],
+  });
   // initMainForm();
   // getAllInputSearch();
   // initFlightSearch();
