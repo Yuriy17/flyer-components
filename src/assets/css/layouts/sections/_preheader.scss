@@ -1,24 +1,28 @@
-.logos {
+.preheader {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  background: white;
   padding: 3px;
   .container {
     display: flex;
     justify-content: center;
     gap: 20px;
     :nth-child(1) {
-      .logos__block-image {
+      .preheader__block-image {
         width: 28px;
       }
     }
     :nth-child(2) {
-      .logos__block-image {
+      .preheader__block-image {
         width: 30px;
       }
     }
     :nth-child(3) {
-      .logos__block {
+      .preheader__block {
         gap: 7px;
       }
-      .logos__block-image {
+      .preheader__block-image {
         width: 52px;
       }
       @include grid-mx('md') {
@@ -38,27 +42,27 @@
     @include grid-mn('md') {
       gap: 24px;
       :nth-child(1) {
-        .logos__block-image {
+        .preheader__block-image {
           width: 41px;
         }
       }
       :nth-child(2) {
-        .logos__block-image {
+        .preheader__block-image {
           width: 39px;
         }
       }
       :nth-child(3) {
-        .logos__block {
+        .preheader__block {
           gap: 14px;
         }
-        .logos__block-image {
+        .preheader__block-image {
           width: 88px;
         }
       }
     }
   }
 
-  // .logos__block
+  // .preheader__block
 
   &__block {
     display: flex;
@@ -66,12 +70,12 @@
     align-items: center;
   }
 
-  // .logos__block-image
+  // .preheader__block-image
 
   &__block-image {
   }
 
-  // .logos__block-content
+  // .preheader__block-content
 
   &__block-content {
     color: var(--Steel-Blue, #667085);

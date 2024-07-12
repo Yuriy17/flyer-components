@@ -1,0 +1,27 @@
+<header class="header">
+  <div class="container">
+    <div class="header__inner">
+      <a href="https://flyer-club.com/" class="header__logo">
+        <img src="/icons/header-flyer-club-logo.svg" alt="logo" width="156" height="48" />
+      </a>
+
+      <%- include('templates/components/nav/nav.ejs')%>
+  
+      <div class="header__right-side">
+        <%- include('templates/components/button/slButton.ejs', {
+          env: {
+            classes: 'btn-sm btn-primary',
+            content: 'Get a Quote',
+          }
+        })%>
+        <a href="tel:+1844-447-0007" class="working-time google_ads_link">
+          <img src="/icons/header-icon-phone.svg" alt="phone icon">
+          <span>Call now for phone exclusive deals</span>
+        </a>
+        <button class="header__burger icon-menu">
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

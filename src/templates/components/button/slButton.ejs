@@ -1,6 +1,7 @@
 
 <sl-button
   <% if(env.variant){ %>variant="<%=env.size%>" <% } %>
+  <% if(env.href){ %>href="<%=env.href%>" <% } %>
   <% if(env.size){ %>size="<%=env.variant%>" <% } %>
   <% if(env.outline){ %>outline <% } %>
   <% if(env.pill){ %>pill<% } %>

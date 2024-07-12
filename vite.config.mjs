@@ -19,58 +19,8 @@ export default defineConfig(({ mode }) => {
 
   return {
     base: '', // the path relative to its deployment directory
-    plugins: [
-      // render in html ejs templates
-      ViteEjsPlugin(
-        // { title: 'My vue project!' },
-        {
-          ejs: (viteConfig) => {
-            // viteConfig is the current viteResolved config.
-            return {
-              root: viteConfig.root,
-              beautify: true,
-              // domain: 'example.com',
-            };
-          },
-        }
-      ),
-      // render in js ejs templates
-      // https://medium.com/@koistya/using-ejs-with-vite-7502a4f79e44
-      {
-        name: 'ejs',
-        async transform(_, id) {
-          if (id.endsWith('.ejs')) {
-            const localsName = 'env';
-            const src = await readFile(id, 'utf-8');
-            const code = compile(src, {
-              client: true,
-              strict: true,
-              localsName,
-              // async: 'true',
-              // views: [path.resolve(__dirname, 'views')],
-              filename: path.relative(__dirname, id),
-              context: {
-                checkLocalsName: (env) => typeof env !== 'undefined'
-              }
-            }).toString();
-            return `export default ${code}`;
-          }
-        },
-      },
-      // viteImagemin({
-      //   plugins: {
-      //     jpg: imageminMozjpeg(),
-          
-      //   },
-      //   makeWebp: {
-      //     plugins: {
-      //       jpg: imageminWebp(),
-      //       // jpeg: imageminWebp(),
-      //       png: imageminWebp(),
-      //     },
-      //   },
-      // }),
-    ],
+    root: 'src',
+    publicDir: '../public',
     build: {
       emptyOutDir: true,
       minify: false,
@@ -131,7 +81,6 @@ export default defineConfig(({ mode }) => {
         '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
       },
     },
-    root: 'src',
     server: {
       port: env.VITE_PORT || 5173, // Use the port from the .env file or default to 5173
     },
@@ -149,5 +98,57 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
+    plugins: [
+      // render in html ejs templates
+      ViteEjsPlugin(
+        // { title: 'My vue project!' },
+        {
+          ejs: (viteConfig) => {
+            // viteConfig is the current viteResolved config.
+            return {
+              root: viteConfig.root,
+              beautify: true,
+              // domain: 'example.com',
+            };
+          },
+        }
+      ),
+      // render in js ejs templates
+      // https://medium.com/@koistya/using-ejs-with-vite-7502a4f79e44
+      {
+        name: 'ejs',
+        async transform(_, id) {
+          if (id.endsWith('.ejs')) {
+            const localsName = 'env';
+            const src = await readFile(id, 'utf-8');
+            const code = compile(src, {
+              client: true,
+              strict: true,
+              localsName,
+              // async: 'true',
+              // views: [path.resolve(__dirname, 'views')],
+              filename: path.relative(__dirname, id),
+              context: {
+                checkLocalsName: (env) => typeof env !== 'undefined'
+              }
+            }).toString();
+            return `export default ${code}`;
+          }
+        },
+      },
+      // viteImagemin({
+      //   plugins: {
+      //     jpg: imageminMozjpeg(),
+          
+      //   },
+      //   makeWebp: {
+      //     plugins: {
+      //       jpg: imageminWebp(),
+      //       // jpeg: imageminWebp(),
+      //       png: imageminWebp(),
+      //     },
+      //   },
+      // }),
+    ],
   };
 });

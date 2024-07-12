@@ -1,0 +1,36 @@
+.nav {
+  display: none;
+  @include grid-mn('xlg') {
+    display: flex;
+  }
+
+  // .nav__list
+
+  &__list {
+    display: flex;
+    list-style: none;
+    @include grid-mn('xlg') {
+      gap: 32px;
+    }
+  }
+
+  // .nav__item
+
+  &__item {
+    @include grid-mn('xlg') {
+    }
+  }
+
+  // .nav__link
+
+  @include highlight('.nav__link', var(--White-Smoke, #fafafa));
+  &__link {
+    @include grid-mn('xlg') {
+      color: var(--White-Smoke, #fafafa);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: normal;
+      text-transform: uppercase;
+    }
+  }
+}

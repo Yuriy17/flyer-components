@@ -1,0 +1,130 @@
+@include highlight('.working-time', var(--White-Smoke, #fafafa));
+.working-time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 16px;
+  gap: 8px;
+  color: var(--White-Smoke, #fafafa);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px; /* 114.286% */
+  > span {
+    display: inline-block;
+    width: 128px;
+  }
+}
+
+.header {
+  z-index: 25;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: transparent;
+  height: 59px;
+  @include grid-mn('lg') {
+    height: 64px;
+  }
+  @include grid-mn('lg') {
+    height: 80px;
+  }
+  @include grid-mn('xlg') {
+    height: 88px;
+  }
+  &__right-side {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  &__inner {
+    padding: 12px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+// Burger
+.header__burger {
+  background: unset;
+  border: none;
+}
+
+.icon-menu {
+  position: relative;
+  width: 2.6rem;
+  height: 2.6rem;
+  cursor: pointer;
+  z-index: 5;
+  transition: all 300ms ease;
+  span,
+  &::before,
+  &::after {
+    content: '';
+    transition: all 300ms ease 0ms;
+    position: absolute;
+    // right: 0;
+    // width: 100%;
+    left: 50%;
+    width: 50%;
+    height: 0.125rem;
+    transform: translate(-50%, 0);
+    background-color: var(--white, #fff);
+  }
+
+  .menu-open & {
+    span,
+    &::before,
+    &::after {
+      transition: all 0.3s ease-in-out;
+    }
+    &:hover,
+    &:active {
+      span,
+      &::before,
+      &::after {
+        background-color: var(--white-transparent-opacity-70, rgba(255, 255, 255, 0.7));
+      }
+    }
+  }
+
+  &::before {
+    top: 0.8625rem;
+  }
+
+  &::after {
+    bottom: 0.8625rem;
+  }
+
+  span {
+    top: calc(50% - 0.0625rem);
+  }
+
+  .menu-open & {
+    span {
+      width: 0;
+    }
+
+    &::before {
+      top: calc(50% - 0.0625rem);
+      transform: translate(-50%, 0) rotate(-45deg);
+    }
+
+    &::after {
+      bottom: calc(50% - 1px);
+      transform: translate(-50%, 0) rotate(45deg);
+    }
+  }
+
+  @include grid-mn('lg') {
+    display: none;
+  }
+}

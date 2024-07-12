@@ -110,7 +110,7 @@
   }
 }
 
-@mixin highlight($selector) {
+@mixin highlight($selector, $color: var(--link-color, #19376b)) {
   #{$selector} {
     position: relative;
 
@@ -121,7 +121,7 @@
       left: 0;
       bottom: 0;
       width: 100%;
-      background-color: var(--link-color, #19376b);
+      background-color: $color;
       transition:
         transform 0.4s,
         transform-origin 0s;

@@ -1,33 +1,32 @@
 .hero {
   max-width: 100%;
+  width: 100%;
+  padding: 40px 0 0px 0;
+  display: block;
+  min-height: 700px;
+  position: relative;
+
+  margin-top: -59px;
+  @include grid-mn('lg') {
+    margin-top: -64px;
+  }
+  @include grid-mn('lg') {
+    margin-top: -80px;
+  }
+  @include grid-mn('xlg') {
+    margin-top: -88px;
+  }
   // .hero__bg
 
   &__bg {
-    display: block;
-    max-width: 100%;
-  }
-
-  // .hero__bg_desktop
-
-  &__bg_desktop {
-    display: none;
-    @include grid-mn('md') {
-      display: block;
-    }
-  }
-
-  // .hero__bg_mobile
-
-  &__bg_mobile {
-    display: block;
-    @include grid-mn('md') {
-      display: none;
-    }
+    width: 100%;
   }
 
   // .hero__content
 
   &__content {
+    z-index: 1;
+    position: relative;
   }
 
   // .hero__footer

@@ -1,11 +1,16 @@
-<picture>
-  <source srcset="assets/images/sections/hero/hero-bg_desktop.webp, assets/images/sections/hero/hero-bg_desktop@2x.webp 2x"
-    type="image/webp" />
-  <img class="hero__bg hero__bg_desktop" src="assets/images/sections/hero/hero-bg_desktop.png"
-    srcset="assets/images/sections/hero/hero-bg_desktop@2x.png 2x" title="background image" />
-</picture>
-<picture>
-  <source srcset="assets/images/sections/hero/hero-bg_mobile.webp, assets/images/sections/hero/hero-bg_mobile@2x.webp" type="image/webp" />
-  <img class="hero__bg hero__bg_mobile" src="assets/images/sections/hero/hero-bg_mobile.jpg"
-    srcset="assets/images/sections/hero/hero-bg_mobile@2x.png 2x" title="background image" />
-</picture>
+<!-- <div class="parallax">
+  <picture class="parallax__image">
+    <source type="image/webp" media="(min-width: 576px)" srcset="/images/desktop/hero-bg_desktop.webp, /images/desktop/hero-bg_desktop@2x.webp 2x">
+    <source type="image/png" media="(min-width: 576px)" srcset="/images/desktop/hero-bg_desktop.png, /images/desktop/hero-bg_desktop@2x.png 2x">
+    <source type="image/webp" srcset="/images/mobile/hero-bg_mobile.webp, /images/mobile/hero-bg_mobile@2x.webp">
+    <source type="image/png" srcset="/images/mobile/hero-bg_mobile.png, /images/mobile/hero-bg_mobile@2x.png">
+    <img class="hero__bg-image" src="/images/mobile/hero-bg_mobile.png" srcset="/images/mobile/hero-bg_mobile@2x.png 2x"  alt="hero background image" width="375" height="776">
+  </picture>
+</div> -->
+<%- include('templates/components/parallax/parallax-bg.ejs', {
+  env: {
+    fileName: 'hero-bg',
+    imageClass: 'hero__bg-image',
+    alt: 'hero background image'
+  }
+}) %>
