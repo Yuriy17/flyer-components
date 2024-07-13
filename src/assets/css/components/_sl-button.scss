@@ -13,7 +13,7 @@ sl-button {
       border: none;
       color: var(--White, #fff);
       text-align: center;
-      /* buttons */
+
       font-family: Inter;
       font-size: 16px;
       font-weight: 600;
@@ -21,7 +21,6 @@ sl-button {
 
       display: flex;
       min-width: 264px;
-      // height: 40px;
       padding: 12px 10px;
       justify-content: center;
       align-items: center;
@@ -29,6 +28,8 @@ sl-button {
       flex-shrink: 0;
       border-radius: 10px;
       background: var(--Gradient, linear-gradient(247deg, #279aff 3.13%, #006dd2 60%, #0a549a 100%));
+      border-radius: 10px;
+      background: var(--Azure-Blue, #0a74d7);
       box-shadow:
         0px -4px 4px 0px rgba(0, 0, 0, 0.25) inset,
         0px 0px 0px 0px rgba(39, 154, 255, 0.3),
@@ -40,49 +41,22 @@ sl-button {
       &:active,
       &:focus,
       &:hover {
-        filter: opacity(0.9);
+      }
+      &:hover {
+        box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+        background: #0086fb;
+      }
+
+      &:active,
+      &:focus {
         box-shadow:
           0px -4px 4px 0px rgba(0, 0, 0, 0.25) inset,
           0px 0px 0px 0px rgba(39, 154, 255, 0.3),
           0px 0px 4px 0px rgba(255, 255, 255, 0.2) inset;
       }
-      &:hover {
-        // background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
-      }
-
-      &:active,
-      &:focus {
-        // background: var(--Gradient, linear-gradient(247deg, #279AFF 3.13%, #006DD2 60%, #0A549A 100%));
-      }
-    }
-  }
-  &.btn-sm {
-    &::part(base) {
-      // display: flex;
-      min-width: 141px;
-      // height: 40px;
-      // padding: 12px 10px;
-      // justify-content: center;
-      // align-items: center;
-      // gap: 10px;
-      // border-radius: 10px;
-      // background: var(--Gradient, linear-gradient(247deg, #279AFF 3.13%, #006DD2 60%, #0A549A 100%));
-      // box-shadow: 0px -4px 4px 0px rgba(0, 0, 0, 0.25) inset, 0px 0px 0px 0px rgba(39, 154, 255, 0.30), 0px 0px 4px 0px rgba(255, 255, 255, 0.20) inset;
     }
   }
   &.btn-light {
-    // color: var(--sl-color-neutral-1000);
-    // transition: color 0.3s ease-in-out;
-    // &.active {
-    //   color: var(--sl-color-primary-600);
-    // }
-    // &:hover {
-    //   color: var(--sl-color-primary-400);
-    // }
-    // &:focus,
-    // &:active {
-    //   color: var(--sl-color-primary-200);
-    // }
     &::part(base) {
       /* Set design tokens for height and border width */
       --sl-input-height-medium: 40px;
@@ -104,31 +78,35 @@ sl-button {
       gap: 8px;
       flex-shrink: 0;
       transition: all ease-in-out 0.1s;
+      box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
       &:active {
         transform: translateX(-2px);
       }
       &:active,
       &:focus,
       &:hover {
-        filter: opacity(0.9);
+      }
+      &:hover {
         box-shadow:
           0px -4px 4px 0px rgba(0, 0, 0, 0.25) inset,
           0px 0px 0px 0px rgba(39, 154, 255, 0.3),
           0px 0px 4px 0px rgba(255, 255, 255, 0.2) inset;
       }
-      &:hover {
-        // background: var(--Gradient, linear-gradient(247deg, #279AFF 3.13%, #006DD2 60%, #0A549A 100%));
-      }
 
       &:active,
       &:focus {
-        // background: #0086FB;
+        background: #0086fb;
       }
 
       &:focus-visible {
         // outline: dashed 2px deeppink;
         // outline-offset: 4px;
       }
+    }
+  }
+  &.btn-sm {
+    &::part(base) {
+      min-width: 141px;
     }
   }
 }

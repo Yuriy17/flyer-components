@@ -24,6 +24,8 @@
   width: 100%;
   background: transparent;
   height: 59px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%), rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
   @include grid-mn('lg') {
     height: 64px;
   }
@@ -33,12 +35,16 @@
   @include grid-mn('xlg') {
     height: 88px;
   }
+  > .container {
+    height: 100%;
+  }
   &__right-side {
     display: flex;
     align-items: center;
     gap: 16px;
   }
   &__inner {
+    height: 100%;
     padding: 12px 0;
     position: relative;
     display: flex;

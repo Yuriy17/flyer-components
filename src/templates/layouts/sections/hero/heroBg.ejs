@@ -7,10 +7,13 @@
     <img class="hero__bg-image" src="/images/mobile/hero-bg_mobile.png" srcset="/images/mobile/hero-bg_mobile@2x.png 2x"  alt="hero background image" width="375" height="776">
   </picture>
 </div> -->
-<%- include('templates/components/parallax/parallax-bg.ejs', {
+<%- include('templates/components/parallax/parallaxBg.ejs', {
   env: {
     fileName: 'hero-bg',
     imageClass: 'hero__bg-image',
-    alt: 'hero background image'
+    alt: 'hero background image',
+    type: 'png',
+    defaultWidth: '1920',
+    defaultHeight: '1029',
   }
 }) %>

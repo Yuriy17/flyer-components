@@ -1,0 +1,13 @@
+<div class="hero__slider">
+  <div class="swiper">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <% for(var i=0; i < env.cards.length; i++) { %>
+        <%- include('templates/layouts/sections/hero/heroSlide.ejs', { 
+          env: env.cards[i]
+        }) %>
+     <% } %>
+    </div>
+  </div>
+</div>
