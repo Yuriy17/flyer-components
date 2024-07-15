@@ -1,24 +1,38 @@
 sl-button {
   &.btn-arrow {
+    display: flex;
+    flex-wrap: nowrap;
     gap: 10px;
-    &::after {
-      content: url('assets/icons/arrows/arrow-top-right-blue.svg');
+    img {
+      display: inline-block;
       width: 16px;
       height: 16px;
+    }
+    &::after {
+    }
+  }
+  &.btn-primary,
+  &.btn-light {
+    &::part(base) {
+      --sl-input-height-medium: 48px;
+      font-family: Inter;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: normal;
+      @include grid-mn('md') {
+        --sl-input-height-medium: 44px;
+      }
+      @include grid-mn('xmd') {
+        --sl-input-height-medium: 40px;
+        font-size: 16px;
+      }
     }
   }
   &.btn-primary {
     &::part(base) {
-      --sl-input-height-medium: 40px;
-
       border: none;
       color: var(--White, #fff);
       text-align: center;
-
-      font-family: Inter;
-      font-size: 16px;
-      font-weight: 600;
-      line-height: normal;
 
       display: flex;
       min-width: 264px;
@@ -60,17 +74,14 @@ sl-button {
   &.btn-light {
     &::part(base) {
       /* Set design tokens for height and border width */
-      --sl-input-height-medium: 40px;
+
       // --sl-input-border-width: 4px;
 
       border: none;
-      color: var(--White, #fff);
+      color: var(--Azure-Blue, #0a74d7);
       text-align: center;
       /* buttons */
-      font-family: Inter;
-      font-size: 16px;
-      font-weight: 600;
-      line-height: normal;
+
       border-radius: 10px;
       background: var(--White, #fff);
       display: inline-flex;

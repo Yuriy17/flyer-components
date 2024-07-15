@@ -16,11 +16,14 @@
   @include grid-mn('xl') {
     height: map.get($preheader-height, 'xl');
   }
-  .container {
+  > .container {
     display: flex;
     justify-content: center;
     gap: 20px;
     height: 100%;
+    @include grid-mx('md') {
+      padding: 0 0;
+    }
     :nth-child(1) {
       .preheader__block-image {
         width: 28px;
@@ -38,16 +41,24 @@
       .preheader__block-image {
         width: 52px;
       }
-      @include grid-mx('md') {
-        .stars__star {
-          height: 10px;
-          width: 10px;
-          min-width: 10px;
+      .stars__star {
+        height: 10px;
+        width: 10px;
+        min-width: 10px;
+        > img {
+          display: block;
+          height: 6.8px;
+          width: 6.8px;
+          min-width: 6.8px;
+        }
+        @include grid-mn('md') {
+          width: 17.171px;
+          min-width: 17.171px;
+          height: 17.171px;
           > img {
-            display: block;
-            height: 6.8px;
-            width: 6.8px;
-            min-width: 6.8px;
+            height: 11.5px;
+            width: 11.5px;
+            min-width: 11.5px;
           }
         }
       }

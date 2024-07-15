@@ -1,0 +1,152 @@
+.card {
+}
+
+.card {
+  position: relative;
+  box-shadow: 0px 4px 12px 0px rgba(20, 46, 70, 0.25);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 319px;
+  height: 376px;
+  display: flex;
+  flex-direction: column;
+  @include grid-mx('md') {
+    &:nth-of-type(1n + 5) {
+      display: none;
+    }
+  }
+  @include grid-mn('md') {
+    width: 316px;
+    height: 375px;
+  }
+  &__img {
+    transition: all 0.3s ease-in-out;
+    display: block;
+    height: 100%;
+    &-block {
+      position: relative;
+      flex-grow: 1;
+      @include grid-mn('md') {
+        min-height: 302px;
+        height: 302px;
+      }
+      img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        object-fit: cover;
+      }
+      .btn-light {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 12px;
+      }
+    }
+  }
+  &:hover {
+    .card__img {
+      transform: scale(1.1);
+    }
+  }
+
+  // .card__content
+
+  &__content {
+    // position: relative;
+    // bottom: 16px;
+    p {
+      margin: 0;
+    }
+  }
+
+  // .card__title
+
+  &__title {
+  }
+
+  // .card__info
+
+  &__info {
+    display: flex;
+    padding: 16px;
+    gap: 8px;
+    flex-direction: column;
+    width: 100%;
+    @include grid-mn('md') {
+      padding: 12px;
+    }
+  }
+
+  // .card__info-cost
+
+  &__info-cost {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  // .card__cost-country
+
+  &__cost-country {
+    color: var(--Dark-blue, #2a3243);
+
+    /* Mobile/SemiBold 20 */
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 30px */
+  }
+
+  // .card__cost-price
+
+  &__cost-price {
+    color: var(--Azure-Blue, #0a74d7);
+
+    /* Mobile/SemiBold 20 */
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 30px */
+  }
+
+  // .card__info-class
+
+  &__info-class {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  // .card__class-text
+
+  &__class-text {
+    color: var(--Slate-Gray, #7c8089);
+
+    /* Mobile/SemiBold 14 */
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  // .card__class-price
+
+  &__class-price {
+    color: var(--Dark-blue, #2a3243);
+
+    /* Mobile/SemiBold 14 */
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+}
+.book {
+  // .book__card
+
+  &__card {
+  }
+}

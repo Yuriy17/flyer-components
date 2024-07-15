@@ -6,6 +6,8 @@
 // @import './components/_sl-dialog.scss';
 @import './components/_sl-button.scss';
 @import './components/_nav.scss';
+@import './components/_card.scss';
+@import './components/_breadcrumbs.scss';
 @import './components/_stars.scss';
 @import './components/_parallax-bg.scss';
 
@@ -15,6 +17,7 @@
 @import './layouts/sections/_preheader.scss';
 @import './layouts/sections/_header.scss';
 @import './layouts/sections/_hero.scss';
+@import './layouts/sections/_book.scss';
 @import './layouts/sections/_reviews.scss';
 
 body {
@@ -40,9 +43,57 @@ h1 {
   }
   @include grid-mn('xmd') {
     font-size: 40px;
+  }
+  @include grid-mn('xlg') {
     text-align: left;
   }
 }
+h2 {
+  color: var(--Dark-blue, #2a3243);
+  text-align: center;
+
+  /* Mobile/H2 SemiBold 24 */
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 36px */
+  text-transform: capitalize;
+  a {
+    color: var(--Azure-Blue, #0a74d7);
+  }
+  @include grid-mn('md') {
+    font-size: 32px;
+  }
+  @include grid-mn('xlg') {
+    font-size: 36px;
+  }
+}
+@include highlight('.show-more', var(--Azure-Blue, #0a74d7));
+.show-more {
+  display: flex;
+  gap: 8px;
+  color: var(--Azure-Blue, #0a74d7);
+  font-family: Montserrat;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  background: transparent;
+  border: none;
+  margin: 22px auto;
+  @include grid-mn('md') {
+    margin: 16px auto;
+  }
+  // .show-more__img
+
+  &__img {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+  }
+}
+
 // .search-container {
 //   margin-bottom: 20px;
 // }

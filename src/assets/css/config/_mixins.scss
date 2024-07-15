@@ -24,7 +24,7 @@
 }
 
 @mixin grid-mx($value: 'sm') {
-  $width: map.get($grid-breakpoints, $value);
+  $width: calc(map.get($grid-breakpoints, $value) - 1px);
 
   @media (max-width: $width) {
     @content;

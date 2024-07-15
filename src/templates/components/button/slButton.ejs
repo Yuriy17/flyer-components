@@ -8,5 +8,6 @@
   <% if(env.classes){ %>class="<%=env.classes%>"<% } %>
   <% if(env.type){ %>type="<%=env.type%>"<% } %>
 >
-  <%=env.content%>
+  <span><%=env.content%></span>
+  <% if(env.icon){ %><img src="<%=env.icon.src%>" alt="<%=env.icon.alt%>"><% } %>
 </sl-button>

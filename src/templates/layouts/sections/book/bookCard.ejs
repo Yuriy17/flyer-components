@@ -1,0 +1,29 @@
+<div class="card book__card">
+  <div class="card__img-block">
+    <%- include('templates/components/adaptivePicture/adaptivePicture.ejs', {
+      env: env.image
+    }) %>
+    <%- include('templates/components/button/slButton.ejs', {
+      env: {
+        classes: 'btn-light btn-arrow',
+        content: 'Get Your Exclusive Quote',
+        icon: {
+          src: '/icons/arrow-top-right-blue.svg',
+          alt: 'arrow-top-right-blue icon'
+        }
+      }
+    })%>
+  </div>
+  <div class="card__content">
+    <div class="card__info">
+      <div class="card__info-cost">
+        <p class="card__cost-country"><%- env.costCountry %></p>
+        <p class="card__cost-price"><%- env.costPrice %></p>
+      </div>
+      <div class="card__info-class">
+        <p class="card__class-text"><%- env.classText %></p>
+        <p class="card__class-price"><%- env.classPrice %></p>
+      </div>
+    </div>
+  </div> 
+</div>
