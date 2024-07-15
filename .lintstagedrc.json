@@ -4,8 +4,7 @@
     "eslint -c eslint.config.mjs"
   ],
   "*.html": [
-    "eslint",
-    "prettier --write"
+    "eslint"
   ],
   "*.scss": "prettier --write"
 }
