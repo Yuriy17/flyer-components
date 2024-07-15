@@ -2,8 +2,8 @@
   <picture class="parallax__image">
     <source type="image/webp" media="(min-width: 576px)" srcset="/images/desktop/<%= env.fileName %>_desktop.webp, /images/desktop/<%= env.fileName %>_desktop@2x.webp 2x">
     <source type="image/png" media="(min-width: 576px)" srcset="/images/desktop/<%= env.fileName %>_desktop.png, /images/desktop/<%= env.fileName %>_desktop@2x.png 2x">
-    <source type="image/webp" srcset="/images/mobile/<%= env.fileName %>_mobile.webp, /images/mobile/<%= env.fileName %>_mobile@2x.webp">
-    <source type="image/png" srcset="/images/mobile/<%= env.fileName %>_mobile.png, /images/mobile/<%= env.fileName %>_mobile@2x.png">
+    <source type="image/webp" srcset="/images/mobile/<%= env.fileName %>.webp, /images/mobile/<%= env.fileName %>@2x.webp">
+    <source type="image/png" srcset="/images/mobile/<%= env.fileName %>.png, /images/mobile/<%= env.fileName %>@2x.png">
     <img class="<%= env.imageClass %>" src="/images/mobile/<%= env.fileName %>_desktop.png" srcset="/images/mobile/<%= env.fileName %>_desktop@2x.png 2x"  alt="<%= env.alt %>" width="1920" height="1029">
   </picture>
 </div>

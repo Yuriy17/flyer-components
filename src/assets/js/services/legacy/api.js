@@ -1,6 +1,6 @@
-import { debounce } from '../utils/debounce';
-import { base_api_url, options } from '../helpers/constants';
-import { showLoadingIcon, hideLoadingIcon } from '../utils/loadingIcon.js';
+import { debounce } from '../../utils/debounce.js';
+import { base_api_url, options } from '../../helpers/constants.js';
+import { showLoadingIcon, hideLoadingIcon } from '../../utils/loadingIcon.js';
 
 // Debounced version of the fetchAirports function
 const debouncedFetchAirports = debounce(async ({ query, listBox, item }) => {
@@ -33,7 +33,7 @@ export function getAllInputSearch() {
       item.querySelectorAll('input[type="hidden"]').forEach((itemHidden) => (itemHidden.value = ''));
       getAirports({
         inputBox,
-        item
+        item,
       });
     });
   });
@@ -41,9 +41,9 @@ export function getAllInputSearch() {
 export const fetchAirports = async ({ query, listBox, item }) => {
   // get value api
   await fetch(`${base_api_url}api/search_location?query=${query}`)
-  .then((res) => res.json())
-  .then((response) => {
-    // response.json().then((body) => console.log(body));
+    .then((res) => res.json())
+    .then((response) => {
+      // response.json().then((body) => console.log(body));
       if (response.status >= 400 && response.status < 600) {
         throw new Error('Bad response from server');
       }
@@ -64,7 +64,7 @@ export const fetchAirports = async ({ query, listBox, item }) => {
         if (checkSanctionPlaces(countryName)) {
           sanctionPlaces = 1;
         }
-        if (sanctionPlaces === 0 && countryName !== '' ) {
+        if (sanctionPlaces === 0 && countryName !== '') {
           return `<li class="${entityId}"><h5>${airportInfo} (<span>${placeId}</span>)</h5><h4>${countryName}</h4></li>`;
         }
       });
@@ -98,7 +98,7 @@ export async function getAirports({ inputBox, item }) {
     debouncedFetchAirports({
       query: userValue.toLowerCase(),
       listBox,
-      item
+      item,
     });
   } else {
     item.classList.remove('active'); //hide autocomplete box
@@ -195,8 +195,7 @@ export async function findFlights(
           }
           if (
             ticketInfo.findIndex(
-              (item) =>
-                item.partner_name === allFlights['itineraries'][i]['legs'][0]['carriers']['marketing'][0]['name']
+              (item) => item.partner_name === allFlights['itineraries'][i]['legs'][0]['carriers']['marketing'][0]['name']
             ) == -1
           ) {
             differentPartners++;
@@ -204,7 +203,7 @@ export async function findFlights(
           ticketInfo.push({
             partner_name: allFlights['itineraries'][i]['legs'][0]['carriers']['marketing'][0]['name'],
             partner_logo: allFlights['itineraries'][i]['legs'][0]['carriers']['marketing'][0]['logoUrl'],
-            price: allFlights['itineraries'][i]['price']['raw'] * 0.45
+            price: allFlights['itineraries'][i]['price']['raw'] * 0.45,
           });
 
           if (differentPartners == 4) {

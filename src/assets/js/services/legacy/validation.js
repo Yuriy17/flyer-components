@@ -282,12 +282,18 @@ export const initValidation = () => {
       if (validate.includes('min')) {
         item
           .closest('form')
-          .insertAdjacentHTML('beforeend', `<div class="${error_block}">${mainRules.min}${validate[validate.indexOf('min') + 1]}</div>`);
+          .insertAdjacentHTML(
+            'beforeend',
+            `<div class="${error_block}">${mainRules.min}${validate[validate.indexOf('min') + 1]}</div>`
+          );
       }
       if (validate.includes('max')) {
         item
           .closest('form')
-          .insertAdjacentHTML('beforeend', `<div class="${error_block}">${mainRules.max}${validate[validate.indexOf('max') + 1]}</div>`);
+          .insertAdjacentHTML(
+            'beforeend',
+            `<div class="${error_block}">${mainRules.max}${validate[validate.indexOf('max') + 1]}</div>`
+          );
       }
       if (validate.includes('countChars')) {
         item

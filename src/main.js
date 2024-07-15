@@ -13,11 +13,23 @@ import { initShoelaceComponents } from './assets/js/services/shoelace/initShoela
 // import { initSampleDialog } from './assets/js/services/initSampleDialog.js';
 import { initReviews } from './assets/js/services/initReviews.js';
 import { ShoelaceComponents } from './assets/js/helpers/constants.js';
+import { initHeroSlider } from './assets/js/services/initHeroSlider';
+import { initStartCosts } from './assets/js/services/initStartCosts.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  initReviews();
   initShoelaceComponents({
     components: [ShoelaceComponents.button],
+  });
+  initReviews();
+  initHeroSlider();
+  initStartCosts({
+    items: [
+      {
+        selector: '.hero .price__cost',
+        duration: 2000,
+        symbol: '$',
+      },
+    ],
   });
   // initMainForm();
   // getAllInputSearch();

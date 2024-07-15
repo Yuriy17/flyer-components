@@ -22,3 +22,24 @@ export function fromHTML(html, trim = true) {
   if (result.length === 1) return result[0];
   return result;
 }
+
+export function animateValue({ obj, start, end, duration, symbol }) {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+
+    let progress_value = Math.floor(progress * (end - start) + start);
+    if (symbol == '$') {
+      progress_value = symbol + new Intl.NumberFormat('en-US').format(progress_value);
+    } else {
+      progress_value = symbol + progress_value;
+    }
+
+    obj.innerHTML = progress_value + '*';
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    }
+  };
+  window.requestAnimationFrame(step);
+}

@@ -1,4 +1,4 @@
-import { inputTel } from './phones';
+import { inputTel } from './phones.js';
 import modalGetFreeQuote from '../../../templates/layouts/modalContent/modalGetFreeQuote.ejs';
 import modalSuccess from '../../../templates/layouts/modalContent/modalSuccess.ejs';
 import modalClassUp from '../../../templates/layouts/modalContent/modalClassUp.ejs';

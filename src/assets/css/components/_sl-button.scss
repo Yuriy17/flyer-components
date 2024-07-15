@@ -1,5 +1,6 @@
 sl-button {
   &.btn-arrow {
+    gap: 10px;
     &::after {
       content: url('assets/icons/arrows/arrow-top-right-blue.svg');
       width: 16px;
@@ -24,7 +25,7 @@ sl-button {
       padding: 12px 10px;
       justify-content: center;
       align-items: center;
-      gap: 10px;
+
       flex-shrink: 0;
       border-radius: 10px;
       background: var(--Gradient, linear-gradient(247deg, #279aff 3.13%, #006dd2 60%, #0a549a 100%));

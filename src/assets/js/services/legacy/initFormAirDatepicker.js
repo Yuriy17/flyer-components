@@ -1,4 +1,4 @@
-import { airDates, airLlocale, airMinDate, airStartDate } from '../helpers/constants.js';
+import { airDates, airLlocale, airMinDate, airStartDate } from '../../helpers/constants.js';
 import AirDatepicker from 'air-datepicker';
 
 export const initFormAirDatepicker = () => {

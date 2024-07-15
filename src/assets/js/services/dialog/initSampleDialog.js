@@ -1,6 +1,6 @@
-import { Dialog } from '../components/Dialog';
-import { insertPosition } from '../helpers/constants';
-import { SampleForm } from '../layouts/SampleForm/SampleForm';
+import { Dialog } from '../../components/Dialog';
+import { insertPosition } from '../../helpers/constants';
+import { SampleForm } from '../../layouts/SampleForm/SampleForm';
 
 export const initSampleDialog = () => {
   const body = document.querySelector('body');

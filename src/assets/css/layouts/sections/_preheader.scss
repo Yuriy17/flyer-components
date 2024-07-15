@@ -1,13 +1,26 @@
+@use 'sass:map';
+
 .preheader {
   width: 100%;
   position: relative;
   z-index: 1;
   background: white;
   padding: 3px;
+  height: map.get($preheader-height, 'xs');
+  @include grid-mn('md') {
+    height: map.get($preheader-height, 'md');
+  }
+  @include grid-mn('xlg') {
+    height: map.get($preheader-height, 'xlg');
+  }
+  @include grid-mn('xl') {
+    height: map.get($preheader-height, 'xl');
+  }
   .container {
     display: flex;
     justify-content: center;
     gap: 20px;
+    height: 100%;
     :nth-child(1) {
       .preheader__block-image {
         width: 28px;

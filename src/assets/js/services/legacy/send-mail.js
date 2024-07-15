@@ -31,18 +31,16 @@ export async function formSubmit(json) {
   }
 }
 
-
 // форма с информацией о билете
 export async function formSubmitTicket() {
-	const ticket = new FormData(document.forms["flightTickets"]);
-	const sendTicket = await fetch("../../send_mail-ticket-flight.php", {
-		method: "POST",
-		body: ticket,
-	});
-	if (sendTicket.ok) {
-		dataLayer.push({ event: "form_sent" });
-	} else {
-		alert("Код ошибки: " + sendTicket.status);
-	}
+  const ticket = new FormData(document.forms['flightTickets']);
+  const sendTicket = await fetch('../../send_mail-ticket-flight.php', {
+    method: 'POST',
+    body: ticket,
+  });
+  if (sendTicket.ok) {
+    dataLayer.push({ event: 'form_sent' });
+  } else {
+    alert('Код ошибки: ' + sendTicket.status);
+  }
 }
-

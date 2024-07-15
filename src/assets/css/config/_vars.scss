@@ -37,3 +37,31 @@
   --orange: #fd9f00;
   --light-gray: #cecece;
 }
+
+$container-bs-gutter: (
+  xs: 56px,
+  md: 120px,
+  xlg: 216px,
+  xxl: 288px,
+);
+
+$preheader-height: (
+  xs: 36px,
+  md: 41px,
+  xlg: 46px,
+  xl: 51px,
+);
+
+$header-height: (
+  xs: 59px,
+  md: 64px,
+  xlg: 80px,
+  xl: 88px,
+);
+$hero-height: (
+  xs: 853px,
+  md: 983px,
+  xmd: 811px,
+  xlg: 854px,
+  xl: 1029px,
+);

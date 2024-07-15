@@ -1,5 +1,5 @@
 import AirDatepicker from 'air-datepicker';
-import { airDates, airLlocale, airMinDate, airStartDate, baseUrl } from '../helpers/constants';
+import { airDates, airLlocale, airMinDate, airStartDate, baseUrl } from '../../helpers/constants';
 import { getAllInputSearch } from './api';
 
 // утсановка значений после поиска
@@ -12,10 +12,13 @@ export function settingFormValues() {
     if (lastSearchTicket && lastSearchTicket.length > 0) {
       document.querySelector('.search-results-img').style.display = 'none';
       document.querySelector('.search-results-table').style.display = 'flex';
-      document.querySelector('.search-results-table-flights').insertAdjacentHTML('afterbegin', setTableTicketInfo(dataFlight.passenger.type));
+      document
+        .querySelector('.search-results-table-flights')
+        .insertAdjacentHTML('afterbegin', setTableTicketInfo(dataFlight.passenger.type));
       //блок с информацией о билете, вывод заголовка
       if (dataFlight.from[0]?.cityName != undefined && lastSearchTicket && lastSearchTicket.length > 0) {
-        document.querySelector('.search-results-table-title').textContent = dataFlight.from[0].cityName + ' - ' + dataFlight.to[0].cityName;
+        document.querySelector('.search-results-table-title').textContent =
+          dataFlight.from[0].cityName + ' - ' + dataFlight.to[0].cityName;
       }
     }
     // inf pers
