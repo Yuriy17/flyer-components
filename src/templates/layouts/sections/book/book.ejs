@@ -1,15 +1,20 @@
-<section class="book">
+<section 
+  <% if(typeof env !== 'undefined' && env.id){ %>id="<%=env.id%>" <% } %> 
+  class="book"
+>
   <div class="container">
     <h2 class="book__title">
       Book Business Class
       Flight to <a href="/europe">Europe</a>
     </h2>
     <div class="book__cards">
-      <% for(var i=0; i < env.cards.length; i++) { %>
-        <%- include('templates/layouts/sections/book/bookCard.ejs', { 
-          env: env.cards[i]
-        }) %>
-      <% } %>
+      <% if(typeof env !== 'undefined'){ %>        
+        <% for(var i=0; i < env.cards.length; i++) { %>
+          <%- include('templates/layouts/sections/book/bookCard.ejs', { 
+            env: env.cards[i]
+          }) %>
+        <% } %>
+      <% } %> 
     </div>
     <%- include('templates/layouts/showMoreButton.ejs', {
       env: {

@@ -3,7 +3,7 @@
   //   --primary-blue-100: #0a74d7;
   //   --primary-blue-200: #044786;
   //   --bg-color-500: #1034a6;
-  //   --bg-color-footer: #e9eefe;
+  --bg-color-footer: #e9eefe;
 
   //   --black-8: #ecedee;
   //   --black-5: #fafafa;
@@ -37,6 +37,14 @@
   --orange: #fd9f00;
   --light-gray: #cecece;
 }
+
+$container-width: (
+  xs: 319px,
+  md: 648px,
+  xmd: 904px,
+  xlg: 1224px,
+  xxl: 1632px,
+);
 
 $container-bs-gutter: (
   xs: 56px,

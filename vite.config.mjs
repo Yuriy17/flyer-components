@@ -40,10 +40,10 @@ export default defineConfig(({ mode }) => {
             if (/png|jpe?g|webp|svg|gif|tiff|bmp|ico/i.test(extType)) {
               extType = 'images';
             }
-            return `assets/${extType}/[name]-[hash][extname]`;
+            return `static/${extType}/[name][extname]`;
           },
-          entryFileNames: 'assets/js/[name]-[hash].js',
-          chunkFileNames: `assets/js/[name]-[hash].js`,
+          entryFileNames: 'static/js/[name].js',
+          chunkFileNames: `static/js/[name].js`,
           // assetFileNames: `assets/js/[name].[ext]`,
           manualChunks: (id) => {
             if (id.includes('node_modules')) {
