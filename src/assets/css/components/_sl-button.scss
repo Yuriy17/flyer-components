@@ -1,8 +1,10 @@
 sl-button {
   &.btn-arrow {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 10px;
+    &::part(label) {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 10px;
+    }
     img {
       display: inline-block;
       width: 16px;
@@ -15,10 +17,7 @@ sl-button {
   &.btn-light {
     &::part(base) {
       --sl-input-height-medium: 48px;
-      font-family: Inter;
-      font-size: 18px;
-      font-weight: 600;
-      line-height: normal;
+
       @include grid-mn('md') {
         --sl-input-height-medium: 44px;
       }
@@ -26,6 +25,12 @@ sl-button {
         --sl-input-height-medium: 40px;
         font-size: 16px;
       }
+    }
+    &::part(label) {
+      font-family: Inter;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: normal;
     }
   }
   &.btn-primary {

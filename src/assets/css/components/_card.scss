@@ -41,6 +41,11 @@
         left: 50%;
         transform: translateX(-50%);
         bottom: 12px;
+        @include grid-mn('xmd') {
+          left: auto;
+          transform: none;
+          right: 12px;
+        }
       }
     }
   }
