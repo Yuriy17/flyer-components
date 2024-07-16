@@ -2,25 +2,25 @@
   <source
     type="image/webp"
     media="(min-width: 576px)"
-    srcset="/images/desktop/<%= env.fileName %>.webp, /images/desktop/<%= env.fileName %>@2x.webp 2x"
+    srcset="/static/images/desktop/<%= env.fileName %>.webp, /static/images/desktop/<%= env.fileName %>@2x.webp 2x"
   />
   <source
     type="image/<%= env.type %>"
     media="(min-width: 576px)"
-    srcset="/images/desktop/<%= env.fileName %>.<%= env.type %>, /images/desktop/<%= env.fileName %>@2x.<%= env.type %> 2x"
+    srcset="/static/images/desktop/<%= env.fileName %>.<%= env.type %>, /static/images/desktop/<%= env.fileName %>@2x.<%= env.type %> 2x"
   />
   <source
     type="image/webp"
-    srcset="/images/mobile/<%= env.fileName %>.webp, /images/mobile/<%= env.fileName %>@2x.webp"
+    srcset="/static/images/mobile/<%= env.fileName %>.webp, /static/images/mobile/<%= env.fileName %>@2x.webp"
   />
   <source
     type="image/<%= env.type %>"
-    srcset="/images/mobile/<%= env.fileName %>.<%= env.type %>, /images/mobile/<%= env.fileName %>@2x.<%= env.type %>"
+    srcset="/static/images/mobile/<%= env.fileName %>.<%= env.type %>, /static/images/mobile/<%= env.fileName %>@2x.<%= env.type %>"
   />
   <img
     class="<%= env.imageClass %>"
-    src="/images/mobile/<%= env.fileName %>.<%= env.type %>"
-    srcset="/images/mobile/<%= env.fileName %>@2x.<%= env.type %> 2x"
+    src="/static/images/mobile/<%= env.fileName %>.<%= env.type %>"
+    srcset="/static/images/mobile/<%= env.fileName %>@2x.<%= env.type %> 2x"
     alt="<%= env.alt %>"
     width="<%= env.defaultWidth %>"
     height="<%= env.defaultHeight %>"
