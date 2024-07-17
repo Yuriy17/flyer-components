@@ -69,3 +69,14 @@ export const ShoelaceComponents = {
   textarea: 'textarea',
   nav: 'nav',
 };
+export const gridBreakpoints = {
+  xs: 0,
+  sm: 375,
+  xsm: 576,
+  md: 768,
+  xmd: 1024,
+  lg: 1240,
+  xlg: 1440,
+  xl: 1680,
+  xxl: 1920,
+};

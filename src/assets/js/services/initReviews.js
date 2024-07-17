@@ -95,9 +95,12 @@ export const initReviews = async () => {
     // const reviewsData = import.meta.env.PROD
     //   ? await axios.get('https://flyer-club.com/flightbooking/trustpilot?reviews=true&perpage=20')
     //   : await axios.get('/data/reviews.json');
-    const reviewsData = await axios.get('/data/reviews.json');
+    const reviewsData = await axios.get(`${import.meta.env.VITE_STATIC_PATH}/data/reviews.json`);
+    console.log('🚀 ~ initReviews ~ reviewsData:', reviewsData);
+    console.log('🚀 ~ initReviews ~ import.meta.env.VITE_STATIC_PATH:', import.meta.env.VITE_STATIC_PATH);
 
     const { TrustScore, ReviewsCount, reviews } = reviewsData.data;
+    console.log('🚀 ~ initReviews ~ reviews:', reviews);
 
     const reviewBlocks = reviews.map(({ reviewLink, title, text, clientName, createdAt, stars }) => {
       const starElements = [];

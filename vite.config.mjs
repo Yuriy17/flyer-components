@@ -15,7 +15,11 @@ export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current working directory.
   // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
   // eslint-disable-next-line no-undef
-  const env = loadEnv(mode, process.cwd(), '');
+  const env = loadEnv(mode, process.cwd());
+
+  // Load app-level env vars to node-level env vars.
+  // eslint-disable-next-line no-undef
+  process.env = { ...process.env, ...env };
 
   return {
     base: '', // the path relative to its deployment directory
@@ -129,8 +133,8 @@ export default defineConfig(({ mode }) => {
               // views: [path.resolve(__dirname, 'views')],
               filename: path.relative(__dirname, id),
               context: {
-                checkLocalsName: (env) => typeof env !== 'undefined'
-              }
+                checkLocalsName: (env) => typeof env !== 'undefined',
+              },
             }).toString();
             return `export default ${code}`;
           }
@@ -139,7 +143,7 @@ export default defineConfig(({ mode }) => {
       // viteImagemin({
       //   plugins: {
       //     jpg: imageminMozjpeg(),
-          
+
       //   },
       //   makeWebp: {
       //     plugins: {
