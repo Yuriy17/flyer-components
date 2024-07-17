@@ -1,15 +1,15 @@
 <div class="card book__card">
   <div class="card__img-block">
-    <%- include('templates/components/adaptivePicture/adaptivePicture.ejs', {
+    <%- include("templates/components/adaptivePicture/adaptivePicture.ejs", {
       env: env.image
     }) %>
-    <%- include('templates/components/button/slButton.ejs', {
+    <%- include("templates/components/button/slButton.ejs", {
       env: {
-        classes: 'btn-light btn-arrow',
-        content: 'Get Your Exclusive Quote',
+        classes: "btn-light btn-arrow",
+        content: "Get Your Exclusive Quote",
         icon: {
-          src: '/static/icons/arrow-top-right-blue.svg',
-          alt: 'arrow-top-right-blue icon'
+          src: "<%= process.env['VITE_STATIC_PATH'] %>/icons/arrow-top-right-blue.svg",
+          alt: "arrow-top-right-blue icon"
         }
       }
     })%>
