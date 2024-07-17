@@ -15,11 +15,14 @@
     <div class="preheader__block">
       <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/preheader-logo-3.svg" alt="trustpilot icon" class="preheader__block-image">
       <div class="preheader__block-content">
-        <%- include('templates/components/reviewStars/reviewStars.ejs', { 
-          "classes" : 'stars_blue' , 
-          "starElements" : [
-            { classes: 'stars__star_active' }, { classes: 'stars__star_active' }, { classes: 'stars__star_active' }, { classes: 'stars__star_active' }, { } 
-          ] 
+        <%- include('templates/components/reviewStars/reviewStars.ejs', {
+          "env": {
+              "static": 'true',
+              "classes" : 'stars_blue' , 
+              "starElements" : [
+                { classes: 'stars__star_active' }, { classes: 'stars__star_active' }, { classes: 'stars__star_active' }, { classes: 'stars__star_active' }, { } 
+              ] 
+          }
         }) %>
       </div>
     </div>
