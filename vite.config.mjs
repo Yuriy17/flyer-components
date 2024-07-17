@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { defineConfig, loadEnv } from 'vite';
 import path from 'path';
 import { compile } from 'ejs';
@@ -14,17 +15,18 @@ const __dirname = path.dirname(__filename);
 export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current working directory.
   // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
-  // eslint-disable-next-line no-undef
   const env = loadEnv(mode, process.cwd());
 
   // Load app-level env vars to node-level env vars.
-  // eslint-disable-next-line no-undef
   process.env = { ...process.env, ...env };
 
   return {
     base: '', // the path relative to its deployment directory
     root: 'src',
     publicDir: '../public',
+    define: {
+      'process.env': process.env,
+    },
     build: {
       emptyOutDir: true,
       minify: false,

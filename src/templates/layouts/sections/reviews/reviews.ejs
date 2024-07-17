@@ -16,5 +16,5 @@
   <p class="trustpilot-reviews__text">
     Rated <%- env.reviewsRate %> / 5 based on  <%- env.reviewsCount %> reviews.
   </p>
-  <img src="/static/icons/reviews-trustpilot-logo.svg" alt="trustpilot logo" class="trustpilot-reviews__logo">
+  <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/reviews-trustpilot-logo.svg" alt="trustpilot logo" class="trustpilot-reviews__logo">
 </div>
