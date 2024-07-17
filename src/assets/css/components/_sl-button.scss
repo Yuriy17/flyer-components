@@ -41,7 +41,7 @@ sl-button {
 
       display: flex;
       min-width: 264px;
-      padding: 12px 10px;
+      padding: 5px 10px;
       justify-content: center;
       align-items: center;
 
@@ -90,7 +90,7 @@ sl-button {
       border-radius: 10px;
       background: var(--White, #fff);
       display: inline-flex;
-      padding: 8px 16px;
+      padding: 5px 16px;
       align-items: center;
       gap: 8px;
       flex-shrink: 0;
@@ -124,6 +124,7 @@ sl-button {
   &.btn-sm {
     &::part(base) {
       min-width: 141px;
+      --sl-input-height-medium: 40px;
     }
   }
 }

@@ -14,6 +14,9 @@ export const initShoelaceComponents = ({ components }) => {
         case ShoelaceComponents.button:
           import('@shoelace-style/shoelace/dist/components/button/button.js');
           break;
+        case ShoelaceComponents.drawer:
+          import('@shoelace-style/shoelace/dist/components/drawer/drawer.js');
+          break;
         case ShoelaceComponents.nav:
           //tab-group
           import('@shoelace-style/shoelace/dist/components/tab/tab.js');

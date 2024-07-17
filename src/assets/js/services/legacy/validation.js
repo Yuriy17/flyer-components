@@ -1,4 +1,4 @@
-import { mainRules } from '../helpers/constants.js';
+import { mainRules } from '../../helpers/constants.js';
 import { findFlights } from './api.js';
 import { addLeadToSalesForce } from './modal.js';
 import { unfade, setPreloader, fade, preloader } from './preloader.js';

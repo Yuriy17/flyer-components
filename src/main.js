@@ -15,11 +15,13 @@ import { initReviews } from './assets/js/services/initReviews.js';
 import { ShoelaceComponents } from './assets/js/helpers/constants.js';
 import { initHeroSlider } from './assets/js/services/initHeroSlider';
 import { initStartCosts } from './assets/js/services/initStartCosts.js';
+import { initBurger } from './assets/js/services/dialog/initBurger.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   initShoelaceComponents({
-    components: [ShoelaceComponents.button],
+    components: [ShoelaceComponents.button, ShoelaceComponents.drawer],
   });
+  initBurger();
   initReviews();
   initHeroSlider();
   initStartCosts({

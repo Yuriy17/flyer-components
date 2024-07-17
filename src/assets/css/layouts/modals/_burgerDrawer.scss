@@ -1,0 +1,20 @@
+.drawer-burger {
+  &::part(panel) {
+    @include grid-mn('md') {
+      --size: 600px;
+    }
+  }
+  &::part(header) {
+    display: none;
+  }
+
+  &::part(body) {
+    padding: 60px;
+    @include grid-mn('md') {
+      padding: 120px 60px;
+    }
+    @include grid-mn('xmd') {
+      padding: 45px 60px 45px 126px;
+    }
+  }
+}

@@ -64,6 +64,7 @@ export const ShoelaceComponents = {
   button: 'button',
   checkbox: 'checkbox',
   dialog: 'dialog',
+  drawer: 'drawer',
   input: 'input',
   select: 'select',
   textarea: 'textarea',
@@ -79,4 +80,26 @@ export const gridBreakpoints = {
   xlg: 1440,
   xl: 1680,
   xxl: 1920,
+};
+export const preheaderHeight = {
+  xs: 36,
+  sm: 36,
+  xsm: 36,
+  md: 41,
+  xmd: 41,
+  lg: 41,
+  xlg: 51,
+  xl: 51,
+  xxl: 51,
+};
+export const headerHeight = {
+  xs: 59,
+  sm: 59,
+  xsm: 59,
+  md: 80,
+  xmd: 80,
+  lg: 80,
+  xlg: 88,
+  xl: 88,
+  xxl: 88,
 };

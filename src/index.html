@@ -5,9 +5,9 @@
   </head>
 
   <body>
+    <%- include('templates/layouts/sections/preheader/preheader.ejs') %> 
+    <%- include('templates/layouts/header.ejs') %> 
     <main>
-      <%- include('templates/layouts/sections/preheader/preheader.ejs') %> 
-      <%- include('templates/layouts/header.ejs') %> 
       <%- include('templates/layouts/sections/hero/hero.ejs') %>
       <%- include('templates/layouts/breadcrumbs/breadcrumbs.ejs', { 
         env: {

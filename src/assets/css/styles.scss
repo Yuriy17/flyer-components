@@ -6,6 +6,7 @@
 // @import './components/_sl-dialog.scss';
 @import './components/_sl-button.scss';
 @import './components/_nav.scss';
+@import './components/_burger.scss';
 @import './components/_card.scss';
 @import './components/_breadcrumbs.scss';
 @import './components/_stars.scss';
@@ -20,6 +21,8 @@
 @import './layouts/sections/_hero.scss';
 @import './layouts/sections/_book.scss';
 @import './layouts/sections/_reviews.scss';
+
+@import './layouts/modals/_burgerDrawer.scss';
 
 body {
   font-family: 'Montserrat', Arial, sans-serif;

@@ -1,4 +1,4 @@
-import { checkValidate, validateText } from '../services/validation';
+import { checkValidate, validateText } from '../services/legacy/validation';
 import { insertPosition, mainRules } from './constants';
 
 export const getValidationClasses = (form) => {
