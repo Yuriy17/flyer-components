@@ -1,9 +1,28 @@
+@use 'sass:map';
+
 /* Footer  */
 .footer {
   background: var(--bg-color-footer);
   padding: 56px 0;
   color: var(--black-100);
+  @include grid-mn('xl') {
+    padding: 50px 0;
+  }
 
+  &__info-logo {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    img {
+      display: block;
+      height: auto;
+      width: 196px;
+    }
+    @include grid-mn('xlg') {
+      justify-content: flex-start;
+      width: 196px;
+    }
+  }
   &__container {
     max-width: var(--max-width);
     display: flex;
@@ -14,39 +33,46 @@
 
   &__info {
     display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 27px;
     width: 100%;
     justify-content: space-between;
-    align-items: flex-start;
-  }
-
-  &__items {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  &__items a {
-    color: #00091c;
-    text-decoration: none;
-  }
-
-  &__sitemap {
-    display: flex;
-    max-width: 240px;
-    flex-direction: column;
-    gap: 24px;
-    a {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      align-self: stretch;
-      color: var(--black-60);
+    @include grid-mn('md') {
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: flex-start;
+      flex-direction: row;
     }
-    span {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      align-self: stretch;
-      color: var(--black-60);
+  }
+
+  &__menu-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 17px auto 0;
+    @include grid-mn('xmd') {
+      padding: 4px 4px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 0;
+      order: 2;
+    }
+
+    @include highlight('.menu-list__link', var(--Dark-blue, #2a3243));
+    .menu-list__link {
+      color: var(--Dark-blue, #2a3243);
+      font-family: Montserrat;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 27px */
+      @include grid-mn('md') {
+        font-size: 16px;
+      }
     }
   }
 
@@ -56,49 +82,174 @@
     align-items: center;
     justify-content: center;
     gap: 12px;
-    span {
-      color: var(--black-40);
+    > p {
+      color: var(--Dark-blue, #2a3243);
+      text-align: center;
+      /* Desktop/Medium 16 */
+      font-family: Montserrat;
       font-size: 16px;
       font-style: normal;
       font-weight: 500;
       line-height: 150%; /* 24px */
+      max-width: 204px;
+      margin: 0;
+      @include grid-mn('md') {
+        max-width: unset;
+      }
     }
 
-    a {
-      color: var(--seconady-gradient);
-    }
-    div {
+    > div {
       display: flex;
+      justify-content: center;
+      align-items: center;
       gap: 12px;
+      margin: 0 -10px;
+      > a {
+        color: var(--Azure-Blue, #0a74d7);
+        /* Desktop/Medium 16 */
+        font-family: Montserrat;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 150%; /* 24px */
+      }
     }
   }
 
   &__price_disclaimer {
-    color: var(--black-40);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 150%; /* 21px */
-    p:before {
-      content: '*';
+    padding: 0 4px;
+    // p:before {
+    //   content: '*';
+    // }
+    p {
+      color: var(--Slate-Gray, #7c8089);
+      opacity: 0.65;
+      /* Mobile/Medium 16 */
+      font-family: Montserrat;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 24px */
+      @include grid-mn('md') {
+        margin: 0;
+        & + p {
+          margin: 25px 0 0;
+        }
+      }
+      @include grid-mn('xmd') {
+        /* Desktop/Medium 14 */
+        font-size: 14px;
+        & + p {
+          margin: 21px 0 0;
+        }
+      }
+    }
+  }
+  .socials {
+    display: flex;
+    margin: 0 0px;
+    gap: 50px;
+    @include grid-mn('md') {
+      margin-top: auto;
+      width: 337px;
+      // width: calc(337px / map.get($container-width, 'md') * 100%);
+      padding: 0 0 0 3px;
+      gap: 68px;
+    }
+    @include grid-mn('xmd') {
+      width: 300px;
+      // width: calc(300px / map.get($container-width, 'xmd') * 100%);
+      order: 4;
+      justify-content: space-between;
+      gap: unset;
+    }
+    @include grid-mn('xlg') {
+      width: 325px;
+      // width: calc(325px / map.get($container-width, 'xlg') * 100%);
+    }
+    a {
+      @include grid-mn('md') {
+        width: 32px;
+        min-width: 32px;
+        height: 32px;
+      }
     }
   }
 }
+.footer-sitemap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  @include grid-mn('xmd') {
+    gap: 17px;
+  }
+  a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    color: var(--Azure-Blue, #0a74d7);
 
-@media (max-width: 870px) {
-  .footer__info {
-    align-items: center;
+    /* Mobile/Medium 18 */
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 27px */
+    @include grid-mn('md') {
+      font-size: 14px;
+    }
+  }
+  > span {
+    display: flex;
+    gap: 9px;
+    align-self: stretch;
+    color: var(--black-60);
+    > span {
+      color: var(--Azure-Blue, #0a74d7);
+
+      /* Mobile/Medium 18 */
+      font-family: Montserrat;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 27px */
+      @include grid-mn('md') {
+        font-size: 14px;
+      }
+    }
+  }
+  // .footer-sitemap__container
+
+  &__container {
+    display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 22px;
+    width: 100%;
+    @include grid-mn('md') {
+      width: 271px;
+    }
+    @include grid-mn('xmd') {
+      order: 3;
+      padding: 4px 0px 0px 3px;
+    }
   }
-}
-@media (max-width: 576px) {
-  .footer__items {
-    align-items: center;
-  }
-}
-@media (max-width: 480px) {
-  .footer__price_disclaimer {
-    padding: 0 20px;
+
+  // .footer-sitemap__title
+
+  &__title {
+    color: var(--Dark-blue, #2a3243);
+    text-align: left;
+
+    /* Mobile/SemiBols 18 */
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    @include grid-mn('md') {
+      font-size: 16px;
+    }
   }
 }
