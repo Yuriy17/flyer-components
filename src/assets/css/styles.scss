@@ -22,6 +22,7 @@
 @import './layouts/sections/_hero.scss';
 @import './layouts/sections/_book.scss';
 @import './layouts/sections/_reviews.scss';
+@import './layouts/sections/_services.scss';
 
 @import './layouts/modals/_burgerDrawer.scss';
 
@@ -98,6 +99,15 @@ h2 {
     display: inline-block;
     width: 20px;
     height: 20px;
+  }
+}
+.section {
+  padding: 40px 0;
+  @include grid-mn('md') {
+    padding: 60px 0;
+  }
+  @include grid-mn('xmd') {
+    padding: 50px 0;
   }
 }
 

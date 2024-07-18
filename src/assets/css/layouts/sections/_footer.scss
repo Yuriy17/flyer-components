@@ -3,11 +3,7 @@
 /* Footer  */
 .footer {
   background: var(--bg-color-footer);
-  padding: 56px 0;
   color: var(--black-100);
-  @include grid-mn('xl') {
-    padding: 50px 0;
-  }
 
   &__info-logo {
     display: flex;
