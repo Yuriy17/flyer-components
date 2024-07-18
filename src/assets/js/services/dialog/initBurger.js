@@ -1,4 +1,7 @@
 import drawerBurgerTemplate from 'src/templates/layouts/drawerContent/drawerBurger.ejs';
+import menuTemplate from 'src/templates/components/menu/menu.ejs';
+import socialsTemplate from 'src/templates/layouts/socials.ejs';
+import menuButtonTemplate from 'src/templates/components/button/slButton.ejs';
 import burgerButtonTemplate from 'src/templates/layouts/burgerButton.ejs';
 import drawerTemplate from 'src/templates/components/drawer/drawer.ejs';
 import { gridBreakpoints, insertPosition, preheaderHeight } from '../../helpers/constants';
@@ -21,7 +24,53 @@ const initBurgerDrawer = () => {
     if (!drawer) {
       const drawerLayout = drawerTemplate({
         classes: drawerClasses,
-        content: drawerBurgerTemplate(),
+        content: drawerBurgerTemplate({
+          menuButton: menuButtonTemplate({
+            classes: 'btn-md btn-primary',
+            content: 'Get a Quote',
+          }),
+          menu: menuTemplate({
+            classes: 'drawer-burger__menu-list',
+            items: [
+              {
+                text: 'About Us',
+                href: '/aboutus',
+                linkClasses: 'link',
+              },
+              {
+                text: 'Destinations',
+                href: 'https://flyer-club.com/p/bestdeals/',
+                linkClasses: 'link link_active',
+              },
+              {
+                text: 'How to book',
+                href: '/booking',
+                linkClasses: 'link',
+              },
+              {
+                text: 'Partners',
+                href: '/partners',
+                linkClasses: 'link',
+              },
+              {
+                text: 'Faq',
+                href: '/faq',
+                linkClasses: 'link',
+              },
+              {
+                text: 'Reviews',
+                href: '/reviews',
+                linkClasses: 'link',
+              },
+              {
+                text: 'Contacts',
+                href: '/contacts',
+                linkClasses: 'link',
+              },
+            ],
+          }),
+          socials: socialsTemplate(),
+        }),
       });
       const burgerButtonLayout = burgerButtonTemplate({
         classes: burgerClasses,

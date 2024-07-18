@@ -1,1 +1,31 @@
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+<div class="drawer-burger__content">
+  <p class="drawer-burger__menu-title">
+    menu
+  </p>
+  <%- env.menu %>
+  <%- env.menuButton %>
+  <div class="burger-contacts">
+    <div class="burger-contacts__block">
+      <p class="burger-contacts__block-title">Let’s talk</p>
+      <div class="burger-contacts__block-content">
+        <a href="tel:+1844-447-0007" class="phone menu_list_contacts_item google_ads_link">
+          <span>+ 1 844-447-0007</span>
+        </a>
+      </div>
+    </div>
+    <div class="burger-contacts__block">
+      <p class="burger-contacts__block-title">Get in touch</p>
+      <div class="burger-contacts__block-content">
+        <a href="mailto:info@flyer-club.com" class="mail menu_list_contacts_item">
+          <span>info@flyer-club.com</span>
+        </a>
+      </div>
+    </div>
+    <div class="burger-contacts__block">
+      <p class="burger-contacts__block-title">Follow our social</p>
+      <div class="burger-contacts__block-content">
+        <%- env.socials %>
+      </div>
+    </div>
+  </div>
+</div>

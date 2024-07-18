@@ -127,4 +127,10 @@ sl-button {
       --sl-input-height-medium: 40px;
     }
   }
+  &.btn-md {
+    &::part(base) {
+      min-width: 188px;
+      --sl-input-height-medium: 44px;
+    }
+  }
 }

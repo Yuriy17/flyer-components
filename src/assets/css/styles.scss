@@ -6,6 +6,7 @@
 // @import './components/_sl-dialog.scss';
 @import './components/_sl-button.scss';
 @import './components/_nav.scss';
+@import './components/_menu-list.scss';
 @import './components/_burger.scss';
 @import './components/_card.scss';
 @import './components/_breadcrumbs.scss';
@@ -23,6 +24,8 @@
 @import './layouts/sections/_reviews.scss';
 
 @import './layouts/modals/_burgerDrawer.scss';
+
+@import './layouts/_socials.scss';
 
 body {
   font-family: 'Montserrat', Arial, sans-serif;
@@ -119,17 +122,13 @@ h2 {
 // .search-input {
 //   position: relative;
 // }
-// .link {
-//   color: var(--sl-color-neutral-1000);
-//   transition: color 0.3s ease-in-out;
-//   &.active {
-//     color: var(--sl-color-primary-600);
-//   }
-//   &:hover {
-//     color: var(--sl-color-primary-400);
-//   }
-//   &:focus,
-//   &:active {
-//     color: var(--sl-color-primary-200);
-//   }
-// }
+.link {
+  color: var(--Black, #22282b);
+  font-family: Montserrat;
+  &.link_active,
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--Azure-Blue, #0a74d7);
+  }
+}
