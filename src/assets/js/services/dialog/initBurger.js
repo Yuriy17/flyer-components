@@ -104,14 +104,15 @@ const initBurgerDrawer = () => {
       addEventListener('scroll', () => {
         window.lastKnownScrollPosition = window.scrollY;
 
-        if (!window.ticking) {
-          window.requestAnimationFrame(() => {
-            setStickyBurger(window.lastKnownScrollPosition);
-            window.ticking = false;
-          });
+        setStickyBurger(window.lastKnownScrollPosition);
+        // if (!window.ticking) {
+        //   window.requestAnimationFrame(() => {
+        //     setStickyBurger(window.lastKnownScrollPosition);
+        //     window.ticking = false;
+        //   });
 
-          window.ticking = true;
-        }
+        //   window.ticking = true;
+        // }
       });
       burgerButton.addEventListener('click', () => (drawer.hasAttribute('open') ? drawer.hide() : drawer.show()));
       drawer.addEventListener('sl-show', () => {
