@@ -1,4 +1,4 @@
-<picture>
+<picture <% if(!env.isNotLazy){ %>class="lazy-picture"<% } %>>
   <source
     type="image/webp"
     media="(min-width: 576px)"
@@ -18,12 +18,14 @@
     srcset="<%= process.env['VITE_STATIC_PATH'] %>/images/mobile/<%= env.fileName %>.<%= env.type %>, <%= process.env['VITE_STATIC_PATH'] %>/images/mobile/<%= env.fileName %>@2x.<%= env.type %>"
   />
   <img
-    class="<%= env.imageClass %>"
     src="<%= process.env['VITE_STATIC_PATH'] %>/images/mobile/<%= env.fileName %>.<%= env.type %>"
     srcset="<%= process.env['VITE_STATIC_PATH'] %>/images/mobile/<%= env.fileName %>@2x.<%= env.type %> 2x"
-    alt="<%= env.alt %>"
-    width="<%= env.defaultWidth %>"
-    height="<%= env.defaultHeight %>"
-    loading="lazy"
+    <% if(env.classes){ %>class="<%=env.imageClass%>"<% } %>
+    <% if(env.alt){ %>alt="<%=env.alt%>"<% } %>
+    <% if(env.width){ %>width="<%=env.defaultWidth%>"<% } %>
+    <% if(env.height){ %>height="<%=env.defaultHeight%>"<% } %>
+    <% if(!env.isNotLazy){ %>loading="lazy"<% } %>
+    
   />
+  <% if(!env.isNotLazy){ %><div class="loading-container"></div><% } %>
 </picture>

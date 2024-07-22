@@ -16,12 +16,14 @@ import { ShoelaceComponents } from './assets/js/helpers/constants.js';
 import { initHeroSlider } from './assets/js/services/initHeroSlider';
 import { initStartCosts } from './assets/js/services/initStartCosts.js';
 import { initBurger } from './assets/js/services/dialog/initBurger.js';
+import { initLazyLoadImage } from './assets/js/services/initLazyLoadImage';
 
 document.addEventListener('DOMContentLoaded', async () => {
   initShoelaceComponents({
     components: [ShoelaceComponents.button, ShoelaceComponents.drawer],
   });
   initBurger();
+  initLazyLoadImage();
   initReviews();
   initHeroSlider();
   initStartCosts({

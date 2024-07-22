@@ -1,0 +1,12 @@
+.lazy-picture {
+  display: block;
+  height: 100%;
+  background: #ffffff7a;
+  position: relative;
+  .loading-container {
+    left: 50%;
+    right: auto;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
