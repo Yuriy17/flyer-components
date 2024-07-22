@@ -94,7 +94,7 @@ const initBurgerDrawer = () => {
       drawer = document.querySelector(`.${drawerClasses}`);
 
       const setStickyBurger = (pos) => {
-        burgerButton.style.top = `${pos > preheaderHeight[breakPoint] ? 0 : preheaderHeight[breakPoint] - pos}px`;
+        burgerButton.style.transform = `translateY(${pos > preheaderHeight[breakPoint] ? 0 : preheaderHeight[breakPoint] - pos}px)`;
       };
       window.lastKnownScrollPosition = 0;
       window.ticking = false;
@@ -104,15 +104,14 @@ const initBurgerDrawer = () => {
       addEventListener('scroll', () => {
         window.lastKnownScrollPosition = window.scrollY;
 
-        setStickyBurger(window.lastKnownScrollPosition);
-        // if (!window.ticking) {
-        //   window.requestAnimationFrame(() => {
-        //     setStickyBurger(window.lastKnownScrollPosition);
-        //     window.ticking = false;
-        //   });
+        if (!window.ticking) {
+          window.requestAnimationFrame(() => {
+            setStickyBurger(window.lastKnownScrollPosition);
+            window.ticking = false;
+          });
 
-        //   window.ticking = true;
-        // }
+          window.ticking = true;
+        }
       });
       burgerButton.addEventListener('click', () => (drawer.hasAttribute('open') ? drawer.hide() : drawer.show()));
       drawer.addEventListener('sl-show', () => {

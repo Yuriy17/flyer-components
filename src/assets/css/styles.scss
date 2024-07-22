@@ -28,6 +28,9 @@
 
 @import './layouts/_socials.scss';
 
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: 'Montserrat', Arial, sans-serif;
   // padding: 20px;
