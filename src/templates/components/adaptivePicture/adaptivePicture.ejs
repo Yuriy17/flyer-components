@@ -20,7 +20,7 @@
   <img
     src="<%= process.env['VITE_STATIC_PATH'] %>/images/mobile/<%= env.fileName %>.<%= env.type %>"
     srcset="<%= process.env['VITE_STATIC_PATH'] %>/images/mobile/<%= env.fileName %>@2x.<%= env.type %> 2x"
-    <% if(env.classes){ %>class="<%=env.imageClass%>"<% } %>
+    <% if(env.imageClass){ %>class="<%=env.imageClass%>"<% } %>
     <% if(env.alt){ %>alt="<%=env.alt%>"<% } %>
     <% if(env.width){ %>width="<%=env.defaultWidth%>"<% } %>
     <% if(env.height){ %>height="<%=env.defaultHeight%>"<% } %>
