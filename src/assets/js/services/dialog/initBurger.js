@@ -99,6 +99,8 @@ const initBurgerDrawer = () => {
       window.lastKnownScrollPosition = 0;
       window.ticking = false;
 
+      // call on init
+      setStickyBurger(window.scrollY);
       addEventListener('scroll', () => {
         window.lastKnownScrollPosition = window.scrollY;
 
