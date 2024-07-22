@@ -11,7 +11,7 @@
   width: 2.2rem;
   height: 1.5rem;
   cursor: pointer;
-  // transition: all 300ms ease;
+  transition: transform 30ms linear;
   background: unset;
   border: none;
   // top: map.get($preheader-height, 'xs');
