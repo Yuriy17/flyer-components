@@ -1,14 +1,17 @@
 import { validationRules } from './validationRules.js';
 
-export const validateField = (field, rules, errorElement) => {
-  const value = field.type === 'checkbox' ? field.checked : field.value;
+export const validateField = ({ field, rules, infoElement }) => {
+  const value = field.classList.contains('form__checkbox') ? field.checked : field.value;
+
   let errorMessage = '';
 
   rules.forEach((rule) => {
     const [ruleName, ruleValue] = rule.split(':');
+
     const validationFunction = validationRules[ruleName];
     if (validationFunction) {
       const result = validationFunction(value, ruleValue);
+
       if (result !== true) {
         errorMessage = result;
       }
@@ -17,15 +20,15 @@ export const validateField = (field, rules, errorElement) => {
 
   if (errorMessage) {
     // field.setCustomValidity(errorMessage);
-    if (errorElement) {
-      errorElement.textContent = errorMessage;
-    } else {
-      console.log('🚀 ~ validateField ~ field:', field);
-    }
+    field.classList.add('form__field_error');
+    field.classList.remove('form__field_success');
+    infoElement?.setAttribute('content', errorMessage);
   } else {
     // field.setCustomValidity('');
-    errorElement.textContent = '';
+    field.classList.remove('form__field_error');
+    field.classList.add('form__field_success');
+    infoElement?.setAttribute('content', 'validation success!');
   }
 
-  field.reportValidity();
+  return !errorMessage;
 };

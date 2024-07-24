@@ -57,8 +57,10 @@
       </a>
     </li>
   </ul>
-  <button class="hero-partners__button">
-    <span>All Partners</span>
-    <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/chevrons-down.svg" alt="chevrons down icon">
-  </button>
+  <%- include('templates/components/button/slButton.ejs', {
+    env: {
+      classes: 'btn-primary btn-sm hero-partners__button',
+      content: 'All Partners',
+    }
+  })%>
 </div>

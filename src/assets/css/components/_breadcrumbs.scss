@@ -38,7 +38,7 @@
     }
     &.active {
       &::before {
-        content: '>';
+        content: url($STATIC_PATH + '/icons/chevron-right-black.svg');
       }
       &,
       a {

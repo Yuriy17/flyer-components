@@ -62,6 +62,7 @@ export const insertPosition = {
 };
 export const ShoelaceComponents = {
   button: 'button',
+  tooltip: 'tooltip',
   checkbox: 'checkbox',
   dialog: 'dialog',
   drawer: 'drawer',

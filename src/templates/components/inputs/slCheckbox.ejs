@@ -1,9 +1,14 @@
 <sl-checkbox 
-  class="form__checkbox <%= env.classes %>"
-  name="<%= env.name %>" 
-  label="<%= env.label %>" 
-  id="<%= env.id %>"
-  data-validate="<%= env.validate %>"
+  <% if(env.checked == 'true'){ %>checked<% } %>
+  <% if(env.classes){ %>class="<%=env.classes%>" <% } %>
+  <% if(env.name){ %>name="<%=env.name%>" <% } %>
+  <% if(env.id){ %>id="<%=env.id%>" <% } %>
+  <% if(env.validate){ %>data-validate="<%=env.validate%>" <% } %>
+  <% if(env.label){ %>label="<%=env.label%>" <% } %>
 >
-  Check me before submitting
+  <% if(env.staticContentPath){ %>
+    <%- include(env.staticContentPath) %>
+  <% } else{ %>
+    <%- env.content %>
+  <% } %>
 </sl-checkbox>

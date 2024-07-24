@@ -1,10 +1,15 @@
 <sl-input 
-  class="form__input <%= env.classes %>"
-  name="<%= env.name %>"
-  id="<%= env.id %>" 
-  data-validate="<%= env.validate %>"
-  label="<%= env.label %>" 
-  placeholder="<%= env.placeholder %>" 
-  autocomplete="<%= env.autocomplete %>"
+  <% if(env.classes){ %>class="<%=env.classes%>" <% } %>
+  <% if(env.name){ %>name="<%=env.name%>" <% } %>
+  <% if(env.id){ %>id="<%=env.id%>" <% } %>
+  <% if(env.validate){ %>data-validate="<%=env.validate%>" <% } %>
+  <% if(env.label){ %>label="<%=env.label%>" <% } %>
+  <% if(env.placeholder){ %>placeholder="<%=env.placeholder%>" <% } %>
+  <% if(env.autocomplete){ %>autocomplete="<%=env.autocomplete%>" <% } %>
 >
+  <% if(env.staticContentPath){ %>
+    <%- include(env.staticContentPath) %>
+  <% } else{ %>
+    <%- env.content %>
+  <% } %>
 </sl-input>

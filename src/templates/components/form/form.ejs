@@ -1,3 +1,9 @@
-<form class="<%= env.classes %>">
-  <%- env.content %>
+<form 
+  <% if(env.classes){ %>class="<%=env.classes%>"<% } %>
+>
+  <% if(env.static){ %>
+    <%- include(env.pathToTemplate) %>
+  <% } else{ %>
+    <%- env.content %>
+  <% } %>
 </form>

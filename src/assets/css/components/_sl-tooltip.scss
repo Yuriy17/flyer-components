@@ -1,0 +1,23 @@
+sl-tooltip {
+  &::part(base) {
+    // display: block;
+    // width: max-content;
+    // max-width: var(--max-width);
+    // border-radius: var(--sl-tooltip-border-radius);
+    // background-color: var(--sl-tooltip-background-color);
+    // font-family: var(--sl-tooltip-font-family);
+    // font-size: var(--sl-tooltip-font-size);
+    // font-weight: var(--sl-tooltip-font-weight);
+    // line-height: var(--sl-tooltip-line-height);
+    //     color: var(--sl-tooltip-color);
+    // padding: var(--sl-tooltip-padding);
+    --sl-tooltip-background-color: white;
+    --sl-tooltip-padding: 10px;
+    --sl-tooltip-color: var(--Dark-blue, #2a3243);
+    --sl-tooltip-font-family: Inter;
+    --sl-tooltip-font-size: 12px;
+    --sl-tooltip-font-weight: 400;
+    --sl-tooltip-line-height: normal;
+    box-shadow: 0px 0px 4px 0px rgba(20, 46, 70, 0.15);
+  }
+}

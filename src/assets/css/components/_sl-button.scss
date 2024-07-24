@@ -40,7 +40,6 @@ sl-button {
       text-align: center;
 
       display: flex;
-      min-width: 264px;
       padding: 5px 10px;
       justify-content: center;
       align-items: center;
@@ -121,16 +120,27 @@ sl-button {
       }
     }
   }
+  // &.btn-sm {
+  //   &::part(base) {
+  //     min-width: 140px;
+  //     --sl-input-height-medium: 40px;
+  //   }
+  // }
   &.btn-sm {
     &::part(base) {
-      min-width: 141px;
-      --sl-input-height-medium: 40px;
+      min-width: 180px;
+      height: 48px;
+      @include grid-mn('xmd') {
+        height: 40px;
+      }
     }
   }
-  &.btn-md {
+  &.btn-xl {
     &::part(base) {
-      min-width: 188px;
-      --sl-input-height-medium: 44px;
+      min-width: 256px;
+      @include grid-mn('xmd') {
+        min-width: 280px;
+      }
     }
   }
 }

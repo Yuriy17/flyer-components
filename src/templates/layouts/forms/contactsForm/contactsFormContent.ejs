@@ -1,0 +1,68 @@
+<div class="form__fields">
+  <%- include('templates/components/inputs/slInput.ejs', {
+    env: {
+      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      classes: 'form__input form__field',
+      name: 'first-name',
+      id: 'contactsFirstName',
+      validate: 'minLength:5;required',
+      label: 'First name',
+      placeholder: 'Enter first name',
+      autocomplete: true
+    }
+  }) %>
+  <%- include('templates/components/inputs/slInput.ejs', {
+    env: {
+      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      classes: 'form__input form__field',
+      name: 'last-name',
+      id: 'contactsLastName',
+      validate: 'minLength:5;required',
+      label: 'Last name',
+      placeholder: 'Enter last name',
+      autocomplete: true
+    }
+  }) %>
+  <%- include('templates/components/inputs/slInput.ejs', {
+    env: {
+      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      classes: 'form__input form__field',
+      name: 'email',
+      id: 'contactsEmail',
+      validate: 'minLength:5;required',
+      label: 'Email',
+      placeholder: 'Enter email',
+      autocomplete: true
+    }
+  }) %>
+  <%- include('templates/components/inputs/slInput.ejs', {
+    env: {
+      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      classes: 'form__input form__field',
+      name: 'phone-number',
+      id: 'contactsPhoneNumber',
+      validate: 'minLength:5;required',
+      label: 'Phone number',
+      placeholder: 'Enter phone number',
+      autocomplete: true
+    }
+  }) %>
+  <%- include('templates/components/inputs/slCheckbox.ejs', {
+    env: {
+      classes: 'form__checkbox form__field',
+      name: 'terms-contitions',
+      id: 'contactsPhone number',
+      validate: 'required',
+      checked: 'false',
+      content: '*I give consent to the processing of my personal data given in the contact form above under the terms and conditions of <a href="#">Privacy Policy</a>'
+    }
+  }) %>
+</div>
+<%- include('templates/components/button/slButton.ejs', {
+  env: {
+    classes: 'btn-primary btn-xl',
+    type: 'submit',
+    variant: 'primary',
+    content: 'Submit',
+  }
+}) %>

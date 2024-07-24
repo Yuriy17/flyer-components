@@ -121,7 +121,6 @@ export const initReviews = async () => {
       });
     });
 
-    const debouncedInitSlider = debounce(initSlider, 500);
     const params = {
       reviewBlocks,
       reviews,
@@ -129,6 +128,7 @@ export const initReviews = async () => {
       TrustScore,
       ReviewsCount,
     };
+    const debouncedInitSlider = debounce(initSlider, 500);
     initSlider(params);
     addEventListener('resize', () => debouncedInitSlider(params));
   }

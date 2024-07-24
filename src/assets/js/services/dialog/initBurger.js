@@ -26,7 +26,7 @@ const initBurgerDrawer = () => {
         classes: drawerClasses,
         content: drawerBurgerTemplate({
           menuButton: menuButtonTemplate({
-            classes: 'btn-md btn-primary',
+            classes: 'btn-sm btn-primary',
             content: 'Get a Quote',
           }),
           menu: menuTemplate({

@@ -1,3 +1,5 @@
+import { debounce } from './debounce';
+
 export function sortByField(field) {
   return (a, b) => (a[field] > b[field] ? 1 : -1);
 }
@@ -43,3 +45,33 @@ export function animateValue({ obj, start, end, duration, symbol }) {
   };
   window.requestAnimationFrame(step);
 }
+
+const initSetHigherHeights = ({ blockArrayElements }) => {
+  let maxHeight = 0;
+  blockArrayElements.forEach((blockElement) => {
+    blockElement.style.removeProperty('min-height');
+    if (maxHeight < blockElement.offsetHeight) {
+      maxHeight = blockElement.offsetHeight;
+    }
+  });
+  blockArrayElements.forEach((blockElement) => (blockElement.style.minHeight = `${maxHeight}px`));
+};
+
+export const debouncedInitOnResize = ({ initFunction, params, debounceTime = 500 }) => {
+  const debouncedInit = debounce(initFunction, debounceTime);
+  debouncedInit(params);
+  addEventListener('resize', () => debouncedInit(params));
+};
+
+export const setHigherHeights = (blockElements) => {
+  if (blockElements && blockElements.length) {
+    const blockArrayElements = [...blockElements];
+    debouncedInitOnResize({
+      initFunction: initSetHigherHeights,
+      params: {
+        blockArrayElements,
+      },
+      debounceTime: 10,
+    });
+  }
+};

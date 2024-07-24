@@ -5,6 +5,7 @@ import { Navigation, Scrollbar } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
+import { setHigherHeights } from '../utils/utils';
 // import { debounce } from '../utils/debounce';
 
 const initSlider = ({
@@ -100,7 +101,7 @@ export const initHeroSlider = async () => {
     initSlider({
       sliderBlock,
     });
-
+    setHigherHeights(sliderBlock.querySelectorAll('.swiper-slide  .card__content'));
     //   const debouncedInitSlider = debounce(initSlider, 500);
     //   const params = {
     //     reviewBlocks,

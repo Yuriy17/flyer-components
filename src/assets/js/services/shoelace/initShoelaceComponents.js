@@ -11,6 +11,18 @@ export const initShoelaceComponents = ({ components }) => {
   if (components?.length) {
     components.forEach((component) => {
       switch (component) {
+        case ShoelaceComponents.tooltip:
+          import('@shoelace-style/shoelace/dist/components/tooltip/tooltip.js');
+          break;
+        case ShoelaceComponents.popup:
+          import('@shoelace-style/shoelace/dist/components/popup/popup.js');
+          break;
+        case ShoelaceComponents.input:
+          import('@shoelace-style/shoelace/dist/components/input/input.js');
+          break;
+        case ShoelaceComponents.checkbox:
+          import('@shoelace-style/shoelace/dist/components/checkbox/checkbox.js');
+          break;
         case ShoelaceComponents.button:
           import('@shoelace-style/shoelace/dist/components/button/button.js');
           break;

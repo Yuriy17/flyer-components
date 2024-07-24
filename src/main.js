@@ -17,10 +17,18 @@ import { initHeroSlider } from './assets/js/services/initHeroSlider';
 import { initStartCosts } from './assets/js/services/initStartCosts.js';
 import { initBurger } from './assets/js/services/dialog/initBurger.js';
 import { initLazyLoadImage } from './assets/js/services/initLazyLoadImage';
+import { initForm } from './assets/js/services/form/initForm.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   initShoelaceComponents({
-    components: [ShoelaceComponents.button, ShoelaceComponents.drawer],
+    components: [
+      ShoelaceComponents.button,
+      ShoelaceComponents.drawer,
+      ShoelaceComponents.popup,
+      ShoelaceComponents.tooltip,
+      ShoelaceComponents.input,
+      ShoelaceComponents.checkbox,
+    ],
   });
   initBurger();
   initLazyLoadImage();
@@ -35,6 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       },
     ],
   });
+  initForm('.contacts__form');
   // initMainForm();
   // getAllInputSearch();
   // initFlightSearch();
