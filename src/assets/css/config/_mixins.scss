@@ -166,7 +166,7 @@
   }
 }
 @mixin overlay($background, $opacity: 1) {
-  :after {
+  &:after {
     position: absolute;
     content: '';
     height: 100%;

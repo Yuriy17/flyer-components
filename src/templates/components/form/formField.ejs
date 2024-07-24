@@ -1,6 +1,12 @@
-<div class="form__field <%= env.classes %>">
-  <%- env.content %>
-  <% if(env.errorText){ %>
-    <div id="<%= env.name %>Error" class="error-message"></div>
+<div 
+  class="form__field <%= env.classes %>"
+  <% if(env.validate){ %>data-validate="<%=env.validate%>" <% } %>
+>
+  <% if(env.staticContentPath){ %>
+    <%- include(env.staticContentPath, {
+      env: env.inputProps
+    }) %>
+  <% } else{ %>
+    <%- env.content %>
   <% } %>
 </div>

@@ -1,4 +1,5 @@
 import intlTelInput from 'intl-tel-input';
+import 'intl-tel-input/build/css/intlTelInput.css';
 import { validateField } from './validateField';
 import AirDatepicker from 'air-datepicker';
 

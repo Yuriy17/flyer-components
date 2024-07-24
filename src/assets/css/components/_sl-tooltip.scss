@@ -11,6 +11,8 @@ sl-tooltip {
     // line-height: var(--sl-tooltip-line-height);
     //     color: var(--sl-tooltip-color);
     // padding: var(--sl-tooltip-padding);
+    --max-width: 223px;
+    padding: 10px;
     --sl-tooltip-background-color: white;
     --sl-tooltip-padding: 10px;
     --sl-tooltip-color: var(--Dark-blue, #2a3243);

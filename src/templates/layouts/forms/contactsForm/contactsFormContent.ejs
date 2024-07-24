@@ -29,29 +29,31 @@
       classes: 'form__input form__field',
       name: 'email',
       id: 'contactsEmail',
-      validate: 'minLength:5;required',
+      validate: 'email;required',
       label: 'Email',
       placeholder: 'Enter email',
       autocomplete: true
     }
   }) %>
-  <%- include('templates/components/inputs/slInput.ejs', {
+  <%- include('templates/components/form/formField.ejs', {
     env: {
-      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
-      classes: 'form__input form__field',
-      name: 'phone-number',
-      id: 'contactsPhoneNumber',
-      validate: 'minLength:5;required',
-      label: 'Phone number',
-      placeholder: 'Enter phone number',
-      autocomplete: true
+      staticContentPath: 'templates/layouts/formFields/phoneField.ejs',
+      classes: 'form__input',
+      validate: 'required',
+      inputProps: {
+        type: "tel",
+        name: 'phone',
+        id: 'contactsPhoneNumber',
+        label: 'Phone number',
+        placeholder: 'Enter phone number',
+      }
     }
   }) %>
   <%- include('templates/components/inputs/slCheckbox.ejs', {
     env: {
       classes: 'form__checkbox form__field',
       name: 'terms-contitions',
-      id: 'contactsPhone number',
+      id: 'contactsCheckbox',
       validate: 'required',
       checked: 'false',
       content: '*I give consent to the processing of my personal data given in the contact form above under the terms and conditions of <a href="#">Privacy Policy</a>'
