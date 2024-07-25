@@ -22,13 +22,14 @@
 
   &__wrapper {
     position: relative;
-    min-height: 887px;
+    height: 887px;
     padding-top: 152px;
     @include grid-mn('md') {
-      min-height: 504px;
+      padding-top: 176px;
+      height: 558px;
     }
     @include grid-mn('xmd') {
-      min-height: 558px;
+      height: 558px;
     }
   }
 }

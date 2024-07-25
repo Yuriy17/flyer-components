@@ -1,52 +1,57 @@
-import intlTelInput from 'intl-tel-input';
-import 'intl-tel-input/build/css/intlTelInput.css';
 import { validateField } from './validateField';
 import AirDatepicker from 'air-datepicker';
+import { initTelInput } from '../initTelInput';
 
-export const setupField = ({ formElement, fieldName }) => {
-  const inputField = formElement.querySelector(`[name="${fieldName}"]`);
-  if (inputField) {
+export const setupField = ({ formElement, fieldName, validationStarted }) => {
+  const field = formElement.querySelector(`[name="${fieldName}"]`);
+  let fieldObject;
+
+  if (field) {
     if (fieldName.includes('phone')) {
-      console.log('🚀 ~ setupField ~ inputField:', inputField);
+
       // Initialize intl-tel-input for phone fields
-      // eslint-disable-next-line no-unused-vars
-      const iti = intlTelInput(inputField, {
-        utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/utils.js',
-      });
+      fieldObject = initTelInput(field);
+      field.addEventListener('blur', () =>
+        checkFieldRules({
+          field,
+          validationStarted,
+        })
+      );
 
-      inputField.addEventListener('blur', () => {
-        const errorElement = inputField.parentElement.querySelector('.error-message');
-        const rules = inputField.getAttribute('data-validate').split(';');
-        validateField(inputField, rules, errorElement);
-      });
     } else if (fieldName.includes('date')) {
-      console.log('🚀 ~ setupField ~ fieldName:', fieldName);
       // Initialize AirDatepicker for date fields
-      new AirDatepicker(inputField);
+      fieldObject = new AirDatepicker(field);
 
-      inputField.addEventListener('blur', () => {
-        const errorElement = inputField.parentElement.querySelector('.error-message');
-        const rules = inputField.getAttribute('data-validate').split(';');
-        validateField(inputField, rules, errorElement);
-      });
+      field.addEventListener('blur', () =>
+        checkFieldRules({
+          field,
+          validationStarted,
+        })
+      );
     }
   }
+  return fieldObject;
 };
 
-export const setupStaticFields = ({ formElement, fieldNames }) => {
-  fieldNames.forEach((fieldName) => setupField({ formElement, fieldName }));
+export const setupStaticFields = ({ formElement, fieldNames, validationStarted }) => {
+  const resultLibsObject = {};
+
+  fieldNames.forEach((fieldName) => {
+    resultLibsObject[fieldName] = setupField({ formElement, fieldName, validationStarted });
+  });
+
+  return resultLibsObject;
 };
 
-export const checkFieldRules = ({ field, validationStarted }) => {
-  console.log('🚀 ~ checkFieldRules ~ field:', field);
+export const checkFieldRules = ({ field, validationStarted, libsObject }) => {
   if (validationStarted) {
     const rules = field.getAttribute('data-validate').split(';');
     // const {parentElement} = input.getAttribute('type') === 'phone' ? input.parentElement : input;
     const infoElement = field.querySelector('sl-tooltip');
-    return validateField({ field, rules, infoElement });
+    return validateField({ field, rules, infoElement, libsObject });
   }
 };
-export const fieldsSetupValidation = ({ fields, validationStarted, trigger, addListener }) => {
+export const fieldsSetupValidation = ({ fields, validationStarted, trigger, addListener, libsObject }) => {
   if (fields && fields.length) {
     if (addListener) {
       fields.forEach((field) => {
@@ -72,7 +77,7 @@ export const fieldsSetupValidation = ({ fields, validationStarted, trigger, addL
           eventName = field.tagName.includes('SL-') ? 'sl-change' : 'change';
         }
 
-        field.addEventListener(eventName, () => checkFieldRules({ field, validationStarted }));
+        field.addEventListener(eventName, () => checkFieldRules({ field, validationStarted, libsObject }));
       });
     }
 
@@ -80,7 +85,7 @@ export const fieldsSetupValidation = ({ fields, validationStarted, trigger, addL
       let isValidForm = true;
 
       fields.forEach((field) => {
-        const isValid = checkFieldRules({ field, validationStarted });
+        const isValid = checkFieldRules({ field, validationStarted, libsObject });
         isValid || (isValidForm = false);
       });
 

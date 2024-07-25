@@ -11,4 +11,7 @@
   <% } else{ %>
     <%- env.content %>
   <% } %>
+  <% if(env.errorFieldText){ %>
+    <div class="field__error-text"><%= env.errorFieldText %></div>  
+  <% } %>
 </sl-checkbox>

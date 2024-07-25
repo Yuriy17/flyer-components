@@ -7,6 +7,13 @@ export const initForm = (formElementSelector) => {
     let validationStarted = false;
     let dynamicFieldCounter = 0;
 
+    // Initialize all static fields
+    const libsObject = setupStaticFields({
+      fieldNames: ['phone', 'date'],
+      formElement,
+      validationStarted,
+    });
+
     const setupDynamicGroup = (groupIndex) => {
       console.log('🚀 ~ setupDynamicGroup ~ groupIndex:', groupIndex);
       DynamicGroup({
@@ -26,11 +33,15 @@ export const initForm = (formElementSelector) => {
           fieldsSetupValidation({ fields, validationStarted, addListener: true });
 
           // Initialize intl-tel-input and AirDatepicker for dynamic fields
-          setupField(formElement, {
+          setupField({
+            formElement,
             fieldName: `dynamicPhone${groupIndex}`,
+            validationStarted,
           });
-          setupField(formElement, {
+          setupField({
+            formElement,
             fieldName: `dynamicDate${groupIndex}`,
+            validationStarted,
           });
         },
       });
@@ -53,26 +64,11 @@ export const initForm = (formElementSelector) => {
         validationStarted: true,
         trigger: true,
         addListener: !validationStarted,
+        libsObject,
       });
       validationStarted = true;
       alert(`Form is ${isFormValid ? 'valid' : 'invalid'}`);
 
-      // event.preventDefault();
-      // if (!form.checkValidity()) {
-      //   console.log(1);
-      // } else {
-      //   console.log(2);
-      //   const formData = new FormData(form);
-      //   formData.forEach((value, key) => {
-      //     console.log(key, value);
-      //   });
-      // }
-    });
-
-    // Initialize all static fields
-    setupStaticFields({
-      fieldNames: ['phone', 'date'],
-      formElement,
     });
   }
 };

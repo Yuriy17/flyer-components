@@ -5,7 +5,7 @@
       classes: 'form__input form__field',
       name: 'first-name',
       id: 'contactsFirstName',
-      validate: 'minLength:5;required',
+      validate: 'minLength:2;required;letters',
       label: 'First name',
       placeholder: 'Enter first name',
       autocomplete: true
@@ -17,7 +17,7 @@
       classes: 'form__input form__field',
       name: 'last-name',
       id: 'contactsLastName',
-      validate: 'minLength:5;required',
+      validate: 'minLength:2;required;letters',
       label: 'Last name',
       placeholder: 'Enter last name',
       autocomplete: true
@@ -39,7 +39,7 @@
     env: {
       staticContentPath: 'templates/layouts/formFields/phoneField.ejs',
       classes: 'form__input',
-      validate: 'required',
+      validate: 'required;phone',
       inputProps: {
         type: "tel",
         name: 'phone',
@@ -56,6 +56,7 @@
       id: 'contactsCheckbox',
       validate: 'required',
       checked: 'false',
+      errorFieldText: 'error checkbox',
       content: '*I give consent to the processing of my personal data given in the contact form above under the terms and conditions of <a href="#">Privacy Policy</a>'
     }
   }) %>
@@ -65,6 +66,6 @@
     classes: 'btn-primary btn-xl',
     type: 'submit',
     variant: 'primary',
-    content: 'Submit',
+    content: 'Get Your Exclusive Quote',
   }
 }) %>

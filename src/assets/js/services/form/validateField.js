@@ -1,7 +1,11 @@
 import { validationRules } from './validationRules.js';
 
-export const validateField = ({ field, rules, infoElement }) => {
-  const value = field.classList.contains('form__checkbox') ? field.checked : field.value;
+export const validateField = ({ field, rules, infoElement, libsObject }) => {
+  let input = field;
+  if (field.tagName === 'DIV') {
+    input = field.querySelector('input');
+  }
+  const value = input.classList.contains('form__checkbox') ? input.checked : input.value;
 
   let errorMessage = '';
 
@@ -10,7 +14,9 @@ export const validateField = ({ field, rules, infoElement }) => {
 
     const validationFunction = validationRules[ruleName];
     if (validationFunction) {
-      const result = validationFunction(value, ruleValue);
+      const result = validationFunction({ value, ruleValue, libsObject });
+      console.log("🚀 ~ rules.forEach ~ { value, ruleValue, libsObject }:", { value, ruleValue, libsObject });
+      console.log('🚀 ~ rules.forEach ~ result:', result);
 
       if (result !== true) {
         errorMessage = result;
