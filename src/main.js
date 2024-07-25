@@ -18,6 +18,7 @@ import { initStartCosts } from './assets/js/services/initStartCosts.js';
 import { initBurger } from './assets/js/services/dialog/initBurger.js';
 import { initLazyLoadImage } from './assets/js/services/initLazyLoadImage';
 import { initForm } from './assets/js/services/form/initForm.js';
+import { initHideCards } from './assets/js/services/initHideCards';
 
 document.addEventListener('DOMContentLoaded', async () => {
   initShoelaceComponents({
@@ -44,6 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     ],
   });
   initForm('.contacts__form');
+  initHideCards();
   // initMainForm();
   // getAllInputSearch();
   // initFlightSearch();

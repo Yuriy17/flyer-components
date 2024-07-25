@@ -1,0 +1,11 @@
+<section class="section subscribe">
+  <div class="container">
+      <%- include('templates/components/form/form.ejs', {
+        env: {
+          static: 'true',
+          classes: 'subscribe__form form',
+          pathToTemplate: 'templates/layouts/forms/subscribeForm/subscribeFormContent.ejs'
+        }
+      }) %>
+  </div>
+</section>

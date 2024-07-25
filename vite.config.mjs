@@ -11,6 +11,8 @@ import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 
+// import bookEuropeCards from './bookEuropeCards.json';
+
 const __dirname = path.dirname(__filename);
 export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current working directory.
@@ -127,6 +129,11 @@ export default defineConfig(({ mode }) => {
           if (id.endsWith('.ejs')) {
             const localsName = 'env';
             const src = await readFile(id, 'utf-8');
+            // const bookEuropeCards = await readFile(
+            //   './bookEuropeCards.json',
+            //   'utf-8'
+            // );
+            
             const code = compile(src, {
               client: true,
               strict: true,
@@ -136,6 +143,7 @@ export default defineConfig(({ mode }) => {
               filename: path.relative(__dirname, id),
               context: {
                 checkLocalsName: (env) => typeof env !== 'undefined',
+                // bookEuropeCards,
               },
             }).toString();
             return `export default ${code}`;

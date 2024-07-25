@@ -1,6 +1,9 @@
 <%- include('templates/layouts/sections/book/book.ejs', {
   env: {
     id: 'bookEurope',
+    desktopCount: 6,
+    mobileCount: 4,
+    initHide: true,
     cards: [{
       image: {
         fileName: 'book-europe-uk',
@@ -69,6 +72,20 @@
       costPrice: '$1,378*',
       classText: 'Business class, r/t',
       classPrice: '$2,745*',
+    },
+    {
+      image: {
+        fileName: 'book-europe-netherlands',
+        alt: 'europe card',
+        type: 'jpg',
+        imageClass: 'card__img',
+        defaultWidth: '319',
+        defaultHeight: '289',
+      },    
+      costCountry: 'Netherlands',
+      costPrice: '$1,564*',
+      classText: 'Business class, r/t',
+      classPrice: '$3,247*',
     },
     {
       image: {

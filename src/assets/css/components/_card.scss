@@ -10,11 +10,7 @@
   height: 376px;
   display: flex;
   flex-direction: column;
-  @include grid-mx('md') {
-    &:nth-of-type(1n + 5) {
-      display: none;
-    }
-  }
+
   @include grid-mn('md') {
     width: 316px;
     height: 375px;

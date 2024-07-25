@@ -7,7 +7,12 @@
       Book Business Class
       Flight to <a href="/europe">Europe</a>
     </h2>
-    <div class="book__cards">
+    <div 
+      class="book__cards show-more-cards"
+      <% if(typeof env !== 'undefined' && env.desktopCount){ %>data-desktop-count="<%=env.desktopCount%>" <% } %> 
+      <% if(typeof env !== 'undefined' && env.mobileCount){ %>data-mobile-count="<%=env.mobileCount%>" <% } %> 
+      <% if(typeof env !== 'undefined' && env.initHide){ %>data-hide="<%=env.initHide%>" <% } %> 
+    >
       <% if(typeof env !== 'undefined'){ %>        
         <% for(var i=0; i < env.cards.length; i++) { %>
           <%- include('templates/layouts/sections/book/bookCard.ejs', { 
@@ -16,9 +21,10 @@
         <% } %>
       <% } %> 
     </div>
+    <p class="show-more-text"></p>
     <%- include('templates/layouts/showMoreButton.ejs', {
       env: {
-        text: 'Show more'
+        text: 'More'
       }
     }) %>
   </div>
