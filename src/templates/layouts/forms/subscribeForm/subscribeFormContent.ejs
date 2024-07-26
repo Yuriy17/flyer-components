@@ -1,0 +1,45 @@
+<div class="form__fields">
+  <%- include('templates/components/inputs/slInput.ejs', {
+    env: {
+      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      classes: 'form__input form__field',
+      name: 'first-name',
+      id: 'subscribeFirstName',
+      validate: 'minLength:2;required;letters',
+      label: 'First name',
+      placeholder: 'Enter first name',
+      autocomplete: true
+    }
+  }) %>
+  <%- include('templates/components/inputs/slInput.ejs', {
+    env: {
+      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      classes: 'form__input form__field',
+      name: 'email',
+      id: 'subscribeEmail',
+      validate: 'email;required',
+      label: 'Email',
+      placeholder: 'Enter email',
+      autocomplete: true
+    }
+  }) %>
+  <%- include('templates/components/inputs/slCheckbox.ejs', {
+    env: {
+      classes: 'form__checkbox form__field',
+      name: 'terms-contitions',
+      id: 'subscribeCheckbox',
+      validate: 'required',
+      checked: 'false',
+      errorFieldText: 'error checkbox',
+      content: '*I give consent to the processing of my personal data given in the contact form above under the terms and conditions of <a href="#">Privacy Policy</a>'
+    }
+  }) %>
+</div>
+<%- include('templates/components/button/slButton.ejs', {
+  env: {
+    classes: 'btn-primary btn-xl',
+    type: 'submit',
+    variant: 'primary',
+    content: 'Get Your Exclusive Quote',
+  }
+}) %>
