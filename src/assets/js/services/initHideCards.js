@@ -10,13 +10,14 @@ export const initHideCards = () => {
 const initShowHide = ({ cardsElement }) => {
   const cardsFragment = new DocumentFragment();
   const showHide = () => {
-    const cards = [...cardsElement.querySelectorAll('.card')];
+    const cards = [...cardsElement.children];
+    let cardsLength = cards.length;
     const isHide = cardsElement.dataset.hide === 'true';
     const maxInitCount = innerWidth > gridBreakpoints.md ? cardsElement.dataset.desktopCount : cardsElement.dataset.mobileCount;
     const showMoreText = cardsElement.parentElement.querySelector('.show-more-text');
 
     if (isHide) {
-      for (let index = 0; index < cards.length; index++) {
+      for (let index = 0; index < cardsLength; index++) {
         const card = cards[index];
         if (index >= maxInitCount) {
           cardsFragment.appendChild(card.cloneNode(true));
@@ -24,10 +25,10 @@ const initShowHide = ({ cardsElement }) => {
         }
       }
     } else {
-
       cardsElement.append(...cardsFragment.children);
+      cardsLength = cardsElement.children.length;
     }
-    showMoreText.innerText = `You're viewed ${isHide ? maxInitCount : cards.length} of ${cards.length} country`;
+    showMoreText.innerText = `You're viewed ${isHide ? maxInitCount : cardsLength} of ${cardsLength} country`;
   };
   showHide();
   const showMoreButton = cardsElement.parentElement.querySelector('.show-more');

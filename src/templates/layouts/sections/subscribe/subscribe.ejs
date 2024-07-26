@@ -1,5 +1,14 @@
 <section class="section subscribe">
   <div class="container">
+    <div class="subscribe__info">
+      <h2 class="subscribe__title">
+        Business & First Class <br> <a href="#">Up to 70%</a>
+      </h2>
+      <p class="subscribe__subtitle subtitle">
+        Fill out the form and receive exclusive flight offers with discounts by email every week
+      </p>
+    </div>
+    <div class="subscribe__form-wrapper">
       <%- include('templates/components/form/form.ejs', {
         env: {
           static: 'true',
@@ -7,5 +16,6 @@
           pathToTemplate: 'templates/layouts/forms/subscribeForm/subscribeFormContent.ejs'
         }
       }) %>
+    </div>
   </div>
 </section>

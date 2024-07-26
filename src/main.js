@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     ],
   });
   initForm('.contacts__form');
+  initForm('.subscribe__form');
   initHideCards();
   // initMainForm();
   // getAllInputSearch();

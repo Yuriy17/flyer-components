@@ -27,6 +27,7 @@
 @import './layouts/sections/_book.scss';
 @import './layouts/sections/_reviews.scss';
 @import './layouts/sections/_services.scss';
+@import './layouts/sections/_subscribe.scss';
 
 @import './layouts/modals/_burgerDrawer.scss';
 
@@ -66,6 +67,7 @@ h1 {
 h2 {
   color: var(--Dark-blue, #2a3243);
   text-align: center;
+  margin: 0 auto 12px;
 
   /* Mobile/H2 SemiBold 24 */
   font-family: Montserrat;
@@ -117,18 +119,21 @@ h2 {
   @include grid-mn('xmd') {
     padding: 50px 0;
   }
-  .subtitle {
-    text-align: center;
-    margin-top: 16px;
-    color: var(--Dark-blue, #2a3243);
-    font-family: Montserrat;
+}
+.subtitle {
+  text-align: center;
+  margin-top: 16px;
+  color: var(--Dark-blue, #2a3243);
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  margin: 0 auto;
+  line-height: 150%;
+  a {
     font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    a {
-      color: var(--Azure-Blue, #0a74d7);
-      font-weight: 600;
-    }
+    color: var(--Azure-Blue, #0a74d7);
+    font-weight: 600;
   }
 }
 

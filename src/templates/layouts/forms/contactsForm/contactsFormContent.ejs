@@ -49,17 +49,6 @@
       }
     }
   }) %>
-  <%- include('templates/components/inputs/slCheckbox.ejs', {
-    env: {
-      classes: 'form__checkbox form__field',
-      name: 'terms-contitions',
-      id: 'contactsCheckbox',
-      validate: 'required',
-      checked: 'false',
-      errorFieldText: 'error checkbox',
-      content: '*I give consent to the processing of my personal data given in the contact form above under the terms and conditions of <a href="#">Privacy Policy</a>'
-    }
-  }) %>
 </div>
 <%- include('templates/components/button/slButton.ejs', {
   env: {
