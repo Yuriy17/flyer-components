@@ -1,149 +1,10 @@
-import { debounce } from '../../utils/debounce.js';
 import { base_api_url, options } from '../../helpers/constants.js';
+import { debounce } from '../../utils/debounce.js';
 import { showLoadingIcon, hideLoadingIcon } from '../../utils/loadingIcon.js';
-
-// Debounced version of the fetchAirports function
-const debouncedFetchAirports = debounce(async ({ query, listBox, item }) => {
-  try {
-    showLoadingIcon(item);
-    await fetchAirports({ query, listBox, item });
-  } catch (error) {
-    console.error(error.message);
-  } finally {
-    // Hide loading icon after 0.5 second
-    setTimeout(() => {
-      hideLoadingIcon(item);
-    }, 500);
-  }
-  // fetch after 0.3 second one time final variant
-}, 300);
-//получение данных аэропортов
-
-export function getAllInputSearch() {
-  let getAllformRows = document.querySelectorAll('[data-container-field-row-id]');
-
-  let inputSearch = getAllformRows[getAllformRows.length - 1].querySelectorAll('.search-input');
-
-  inputSearch.forEach((item) => {
-    let inputBox;
-
-    inputBox = item.querySelector('input');
-
-    inputBox.addEventListener('input', () => {
-      item.querySelectorAll('input[type="hidden"]').forEach((itemHidden) => (itemHidden.value = ''));
-      getAirports({
-        inputBox,
-        item,
-      });
-    });
-  });
-}
-export const fetchAirports = async ({ query, listBox, item }) => {
-  // get value api
-  await fetch(`${base_api_url}api/search_location?query=${query}`)
-    .then((res) => res.json())
-    .then((response) => {
-      // response.json().then((body) => console.log(body));
-      if (response.status >= 400 && response.status < 600) {
-        throw new Error('Bad response from server');
-      }
-      const allPlaces = response?.locations;
-
-      if (!allPlaces) {
-        return;
-      }
-      let sanctionPlaces = 0;
-      let newAllPlaces = allPlaces.map(({ name, country, iataCityCode, id }) => {
-        let airportInfo, placeId, countryName, entityId;
-
-        airportInfo = name;
-        countryName = country;
-        placeId = iataCityCode;
-        entityId = id;
-
-        if (checkSanctionPlaces(countryName)) {
-          sanctionPlaces = 1;
-        }
-        if (sanctionPlaces === 0 && countryName !== '') {
-          return `<li class="${entityId}"><h5>${airportInfo} (<span>${placeId}</span>)</h5><h4>${countryName}</h4></li>`;
-        }
-      });
-
-      item.classList.add('active');
-      listBox.classList.add('active');
-      listBox.innerHTML = newAllPlaces.join('');
-      let allList = listBox.querySelectorAll('li');
-      for (let i = 0; i < allList.length; i++) {
-        allList[i].setAttribute('onclick', 'valueInputAirport(this)');
-      }
-    })
-    .catch((err) => console.error(err));
-};
-export async function getAirports({ inputBox, item }) {
-  const listBox = item.querySelector('.autocom-box');
-  const inputAirport = item.querySelector('.input_airport');
-  const isActiveItem = item.classList.contains('active');
-  //значение пользователя
-  let userValue = inputBox.value;
-
-  if (userValue.length < 3) {
-    inputAirport.value = '';
-  }
-
-  if (userValue.length < 3 && isActiveItem) {
-    inputBox.closest('.search-input.active').classList.remove('active');
-    listBox.classList.remove('active');
-  }
-  if (userValue.length >= 3) {
-    debouncedFetchAirports({
-      query: userValue.toLowerCase(),
-      listBox,
-      item,
-    });
-  } else {
-    item.classList.remove('active'); //hide autocomplete box
-    listBox.classList.remove('active');
-  }
-}
-
-export function checkSanctionPlaces(name) {
-  let santions = ['cuba', 'iran', 'north korea', 'syria', 'luhansk', 'donetsk', 'crimea'];
-  if (santions.indexOf(name.toLowerCase()) != -1) {
-    return 1;
-  }
-  return 0;
-}
-window.valueInputAirport = valueInputAirport;
-// вывод в инпуты результат поиска аэропорта
-export function valueInputAirport(value) {
-  const parent = value.closest('.search-input');
-  const inputBox = parent.querySelector('input');
-  inputBox.value = value.querySelector('h5').textContent;
-  inputBox.nextSibling.nextSibling.value = value.querySelector('h4').textContent;
-
-  if (inputBox.classList.contains('input_from')) {
-    parent.querySelector('.input_from').value = value.querySelector('h5').textContent;
-    parent.querySelector('.cityAirport').value = value.querySelector('h4').textContent;
-    parent.querySelector('.cityCode').value = value.querySelector('h5 span').textContent;
-    parent.querySelector('.originEntityId').value = value.getAttribute('class');
-  } else if (inputBox.classList.contains('input_to')) {
-    parent.querySelector('.input_to').value = value.querySelector('h5').textContent;
-    parent.querySelector('.cityAirportTo').value = value.querySelector('h4').textContent;
-    parent.querySelector('.cityCodeTo').value = value.querySelector('h5 span').textContent;
-    parent.querySelector('.destinationEntityId').value = value.getAttribute('class');
-  }
-  //console.log(value.querySelector('h5 span').textContent);
-
-  let listBox = value.closest('.autocom-box');
-  if (listBox.classList.contains('active')) {
-    inputBox.closest('.search-input.active').classList.remove('active');
-  }
-  listBox.classList.remove('active');
-}
 
 //api поиска полетов
 
-export async function findFlights(
+export async function findFlights({
   flyTripType,
   from,
   to,
@@ -151,10 +12,10 @@ export async function findFlights(
   returnDate,
   type_ticket,
   adults,
-  children,
-  infants,
-  sortBy
-) {
+  // children,
+  // infants,
+  sortBy,
+}) {
   let legs = '';
   //flyTripType = "One-way";
   if (flyTripType === 'Round-trip') {
@@ -248,10 +109,147 @@ export async function findFlightsDetails(itineraryId, leg, children, infants, ad
     .catch((err) => console.error(err));
   //console.log(flightData);
 }
+
+
+// Debounced version of the fetchAirports function
+const debouncedFetchAirports = debounce(async ({ query, listBox, inputSearchElement }) => {
+  try {
+    showLoadingIcon(inputSearchElement);
+    await fetchAirports({ query, listBox, inputSearchElement });
+  } catch (error) {
+    console.error(error.message);
+  } finally {
+    // Hide loading icon after 0.5 second
+    setTimeout(() => {
+      hideLoadingIcon(inputSearchElement);
+    }, 500);
+  }
+  // fetch after 0.3 second one time final variant
+}, 300);
+
+export const fetchAirports = async ({ query, listBox, inputSearchElement }) => {
+  // get value api
+  await fetch(`${base_api_url}api/search_location?query=${query}`)
+    .then((res) => res.json())
+    .then((response) => {
+      // response.json().then((body) => console.log(body));
+      if (response.status >= 400 && response.status < 600) {
+        throw new Error('Bad response from server');
+      }
+      const allPlaces = response?.locations;
+
+      if (!allPlaces) {
+        return;
+      }
+      let sanctionPlaces = 0;
+      let newAllPlaces = allPlaces.map(({ name, country, iataCityCode, id }) => {
+        let airportInfo, placeId, countryName, entityId;
+
+        airportInfo = name;
+        countryName = country;
+        placeId = iataCityCode;
+        entityId = id;
+
+        if (checkSanctionPlaces(countryName)) {
+          sanctionPlaces = 1;
+        }
+        if (sanctionPlaces === 0 && countryName !== '') {
+          return `<li class="${entityId}"><h5>${airportInfo} (<span>${placeId}</span>)</h5><h4>${countryName}</h4></li>`;
+        }
+      });
+
+      inputSearchElement.classList.add('active');
+      listBox.classList.add('active');
+      listBox.innerHTML = newAllPlaces.join('');
+      let allList = listBox.querySelectorAll('li');
+      for (let i = 0; i < allList.length; i++) {
+        // allList[i].setAttribute('onclick', 'valueInputAirport(this)');
+        allList[i].addEventListener('click', (e) => valueInputAirport(e.currentTarget));
+      }
+    })
+    .catch((err) => console.error(err));
+};
+
+// вывод в инпуты результат поиска аэропорта
+export function valueInputAirport(value) {
+  const parent = value.closest('.search-input');
+  const inputBox = parent.querySelector('input');
+  inputBox.value = value.querySelector('h5').textContent;
+  inputBox.nextSibling.nextSibling.value = value.querySelector('h4').textContent;
+
+  if (inputBox.classList.contains('input_from')) {
+    parent.querySelector('.input_from').value = value.querySelector('h5').textContent;
+    parent.querySelector('.cityAirport').value = value.querySelector('h4').textContent;
+    parent.querySelector('.cityCode').value = value.querySelector('h5 span').textContent;
+    parent.querySelector('.originEntityId').value = value.getAttribute('class');
+  } else if (inputBox.classList.contains('input_to')) {
+    parent.querySelector('.input_to').value = value.querySelector('h5').textContent;
+    parent.querySelector('.cityAirportTo').value = value.querySelector('h4').textContent;
+    parent.querySelector('.cityCodeTo').value = value.querySelector('h5 span').textContent;
+    parent.querySelector('.destinationEntityId').value = value.getAttribute('class');
+  }
+  //console.log(value.querySelector('h5 span').textContent);
+
+  let listBox = value.closest('.autocom-box');
+  if (listBox.classList.contains('active')) {
+    inputBox.closest('.search-input.active').classList.remove('active');
+  }
+  listBox.classList.remove('active');
+}
+
+export function checkSanctionPlaces(name) {
+  let santions = ['cuba', 'iran', 'north korea', 'syria', 'luhansk', 'donetsk', 'crimea'];
+
+  return santions.indexOf(name.toLowerCase()) != -1 ? 1 : 0;
+}
+
+
+//получение данных аэропортов
+
+export function getAllInputSearch({ formElement }) {
+  let getAllFormRows = formElement.querySelectorAll('[data-container-field-row-id]');
+
+  let inputSearchElements = getAllFormRows[getAllFormRows.length - 1].querySelectorAll('.search-input');
+
+  inputSearchElements.forEach((inputSearchElement) => {
+    const inputBox = inputSearchElements.querySelector('input');
+
+    inputBox.addEventListener('input', () => {
+      inputSearchElement.querySelectorAll('input[type="hidden"]').forEach((itemHidden) => (itemHidden.value = ''));
+      getAirports({
+        inputBox,
+        inputSearchElement,
+      });
+    });
+  });
+}
+
+export async function getAirports({ inputBox, item: inputSearchElement }) {
+  const listBox = inputSearchElement.querySelector('.autocom-box');
+  const inputAirport = inputSearchElement.querySelector('.input_airport');
+  const isActiveItem = inputSearchElement.classList.contains('active');
+  //значение пользователя
+  const userValue = inputBox.value;
+
+  if (userValue.length < 3) {
+    inputAirport.value = '';
+    if (isActiveItem) {
+      //hide autocomplete box
+      inputSearchElement.classList.remove('active');
+      listBox.classList.remove('active');
+    }
+  } else {
+    debouncedFetchAirports({
+      query: userValue.toLowerCase(),
+      listBox,
+      inputSearchElement,
+    });
+  }
+}
 // window.getAllInputSearch = getAllInputSearch;
 // window.fetchAirports = fetchAirports;
-window.getAirports = getAirports;
-window.checkSanctionPlaces = checkSanctionPlaces;
-window.valueInputAirport = valueInputAirport;
-window.findFlights = findFlights;
-window.findFlightsDetails = findFlightsDetails;
+// window.getAirports = getAirports;
+// window.checkSanctionPlaces = checkSanctionPlaces;
+// window.valueInputAirport = valueInputAirport;
+// window.findFlights = findFlights;
+// window.findFlightsDetails = findFlightsDetails;

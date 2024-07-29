@@ -1,4 +1,4 @@
-import { gridBreakpoints } from '../helpers/constants';
+import { gridBreakpoints } from 'src/assets/js/helpers/constants';
 
 export const initHideCards = () => {
   const cardsElements = document.querySelectorAll('.show-more-cards');

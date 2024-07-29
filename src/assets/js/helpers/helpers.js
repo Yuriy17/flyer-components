@@ -1,5 +1,6 @@
-import { checkValidate, validateText } from '../services/legacy/validation';
-import { insertPosition, mainRules } from './constants';
+import { checkValidate, validateText } from 'src/assets/js/services/legacy/validation';
+import { gridBreakpoints, insertPosition, mainRules } from 'src/assets/js/helpers/constants';
+
 
 export const getValidationClasses = (form) => {
   if (form.classList.contains('white')) {
@@ -112,4 +113,16 @@ export const pasteByInsertPosition = ({ insertPositionType, parentElement, child
   }
 
   callbackAfterPaste && callbackAfterPaste(child);
+};
+
+export const getCurrentBreakpoint = () => {
+  let breakPoint = gridBreakpoints.xxl;
+
+  Object.keys(gridBreakpoints).forEach((key) => {
+    if (innerWidth <= gridBreakpoints[key] && innerWidth < breakPoint) {
+      breakPoint = key;
+    }
+  });
+
+  return breakPoint;
 };

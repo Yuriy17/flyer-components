@@ -14,8 +14,8 @@ export const initForm = (formElementSelector) => {
       validationStarted,
     });
 
+    console.log("🚀 ~ initForm ~ libsObject:", libsObject);
     const setupDynamicGroup = (groupIndex) => {
-      console.log('🚀 ~ setupDynamicGroup ~ groupIndex:', groupIndex);
       DynamicGroup({
         parentElement: document.getElementById('dynamicFields'),
         templateProps: {

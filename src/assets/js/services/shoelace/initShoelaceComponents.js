@@ -5,7 +5,6 @@ import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path';
 setBasePath('/node_modules/@shoelace-style/shoelace/dist');
 
 import { ShoelaceComponents } from '../../helpers/constants';
-import { initNav } from './initNav';
 
 export const initShoelaceComponents = ({ components }) => {
   if (components?.length) {
@@ -29,12 +28,14 @@ export const initShoelaceComponents = ({ components }) => {
         case ShoelaceComponents.drawer:
           import('@shoelace-style/shoelace/dist/components/drawer/drawer.js');
           break;
-        case ShoelaceComponents.nav:
+        case ShoelaceComponents.dialog:
+          import('@shoelace-style/shoelace/dist/components/dialog/dialog.js');
+          break;
+        case ShoelaceComponents.tabGroup:
           //tab-group
           import('@shoelace-style/shoelace/dist/components/tab/tab.js');
           import('@shoelace-style/shoelace/dist/components/tab-panel/tab-panel.js');
           import('@shoelace-style/shoelace/dist/components/tab-group/tab-group.js');
-          initNav();
           break;
 
         default:

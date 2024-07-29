@@ -62,17 +62,17 @@ export function settingFormValues() {
           airDates[0].to.selectDate(dataFlight.returnDate[i].date.replaceAll('-', '/'));
         }
       } else {
-        add_flight_row(
-          dataFlight.from[i].cityName,
-          dataFlight.from[i].airportName,
-          dataFlight.from[i].entityId,
-          dataFlight.from[i].cityCode,
-          dataFlight.to[i].cityName,
-          dataFlight.to[i].airportName,
-          dataFlight.to[i].cityCode,
-          dataFlight.to[i].entityId,
-          dataFlight.departureDate[i].date.replaceAll('-', '/')
-        );
+        add_flight_row({
+          fromVal: dataFlight.from[i].cityName,
+          cityAirportVal: dataFlight.from[i].airportName,
+          originEntityIdVal: dataFlight.from[i].entityId,
+          cityCodeVal: dataFlight.from[i].cityCode,
+          toVal: dataFlight.to[i].cityName,
+          cityAirportToVal: dataFlight.to[i].airportName,
+          cityCodeToVal: dataFlight.to[i].cityCode,
+          destinationEntityId: dataFlight.to[i].entityId,
+          dateDepartureVa: dataFlight.departureDate[i].date.replaceAll('-', '/'),
+        });
       }
     }
   }
@@ -81,7 +81,7 @@ export function settingFormValues() {
 let sum;
 //добавление поля в выборе рейса (multi city)
 let last_row_container_fields = 1;
-function add_flight_row(
+function add_flight_row({
   fromVal = '',
   cityAirportVal = '',
   originEntityIdVal = '',
@@ -90,8 +90,8 @@ function add_flight_row(
   cityAirportToVal = '',
   cityCodeToVal = '',
   destinationEntityId = '',
-  dateDepartureVal = ''
-) {
+  dateDepartureVal = '',
+}) {
   const container_fields = document.querySelectorAll('[data-container-field-row-id]');
   let fromSearchResult,
     btn_delete_1 = '',

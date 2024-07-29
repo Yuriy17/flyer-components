@@ -1,6 +1,10 @@
-import { validateField } from './validateField';
+//AirDatepicker style
+import 'air-datepicker/air-datepicker.css';
+
 import AirDatepicker from 'air-datepicker';
+import { validateField } from './validateField';
 import { initTelInput } from '../initTelInput';
+import { airLlocale, airMinDate, airStartDate } from '../../helpers/constants';
 
 export const setupField = ({ formElement, fieldName, validationStarted }) => {
   const field = formElement.querySelector(`[name="${fieldName}"]`);
@@ -8,7 +12,6 @@ export const setupField = ({ formElement, fieldName, validationStarted }) => {
 
   if (field) {
     if (fieldName.includes('phone')) {
-
       // Initialize intl-tel-input for phone fields
       fieldObject = initTelInput(field);
       field.addEventListener('blur', () =>
@@ -17,11 +20,35 @@ export const setupField = ({ formElement, fieldName, validationStarted }) => {
           validationStarted,
         })
       );
-
     } else if (fieldName.includes('date')) {
-      // Initialize AirDatepicker for date fields
-      fieldObject = new AirDatepicker(field);
+      const dateConfig = {
+        locale: airLlocale,
+        startDate: airStartDate,
+        minDate: airMinDate,
+        onSelect: ({ date, formattedDate, datepicker }) => {
+          console.log("🚀 ~ setupField ~ formattedDate:", formattedDate);
+          console.log("🚀 ~ setupField ~ date:", date);
+          console.log("🚀 ~ setupField ~ field:", field.value);
+          console.log('🚀 ~ setupField ~ datepicker:', datepicker.selectedDates);
+          // console.log('🚀 ~ setupField ~ datepicker:', datepicker.formatDate(datepicker.viewDate, ));
 
+        }
+      };
+      const { params } = field.dataset;
+
+      if (params) {
+        const paramsRules = params.split(';');
+        paramsRules.forEach((rule) => {
+          const [ruleName, ruleValue] = rule.split(':');
+
+          dateConfig[ruleName] = ruleValue || true;
+        });
+      }
+      console.log("🚀 ~ setupField ~ dateConfig:", dateConfig);
+      // Initialize AirDatepicker for date fields
+      fieldObject = new AirDatepicker(field, dateConfig);
+      console.log("🚀 ~ setupField ~ fieldObject:", fieldObject);
+      field.addEventListener('focus', () => fieldObject.show());
       field.addEventListener('blur', () =>
         checkFieldRules({
           field,
@@ -35,7 +62,6 @@ export const setupField = ({ formElement, fieldName, validationStarted }) => {
 
 export const setupStaticFields = ({ formElement, fieldNames, validationStarted }) => {
   const resultLibsObject = {};
-
   fieldNames.forEach((fieldName) => {
     resultLibsObject[fieldName] = setupField({ formElement, fieldName, validationStarted });
   });

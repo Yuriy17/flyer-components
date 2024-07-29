@@ -86,10 +86,6 @@ export const initValidation = () => {
   const forms = document.querySelectorAll('form');
   forms.forEach((form) => {
     form.addEventListener('submit', async function (e) {
-      console.log(e.currentTarget);
-      console.log(e);
-      alert('sdf');
-      alert(e.toJSON());
       e.preventDefault();
       const formFields = Array.from(form.elements);
       let isValidate = true;
@@ -201,18 +197,18 @@ export const initValidation = () => {
           localStorage.setItem('flightTicketInfo', JSON.stringify(formData));
           if (formName !== 'flightTickets') {
             await setPreloader('searching');
-            await findFlights(
-              formElements.fly_trip_type,
-              objFrom,
-              objTo,
-              objDepartureDate,
-              objReturnDate,
-              formElements.type_ticket,
-              formElements.adults,
-              formElements.children,
-              formElements.infants,
-              'fastest'
-            );
+            await findFlights({
+              flyTripType: formElements.fly_trip_type,
+              from: objFrom,
+              to: objTo,
+              departureDate: objDepartureDate,
+              returnDate: objReturnDate,
+              type_ticket: formElements.type_ticket,
+              adults: formElements.adults,
+              children: formElements.children,
+              infants: formElements.infants,
+              sortBy: 'fastest',
+            });
             await redirectToHowToBook();
             return;
           } else {

@@ -6,10 +6,12 @@
   <div class="field__num">
     <div class="quantity_inner">
       <div class="bt_minus">
-        <img src="<%=  env.baseUrl %>assets/icons/rounded-minus.svg"" alt=" rounded minus">
+        <img src="<%=  env.baseUrl %>assets/icons/rounded-minus.svg" alt=" rounded minus">
       </div>
       <div class="quantity_inner_label">
-        <input id="<%= env.id %>" name="<%= env.id %>" type="hidden" value="<%= env.value %>" class="quantity <%= env.class %>" />
+        <input 
+          id="<%= env.id %>" name="<%= env.id %>" 
+          type="hidden" value="<%= env.value %>" class="quantity <%= env.class %>" />
         <label for="<%= env.id %>" class="quantity_label"><%= env.value %></label>
       </div>
       <div class="bt_plus">

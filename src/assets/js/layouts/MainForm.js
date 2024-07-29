@@ -1,10 +1,12 @@
 import dropsContainerTemplate from 'src/templates/layouts/forms/mainForm/dropsContainer.ejs';
 import standartFormTemplate from 'src/templates/layouts/forms/mainForm/standartForm.ejs';
 import formTemplate from 'src/templates/layouts/forms/mainForm/form.ejs';
+// import sectionTemplate from 'src/templates/layouts/sections/specialOfferMain/specialOfferMain.ejs';
 import passengerFieldTemplate from 'src/templates/layouts/forms/mainForm/passengerField.ejs';
 import inputTypeTemplate from 'src/templates/layouts/forms/mainForm/typeBlock.ejs';
-import { baseUrl } from '../helpers/constants';
-import { inputTel } from '../services/phones';
+import { baseUrl } from 'src/assets/js/helpers/constants';
+import { inputTel } from '../services/legacy/phones';
+
 
 export const MainForm = ({ passengersData, formType }) => {
   const dropsContainer = dropsContainerTemplate({
@@ -16,6 +18,12 @@ export const MainForm = ({ passengersData, formType }) => {
     inputTel('.form-valid-tab');
   }
 
+  // sectionTemplate({
+  //   env: {
+  //     content:
+  //   },
+  // });
+  
   return formTemplate({
     constants: {
       baseUrl,
@@ -44,5 +52,5 @@ export const MainForm = ({ passengersData, formType }) => {
       value: 'Multi-city',
       icon: 'icon-airplane-2',
     }),
-  }).trim();
+  });
 };

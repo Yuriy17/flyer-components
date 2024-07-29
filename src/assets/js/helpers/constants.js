@@ -69,7 +69,7 @@ export const ShoelaceComponents = {
   input: 'input',
   select: 'select',
   textarea: 'textarea',
-  nav: 'nav',
+  tabGroup: 'tabGroup',
 };
 export const gridBreakpoints = {
   xs: 0,

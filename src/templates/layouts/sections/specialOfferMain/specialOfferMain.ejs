@@ -1,9 +1,8 @@
-<form 
-  <% if(env.classes){ %>class="<%=env.classes%>"<% } %>
->
+<div class="section-special-offer-main">
+  <div class="save-up">Save up to $3,000</div>
   <% if(env.staticContentPath){ %>
     <%- include(env.staticContentPath) %>
   <% } else{ %>
     <%- env.content %>
   <% } %>
-</form>
+</div>

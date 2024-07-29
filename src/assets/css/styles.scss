@@ -14,6 +14,7 @@
 @import './components/_breadcrumbs.scss';
 @import './components/_form.scss';
 @import './components/_stars.scss';
+@import './components/_dialog-flight.scss';
 @import './components/_parallax-bg.scss';
 
 // @import './layouts/_nav.scss';
@@ -30,8 +31,11 @@
 @import './layouts/sections/_subscribe.scss';
 
 @import './layouts/modals/_burgerDrawer.scss';
+@import './layouts/modals/_dialog-flight.scss';
 
 @import './layouts/_socials.scss';
+
+.air-datepicker-global-container { z-index: 999; }
 
 html {
   scroll-behavior: smooth;

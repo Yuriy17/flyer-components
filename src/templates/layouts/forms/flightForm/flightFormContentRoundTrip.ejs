@@ -1,0 +1,117 @@
+<div class="form__fields">
+  <div class="form__fields-search">
+    <%- include('templates/components/inputs/slInput.ejs', {
+      env: {
+        staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+        classes: 'form__input form__field',
+        name: 'first-name',
+        id: 'contactsFirstName',
+        validate: 'minLength:2;required;letters',
+        label: 'From',
+        placeholder: 'New York (NY)',
+        autocomplete: true
+      }
+    }) %>
+    <button class="form__exchange-button">
+      <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/exchange.svg" alt="">
+    </button>
+    <%- include('templates/components/inputs/slInput.ejs', {
+      env: {
+        staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+        classes: 'form__input form__field',
+        name: 'to',
+        id: 'contactsTo',
+        validate: 'minLength:2;required;letters',
+        label: 'To',
+        placeholder: 'Los Angeles (LA)',
+        autocomplete: true
+      }
+    }) %>
+  </div>
+<!-- Date
+13 Apr 2024 – 20 Apr 2024 -->
+  <%- include('templates/components/form/formField.ejs', {
+    env: {
+      staticContentPath: 'templates/layouts/formFields/dateField.ejs',
+      classes: 'form__input',
+      validate: 'required;date:2',
+      inputProps: {
+        name: 'date',
+        id: 'contactsDate',
+        label: 'Date',
+        readonly: "readonly",
+        placeholder: '13 Apr 2024 – 20 Apr 2024',
+        initParams: 'autoClose:true;addon:right;multipleDatesSeparator: – ;range;dateFormat:d MMM yyyy'
+      }
+    }
+  }) %>
+
+<!-- Passenger
+1 | Business Class -->
+
+
+  <%- include('templates/components/inputs/slInput.ejs', {
+    env: {
+      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      classes: 'form__input form__field',
+      name: 'first-name',
+      id: 'contactsFirstName',
+      validate: 'minLength:2;required;letters',
+      label: 'First name',
+      placeholder: 'Enter first name',
+      autocomplete: true
+    }
+  }) %>
+
+  <%- include('templates/components/inputs/slInput.ejs', {
+    env: {
+      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      classes: 'form__input form__field',
+      name: 'last-name',
+      id: 'contactsLastName',
+      validate: 'minLength:2;required;letters',
+      label: 'Last name',
+      placeholder: 'Enter last name',
+      autocomplete: true
+    }
+  }) %>
+
+  <%- include('templates/components/form/formField.ejs', {
+    env: {
+      staticContentPath: 'templates/layouts/formFields/phoneField.ejs',
+      classes: 'form__input',
+      validate: 'required;phone',
+      inputProps: {
+        type: "tel",
+        name: 'phone',
+        id: 'contactsPhoneNumber',
+        label: 'Phone number',
+        placeholder: '+1 XXX-XXX-XXXX',
+      }
+    }
+  }) %>
+
+
+  <%- include('templates/components/inputs/slInput.ejs', {
+    env: {
+      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      classes: 'form__input form__field',
+      name: 'email',
+      id: 'contactsEmail',
+      validate: 'email;required',
+      label: 'Email address',
+      placeholder: 'Enter your email address',
+      autocomplete: true
+    }
+  }) %>
+
+</div>
+  
+<%- include('templates/components/button/slButton.ejs', {
+  env: {
+    classes: 'btn-primary btn-xl',
+    type: 'submit',
+    variant: 'primary',
+    content: 'Submit',
+  }
+}) %>

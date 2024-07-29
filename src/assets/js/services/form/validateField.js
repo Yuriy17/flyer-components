@@ -15,8 +15,6 @@ export const validateField = ({ field, rules, infoElement, libsObject }) => {
     const validationFunction = validationRules[ruleName];
     if (validationFunction) {
       const result = validationFunction({ value, ruleValue, libsObject });
-      console.log("🚀 ~ rules.forEach ~ { value, ruleValue, libsObject }:", { value, ruleValue, libsObject });
-      console.log('🚀 ~ rules.forEach ~ result:', result);
 
       if (result !== true) {
         errorMessage = result;

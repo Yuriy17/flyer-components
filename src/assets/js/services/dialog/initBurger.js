@@ -4,24 +4,18 @@ import socialsTemplate from 'src/templates/layouts/socials.ejs';
 import menuButtonTemplate from 'src/templates/components/button/slButton.ejs';
 import burgerButtonTemplate from 'src/templates/layouts/burgerButton.ejs';
 import drawerTemplate from 'src/templates/components/drawer/drawer.ejs';
-import { gridBreakpoints, insertPosition, preheaderHeight } from '../../helpers/constants';
-import { pasteByInsertPosition } from '../../helpers/helpers';
+import { gridBreakpoints, insertPosition, preheaderHeight } from 'src/assets/js/helpers/constants';
+import { pasteByInsertPosition } from 'src/assets/js/helpers/helpers';
+import { debouncedInitOnResize } from 'src/assets/js/utils/utils';
+import { getCurrentBreakpoint } from '../../helpers/helpers';
 
-const initBurgerDrawer = () => {
-  let breakPoint = gridBreakpoints.xxl;
+export const initBurger = () => {
+  let isInitialized = false;
+  const initBurgerDrawer = () => {
+    if (!isInitialized && innerWidth <= gridBreakpoints.xlg) {
+      const drawerClasses = 'drawer-burger';
+      const burgerClasses = 'icon-menu';
 
-  Object.keys(gridBreakpoints).forEach((key) => {
-    if (innerWidth <= gridBreakpoints[key] && innerWidth < breakPoint) {
-      breakPoint = key;
-    }
-  });
-
-  if (gridBreakpoints[breakPoint] <= gridBreakpoints.xlg) {
-    const drawerClasses = 'drawer-burger';
-    const burgerClasses = 'icon-menu';
-    let drawer = document.querySelector(`.${drawerClasses}`);
-
-    if (!drawer) {
       const drawerLayout = drawerTemplate({
         classes: drawerClasses,
         content: drawerBurgerTemplate({
@@ -90,11 +84,10 @@ const initBurgerDrawer = () => {
         child: drawerLayout,
       });
 
-      drawer = document.querySelector(`.${drawerClasses}`);
-      drawer = document.querySelector(`.${drawerClasses}`);
-
+      const drawer = document.querySelector(`.${drawerClasses}`);
+      const currentBreakpoint = getCurrentBreakpoint();
       const setStickyBurger = (pos) => {
-        burgerButton.style.transform = `translateY(${pos > preheaderHeight[breakPoint] ? 0 : preheaderHeight[breakPoint] - pos}px)`;
+        burgerButton.style.transform = `translateY(${pos > preheaderHeight[currentBreakpoint] ? 0 : preheaderHeight[currentBreakpoint] - pos}px)`;
       };
       window.lastKnownScrollPosition = 0;
       window.ticking = false;
@@ -115,9 +108,9 @@ const initBurgerDrawer = () => {
       });
       burgerButton.addEventListener('click', () => (drawer.hasAttribute('open') ? drawer.hide() : drawer.show()));
       drawer.addEventListener('sl-show', () => {
-        if (window.lastKnownScrollPosition < preheaderHeight[breakPoint]) {
+        if (window.lastKnownScrollPosition < preheaderHeight[currentBreakpoint]) {
           window.scrollTo({
-            top: preheaderHeight[breakPoint],
+            top: preheaderHeight[currentBreakpoint],
             left: 0,
             behavior: 'smooth',
           });
@@ -127,14 +120,12 @@ const initBurgerDrawer = () => {
       drawer.addEventListener('sl-hide', () => {
         burgerButton.classList.remove('icon-menu_open');
       });
-    }
-  }
-};
 
-export const initBurger = () => {
-  // const burgerButton = document.querySelector('.icon-menu');
-  // if(burgerButton) {
-  // }
-  initBurgerDrawer();
-  addEventListener('resize', () => initBurgerDrawer());
+      isInitialized = true;
+    }
+  };
+
+  debouncedInitOnResize({
+    initFunction: initBurgerDrawer,
+  });
 };

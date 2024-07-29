@@ -1,0 +1,73 @@
+.dialog-flight {
+  &__form {
+    padding: 0 5px;
+    sl-input::part(form-control), div.form__input  {
+        box-shadow: 0px 4px 4px 0px rgba(10, 116, 215, 0.10);
+        border: none;
+      
+    }
+  }
+  &__nav {
+    &::part(tabs) {
+      display: flex;
+      gap: 9px;
+      border-bottom: none;
+    padding: 0 5px 24px;
+    }
+    &::part(active-tab-indicator) {
+      display: none;
+    }
+    > sl-tab {
+      &::part(base) {
+        display: flex;
+        padding: 10px 8px;
+        justify-content: center;
+        align-items: center;
+
+        color: #a5a7ac;
+        font-family: Montserrat;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        border-radius: 4px;
+        transition: all 0.3s ease-in-out;
+      }
+      &[active]::part(base) {
+        background: var(--White, #fff);
+        box-shadow: 0px 4px 4px 0px rgba(10, 116, 215, 0.1);
+        color: #00091c;
+      }
+    }
+  }
+  sl-tab-panel {
+    &::part(base) {
+      padding: 0;
+    }
+  }
+  .form {
+    &__fields {
+      gap: 8px;
+      &-search {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        @include grid-mn('md') {
+          flex-direction: row;
+        }
+      }
+    }
+    &__exchange-button {
+      border: none;
+      background: transparent;
+      position: absolute;
+      top: 50%;
+      left: auto;
+      right: 16px;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+  }
+}

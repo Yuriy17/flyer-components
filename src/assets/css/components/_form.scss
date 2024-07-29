@@ -86,10 +86,15 @@
     &::part(form-control),
     &.form__input {
       border-color: #e31d1c;
+    }
+    input[name='date'],
+    &::part(form-control),
+    &.form__input {
       background: linear-gradient(0deg, rgba(227, 29, 28, 0.1) 0%, rgba(227, 29, 28, 0.1) 100%), var(--White, #fff);
     }
     &::part(input),
-    .iti__tel-input {
+    .iti__tel-input,
+    input[name='date'] {
       &::placeholder {
         color: #e31d1c;
       }
@@ -125,6 +130,7 @@
   div.form__input {
     position: relative;
     width: 100%;
+    border-radius: 10px;
     @include grid-mn('md') {
       width: calc(50% - 8px);
     }

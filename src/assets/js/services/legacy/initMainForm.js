@@ -1,5 +1,6 @@
-import { inputTel } from './phones';
+
 import { MainForm } from '../../layouts/MainForm';
+import { inputTel } from './phones';
 
 export const initMainForm = async () => {
   // Function to create the main form
