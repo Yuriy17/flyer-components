@@ -4,7 +4,7 @@
     right: 24px;
   }
   &::part(body) {
-    padding: 40px 23px 24px;
+    padding: 40px 23px 0;
   }
   &::part(close-button) {
     display: none;
@@ -32,6 +32,13 @@
     }
   }
   &__nav {
+        height: 100%;
+    &::part(base) {
+      height: 100%;
+    }
+        &::part(body) {
+      height: 100%;
+    }
     &::part(tabs) {
       display: flex;
       gap: 9px;

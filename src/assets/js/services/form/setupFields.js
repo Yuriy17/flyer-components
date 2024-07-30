@@ -62,8 +62,18 @@ export const setupField = ({ formElement, fieldName }) => {
       console.log("🚀 ~ setupField ~ fieldObject:", fieldObject);
 
     } else if(fieldName.includes('passenger')) { 
-      field.addEventListener('click', () => (fieldBlock.open = !fieldBlock.open));;
-      console.log("🚀 ~ setupField ~ fieldBlock:", fieldBlock);
+      // const content = fieldBlock.querySelector('.block-drop-down');
+      // console.log("🚀 ~ setupField ~ content:", content);
+      // field.addEventListener('click', () => {
+      //   console.log("🚀 ~ field.addEventListener ~ fieldBlock.open:", fieldBlock.open);
+      //   fieldBlock.open = true;
+      //   content.focus();
+      // });
+      // content.addEventListener('focusout', (e) => {
+      //   console.log("🚀 ~ content.addEventListener ~ e:", e);
+      //   fieldBlock.open = false;
+      // })
+      // console.log("🚀 ~ setupField ~ fieldBlock:", fieldBlock);
 
       
     }

@@ -1,0 +1,122 @@
+.passenger-block {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: calc(100vw - 90px);
+
+  // .passenger-block__count
+
+  &__count {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__count-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  // .passenger-block__count-title
+
+  &__count-title {
+    color: var(--Dark-blue, #2a3243);
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+  }
+
+  // .passenger-block__class
+
+  &__class {
+    &::part(form-control) {
+            display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    &::part(form-control-label) {
+      color: var(--Dark-blue, #2a3243);
+      font-family: Montserrat;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+    &::part(form-control-input) {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+}
+.passenger-radio {
+  &::part(control) {
+    --toggle-size: 28px;
+  }
+  &::part(control) {
+    --sl-input-border-width: 2px;
+    --sl-input-border-color: #bfbfbf;
+  }
+
+  &::part(checked-icon) {
+    position: relative;
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      content: '';
+      border-radius: 50%;
+      background-color: #fff;
+      min-width: 14px;
+      width: 14px;
+      height: 14px;
+    }
+  }
+  &::part(label) {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  // .passenger-radio__title
+
+  &__title {
+    display: flex;
+    align-items: center;
+    min-height: 28px;
+    color: var(--Dark-blue, #2a3243);
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+  }
+
+  // .passenger-radio__text
+
+  &__text {
+    color: var(--Steel-Blue, #667085);
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0 0 0 -33px;
+  }
+
+  // .passenger-radio__price
+
+  &__price {
+    color: var(--Dark-blue, #2a3243);
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+}

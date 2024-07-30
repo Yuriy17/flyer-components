@@ -23,15 +23,24 @@
   }
 
   &__passenger {
-    sl-tooltip {
-      &::part(base) {
-        --max-width: 100%;
-      }
-      &::part(popup) {
-        --auto-size-available-width: 100%;
-        width: 100%;
-      }
-    }
+    // sl-tooltip {
+    //   &::part(base) {
+    //     --max-width: 100%;
+    //     // disable arrow
+    //     --sl-tooltip-arrow-size: 0;
+    //   }
+    //   &::part(base__popup) {
+    //     --auto-size-available-width: 100%;
+    //     box-shadow: 0px 4px 4px 0px rgba(10, 116, 215, 0.1);
+    //     top: calc(100% + 5px);
+    //     width: 100%;
+    //     // width: calc(100% - 56px);
+    //     //     margin: 45px 0 0;
+    //   }
+    //   &::part(body) {
+    //     width: 100%;
+    //   }
+    // }
   }
   &__checkbox {
     padding: 0 3px 0 14px;
@@ -92,7 +101,8 @@
       }
     }
   }
-  &__date {
+  &__date,
+  &__field-dropdown {
     &::before {
       content: url($STATIC_PATH + '/icons/chevron-black-drop-down.svg');
       display: block;
@@ -103,8 +113,10 @@
       width: 20px;
       height: 20px;
       transition: transform 0.2s ease-in-out;
+      z-index: 1;
     }
-    &.active::before {
+    &.active::before,
+    &[open]::before {
       transform: translateY(-50%) rotate(180deg);
     }
     &.form__field_error::before,
@@ -226,6 +238,31 @@
     }
   }
   &__field {
+    &-dropdown {
+      position: relative;
+      width: 100%;
+
+      &::part(base) {
+        --max-width: 100%;
+        width: 100%;
+      }
+
+      &::part(base__popup) {
+        --auto-size-available-width: 100%;
+        box-shadow: 0px 4px 4px 0px rgba(10, 116, 215, 0.1);
+        top: calc(100% + 5px);
+        width: 100%;
+        
+        // width: calc(100% - 56px);
+        //     margin: 45px 0 0;
+      }
+      &::part(panel) {
+        width: 100%;
+        padding: 16px;
+        background-color: #fff;
+        box-shadow: 0px 4px 4px 0px rgba(10, 116, 215, 0.1);
+      }
+    }
     & + .form__checkbox {
       margin-top: 22px;
     }

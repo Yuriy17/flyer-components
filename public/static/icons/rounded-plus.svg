@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24" width="24" aria-hidden="true" fill="currentcolor" color="#006dd2" tabindex="-1" focusable="false" role="img" class="Svg-sc-12lgb6u-0 gHvJpT RadioPlus__SvgRadioPlus-sc-g798wf-0 cyONYp">
-    <path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z">
-    </path>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="24" rx="4" fill="#0A74D7" fill-opacity="0.05" />
+    <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" stroke="#0A74D7" stroke-opacity="0.03" />
+    <path d="M11.375 7H12.625V11.375H17V12.625H12.625V17H11.375V12.625H7V11.375H11.375V7Z" fill="#2A3243" />
 </svg>

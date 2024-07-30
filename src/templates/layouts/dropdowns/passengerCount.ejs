@@ -1,0 +1,27 @@
+<div class="passenger-count">
+  <div class="passenger-count__info">
+    <p class="passenger-count__info-label">
+      <%= env.label %>
+    </p>
+    <p class="passenger-count__info-age">
+      <%= env.aged %>
+    </p>
+  </div>
+  <div class="passenger-count__number">
+    <div class="passenger-count__number-inner">
+      <div class="bt_minus">
+        <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/rounded-minus.svg" alt=" rounded minus">
+      </div>
+      <div class="passenger-count__number-label">
+        <input id="<%= env.id %>" name="<%= env.id %>" type="hidden" value="<%= env.value %>"
+          class="passenger-count__number-input <%= env.class %>" />
+        <label for="<%= env.id %>" class="passenger-count__number-input-label">
+          <%= env.value %>
+        </label>
+      </div>
+      <div class="bt_plus">
+        <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/rounded-plus.svg" alt="rounded plus">
+      </div>
+    </div>
+  </div>
+</div>

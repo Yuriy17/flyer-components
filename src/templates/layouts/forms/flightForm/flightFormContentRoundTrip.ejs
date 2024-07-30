@@ -2,9 +2,18 @@
   <div class="form__fields-search">
     <%- include('templates/components/inputs/slInput.ejs', {
       env: {
-        staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+        staticContentObject: {
+          tooltipPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+          path: 'templates/layouts/formFields/fromHiddenInputs.ejs',
+          pathObject: {
+            last_row_container_fields: '0',
+            cityAirportVal: '',
+            cityCodeVal: '',
+            originEntityIdVal: '',
+          }
+        },
         classes: 'form__input form__field',
-        name: 'first-name',
+        name: 'flight[0]["from"]',
         id: 'contactsFirstName',
         validate: 'minLength:2;required;letters',
         label: 'From',
@@ -17,9 +26,18 @@
     </button>
     <%- include('templates/components/inputs/slInput.ejs', {
       env: {
-        staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+        staticContentObject: {
+          tooltipPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+          pathObject: {
+            last_row_container_fields: '0',
+            path: 'templates/layouts/formFields/toHiddenInputs.ejs',
+            cityAirportToVal: '',
+            cityCodeToVal: '',
+            destinationEntityId: '',
+          }
+        },
         classes: 'form__input form__field',
-        name: 'to',
+        name: 'flight[0]["to"]',
         id: 'contactsTo',
         validate: 'minLength:2;required;letters',
         label: 'To',
@@ -44,32 +62,34 @@
     }
   }) %>
 
-<!-- Passenger
-1 | Business Class -->
   <%- include('templates/components/form/formField.ejs', {
     env: {
       staticContentPath: 'templates/layouts/formFields/passengerField.ejs',
       classes: 'form__input form__passenger',
       validate: 'required;',
-      inputProps: {
-        tooltip: 'true',
-        name: 'passenger',
-        id: 'contactsPassenger',
-        label: 'Passenger',
-        value: '1 | Business Class',
-        readonly: "readonly",
+      staticDropdownContentObject: {
+        dropdownContentPath: 'templates/layouts/dropdowns/passengerDropdownContent.ejs',
         passengersData: [
           { label: 'Adults', aged: '(12+ years)', id: 'adults', value: '1', class: 'adults' },
           { label: 'Children', aged: '(2-11 years)', id: 'children', value: '0', class: 'children' },
           { label: 'Infants', aged: '(Under 2 years)', id: 'infants', value: '0', class: 'infants' },
-        ]
+        ],
+      },
+      inputProps: {
+        name: 'passenger',
+        id: 'contactsPassenger',
+        label: 'Passenger',
+        value: '1 | Business Class',
+        readonly: "readonly"
       }
     }
   }) %>
 
   <%- include('templates/components/inputs/slInput.ejs', {
     env: {
-      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      staticContentObject: {
+        tooltipPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      },
       classes: 'form__input form__field',
       name: 'first-name',
       id: 'contactsFirstName',
@@ -123,7 +143,7 @@
   }) %>
 
 </div>
-  
+
 <%- include('templates/components/button/slButton.ejs', {
   env: {
     classes: 'btn-primary btn-xl',

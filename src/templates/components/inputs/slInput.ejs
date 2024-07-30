@@ -7,8 +7,15 @@
   <% if(env.placeholder){ %>placeholder="<%=env.placeholder%>" <% } %>
   <% if(env.autocomplete){ %>autocomplete="<%=env.autocomplete%>" <% } %>
 >
-  <% if(env.staticContentPath){ %>
-    <%- include(env.staticContentPath) %>
+  <% if(env.staticContentObject){ %>
+    <% if(env.staticContentObject.tooltipPath){ %>
+      <%- include(env.staticContentObject.tooltipPath) %>
+    <% } %>
+    <% if(env.staticContentObject.path){ %>
+      <%- include(env.staticContentObject.path, {
+        env: env.staticContentObject.pathObject
+      }) %>
+    <% } %>
   <% } else{ %>
     <%- env.content %>
   <% } %>

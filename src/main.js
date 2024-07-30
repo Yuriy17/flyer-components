@@ -17,12 +17,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     components: [
       ShoelaceComponents.button,
       ShoelaceComponents.drawer,
+      ShoelaceComponents.dropdown,
       ShoelaceComponents.dialog,
       ShoelaceComponents.popup,
       ShoelaceComponents.tooltip,
       ShoelaceComponents.input,
       ShoelaceComponents.checkbox,
       ShoelaceComponents.tabGroup,
+      ShoelaceComponents.radioGroup,
     ],
   });
   initBurger();

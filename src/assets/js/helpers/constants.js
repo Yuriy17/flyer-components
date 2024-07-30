@@ -71,6 +71,7 @@ export const ShoelaceComponents = {
   textarea: 'textarea',
   tabGroup: 'tabGroup',
   details: 'details',
+  radioGroup: 'radioGroup',
 };
 export const gridBreakpoints = {
   xs: 0,

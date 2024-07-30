@@ -1,12 +1,20 @@
-<div 
-  class="form__field <%= env.classes %>"
-  <% if(env.validate){ %>data-validate="<%=env.validate%>" <% } %>
->
-  <% if(env.staticContentPath){ %>
-    <%- include(env.staticContentPath, {
-      env: env.inputProps
+<% if(env.staticDropdownContentObject){ %><sl-dropdown class="form__field-dropdown"><% } %>
+  <div 
+    class="form__field <%= env.classes %>"
+    <% if(env.validate){ %>data-validate="<%=env.validate%>" <% } %>
+    <% if(env.staticDropdownContentObject){ %>slot="trigger"<% } %>
+  >
+    <% if(env.staticContentPath){ %>
+      <%- include(env.staticContentPath, {
+        env: env.inputProps
+      }) %>
+    <% } else{ %>
+      <%- env.content %>
+    <% } %>
+  </div>
+  <% if(env.staticDropdownContentObject){ %>    
+    <%- include(env.staticDropdownContentObject.dropdownContentPath, {
+      env: env.staticDropdownContentObject
     }) %>
-  <% } else{ %>
-    <%- env.content %>
   <% } %>
-</div>
+<% if(env.staticDropdownContentObject){ %></sl-dropdown><% } %>
