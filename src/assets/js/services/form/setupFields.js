@@ -91,11 +91,9 @@ export const setupStaticFields = ({ formElement, fieldNames }) => {
 };
 
 export const checkFieldRules = ({ field, validationStarted, libsObject }) => {
-  console.log("🚀 ~ checkFieldRules ~ validationStarted:", validationStarted);
   if(validationStarted) {
 
     const rules = field.dataset.validate?.split(';');
-    console.log("🚀 ~ checkFieldRules ~ rules:", rules);
     // const {parentElement} = input.getAttribute('type') === 'phone' ? input.parentElement : input;
     const infoElement = field.querySelector('sl-tooltip');
     return rules && validateField({ field, rules, infoElement, libsObject });
@@ -112,7 +110,7 @@ export const fieldsSetupValidation = ({ fields, validationStarted, trigger, addL
         if (isSlComponent) {
           input = field;
         } else {
-          input = field.querySelector('> input');
+          input = field.querySelector(' input');
         }
 
         switch (input.getAttribute('type')) {
@@ -135,7 +133,8 @@ export const fieldsSetupValidation = ({ fields, validationStarted, trigger, addL
           eventName = isSlComponent ? 'sl-change' : 'change';
         }
 
-        input.addEventListener(eventName, () => {
+        input.addEventListener(eventName, (e) => {
+          e.stopPropagation()
           checkFieldRules({ field, validationStarted, libsObject });
         });
       });

@@ -1,8 +1,7 @@
 import { fieldsSetupValidation, setupField, setupStaticFields } from './setupFields';
 import { DynamicGroup } from '../../components/form/DynamicGroup';
 
-export const initForm = (formElementSelector) => {
-  const formElement = document.querySelector(formElementSelector);
+export const initForm = (formElement) => {
   if (formElement) {
     let validationStarted = false;
     let dynamicFieldCounter = 0;

@@ -170,7 +170,8 @@
     }
   }
   sl-input,
-  div.form__input {
+  div.form__input,
+  .form__field-dropdown {
     position: relative;
     width: 100%;
     border-radius: 10px;
@@ -240,7 +241,9 @@
   &__field {
     &-dropdown {
       position: relative;
-      width: 100%;
+      .form__field {
+        width: 100%;
+      }
 
       &::part(base) {
         --max-width: 100%;
