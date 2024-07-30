@@ -1,0 +1,40 @@
+<% if(env.tooltip){ %><sl-tooltip trigger="manual" class="manual-tooltip" hoist placement="top"><% } %>
+  <% if(env.label){ %>
+    <label
+      <% if(env.id){ %>for="<%=env.id%>" <% } %>
+    >
+      <%=env.label%>
+    </label>
+    <% } %>
+  <input 
+    <% if(env.classes){ %>class="<%=env.classes%>" <% } %>
+    <% if(env.initParams){ %>data-params="<%=env.initParams%>" <% } %>
+    <% if(env.name){ %>name="<%=env.name%>" <% } %>
+    <% if(env.id){ %>id="<%=env.id%>" <% } %>
+    <% if(env.value){ %>value="<%=env.value%>" <% } %>
+    <% if(env.type){ %>type="<%=env.type%>" <% } %>
+    <% if(env.readonly){ %>readonly="<%=env.readonly%>" <% } %>
+    <% if(env.placeholder){ %>placeholder="<%=env.placeholder%>" <% } %>
+  />
+  <div class="block-drop-down" slot="content">
+    <div class="passenger">
+      <div class="drop-passenger-title">Passenger</div>
+      
+
+    </div>
+    <div class="class_f">
+      <div class="drop-passenger-title">Class</div>
+      <div class="class_field">
+        <div class="form_radio_btn">
+          <input id="radio-1" type="radio" name="type_ticket" value="Business" checked="true" />
+          <label for="radio-1">Business</label>
+        </div>
+        <div class="form_radio_btn">
+          <input id="radio-2" type="radio" name="type_ticket" value="First" />
+          <label for="radio-2">First</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include('templates/layouts/tooltips/fieldTooltip.ejs') %>
+  <% if(env.tooltip){ %></sl-tooltip><% } %>

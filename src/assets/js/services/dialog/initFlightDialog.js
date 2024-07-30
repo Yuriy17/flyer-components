@@ -4,7 +4,9 @@ import { initTriggerButton } from './initTriggerButton';
 
 export const initFlightDialog = async () => {
   const dialogFlight = document.querySelector('.dialog-flight');
-
+  const closeButton = dialogFlight.querySelector('.icon-menu');
+  
+  closeButton.addEventListener('click', () => dialogFlight.hide());
   initTriggerButton({ dialogFlight });
   // await initMainForm(); 
 

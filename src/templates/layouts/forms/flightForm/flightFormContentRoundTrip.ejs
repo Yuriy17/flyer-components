@@ -28,12 +28,10 @@
       }
     }) %>
   </div>
-<!-- Date
-13 Apr 2024 – 20 Apr 2024 -->
   <%- include('templates/components/form/formField.ejs', {
     env: {
       staticContentPath: 'templates/layouts/formFields/dateField.ejs',
-      classes: 'form__input',
+      classes: 'form__input form__date',
       validate: 'required;date:2',
       inputProps: {
         name: 'date',
@@ -48,7 +46,26 @@
 
 <!-- Passenger
 1 | Business Class -->
-
+  <%- include('templates/components/form/formField.ejs', {
+    env: {
+      staticContentPath: 'templates/layouts/formFields/passengerField.ejs',
+      classes: 'form__input form__passenger',
+      validate: 'required;',
+      inputProps: {
+        tooltip: 'true',
+        name: 'passenger',
+        id: 'contactsPassenger',
+        label: 'Passenger',
+        value: '1 | Business Class',
+        readonly: "readonly",
+        passengersData: [
+          { label: 'Adults', aged: '(12+ years)', id: 'adults', value: '1', class: 'adults' },
+          { label: 'Children', aged: '(2-11 years)', id: 'children', value: '0', class: 'children' },
+          { label: 'Infants', aged: '(Under 2 years)', id: 'infants', value: '0', class: 'infants' },
+        ]
+      }
+    }
+  }) %>
 
   <%- include('templates/components/inputs/slInput.ejs', {
     env: {

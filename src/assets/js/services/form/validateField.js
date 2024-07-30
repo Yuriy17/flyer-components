@@ -1,6 +1,7 @@
 import { validationRules } from './validationRules.js';
 
 export const validateField = ({ field, rules, infoElement, libsObject }) => {
+  console.log("🚀 ~ validateField ~ libsObject:", libsObject);
   let input = field;
   if (field.tagName === 'DIV') {
     input = field.querySelector('input');

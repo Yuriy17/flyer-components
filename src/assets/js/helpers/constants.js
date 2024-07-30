@@ -70,6 +70,7 @@ export const ShoelaceComponents = {
   select: 'select',
   textarea: 'textarea',
   tabGroup: 'tabGroup',
+  details: 'details',
 };
 export const gridBreakpoints = {
   xs: 0,

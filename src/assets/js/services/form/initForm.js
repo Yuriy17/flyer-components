@@ -9,12 +9,10 @@ export const initForm = (formElementSelector) => {
 
     // Initialize all static fields
     const libsObject = setupStaticFields({
-      fieldNames: ['phone', 'date'],
+      fieldNames: ['phone', 'date', 'passenger'],
       formElement,
-      validationStarted,
     });
 
-    console.log("🚀 ~ initForm ~ libsObject:", libsObject);
     const setupDynamicGroup = (groupIndex) => {
       DynamicGroup({
         parentElement: document.getElementById('dynamicFields'),
@@ -66,6 +64,7 @@ export const initForm = (formElementSelector) => {
         addListener: !validationStarted,
         libsObject,
       });
+      formElement.dataset.validationStarted = 'true';
       validationStarted = true;
       alert(`Form is ${isFormValid ? 'valid' : 'invalid'}`);
 

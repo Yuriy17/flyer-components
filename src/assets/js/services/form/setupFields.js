@@ -6,37 +6,49 @@ import { validateField } from './validateField';
 import { initTelInput } from '../initTelInput';
 import { airLlocale, airMinDate, airStartDate } from '../../helpers/constants';
 
-export const setupField = ({ formElement, fieldName, validationStarted }) => {
+export const setupField = ({ formElement, fieldName }) => {
   const field = formElement.querySelector(`[name="${fieldName}"]`);
   let fieldObject;
 
-  if (field) {
-    if (fieldName.includes('phone')) {
+  if(field) {
+    const fieldBlock = field.parentElement;
+    if(fieldName.includes('phone')) {
       // Initialize intl-tel-input for phone fields
       fieldObject = initTelInput(field);
       field.addEventListener('blur', () =>
         checkFieldRules({
           field,
-          validationStarted,
+          validationStarted: !!formElement.dataset.validationStarted,
         })
       );
-    } else if (fieldName.includes('date')) {
+    } else if(fieldName.includes('date')) {
+      
       const dateConfig = {
         locale: airLlocale,
         startDate: airStartDate,
         minDate: airMinDate,
         onSelect: ({ date, formattedDate, datepicker }) => {
-          console.log("🚀 ~ setupField ~ formattedDate:", formattedDate);
-          console.log("🚀 ~ setupField ~ date:", date);
-          console.log("🚀 ~ setupField ~ field:", field.value);
-          console.log('🚀 ~ setupField ~ datepicker:', datepicker.selectedDates);
+          // console.log('🚀 ~ setupField ~ formattedDate:', formattedDate);
+          // console.log('🚀 ~ setupField ~ date:', date);
+          // console.log('🚀 ~ setupField ~ field:', field.value);
+          // console.log('🚀 ~ setupField ~ datepicker:', datepicker.selectedDates);
           // console.log('🚀 ~ setupField ~ datepicker:', datepicker.formatDate(datepicker.viewDate, ));
 
-        }
+          // const x = checkFieldRules({
+          //   field,
+          //   validationStarted: !!formElement.dataset.validationStarted,
+          //   libsObject: datepicker,
+          // });
+          // console.log("🚀 ~ setupField ~ x:", x);
+          console.log("🚀 ~ setupField ~ field:", field);
+          field.dispatchEvent(new Event('change'));
+        },
+        onShow: (isFinished) => isFinished || fieldBlock.classList.add('active'),
+        onHide: (isFinished) => isFinished || fieldBlock.classList.remove('active'),
       };
       const { params } = field.dataset;
 
-      if (params) {
+      if(params) {
         const paramsRules = params.split(';');
         paramsRules.forEach((rule) => {
           const [ruleName, ruleValue] = rule.split(':');
@@ -48,42 +60,52 @@ export const setupField = ({ formElement, fieldName, validationStarted }) => {
       // Initialize AirDatepicker for date fields
       fieldObject = new AirDatepicker(field, dateConfig);
       console.log("🚀 ~ setupField ~ fieldObject:", fieldObject);
-      field.addEventListener('focus', () => fieldObject.show());
-      field.addEventListener('blur', () =>
-        checkFieldRules({
-          field,
-          validationStarted,
-        })
-      );
+
+    } else if(fieldName.includes('passenger')) { 
+      field.addEventListener('click', () => (fieldBlock.open = !fieldBlock.open));;
+      console.log("🚀 ~ setupField ~ fieldBlock:", fieldBlock);
+
+      
     }
   }
   return fieldObject;
 };
 
-export const setupStaticFields = ({ formElement, fieldNames, validationStarted }) => {
+export const setupStaticFields = ({ formElement, fieldNames }) => {
   const resultLibsObject = {};
   fieldNames.forEach((fieldName) => {
-    resultLibsObject[fieldName] = setupField({ formElement, fieldName, validationStarted });
+    resultLibsObject[fieldName] = setupField({ formElement, fieldName });
   });
 
   return resultLibsObject;
 };
 
 export const checkFieldRules = ({ field, validationStarted, libsObject }) => {
-  if (validationStarted) {
-    const rules = field.getAttribute('data-validate').split(';');
+  console.log("🚀 ~ checkFieldRules ~ validationStarted:", validationStarted);
+  if(validationStarted) {
+
+    const rules = field.dataset.validate?.split(';');
+    console.log("🚀 ~ checkFieldRules ~ rules:", rules);
     // const {parentElement} = input.getAttribute('type') === 'phone' ? input.parentElement : input;
     const infoElement = field.querySelector('sl-tooltip');
-    return validateField({ field, rules, infoElement, libsObject });
+    return rules && validateField({ field, rules, infoElement, libsObject });
   }
 };
 export const fieldsSetupValidation = ({ fields, validationStarted, trigger, addListener, libsObject }) => {
   if (fields && fields.length) {
     if (addListener) {
       fields.forEach((field) => {
+        const isSlComponent = field.tagName.includes('SL-');
         let isTextType = false;
-        let eventName;
-        switch (field.getAttribute('type')) {
+        let eventName, input;
+
+        if (isSlComponent) {
+          input = field;
+        } else {
+          input = field.querySelector('> input');
+        }
+
+        switch (input.getAttribute('type')) {
           case 'text':
           case 'number':
           case 'email':
@@ -98,12 +120,14 @@ export const fieldsSetupValidation = ({ fields, validationStarted, trigger, addL
         }
 
         if (isTextType) {
-          eventName = field.tagName.includes('SL-') ? 'sl-input' : 'input';
+          eventName = isSlComponent ? 'sl-input' : 'input';
         } else {
-          eventName = field.tagName.includes('SL-') ? 'sl-change' : 'change';
+          eventName = isSlComponent ? 'sl-change' : 'change';
         }
 
-        field.addEventListener(eventName, () => checkFieldRules({ field, validationStarted, libsObject }));
+        input.addEventListener(eventName, () => {
+          checkFieldRules({ field, validationStarted, libsObject });
+        });
       });
     }
 
