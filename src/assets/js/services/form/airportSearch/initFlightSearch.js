@@ -1,14 +1,19 @@
 import { airDates } from 'src/assets/js/helpers/constants';
 
-function sumPassenger({ containerElement }) {
-  containerElement.querySelectorAll('.number_passengers-all').forEach((el) => {
-    let sum = 0;
-    let quantities = el.closest('.block_arrow').querySelectorAll('.quantity');
-    quantities.forEach((quantity) => {
-      sum += Number(quantity.value);
-    });
-    el.innerHTML = sum;
+function sumPassenger({ allPassengersInputElement, passengerCountElements }) {
+  const values = allPassengersInputElement.value.split('|');
+  console.log("🚀 ~ sumPassenger ~ values:", values);
+
+  let sum = 0;
+  passengerCountElements.forEach((passengerCountElement) => {
+    const input = passengerCountElement.querySelector('.passenger-count__number-label input');
+    console.log("🚀 ~ passengerCountElements.forEach ~ input:", input);
+    console.log("🚀 ~ passengerCountElements.forEach ~ Number(input.value):", Number(input.value));
+    sum += Number(input.value);
   });
+  console.log("🚀 ~ passengerCountElements.forEach ~ sum:", sum);
+  allPassengersInputElement.value = `${sum.toString()} |${values[1]}`;
+  console.log("🚀 ~ sumPassenger ~ allPassengersInputElement.value:", allPassengersInputElement.value);
 }
 // function changeFlyTripType(el) {
 //   el.nextElementSibling.classList.add('active_radio');
@@ -58,7 +63,7 @@ function sumPassenger({ containerElement }) {
 //       document.querySelector('.btn_add').addEventListener('click', () => add_flight_row('', '', '', '', '', '', '', '', ''));
 //     }
 //   }
-// }
+
 export const initFlightSearch = ({ containerElement }) => {
   if (containerElement) {
     const dialogFlightForms = containerElement.querySelectorAll('.dialog-flight__form.form');
@@ -78,15 +83,15 @@ export const initFlightSearch = ({ containerElement }) => {
 
               const btMinus = passengerCountElement.querySelector('.bt_minus');
               const btPlus = passengerCountElement.querySelector('.bt_plus');
-              const input = parent.querySelector('.passenger-count__number-label input');
+              const input = passengerCountElement.querySelector('.passenger-count__number-label input');
               const updatePassengerCount = ({ increment }) => {
                 let count = Number(input.value) + increment;
                 if (input.getAttribute('name') === 'adults' && count < 1) {
                   count = 1;
                 }
                 input.value = Math.max(0, count);
-                input.closest('.quantity_inner').querySelector('.quantity_label').innerHTML = input.value;
-                sumPassenger({ dialogFlightForm });
+                console.log("🚀 ~ updatePassengerCount ~ count:", count);
+                sumPassenger({ allPassengersInputElement, passengerCountElements });
               };
 
               btMinus &&
