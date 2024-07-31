@@ -1,0 +1,78 @@
+<%- include('templates/components/form/formField.ejs', {
+  env: {
+    staticContentPath: 'templates/layouts/formFields/passengerField.ejs',
+    classes: 'form__input form__passenger',
+    staticDropdownContentObject: {
+      dropdownContentPath: 'templates/layouts/dropdowns/passengerDropdownContent.ejs',
+      passengersData: [
+        { label: 'Adults', aged: '(12+ years)', id: 'adults', value: '1', class: 'adults' },
+        { label: 'Children', aged: '(2-11 years)', id: 'children', value: '0', class: 'children' },
+        { label: 'Infants', aged: '(Under 2 years)', id: 'infants', value: '0', class: 'infants' },
+      ],
+    },
+    inputProps: {
+      name: 'passenger',
+      id: `${env.formName}Passenger`,
+      label: 'Passenger',
+      value: '1 | Business Class',
+      readonly: "readonly"
+    }
+  }
+}) %>
+
+<%- include('templates/components/inputs/slInput.ejs', {
+  env: {
+    staticContentObject: {
+      tooltipPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+    },
+    classes: 'form__input form__field',
+    name: 'first-name',
+    id: `${env.formName}FirstName`,
+    validate: 'minLength:2;required;letters',
+    label: 'First name',
+    placeholder: 'Enter first name',
+    autocomplete: true
+  }
+}) %>
+
+<%- include('templates/components/inputs/slInput.ejs', {
+  env: {
+    staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+    classes: 'form__input form__field',
+    name: 'last-name',
+    id: `${env.formName}LastName`,
+    validate: 'minLength:2;required;letters',
+    label: 'Last name',
+    placeholder: 'Enter last name',
+    autocomplete: true
+  }
+}) %>
+
+<%- include('templates/components/form/formField.ejs', {
+  env: {
+    staticContentPath: 'templates/layouts/formFields/phoneField.ejs',
+    classes: 'form__input',
+    validate: 'required;phone',
+    inputProps: {
+      type: "tel",
+      name: 'phone',
+      id: `${env.formName}PhoneNumber`,
+      label: 'Phone number',
+      placeholder: '+1 XXX-XXX-XXXX',
+    }
+  }
+}) %>
+
+
+<%- include('templates/components/inputs/slInput.ejs', {
+  env: {
+    staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+    classes: 'form__input form__field',
+    name: 'email',
+    id: `${env.formName}Email`,
+    validate: 'email;required',
+    label: 'Email address',
+    placeholder: 'Enter your email address',
+    autocomplete: true
+  }
+}) %>

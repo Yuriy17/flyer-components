@@ -5,8 +5,8 @@
       <% if(env.passengersData.length){ %>
         <% for(var i=0; i < env.passengersData.length; i++) { %>
           <%- include('templates/layouts/dropdowns/passengerCount.ejs', { env: env.passengersData[i] }) %>
-            <% } %>
-              <% } %>
+        <% } %>
+      <% } %>
     </div>
   </div>
   <sl-radio-group class="passenger-block__class" label="Class" name="type_ticket" value="Business Class">

@@ -1,143 +1,15 @@
 <div class="form__fields">
-  <div class="form__fields-search">
-    <%- include('templates/components/inputs/slInput.ejs', {
-      env: {
-        staticContentObject: {
-          tooltipPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
-          path: 'templates/layouts/formFields/fromHiddenInputs.ejs',
-          pathObject: {
-            last_row_container_fields: '0',
-            cityAirportVal: '',
-            cityCodeVal: '',
-            originEntityIdVal: '',
-          }
-        },
-        classes: 'form__input form__field',
-        name: 'flight[0]["from"]',
-        id: 'contactsFirstName',
-        validate: 'minLength:2;required;letters',
-        label: 'From',
-        placeholder: 'New York (NY)',
-        autocomplete: true
-      }
-    }) %>
-    <button class="form__exchange-button">
-      <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/exchange.svg" alt="">
-    </button>
-    <%- include('templates/components/inputs/slInput.ejs', {
-      env: {
-        staticContentObject: {
-          tooltipPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
-          pathObject: {
-            last_row_container_fields: '0',
-            path: 'templates/layouts/formFields/toHiddenInputs.ejs',
-            cityAirportToVal: '',
-            cityCodeToVal: '',
-            destinationEntityId: '',
-          }
-        },
-        classes: 'form__input form__field',
-        name: 'flight[0]["to"]',
-        id: 'contactsTo',
-        validate: 'minLength:2;required;letters',
-        label: 'To',
-        placeholder: 'Los Angeles (LA)',
-        autocomplete: true
-      }
-    }) %>
-  </div>
-  <%- include('templates/components/form/formField.ejs', {
+  <%- include('templates/layouts/forms/flightForm/dynamicGroupContent.ejs', {
     env: {
-      staticContentPath: 'templates/layouts/formFields/dateField.ejs',
-      classes: 'form__input form__date',
-      validate: 'required;date:2',
-      inputProps: {
-        name: 'date',
-        id: 'contactsDate',
-        label: 'Date',
-        readonly: "readonly",
-        placeholder: '13 Apr 2024 – 20 Apr 2024',
-        initParams: 'autoClose:true;addon:right;multipleDatesSeparator: – ;range;dateFormat:d MMM yyyy'
-      }
+      groupIndex: 0,
+      dateCount: 2,
+      formName: env.formName
     }
   }) %>
 
-  <%- include('templates/components/form/formField.ejs', {
+  <%- include('templates/layouts/forms/flightForm/staticContent.ejs', {
     env: {
-      staticContentPath: 'templates/layouts/formFields/passengerField.ejs',
-      classes: 'form__input form__passenger',
-      staticDropdownContentObject: {
-        dropdownContentPath: 'templates/layouts/dropdowns/passengerDropdownContent.ejs',
-        passengersData: [
-          { label: 'Adults', aged: '(12+ years)', id: 'adults', value: '1', class: 'adults' },
-          { label: 'Children', aged: '(2-11 years)', id: 'children', value: '0', class: 'children' },
-          { label: 'Infants', aged: '(Under 2 years)', id: 'infants', value: '0', class: 'infants' },
-        ],
-      },
-      inputProps: {
-        name: 'passenger',
-        id: 'contactsPassenger',
-        label: 'Passenger',
-        value: '1 | Business Class',
-        readonly: "readonly"
-      }
-    }
-  }) %>
-
-  <%- include('templates/components/inputs/slInput.ejs', {
-    env: {
-      staticContentObject: {
-        tooltipPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
-      },
-      classes: 'form__input form__field',
-      name: 'first-name',
-      id: 'contactsFirstName',
-      validate: 'minLength:2;required;letters',
-      label: 'First name',
-      placeholder: 'Enter first name',
-      autocomplete: true
-    }
-  }) %>
-
-  <%- include('templates/components/inputs/slInput.ejs', {
-    env: {
-      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
-      classes: 'form__input form__field',
-      name: 'last-name',
-      id: 'contactsLastName',
-      validate: 'minLength:2;required;letters',
-      label: 'Last name',
-      placeholder: 'Enter last name',
-      autocomplete: true
-    }
-  }) %>
-
-  <%- include('templates/components/form/formField.ejs', {
-    env: {
-      staticContentPath: 'templates/layouts/formFields/phoneField.ejs',
-      classes: 'form__input',
-      validate: 'required;phone',
-      inputProps: {
-        type: "tel",
-        name: 'phone',
-        id: 'contactsPhoneNumber',
-        label: 'Phone number',
-        placeholder: '+1 XXX-XXX-XXXX',
-      }
-    }
-  }) %>
-
-
-  <%- include('templates/components/inputs/slInput.ejs', {
-    env: {
-      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
-      classes: 'form__input form__field',
-      name: 'email',
-      id: 'contactsEmail',
-      validate: 'email;required',
-      label: 'Email address',
-      placeholder: 'Enter your email address',
-      autocomplete: true
+      formName: env.formName
     }
   }) %>
 

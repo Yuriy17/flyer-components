@@ -1,19 +1,19 @@
 <div class="hidden-inputs">
   <input
-    name="flight[<%= env.last_row_container_fields %>]['cityAirport']"
+    name="flight[<%= env.groupIndex %>]['cityAirport']"
     type="hidden"
     class="cityAirport input_airport"
     value='<%= env.cityAirportVal %>'
   />
   <input
-    name="flight[<%= env.last_row_container_fields %>]['cityCode']"
+    name="flight[<%= env.groupIndex %>]['cityCode']"
     type="hidden"
     class="cityCode"
     data-validation="required"
     value='<%= env.cityCodeVal %>'
   />
   <input
-    name="flight[<%= env.last_row_container_fields %>]['originEntityId']"
+    name="flight[<%= env.groupIndex %>]['originEntityId']"
     type="hidden"
     class="originEntityId"
     value='<%= env.originEntityIdVal %>'
