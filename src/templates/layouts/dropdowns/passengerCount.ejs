@@ -13,11 +13,8 @@
         <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/rounded-minus.svg" alt=" rounded minus">
       </div>
       <div class="passenger-count__number-label">
-        <input id="<%= env.id %>" name="<%= env.id %>" type="hidden" value="<%= env.value %>"
+        <input id="<%= env.id %>" name="<%= env.id %>" value="<%= env.value %>"
           class="passenger-count__number-input <%= env.class %>" />
-        <label for="<%= env.id %>" class="passenger-count__number-input-label">
-          <%= env.value %>
-        </label>
       </div>
       <div class="bt_plus">
         <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/rounded-plus.svg" alt="rounded plus">

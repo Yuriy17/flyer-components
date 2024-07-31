@@ -51,6 +51,9 @@
 
   &__number-label {
     margin: 0;
+    width: 24px;
+    display: flex;
+    justify-content: center;
   }
 
   // .passenger-count__number-input
@@ -63,6 +66,10 @@
     font-weight: 500;
     line-height: normal;
     margin: 0;
+    width: auto;
+    max-width: 100%;
+    text-align: center;
+    border: none;
   }
 
   // .passenger-count__number-input-label
