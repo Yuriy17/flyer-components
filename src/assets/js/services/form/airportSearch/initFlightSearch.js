@@ -1,20 +1,3 @@
-import { airDates } from 'src/assets/js/helpers/constants';
-
-function sumPassenger({ allPassengersInputElement, passengerCountElements }) {
-  const values = allPassengersInputElement.value.split('|');
-  console.log("🚀 ~ sumPassenger ~ values:", values);
-
-  let sum = 0;
-  passengerCountElements.forEach((passengerCountElement) => {
-    const input = passengerCountElement.querySelector('.passenger-count__number-label input');
-    console.log("🚀 ~ passengerCountElements.forEach ~ input:", input);
-    console.log("🚀 ~ passengerCountElements.forEach ~ Number(input.value):", Number(input.value));
-    sum += Number(input.value);
-  });
-  console.log("🚀 ~ passengerCountElements.forEach ~ sum:", sum);
-  allPassengersInputElement.value = `${sum.toString()} |${values[1]}`;
-  console.log("🚀 ~ sumPassenger ~ allPassengersInputElement.value:", allPassengersInputElement.value);
-}
 // function changeFlyTripType(el) {
 //   el.nextElementSibling.classList.add('active_radio');
 //   if (document.querySelector('.btn_add')) {
@@ -69,72 +52,75 @@ export const initFlightSearch = ({ containerElement }) => {
     const dialogFlightForms = containerElement.querySelectorAll('.dialog-flight__form.form');
 
     if (dialogFlightForms && dialogFlightForms.length) {
+      const sumPassenger = ({ allPassengersInputElement, passengerCountElements }) => {
+        const allPassengerValues = allPassengersInputElement.value.split('|');
+
+        let sum = 0;
+        passengerCountElements.forEach((passengerCountElement) => {
+          const input = passengerCountElement.querySelector('.passenger-count__number-label input');
+          sum += Number(input.value);
+        });
+        allPassengersInputElement.value = `${sum.toString()} |${allPassengerValues[1]}`;
+      };
+      const updatePassengerCount = ({ increment, input, allPassengersInputElement, passengerCountElements }) => {
+        let count = Number(input.value) + increment;
+        if (input.getAttribute('name') === 'adults' && count < 1) {
+          count = 1;
+        }
+        input.value = Math.max(0, count);
+        sumPassenger({ allPassengersInputElement, passengerCountElements });
+      };
+
+      const handleRadioChange = ({ value, allPassengersInputElement }) => {
+        const allPassengerValues = allPassengersInputElement.value.split('|');
+        allPassengersInputElement.value = `${allPassengerValues[0]}| ${value}`;
+      };
+
       dialogFlightForms.forEach((dialogFlightForm) => {
         const allPassengersFieldElement = dialogFlightForm.querySelector('.form__passenger');
 
         if (allPassengersFieldElement) {
+          const radioTypeTickets = dialogFlightForm.querySelector('.passenger-block__class');
           const allPassengersInputElement = allPassengersFieldElement.querySelector('input');
           const passengersDropdownElement = allPassengersFieldElement.parentElement;
           const passengerCountElements = passengersDropdownElement.querySelectorAll('.passenger-count');
 
+          radioTypeTickets &&
+            radioTypeTickets.addEventListener('sl-change', (e) => {
+              const { value } = e.currentTarget;
+              handleRadioChange({ value, allPassengersInputElement });
+            });
           if (passengerCountElements && passengerCountElements.length) {
             for (let index = 0; index < passengerCountElements.length; index++) {
               const passengerCountElement = passengerCountElements[index];
-
               const btMinus = passengerCountElement.querySelector('.bt_minus');
               const btPlus = passengerCountElement.querySelector('.bt_plus');
               const input = passengerCountElement.querySelector('.passenger-count__number-label input');
-              const updatePassengerCount = ({ increment }) => {
-                let count = Number(input.value) + increment;
-                if (input.getAttribute('name') === 'adults' && count < 1) {
-                  count = 1;
-                }
-                input.value = Math.max(0, count);
-                console.log("🚀 ~ updatePassengerCount ~ count:", count);
-                sumPassenger({ allPassengersInputElement, passengerCountElements });
-              };
 
               btMinus &&
                 btMinus.addEventListener('click', () => {
-                  updatePassengerCount({ increment: -1 });
+                  updatePassengerCount({ increment: -1, input, allPassengersInputElement, passengerCountElements });
                 });
 
               btPlus &&
                 btPlus.addEventListener('click', () => {
                   const totalPassengers = Number(allPassengersInputElement.value.split('|')[0]);
-                  console.log('🚀 ~ item.addEventListener ~ totalPassengers:', totalPassengers);
                   if (totalPassengers < 8) {
-                    updatePassengerCount({ increment: 1 });
+                    updatePassengerCount({ increment: 1, input, allPassengersInputElement, passengerCountElements });
                   }
                 });
             }
           }
         }
 
-        const handleRadioChange = (item, radioTypeTickets) => {
-          radioTypeTickets.forEach((el) => el.querySelector('input[type="radio"]').removeAttribute('checked'));
-          const itemValue = item.querySelector('input[type="radio"]').value;
-          dialogFlightForm.querySelector('.flight_class').textContent = itemValue;
-
-          radioTypeTickets.forEach((el) => {
-            const label = el.querySelector('label');
-            label.classList.remove('active_radio');
-            if (el.querySelector('input[type="radio"]').value === itemValue) {
-              el.querySelector('input[type="radio"]').setAttribute('checked', true);
-              label.classList.add('active_radio');
-            }
-          });
-        };
-
-        const radioTypeTickets = dialogFlightForm.querySelectorAll('.form_radio_btn');
-        radioTypeTickets.forEach((item) => {
-          item.addEventListener('click', () => handleRadioChange(item, radioTypeTickets));
-          if (item.querySelector('input[type="radio"]').checked) {
-            item.querySelector('label').classList.add('active_radio');
-          } else {
-            item.querySelector('label').classList.remove('active_radio');
-          }
-        });
+        // radioTypeTickets.forEach((item) => {
+        //   item.addEventListener('click', () => handleRadioChange(item, radioTypeTickets));
+        //   if (item.querySelector('input[type="radio"]').checked) {
+        //     item.querySelector('label').classList.add('active_radio');
+        //   } else {
+        //     item.querySelector('label').classList.remove('active_radio');
+        //   }
+        // });
 
         // const flyTripTypeElements = containerElement.querySelectorAll('input[name=fly_trip_type]');
         // flyTripTypeElements.forEach((el) => {

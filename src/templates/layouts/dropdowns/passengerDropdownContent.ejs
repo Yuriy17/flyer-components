@@ -1,40 +1,38 @@
-<div class="passenger-block" >
+<div class="passenger-block">
   <div class="passenger-block__count">
     <p class="passenger-block__count-title">Passenger</p>
     <div class="passenger-block__count-fields">
       <% if(env.passengersData.length){ %>
         <% for(var i=0; i < env.passengersData.length; i++) { %>
-          <%- include('templates/layouts/dropdowns/passengerCount.ejs', { 
-            env: env.passengersData[i] 
-          }) %>
-        <% } %>
-      <% } %>
+          <%- include('templates/layouts/dropdowns/passengerCount.ejs', { env: env.passengersData[i] }) %>
+            <% } %>
+              <% } %>
     </div>
   </div>
-  <sl-radio-group class="passenger-block__class" label="Class" name="type_ticket" value="Business">
-    <sl-radio class="passenger-radio" value="Premium">
-        <p class="passenger-radio__title">Premium Economy</p>
-        <p class="passenger-radio__text">
-          <span>from</span>
-          <span class="passenger-radio__price">$1,289</span>
-          <span>per treveler</span>
-        </p>
+  <sl-radio-group class="passenger-block__class" label="Class" name="type_ticket" value="Business Class">
+    <sl-radio class="passenger-radio" value="Premium Economy">
+      <p class="passenger-radio__title">Premium Economy</p>
+      <p class="passenger-radio__text">
+        <span>from</span>
+        <span class="passenger-radio__price">$1,289</span>
+        <span>per treveler</span>
+      </p>
     </sl-radio>
-    <sl-radio class="passenger-radio" value="Business">
-        <p class="passenger-radio__title">Business Class</p>
-        <p class="passenger-radio__text">
-          <span>from</span>
-          <span class="passenger-radio__price">$1,289</span>
-          <span>per treveler</span>
-        </p>
+    <sl-radio class="passenger-radio" value="Business Class">
+      <p class="passenger-radio__title">Business Class</p>
+      <p class="passenger-radio__text">
+        <span>from</span>
+        <span class="passenger-radio__price">$1,289</span>
+        <span>per treveler</span>
+      </p>
     </sl-radio>
-    <sl-radio class="passenger-radio" value="First">
-        <p class="passenger-radio__title">First Class</p>
-        <p class="passenger-radio__text">
-          <span>from</span>
-          <span class="passenger-radio__price">$1,289</span>
-          <span>per treveler</span>
-        </p>
+    <sl-radio class="passenger-radio" value="First Class">
+      <p class="passenger-radio__title">First Class</p>
+      <p class="passenger-radio__text">
+        <span>from</span>
+        <span class="passenger-radio__price">$1,289</span>
+        <span>per treveler</span>
+      </p>
     </sl-radio>
   </sl-radio-group>
 </div>
