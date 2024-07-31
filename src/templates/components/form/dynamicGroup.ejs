@@ -1,4 +1,34 @@
 <div class="dynamic-group container-field-row">
+  <%- include('templates/layouts/forms/flightForm/dynamicGroupContent.ejs', {
+    env: {
+      groupIndex: env.groupIndex,
+      dateCount: env.dateCount,
+      formName: env.formName
+    }
+  }) %>
+  <div class="dynamic-group__buttons">
+    <div class="dynamic-group__button-block">
+      <%- include('templates/components/button/slButton.ejs', {
+        env: {
+          classes: 'btn-sm dynamic-group__button',
+          variant: 'primary',
+          content: 'Add flight',
+          outline: 'true'
+        }
+      }) %>
+    </div>
+    <div class="dynamic-group__button-block">
+      <%- include('templates/components/button/slButton.ejs', {
+        env: {
+          classes: 'btn-sm dynamic-group__button',
+          variant: 'warning',
+          content: 'Delete',
+        }
+      }) %>
+    </div>
+  </div>
+</div>
+
   <!-- <div class="form__field">
     <sl-input label="Dynamic Field" class="dynamic-input" name="dynamicField<%= env.groupIndex %>"
       data-validate="required"></sl-input>
@@ -22,4 +52,3 @@
     <div class="error-message"></div>
   </div>
   <sl-button class="delete-button" type="button">Delete</sl-button> -->
-</div>

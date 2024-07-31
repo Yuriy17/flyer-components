@@ -1,0 +1,20 @@
+.dynamic-group {
+width: 100%;
+		// .dynamic-group__buttons
+
+		&__buttons {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		// .dynamic-group__button-block
+
+		&__button-block {
+			width: calc(50% - 4px);
+		}
+
+		&__button {
+			width: 100%;
+			max-width: 100%;
+		}
+}

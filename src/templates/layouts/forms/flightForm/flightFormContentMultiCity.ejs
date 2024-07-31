@@ -1,1 +1,24 @@
-multi city
+<div class="form__fields">
+  <%- include('templates/components/form/dynamicGroup.ejs', {
+    env: {
+      groupIndex: 0,
+      dateCount: 1,
+      formName: env.formName
+    }
+  }) %>
+
+  <%- include('templates/layouts/forms/flightForm/staticContent.ejs', {
+    env: {
+      formName: env.formName
+    }
+  }) %>
+</div>
+
+<%- include('templates/components/button/slButton.ejs', {
+  env: {
+    classes: 'btn-primary btn-xl',
+    type: 'submit',
+    variant: 'primary',
+    content: 'Submit',
+  }
+}) %>
