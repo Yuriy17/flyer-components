@@ -46,72 +46,77 @@
 //       document.querySelector('.btn_add').addEventListener('click', () => add_flight_row('', '', '', '', '', '', '', '', ''));
 //     }
 //   }
+const sumPassenger = ({ allPassengersInputElement, passengerCountElements }) => {
+  const allPassengerValues = allPassengersInputElement.value.split('|');
+
+  let sum = 0;
+  passengerCountElements.forEach((passengerCountElement) => {
+    const input = passengerCountElement.querySelector('.passenger-count__number-label input');
+    sum += Number(input.value);
+  });
+  allPassengersInputElement.value = `${sum.toString()} |${allPassengerValues[1]}`;
+};
+
+const updatePassengerCount = ({ increment, input, allPassengersInputElement, passengerCountElements }) => {
+  let count = Number(input.value) + increment;
+  if (input.getAttribute('name') === 'adults' && count < 1) {
+    count = 1;
+  }
+  input.value = Math.max(0, count);
+  sumPassenger({ allPassengersInputElement, passengerCountElements });
+};
+
+const handleRadioChange = ({ value, allPassengersInputElement }) => {
+  const allPassengerValues = allPassengersInputElement.value.split('|');
+  allPassengersInputElement.value = `${allPassengerValues[0]}| ${value}`;
+};
+const initDialogFlightForm = ({ dialogFlightForm }) => {
+  const allPassengersFieldElement = dialogFlightForm.querySelector('.form__passenger');
+
+  if (allPassengersFieldElement) {
+    const radioTypeTickets = dialogFlightForm.querySelector('.passenger-block__class');
+    const allPassengersInputElement = allPassengersFieldElement.querySelector('input');
+    const passengersDropdownElement = allPassengersFieldElement.parentElement;
+    const passengerCountElements = passengersDropdownElement.querySelectorAll('.passenger-count');
+
+    radioTypeTickets &&
+      radioTypeTickets.addEventListener('sl-change', (e) => {
+        const { value } = e.currentTarget;
+        handleRadioChange({ value, allPassengersInputElement });
+      });
+    if (passengerCountElements && passengerCountElements.length) {
+      for (let index = 0; index < passengerCountElements.length; index++) {
+        const passengerCountElement = passengerCountElements[index];
+        const btMinus = passengerCountElement.querySelector('.bt_minus');
+        const btPlus = passengerCountElement.querySelector('.bt_plus');
+        const input = passengerCountElement.querySelector('.passenger-count__number-label input');
+
+        btMinus &&
+          btMinus.addEventListener('click', () => {
+            updatePassengerCount({ increment: -1, input, allPassengersInputElement, passengerCountElements });
+          });
+
+        btPlus &&
+          btPlus.addEventListener('click', () => {
+            const totalPassengers = Number(allPassengersInputElement.value.split('|')[0]);
+            if (totalPassengers < 8) {
+              updatePassengerCount({ increment: 1, input, allPassengersInputElement, passengerCountElements });
+            }
+          });
+      }
+    }
+  }
+};
 
 export const initFlightSearch = ({ containerElement }) => {
   if (containerElement) {
     const dialogFlightForms = containerElement.querySelectorAll('.dialog-flight__form.form');
 
     if (dialogFlightForms && dialogFlightForms.length) {
-      const sumPassenger = ({ allPassengersInputElement, passengerCountElements }) => {
-        const allPassengerValues = allPassengersInputElement.value.split('|');
-
-        let sum = 0;
-        passengerCountElements.forEach((passengerCountElement) => {
-          const input = passengerCountElement.querySelector('.passenger-count__number-label input');
-          sum += Number(input.value);
-        });
-        allPassengersInputElement.value = `${sum.toString()} |${allPassengerValues[1]}`;
-      };
-      const updatePassengerCount = ({ increment, input, allPassengersInputElement, passengerCountElements }) => {
-        let count = Number(input.value) + increment;
-        if (input.getAttribute('name') === 'adults' && count < 1) {
-          count = 1;
-        }
-        input.value = Math.max(0, count);
-        sumPassenger({ allPassengersInputElement, passengerCountElements });
-      };
-
-      const handleRadioChange = ({ value, allPassengersInputElement }) => {
-        const allPassengerValues = allPassengersInputElement.value.split('|');
-        allPassengersInputElement.value = `${allPassengerValues[0]}| ${value}`;
-      };
-
       dialogFlightForms.forEach((dialogFlightForm) => {
-        const allPassengersFieldElement = dialogFlightForm.querySelector('.form__passenger');
-
-        if (allPassengersFieldElement) {
-          const radioTypeTickets = dialogFlightForm.querySelector('.passenger-block__class');
-          const allPassengersInputElement = allPassengersFieldElement.querySelector('input');
-          const passengersDropdownElement = allPassengersFieldElement.parentElement;
-          const passengerCountElements = passengersDropdownElement.querySelectorAll('.passenger-count');
-
-          radioTypeTickets &&
-            radioTypeTickets.addEventListener('sl-change', (e) => {
-              const { value } = e.currentTarget;
-              handleRadioChange({ value, allPassengersInputElement });
-            });
-          if (passengerCountElements && passengerCountElements.length) {
-            for (let index = 0; index < passengerCountElements.length; index++) {
-              const passengerCountElement = passengerCountElements[index];
-              const btMinus = passengerCountElement.querySelector('.bt_minus');
-              const btPlus = passengerCountElement.querySelector('.bt_plus');
-              const input = passengerCountElement.querySelector('.passenger-count__number-label input');
-
-              btMinus &&
-                btMinus.addEventListener('click', () => {
-                  updatePassengerCount({ increment: -1, input, allPassengersInputElement, passengerCountElements });
-                });
-
-              btPlus &&
-                btPlus.addEventListener('click', () => {
-                  const totalPassengers = Number(allPassengersInputElement.value.split('|')[0]);
-                  if (totalPassengers < 8) {
-                    updatePassengerCount({ increment: 1, input, allPassengersInputElement, passengerCountElements });
-                  }
-                });
-            }
-          }
-        }
+        initDialogFlightForm({
+          dialogFlightForm,
+        });
 
         // radioTypeTickets.forEach((item) => {
         //   item.addEventListener('click', () => handleRadioChange(item, radioTypeTickets));

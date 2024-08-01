@@ -20,12 +20,14 @@
       <% } %>
     </div>
     <div class="dynamic-group__button-block">
-      <% if(env.staticContentObject){ %>
-        <%- include(env.staticContentObject.buttonDelete.path, {
-          env: env.staticContentObject.buttonDelete.params
-        }) %>
-      <% } else if (env.buttonDelete) { %>
-        <%- env.buttonDelete %>
+      <% if(env.groupIndex > 0){ %>
+        <% if(env.staticContentObject){ %>
+          <%- include(env.staticContentObject.buttonDelete.path, {
+            env: env.staticContentObject.buttonDelete.params
+          }) %>
+        <% } else if (env.buttonDelete) { %>
+          <%- env.buttonDelete %>
+        <% } %>
       <% } %>
     </div>
   </div>

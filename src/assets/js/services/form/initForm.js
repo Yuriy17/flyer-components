@@ -4,24 +4,24 @@ import { fieldsSetupValidation, setupStaticFields } from './setupFields';
 export const initForm = (formElement) => {
   if (formElement) {
     let validationStarted = false;
-    let dynamicFieldCounter = 1;
+    let dynamicFieldCounter = 0;
 
     // Initialize all static fields
     const libsObject = setupStaticFields({
       fieldNames: ['phone', 'date', 'passenger'],
       formElement,
     });
-
-    const addFieldButton = formElement.querySelector('.dynamic-group__button-add');
-    addFieldButton &&
-      addFieldButton.addEventListener('click', () => {
-        addDynamicGroup({
-          groupIndex: dynamicFieldCounter,
-          formElement,
-          validationStarted,
-        });
-        dynamicFieldCounter++;
+    const addDynamicGroupCallback = () => {
+      addDynamicGroup({
+        groupIndex: dynamicFieldCounter,
+        formElement,
+        validationStarted,
       });
+      dynamicFieldCounter++;
+    };
+    addDynamicGroupCallback();
+    const addFieldButton = formElement.querySelector('.dynamic-group__button-add');
+    addFieldButton && addFieldButton.addEventListener('click', () => addDynamicGroupCallback());
 
     formElement.addEventListener('submit', (event) => {
       event.preventDefault();

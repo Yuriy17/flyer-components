@@ -11,12 +11,15 @@ import dateFieldTemplate from 'src/templates/layouts/formFields/dateField.ejs';
 import { insertPosition } from '../../helpers/constants';
 
 export const addDynamicGroup = ({ groupIndex, formElement, validationStarted }) => {
-  const parentElement = formElement.querySelector('.dynamic-groups');
+  let parentElement = formElement.querySelector('.dynamic-groups');
+  console.log("🚀 ~ addDynamicGroup ~ parentElement:", parentElement);
   const formName = formElement.getAttribute('id');
+  // const dynamicGroups = formElement.querySelectorAll('.dynamic-groups');
+  
   parentElement &&
     DynamicGroup({
       parentElement,
-      insertPositionType: insertPosition.afterbegin,
+      insertPositionType: insertPosition.beforebegin,
       templateProps: {
         groupIndex,
         dynamicContent: dynamicGroupContentTemplate({
@@ -72,33 +75,35 @@ export const addDynamicGroup = ({ groupIndex, formElement, validationStarted }) 
           }),
         }),
         buttonAdd: buttonTemplate({
-              classes: 'btn-prefix-icon dynamic-group__button dynamic-group__button-add',
-              icon: {
-                src: `${import.meta.env.VITE_STATIC_PATH}/icons/plus-blue.svg`,
-                slot: 'prefix',
-                alt: 'plus icon'
+          classes: 'btn-prefix-icon dynamic-group__button dynamic-group__button-add',
+          icon: {
+            src: `${import.meta.env.VITE_STATIC_PATH}/icons/plus-blue.svg`,
+            slot: 'prefix',
+            alt: 'plus icon',
           },
           variant: 'primary',
           content: 'Add flight',
           outline: 'true',
         }),
         buttonDelete: buttonTemplate({
-              classes: 'btn-prefix-icon dynamic-group__button dynamic-group__button-delete',
-              icon: {
-                src: `${import.meta.env.VITE_STATIC_PATH}/icons/trash-white.svg`,
-                slot: 'prefix',
-                alt: 'plus icon'
-              },          variant: 'danger',
+          classes: 'btn-prefix-icon dynamic-group__button dynamic-group__button-delete',
+          icon: {
+            src: `${import.meta.env.VITE_STATIC_PATH}/icons/trash-white.svg`,
+            slot: 'prefix',
+            alt: 'plus icon',
+          },
+          variant: 'danger',
           content: 'Delete',
         }),
       },
       isReturnElement: true,
       callbackAfterPaste: (dynamicGroup) => {
-        console.log('🚀 ~ setupDynamicGroup ~ dynamicGroup:', dynamicGroup);
         const deleteButton = dynamicGroup.querySelector('.dynamic-group__button-delete');
         deleteButton &&
           deleteButton.addEventListener('click', () => {
-            dynamicGroup.remove();
+            if(groupIndex > 0) {
+              dynamicGroup.remove();
+            }
           });
 
         const fields = dynamicGroup.querySelectorAll('[data-validate]');

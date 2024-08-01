@@ -1,48 +1,5 @@
 <div class="form__fields">
   <div class="dynamic-groups">
-    <%- include('templates/components/form/dynamicGroup.ejs', {
-      env: {
-        groupIndex: 0,
-        staticContentObject: {
-          dynamicGroupContent: {
-            path: 'templates/layouts/forms/flightForm/dynamicGroupContent.ejs',
-            params: {
-              static: true,
-              groupIndex: env.groupIndex,
-              dateCount: env.dateCount,
-              formName: env.formName
-            }
-          },
-          buttonAdd: {
-            path: 'templates/components/button/slButton.ejs',
-            params: {
-              variant: 'primary',
-              content: 'Add flight',
-              outline: 'true',
-              classes: 'btn-prefix-icon dynamic-group__button dynamic-group__button-add',
-              icon: {
-                src: `${process.env['VITE_STATIC_PATH']}/icons/plus-blue.svg`,
-                slot: 'prefix',
-                alt: 'plus icon'
-              }
-            }
-          },
-          buttonDelete: {
-            path: 'templates/components/button/slButton.ejs',
-            params: {
-              variant: 'danger',
-              content: 'Delete',
-              classes: 'btn-prefix-icon dynamic-group__button dynamic-group__button-delete',
-              icon: {
-                src: `${process.env['VITE_STATIC_PATH']}/icons/trash-white.svg`,
-                slot: 'prefix',
-                alt: 'plus icon'
-              }
-            }
-          }
-        }
-      }
-    }) %>
   </div>
 
   <%- include('templates/layouts/forms/flightForm/staticContent.ejs', {
