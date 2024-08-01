@@ -70,9 +70,15 @@ export default defineConfig(({ mode }) => {
               if (id.includes('intl-tel-input')) {
                 return 'intl-tel-input';
               }
+              if (id.includes('floating-ui')) {
+                return 'floating-ui';
+              }
               // TODO check where is lit
               if (id.includes('/lit/') || id.includes('/@lit/') || id.includes('/lit-html/') || id.includes('/lit-element/')) {
                 return 'lit';
+              }
+              if (id.includes('air-datepicker')) {
+                return 'air-datepicker';
               }
               // eslint-disable-next-line no-undef
               console.log('🚀 ~ defineConfig ~ vendor id:', id);
