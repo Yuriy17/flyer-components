@@ -9,6 +9,7 @@ import { airLlocale, airMinDate, airStartDate } from '../../helpers/constants';
 export const setupField = ({ formElement, fieldName }) => {
   const field = formElement.querySelector(`[name="${fieldName}"]`);
   let fieldObject;
+  console.log("🚀 ~ setupField ~ field:", field);
 
   if(field) {
     const fieldBlock = field.parentElement;

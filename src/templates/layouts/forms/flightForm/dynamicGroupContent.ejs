@@ -62,12 +62,12 @@
       validate: `required;date:${env.dateCount || 1}`,
       inputProps: {
         static: 'true',
-        name: `flight[${env.groupIndex}]['${env.dateCount > 1 ? 'dates' : 'date_start'}']`,
+        name: `flight[${env.groupIndex}]['date']`,
         id: `${env.formName}Date${env.groupIndex}`,
         label: 'Date',
         readonly: "readonly",
         placeholder: env.dateCount > 1 ? '13 Apr 2024 – 20 Apr 2024' : '13 Apr 2024',
-        initParams: 'autoClose:true;addon:right;multipleDatesSeparator: – ;range;dateFormat:d MMM yyyy'
+        initParams: `autoClose:true;addon:right;multipleDatesSeparator: – ;${env.dateCount > 1 ? 'range' : ''};dateFormat:d MMM yyyy`
       }
     }
   }) %>

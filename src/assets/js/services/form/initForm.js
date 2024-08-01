@@ -1,27 +1,37 @@
 import { addDynamicGroup } from './addDynamicGroup';
 import { fieldsSetupValidation, setupStaticFields } from './setupFields';
 
-export const initForm = (formElement) => {
+export const initForm = async (formElement) => {
   if (formElement) {
     let validationStarted = false;
     let dynamicFieldCounter = 0;
 
-    // Initialize all static fields
-    const libsObject = setupStaticFields({
-      fieldNames: ['phone', 'date', 'passenger'],
-      formElement,
-    });
-    const addDynamicGroupCallback = () => {
-      addDynamicGroup({
+    const addDynamicGroupCallback = async ({ dynamicGroupsElement }) => {
+      const dynamicField = await addDynamicGroup({
+        parentElement: dynamicGroupsElement,
         groupIndex: dynamicFieldCounter,
         formElement,
-        validationStarted,
       });
       dynamicFieldCounter++;
+      console.log('🚀 ~ addDynamicGroupCallback ~ dynamicField:', dynamicField);
+      return dynamicField;
     };
-    addDynamicGroupCallback();
-    const addFieldButton = formElement.querySelector('.dynamic-group__button-add');
-    addFieldButton && addFieldButton.addEventListener('click', () => addDynamicGroupCallback());
+    let libsObject;
+    const dynamicGroupsElement = formElement.querySelector('.dynamic-groups');
+    if (dynamicGroupsElement) {
+      const dynamicGroupElement = await addDynamicGroupCallback({ dynamicGroupsElement });
+      console.log("🚀 ~ initForm ~ dynamicGroupElement:", dynamicGroupElement);
+      const addFieldButton = dynamicGroupElement?.querySelector('.dynamic-group__button-add');
+      console.log("🚀 ~ initForm ~ addFieldButton:", addFieldButton);
+      console.log("🚀 ~ initForm ~ dynamicGroupElement:", dynamicGroupElement);
+      addFieldButton?.addEventListener('click', () => addDynamicGroupCallback({ dynamicGroupsElement }));
+    } else {
+      // Initialize static lib fields
+      libsObject = setupStaticFields({
+        fieldNames: ['phone', 'passenger', `flight[0]['date']`],
+        formElement,
+      });
+    }
 
     formElement.addEventListener('submit', (event) => {
       event.preventDefault();

@@ -83,6 +83,10 @@
   .form {
     &__fields {
       gap: 8px;
+              @include grid-mn('md') {
+
+          justify-content: space-between;
+        }
       &-search {
         position: relative;
         width: 100%;
@@ -91,6 +95,7 @@
         gap: 8px;
         @include grid-mn('md') {
           flex-direction: row;
+          justify-content: space-between;
         }
       }
     }
@@ -103,6 +108,11 @@
       right: 16px;
       transform: translateY(-50%);
       z-index: 1;
+              @include grid-mn('md') {
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%) rotate(90deg);
+        }
     }
   }
 }

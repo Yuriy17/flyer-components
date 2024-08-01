@@ -10,16 +10,14 @@ import formFieldTemplate from 'src/templates/components/form/formField.ejs';
 import dateFieldTemplate from 'src/templates/layouts/formFields/dateField.ejs';
 import { insertPosition } from '../../helpers/constants';
 
-export const addDynamicGroup = ({ groupIndex, formElement, validationStarted }) => {
-  let parentElement = formElement.querySelector('.dynamic-groups');
-  console.log("🚀 ~ addDynamicGroup ~ parentElement:", parentElement);
+export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }) => {
   const formName = formElement.getAttribute('id');
-  // const dynamicGroups = formElement.querySelectorAll('.dynamic-groups');
-  
-  parentElement &&
-    DynamicGroup({
+  // const dynamicGroups = formElement.querySelectorAll('.dynamic-group');
+
+  if (parentElement) {
+    const dynamicGroup = await DynamicGroup({
       parentElement,
-      insertPositionType: insertPosition.beforebegin,
+      insertPositionType: insertPosition.beforeend,
       templateProps: {
         groupIndex,
         dynamicContent: dynamicGroupContentTemplate({
@@ -62,7 +60,7 @@ export const addDynamicGroup = ({ groupIndex, formElement, validationStarted }) 
           }),
           dateContent: formFieldTemplate({
             content: dateFieldTemplate({
-              name: `flight[${groupIndex}]['date_start']`,
+              name: `flight[${groupIndex}]['date']`,
               id: `${formName}Date${groupIndex}`,
               label: 'Date',
               readonly: 'readonly',
@@ -101,7 +99,7 @@ export const addDynamicGroup = ({ groupIndex, formElement, validationStarted }) 
         const deleteButton = dynamicGroup.querySelector('.dynamic-group__button-delete');
         deleteButton &&
           deleteButton.addEventListener('click', () => {
-            if(groupIndex > 0) {
+            if (groupIndex > 0) {
               dynamicGroup.remove();
             }
           });
@@ -110,15 +108,24 @@ export const addDynamicGroup = ({ groupIndex, formElement, validationStarted }) 
 
         // Initialize AirDatepicker for dynamic fields
         const libsObject = setupStaticFields({
-          fieldNames: [`flight[${groupIndex}]['date_start']`],
+          fieldNames: [`flight[${groupIndex}]['date']`],
           formElement,
         });
-        fieldsSetupValidation({ fields, validationStarted, libsObject, addListener: true });
+        fieldsSetupValidation({
+          fields,
+          validationStarted: !!formElement.dataset.validationStarted,
+          libsObject,
+          addListener: true,
+        });
 
         setupField({
           formElement,
-          fieldName: `flight[${groupIndex}]['date_start']`,
+          fieldName: `flight[${groupIndex}]['date']`,
         });
       },
     });
+    console.log('🚀 ~ addDynamicGroup ~ dynamicGroup:', dynamicGroup);
+
+    return dynamicGroup;
+  }
 };
