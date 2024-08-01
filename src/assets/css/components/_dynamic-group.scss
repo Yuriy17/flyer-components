@@ -3,6 +3,9 @@
   flex-wrap: wrap;
   gap: 8px;
   width: 100%;
+  @include grid-mn('md') {
+    justify-content: space-between;
+  }
   // .dynamic-group__buttons
 
   &__buttons {

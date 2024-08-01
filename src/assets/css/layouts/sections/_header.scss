@@ -43,7 +43,7 @@
     }
     > .btn-sm {
       display: none;
-      @include grid-mn('xmd') {
+      @include grid-mn('xlg') {
         display: block;
       }
     }

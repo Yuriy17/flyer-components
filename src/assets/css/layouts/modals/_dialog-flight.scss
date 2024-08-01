@@ -32,11 +32,11 @@
     }
   }
   &__nav {
-        height: 100%;
+    height: 100%;
     &::part(base) {
       height: 100%;
     }
-        &::part(body) {
+    &::part(body) {
       height: 100%;
     }
     &::part(tabs) {
@@ -83,10 +83,9 @@
   .form {
     &__fields {
       gap: 8px;
-              @include grid-mn('md') {
-
-          justify-content: space-between;
-        }
+      @include grid-mn('md') {
+        justify-content: space-between;
+      }
       &-search {
         position: relative;
         width: 100%;
@@ -108,11 +107,11 @@
       right: 16px;
       transform: translateY(-50%);
       z-index: 1;
-              @include grid-mn('md') {
-    left: 50%;
-    right: auto;
-    transform: translate(-50%, -50%) rotate(90deg);
-        }
+      @include grid-mn('md') {
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, -50%) rotate(90deg);
+      }
     }
   }
 }
