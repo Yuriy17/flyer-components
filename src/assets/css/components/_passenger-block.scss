@@ -4,6 +4,11 @@
   gap: 24px;
   width: calc(100vw - 90px);
 
+  @include grid-mn('md') {
+        width: auto;
+    max-width: 100%;
+  }
+
   // .passenger-block__count
 
   &__count {
