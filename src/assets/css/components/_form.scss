@@ -20,6 +20,19 @@
     flex-wrap: wrap;
     gap: 16px;
     max-width: 100%;
+    .form__fields-search > sl-input,
+    .dynamic-group > div.form__input,
+    > sl-input,
+    > div.form__input,
+    > .form__field-dropdown,
+    .dynamic-group__buttons {
+      position: relative;
+      width: 100%;
+      border-radius: 10px;
+      @include grid-mn('md') {
+        width: calc(50% - 8px);
+      }
+    }
   }
 
   &__passenger {
@@ -169,16 +182,7 @@
       opacity: 1;
     }
   }
-  sl-input,
-  div.form__input,
-  .form__field-dropdown {
-    position: relative;
-    width: 100%;
-    border-radius: 10px;
-    @include grid-mn('md') {
-      width: calc(50% - 8px);
-    }
-  }
+
   sl-input::part(form-control),
   div.form__input {
     height: 73px;
@@ -255,7 +259,7 @@
         box-shadow: 0px 4px 4px 0px rgba(10, 116, 215, 0.1);
         top: calc(100% + 5px);
         width: 100%;
-        
+
         // width: calc(100% - 56px);
         //     margin: 45px 0 0;
       }

@@ -1,4 +1,16 @@
 sl-button {
+  &.btn-prefix-icon {
+    &::part(base) {
+      display: flex;
+      /* gap: 4px; */
+      align-items: center;
+    }
+    ::part(label) {
+      --sl-spacing-small: 4px;
+      padding-inline-start: 4px;
+          padding: 0 4px;
+    }
+  }
   &.btn-arrow {
     &::part(label) {
       display: flex;
@@ -13,6 +25,7 @@ sl-button {
     &::after {
     }
   }
+  &.btn-prefix-icon,
   &.btn-primary,
   &.btn-light {
     &::part(base) {

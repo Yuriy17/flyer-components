@@ -9,12 +9,14 @@
 
   <div class="dynamic-group__buttons">
     <div class="dynamic-group__button-block">
-      <% if(env.staticContentObject){ %>
-        <%- include(env.staticContentObject.buttonAdd.path, {
-          env: env.staticContentObject.buttonAdd.params
-        }) %>
-      <% } else if (env.buttonAdd) { %>
-        <%- env.buttonAdd %>
+      <% if(env.groupIndex < 1){ %>
+        <% if(env.staticContentObject){ %>
+          <%- include(env.staticContentObject.buttonAdd.path, {
+            env: env.staticContentObject.buttonAdd.params
+          }) %>
+        <% } else if (env.buttonAdd ) { %>
+          <%- env.buttonAdd %>
+        <% } %>
       <% } %>
     </div>
     <div class="dynamic-group__button-block">

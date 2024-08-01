@@ -2,6 +2,7 @@
   <div class="dynamic-groups">
     <%- include('templates/components/form/dynamicGroup.ejs', {
       env: {
+        groupIndex: 0,
         staticContentObject: {
           dynamicGroupContent: {
             path: 'templates/layouts/forms/flightForm/dynamicGroupContent.ejs',
@@ -15,18 +16,28 @@
           buttonAdd: {
             path: 'templates/components/button/slButton.ejs',
             params: {
-              classes: 'btn-sm dynamic-group__button dynamic-group__button-add',
               variant: 'primary',
               content: 'Add flight',
-              outline: 'true'
+              outline: 'true',
+              classes: 'btn-prefix-icon dynamic-group__button dynamic-group__button-add',
+              icon: {
+                src: `${process.env['VITE_STATIC_PATH']}/icons/plus-blue.svg`,
+                slot: 'prefix',
+                alt: 'plus icon'
+              }
             }
           },
           buttonDelete: {
             path: 'templates/components/button/slButton.ejs',
             params: {
-              classes: 'btn-sm dynamic-group__button dynamic-group__button-delete',
-              variant: 'warning',
+              variant: 'danger',
               content: 'Delete',
+              classes: 'btn-prefix-icon dynamic-group__button dynamic-group__button-delete',
+              icon: {
+                src: `${process.env['VITE_STATIC_PATH']}/icons/trash-white.svg`,
+                slot: 'prefix',
+                alt: 'plus icon'
+              }
             }
           }
         }

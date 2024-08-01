@@ -8,6 +8,7 @@ import toHiddenInputsTemplate from 'src/templates/layouts/formFields/toHiddenInp
 import fromHiddenInputsTemplate from 'src/templates/layouts/formFields/fromHiddenInputs.ejs';
 import formFieldTemplate from 'src/templates/components/form/formField.ejs';
 import dateFieldTemplate from 'src/templates/layouts/formFields/dateField.ejs';
+import { insertPosition } from '../../helpers/constants';
 
 export const addDynamicGroup = ({ groupIndex, formElement, validationStarted }) => {
   const parentElement = formElement.querySelector('.dynamic-groups');
@@ -15,6 +16,7 @@ export const addDynamicGroup = ({ groupIndex, formElement, validationStarted }) 
   parentElement &&
     DynamicGroup({
       parentElement,
+      insertPositionType: insertPosition.afterbegin,
       templateProps: {
         groupIndex,
         dynamicContent: dynamicGroupContentTemplate({
@@ -70,14 +72,23 @@ export const addDynamicGroup = ({ groupIndex, formElement, validationStarted }) 
           }),
         }),
         buttonAdd: buttonTemplate({
-          classes: 'btn-sm dynamic-group__button dynamic-group__button-add',
+              classes: 'btn-prefix-icon dynamic-group__button dynamic-group__button-add',
+              icon: {
+                src: `${import.meta.env.VITE_STATIC_PATH}/icons/plus-blue.svg`,
+                slot: 'prefix',
+                alt: 'plus icon'
+          },
           variant: 'primary',
           content: 'Add flight',
           outline: 'true',
         }),
         buttonDelete: buttonTemplate({
-          classes: 'btn-sm dynamic-group__button dynamic-group__button-delete',
-          variant: 'warning',
+              classes: 'btn-prefix-icon dynamic-group__button dynamic-group__button-delete',
+              icon: {
+                src: `${import.meta.env.VITE_STATIC_PATH}/icons/trash-white.svg`,
+                slot: 'prefix',
+                alt: 'plus icon'
+              },          variant: 'danger',
           content: 'Delete',
         }),
       },

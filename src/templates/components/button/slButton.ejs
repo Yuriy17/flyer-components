@@ -9,5 +9,7 @@
   <% if(env.type){ %>type="<%=env.type%>"<% } %>
 >
   <span><%=env.content%></span>
-  <% if(env.icon){ %><img src="<%=env.icon.src%>" alt="<%=env.icon.alt%>"><% } %>
+  <% if(env.icon){ %>
+    <img slot="<%= env.icon.slot %>" src="<%= env.icon.src %>" alt="<%= env.icon.alt %>">
+  <% } %>
 </sl-button>

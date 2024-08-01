@@ -4,7 +4,7 @@ import { fieldsSetupValidation, setupStaticFields } from './setupFields';
 export const initForm = (formElement) => {
   if (formElement) {
     let validationStarted = false;
-    let dynamicFieldCounter = 0;
+    let dynamicFieldCounter = 1;
 
     // Initialize all static fields
     const libsObject = setupStaticFields({

@@ -24,7 +24,7 @@
   <% } else if (env.fromContent) { %>
    <%- env.fromContent %>
   <% } %>
-  <button class="form__exchange-button">
+  <button type="button" class="form__exchange-button">
     <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/exchange.svg" alt="">
   </button>
   <% if(env.static){ %>

@@ -137,62 +137,62 @@ export const initFlightSearch = ({ containerElement }) => {
         // console.log('🚀 ~ initFlightSearch ~ flyTripTypeElements[0]:', flyTripTypeElements[0]);
         // changeFlyTripType(flyTripTypeElements[0]);
 
-        window.addEventListener('click', (event) => {
-          if (!event.target.closest('.drop')) {
-            dialogFlightForm.querySelectorAll('.block-drop-down.show').forEach((dropdown) => {
-              dropdown.classList.remove('show');
-              dropdown.closest('.drop').querySelector('.block_photo').classList.remove('open');
-            });
-          }
+        // window.addEventListener('click', (event) => {
+        //   if (!event.target.closest('.drop')) {
+        //     dialogFlightForm.querySelectorAll('.block-drop-down.show').forEach((dropdown) => {
+        //       dropdown.classList.remove('show');
+        //       dropdown.closest('.drop').querySelector('.block_photo').classList.remove('open');
+        //     });
+        //   }
 
-          const activeSearchInputs = dialogFlightForm.querySelectorAll('.search-input.active');
-          activeSearchInputs.forEach((inputContainer) => {
-            const autocomBox = inputContainer.querySelector('.autocom-box');
-            if (autocomBox.classList.contains('active')) {
-              const inputs = inputContainer.querySelectorAll('input');
-              const listItems = autocomBox.querySelectorAll('li');
-              listItems.forEach((li) => {
-                if (
-                  inputs[0].value &&
-                  inputs[1].value &&
-                  inputs[2].value &&
-                  inputs[3].value &&
-                  !(
-                    inputs[0].value === li.querySelector('h5').textContent &&
-                    inputs[1].value === li.querySelector('h4').textContent &&
-                    inputs[2].value === li.querySelector('h5 span').textContent &&
-                    inputs[3].value === li.getAttribute('class')
-                  )
-                ) {
-                  inputs.forEach((input) => (input.value = ''));
-                }
-              });
-            }
-            inputContainer.classList.remove('active');
-            autocomBox.classList.remove('active');
-          });
+        //   const activeSearchInputs = dialogFlightForm.querySelectorAll('.search-input.active');
+        //   activeSearchInputs.forEach((inputContainer) => {
+        //     const autocomBox = inputContainer.querySelector('.autocom-box');
+        //     if (autocomBox.classList.contains('active')) {
+        //       const inputs = inputContainer.querySelectorAll('input');
+        //       const listItems = autocomBox.querySelectorAll('li');
+        //       listItems.forEach((li) => {
+        //         if (
+        //           inputs[0].value &&
+        //           inputs[1].value &&
+        //           inputs[2].value &&
+        //           inputs[3].value &&
+        //           !(
+        //             inputs[0].value === li.querySelector('h5').textContent &&
+        //             inputs[1].value === li.querySelector('h4').textContent &&
+        //             inputs[2].value === li.querySelector('h5 span').textContent &&
+        //             inputs[3].value === li.getAttribute('class')
+        //           )
+        //         ) {
+        //           inputs.forEach((input) => (input.value = ''));
+        //         }
+        //       });
+        //     }
+        //     inputContainer.classList.remove('active');
+        //     autocomBox.classList.remove('active');
+        //   });
 
-          if (event.target.classList.contains('switch') || event.target.closest('.switch')) {
-            const parent = event.target.closest('.container-field-row');
-            const [inputFrom, inputTo] = [parent.querySelector('.input_from'), parent.querySelector('.input_to')];
-            const [cityAirportFrom, cityAirportTo] = [
-              parent.querySelector('.cityAirport'),
-              parent.querySelector('.cityAirportTo'),
-            ];
-            const [cityCodeFrom, cityCodeTo] = [parent.querySelector('.cityCode'), parent.querySelector('.cityCodeTo')];
-            const [entityIdFrom, entityIdTo] = [
-              parent.querySelector('.originEntityId'),
-              parent.querySelector('.destinationEntityId'),
-            ];
+        //   if (event.target.classList.contains('switch') || event.target.closest('.switch')) {
+        //     const parent = event.target.closest('.container-field-row');
+        //     const [inputFrom, inputTo] = [parent.querySelector('.input_from'), parent.querySelector('.input_to')];
+        //     const [cityAirportFrom, cityAirportTo] = [
+        //       parent.querySelector('.cityAirport'),
+        //       parent.querySelector('.cityAirportTo'),
+        //     ];
+        //     const [cityCodeFrom, cityCodeTo] = [parent.querySelector('.cityCode'), parent.querySelector('.cityCodeTo')];
+        //     const [entityIdFrom, entityIdTo] = [
+        //       parent.querySelector('.originEntityId'),
+        //       parent.querySelector('.destinationEntityId'),
+        //     ];
 
-            [inputFrom.value, inputTo.value] = [inputTo.value, inputFrom.value];
-            [cityAirportFrom.value, cityAirportTo.value] = [cityAirportTo.value, cityAirportFrom.value];
-            [cityCodeFrom.value, cityCodeTo.value] = [cityCodeTo.value, cityCodeFrom.value];
-            [entityIdFrom.value, entityIdTo.value] = [entityIdTo.value, entityIdFrom.value];
-          }
+        //     [inputFrom.value, inputTo.value] = [inputTo.value, inputFrom.value];
+        //     [cityAirportFrom.value, cityAirportTo.value] = [cityAirportTo.value, cityAirportFrom.value];
+        //     [cityCodeFrom.value, cityCodeTo.value] = [cityCodeTo.value, cityCodeFrom.value];
+        //     [entityIdFrom.value, entityIdTo.value] = [entityIdTo.value, entityIdFrom.value];
+        //   }
 
-          event.stopPropagation();
-        });
+        //   event.stopPropagation();
+        // });
       });
     }
   }

@@ -48,6 +48,11 @@
     &::part(active-tab-indicator) {
       display: none;
     }
+    > sl-tab-panel {
+      &::part(base) {
+        padding: 0 0 20px;
+      }
+    }
     > sl-tab {
       &::part(base) {
         display: flex;
@@ -71,11 +76,7 @@
       }
     }
   }
-  sl-tab-panel {
-    &::part(base) {
-      padding: 0;
-    }
-  }
+
   .form {
     &__fields {
       gap: 8px;
