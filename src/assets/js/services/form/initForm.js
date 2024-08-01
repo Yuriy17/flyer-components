@@ -1,5 +1,5 @@
-import { fieldsSetupValidation, setupField, setupStaticFields } from './setupFields';
-import { DynamicGroup } from '../../components/form/DynamicGroup';
+import { addDynamicGroup } from './addDynamicGroup';
+import { fieldsSetupValidation, setupStaticFields } from './setupFields';
 
 export const initForm = (formElement) => {
   if (formElement) {
@@ -12,42 +12,14 @@ export const initForm = (formElement) => {
       formElement,
     });
 
-    const setupDynamicGroup = (groupIndex) => {
-      DynamicGroup({
-        parentElement: document.getElementById('dynamicFields'),
-        templateProps: {
-          groupIndex,
-        },
-        isReturnElement: true,
-        callbackAfterPaste: (dynamicGroup) => {
-          console.log('🚀 ~ setupDynamicGroup ~ dynamicGroup:', dynamicGroup);
-          const deleteButton = dynamicGroup.querySelector('.delete-button');
-          deleteButton.addEventListener('click', () => {
-            dynamicGroup.remove();
-          });
-
-          const fields = dynamicGroup.querySelectorAll('[data-validate]');
-          fieldsSetupValidation({ fields, validationStarted, addListener: true });
-
-          // Initialize intl-tel-input and AirDatepicker for dynamic fields
-          setupField({
-            formElement,
-            fieldName: `dynamicPhone${groupIndex}`,
-            validationStarted,
-          });
-          setupField({
-            formElement,
-            fieldName: `dynamicDate${groupIndex}`,
-            validationStarted,
-          });
-        },
-      });
-    };
-
-    const addFieldButton = formElement.querySelector('#addField');
+    const addFieldButton = formElement.querySelector('.dynamic-group__button-add');
     addFieldButton &&
       addFieldButton.addEventListener('click', () => {
-        setupDynamicGroup(dynamicFieldCounter);
+        addDynamicGroup({
+          groupIndex: dynamicFieldCounter,
+          formElement,
+          validationStarted,
+        });
         dynamicFieldCounter++;
       });
 
@@ -66,7 +38,6 @@ export const initForm = (formElement) => {
       formElement.dataset.validationStarted = 'true';
       validationStarted = true;
       alert(`Form is ${isFormValid ? 'valid' : 'invalid'}`);
-
     });
   }
 };

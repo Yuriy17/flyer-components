@@ -1,5 +1,5 @@
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
-import dialogTemplate from 'src/templates/components/slDialog.ejs';
+import dialogTemplate from 'src/templates/components/inputs/slDialog.ejs';
 import { Component } from './Component';
 
 /**

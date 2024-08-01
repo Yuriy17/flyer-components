@@ -1,4 +1,4 @@
-import buttonTemplate from 'src/templates/components/slButton.ejs';
+import buttonTemplate from 'src/templates/components/button/slButton.ejs';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 
 import { Component } from './Component';

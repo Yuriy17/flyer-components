@@ -1,30 +1,30 @@
 <div class="dynamic-group container-field-row">
-  <%- include('templates/layouts/forms/flightForm/dynamicGroupContent.ejs', {
-    env: {
-      groupIndex: env.groupIndex,
-      dateCount: env.dateCount,
-      formName: env.formName
-    }
-  }) %>
+  <% if(env.staticContentObject){ %>
+    <%- include(env.staticContentObject.dynamicGroupContent.path, {
+      env: env.staticContentObject.dynamicGroupContent.params
+    }) %>
+  <% } else if (env.dynamicContent) { %>
+   <%- env.dynamicContent %>
+  <% } %>
+
   <div class="dynamic-group__buttons">
     <div class="dynamic-group__button-block">
-      <%- include('templates/components/button/slButton.ejs', {
-        env: {
-          classes: 'btn-sm dynamic-group__button',
-          variant: 'primary',
-          content: 'Add flight',
-          outline: 'true'
-        }
-      }) %>
+      <% if(env.staticContentObject){ %>
+        <%- include(env.staticContentObject.buttonAdd.path, {
+          env: env.staticContentObject.buttonAdd.params
+        }) %>
+      <% } else if (env.buttonAdd) { %>
+        <%- env.buttonAdd %>
+      <% } %>
     </div>
     <div class="dynamic-group__button-block">
-      <%- include('templates/components/button/slButton.ejs', {
-        env: {
-          classes: 'btn-sm dynamic-group__button',
-          variant: 'warning',
-          content: 'Delete',
-        }
-      }) %>
+      <% if(env.staticContentObject){ %>
+        <%- include(env.staticContentObject.buttonDelete.path, {
+          env: env.staticContentObject.buttonDelete.params
+        }) %>
+      <% } else if (env.buttonDelete) { %>
+        <%- env.buttonDelete %>
+      <% } %>
     </div>
   </div>
 </div>

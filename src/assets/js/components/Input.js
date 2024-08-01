@@ -1,5 +1,5 @@
 import '@shoelace-style/shoelace/dist/components/input/input.js';
-import inputTemplate from 'src/templates/components/slInput.ejs';
+import inputTemplate from 'src/templates/components/inputs/slInput.ejs';
 import { Component } from './Component';
 
 /**

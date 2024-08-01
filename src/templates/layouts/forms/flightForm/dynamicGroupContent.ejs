@@ -1,62 +1,76 @@
 <div class="form__fields-search">
-  <%- include('templates/components/inputs/slInput.ejs', {
-    env: {
-      staticContentObject: {
-        tooltipPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
-        path: 'templates/layouts/formFields/fromHiddenInputs.ejs',
-        pathObject: {
-          groupIndex: env.groupIndex,
-          cityAirportVal: '',
-          cityCodeVal: '',
-          originEntityIdVal: '',
-        }
-      },
-      classes: 'form__input form__field',
-      name: `flight[${env.groupIndex}]["from"]`,
-      id: `${env.formName}FirstName`,
-      validate: 'minLength:2;required;letters',
-      label: 'From',
-      placeholder: 'New York (NY)',
-      autocomplete: true
-    }
-  }) %>
+  <% if(env.static){ %>
+    <%- include('templates/components/inputs/slInput.ejs', {
+      env: {
+        staticContentObject: {
+          tooltipPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+          path: 'templates/layouts/formFields/fromHiddenInputs.ejs',
+          pathObject: {
+            groupIndex: env.groupIndex,
+            cityAirportVal: '',
+            cityCodeVal: '',
+            originEntityIdVal: '',
+          }
+        },
+        classes: 'form__input form__field',
+        name: `flight[${env.groupIndex}]["from"]`,
+        id: `${env.formName}FirstName${env.groupIndex}`,
+        validate: 'minLength:2;required;letters',
+        label: 'From',
+        placeholder: 'New York (NY)',
+        autocomplete: true
+      }
+    }) %>
+  <% } else if (env.fromContent) { %>
+   <%- env.fromContent %>
+  <% } %>
   <button class="form__exchange-button">
     <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/exchange.svg" alt="">
   </button>
-  <%- include('templates/components/inputs/slInput.ejs', {
+  <% if(env.static){ %>
+    <%- include('templates/components/inputs/slInput.ejs', {
+      env: {
+        staticContentObject: {
+          tooltipPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+          pathObject: {
+            groupIndex: env.groupIndex,
+            path: 'templates/layouts/formFields/toHiddenInputs.ejs',
+            cityAirportToVal: '',
+            cityCodeToVal: '',
+            destinationEntityId: '',
+          }
+        },
+        classes: 'form__input form__field',
+        name: `flight[${env.groupIndex}]["to"]`,
+        id: `${env.formName}To${env.groupIndex}`,
+        validate: 'minLength:2;required;letters',
+        label: 'To',
+        placeholder: 'Los Angeles (LA)',
+        autocomplete: true
+      }
+    }) %>
+  <% } else if (env.toContent) { %>
+   <%- env.toContent %>
+  <% } %>
+
+</div>
+<% if(env.static){ %>
+  <%- include('templates/components/form/formField.ejs', {
     env: {
-      staticContentObject: {
-        tooltipPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
-        pathObject: {
-          groupIndex: env.groupIndex,
-          path: 'templates/layouts/formFields/toHiddenInputs.ejs',
-          cityAirportToVal: '',
-          cityCodeToVal: '',
-          destinationEntityId: '',
-        }
-      },
-      classes: 'form__input form__field',
-      name: `flight[${env.groupIndex}]["to"]`,
-      id: `${env.formName}To`,
-      validate: 'minLength:2;required;letters',
-      label: 'To',
-      placeholder: 'Los Angeles (LA)',
-      autocomplete: true
+      staticContentPath: 'templates/layouts/formFields/dateField.ejs',
+      classes: 'form__input form__date',
+      validate: `required;date:${env.dateCount || 1}`,
+      inputProps: {
+        static: 'true',
+        name: `flight[${env.groupIndex}]['${env.dateCount > 1 ? 'dates' : 'date_start'}']`,
+        id: `${env.formName}Date${env.groupIndex}`,
+        label: 'Date',
+        readonly: "readonly",
+        placeholder: env.dateCount > 1 ? '13 Apr 2024 – 20 Apr 2024' : '13 Apr 2024',
+        initParams: 'autoClose:true;addon:right;multipleDatesSeparator: – ;range;dateFormat:d MMM yyyy'
+      }
     }
   }) %>
-</div>
-<%- include('templates/components/form/formField.ejs', {
-  env: {
-    staticContentPath: 'templates/layouts/formFields/dateField.ejs',
-    classes: 'form__input form__date',
-    validate: `required;date:${env.dateCount || 2}`,
-    inputProps: {
-      name: 'date',
-      id: `${env.formName}Date`,
-      label: 'Date',
-      readonly: "readonly",
-      placeholder: env.dateCount > 1 ? '13 Apr 2024 – 20 Apr 2024' : '13 Apr 2024',
-      initParams: 'autoClose:true;addon:right;multipleDatesSeparator: – ;range;dateFormat:d MMM yyyy'
-    }
-  }
-}) %>
+<% } else if (env.dateContent) { %>
+  <%- env.dateContent %>
+<% } %>

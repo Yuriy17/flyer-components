@@ -1,5 +1,5 @@
 import '@shoelace-style/shoelace/dist/components/textarea/textarea.js';
-import textareaTemplate from 'src/templates/components/slTextarea.ejs';
+import textareaTemplate from 'src/templates/components/inputs/slTextarea.ejs';
 import { Component } from './Component';
 
 /**

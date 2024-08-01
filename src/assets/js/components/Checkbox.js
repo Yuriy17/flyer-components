@@ -1,4 +1,4 @@
-import checkboxTemplate from 'src/templates/components/slCheckbox.ejs';
+import checkboxTemplate from 'src/templates/components/inputs/slCheckbox.ejs';
 import '@shoelace-style/shoelace/dist/components/checkbox/checkbox.js';
 import { Component } from './Component';
 

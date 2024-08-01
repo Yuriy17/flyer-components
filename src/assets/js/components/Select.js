@@ -1,6 +1,6 @@
 import '@shoelace-style/shoelace/dist/components/select/select.js';
 import '@shoelace-style/shoelace/dist/components/option/option.js';
-import selectTemplate from 'src/templates/components/slSelect.ejs';
+import selectTemplate from 'src/templates/components/inputs/slSelect.ejs';
 import { Component } from './Component';
 
 /**
