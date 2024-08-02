@@ -88,14 +88,14 @@ const initSlider = ({ reviewBlocks, reviews, reviewsSection, TrustScore, Reviews
   });
 };
 
-export const initReviews = async () => {
+export const initReviews = async ({ url }) => {
   const reviewsSection = document.querySelector('section.trustpilot-reviews');
   if (reviewsSection) {
     // TODO
     // const reviewsData = import.meta.env.PROD
     //   ? await axios.get('https://flyer-club.com/flightbooking/trustpilot?reviews=true&perpage=20')
     //   : await axios.get('/data/reviews.json');
-    const reviewsData = await axios.get(`${import.meta.env.VITE_STATIC_PATH}/data/reviews.json`);
+    const reviewsData = await axios.get(url);
 
     const { TrustScore, ReviewsCount, reviews } = reviewsData.data;
 
