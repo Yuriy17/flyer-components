@@ -107,6 +107,7 @@ h2 {
   background: transparent;
   border: none;
   margin: 22px auto;
+  cursor: pointer;
   @include grid-mn('md') {
     margin: 16px auto;
   }
