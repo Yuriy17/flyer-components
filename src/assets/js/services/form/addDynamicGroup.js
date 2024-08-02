@@ -68,7 +68,7 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
               label: 'Date',
               readonly: 'readonly',
               placeholder: '13 Apr 2024',
-              initParams: 'autoClose:true;addon:right;multipleDatesSeparator: – ;range;dateFormat:d MMM yyyy',
+              initParams: 'autoClose:true;addon:right;multipleDatesSeparator: – ;dateFormat:d MMM yyyy',
               fieldTooltipContent: fieldTooltipTemplate(),
             }),
             classes: 'form__input form__date',

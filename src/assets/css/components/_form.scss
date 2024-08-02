@@ -142,6 +142,9 @@
   }
   &__date,
   &__field-dropdown {
+    input {
+      cursor: pointer;
+    }
     &::before {
       content: url($STATIC_PATH + '/icons/chevron-black-drop-down.svg');
       display: block;
