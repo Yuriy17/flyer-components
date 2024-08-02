@@ -1,9 +1,32 @@
-<ul class="menu-list <%= env.classes %>">
-  <% for(var i=0; i < env.items.length; i++) { %>
-    <li class="menu-list__item">
-      <a href="<%= env.items[i].link %>" class="menu-list__link <%= env.items[i].linkClasses %>">
-        <%= env.items[i].text %>
-      </a>
-    </li>
-  <% } %>
-</ul>
+<% if (env.items) { %>
+  <ul class="menu-list <%= env.classes %>">
+    <% for(var i=0; i < env.items.length; i++) { %>
+      <% if (env.static) { %>        
+        <%- include('templates/components/menu/menuItem.ejs', {
+          env: env.items[i]
+        }) %>
+      <% } else { %>
+        <%- env.items[i] %>
+      <% } %>
+    <% } %>
+  </ul>
+<% } else if (env.categoryItems) { %>
+  <div class="menu-categories <%= env.classes %>">
+    <% for(var i=0; i < env.categoryItems.length; i++) { %>
+      <div class="menu-categories__block">
+        <p class="menu-categories__block-title"><%= env.categoryItems[i].title %></p>
+        <ul class="menu-list <%= env.categoryItems[i].classes %>">
+          <% for(var y=0; y < env.categoryItems[i].items.length; y++) { %>
+            <% if (env.static) { %>        
+              <%- include('templates/components/menu/menuItem.ejs', {
+                env: env.categoryItems[i].items[y]
+              }) %>
+            <% } else { %>
+              <%- env.categoryItems[i].items[y] %>
+            <% } %>
+          <% } %>
+        </ul>
+      </div>
+    <% } %>
+  </div>
+<% } %>

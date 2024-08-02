@@ -1,5 +1,6 @@
 import drawerBurgerTemplate from 'src/templates/layouts/drawerContent/drawerBurger.ejs';
 import menuTemplate from 'src/templates/components/menu/menu.ejs';
+import menuItemTemplate from 'src/templates/components/menu/menuItem.ejs';
 import socialsTemplate from 'src/templates/layouts/socials.ejs';
 import menuButtonTemplate from 'src/templates/components/button/slButton.ejs';
 import burgerButtonTemplate from 'src/templates/layouts/burgerButton.ejs';
@@ -26,41 +27,55 @@ export const initBurger = () => {
           menu: menuTemplate({
             classes: 'drawer-burger__menu-list',
             items: [
-              {
-                text: 'About Us',
-                href: '/aboutus',
-                linkClasses: 'link',
-              },
-              {
-                text: 'Destinations',
-                href: 'https://flyer-club.com/p/bestdeals/',
-                linkClasses: 'link link_active',
-              },
-              {
-                text: 'How to book',
-                href: '/booking',
-                linkClasses: 'link',
-              },
-              {
-                text: 'Partners',
-                href: '/partners',
-                linkClasses: 'link',
-              },
-              {
-                text: 'Faq',
-                href: '/faq',
-                linkClasses: 'link',
-              },
-              {
-                text: 'Reviews',
-                href: '/reviews',
-                linkClasses: 'link',
-              },
-              {
-                text: 'Contacts',
-                href: '/contacts',
-                linkClasses: 'link',
-              },
+              menuItemTemplate({
+                link: {
+                  text: 'About Us',
+                  href: '/aboutus',
+                  classes: 'link',
+                }
+              }),
+              menuItemTemplate({
+                link: {
+                  text: 'Destinations',
+                  href: 'https://flyer-club.com/p/bestdeals/',
+                  classes: 'link link_active',
+                }
+              }),
+              menuItemTemplate({
+                link: {
+                  text: 'How to book',
+                  href: '/booking',
+                  classes: 'link',
+                }
+              }),
+              menuItemTemplate({
+                link: {
+                  text: 'Partners',
+                  href: '/partners',
+                  classes: 'link',
+                }
+              }),
+              menuItemTemplate({
+                link: {
+                  text: 'Faq',
+                  href: '/faq',
+                  classes: 'link',
+                }
+              }),
+              menuItemTemplate({
+                link: {
+                  text: 'Reviews',
+                  href: '/reviews',
+                  classes: 'link',
+                }
+              }),
+              menuItemTemplate({
+                link: {
+                  text: 'Contacts',
+                  href: '/contacts',
+                  classes: 'link',
+                }
+              }),
             ],
           }),
           socials: socialsTemplate(),

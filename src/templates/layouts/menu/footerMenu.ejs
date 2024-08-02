@@ -1,27 +1,74 @@
 <%- include('templates/components/menu/menu.ejs', {
   env: {
-    classes: 'footer__menu-list',
-    items: [
+    static: 'true',
+    classes: 'footer__menu',
+    categoryItems: [
       {
-        text: 'How to book',
-        href: '/booking'
+        title: 'Support',
+        classes: 'footer__menu-list',
+        items: [
+          {
+            link: {
+              text: 'How to book',
+              href: '/booking'
+            }
+          },
+          {
+            link: {
+              text: 'Reviews',
+              href: '/reviews'
+            }
+          },
+          {
+            link: {
+              text: 'Contacts',
+              href: '/contacts'
+            }
+          },
+          {
+            link: {
+              text: 'FAQ',
+              href: '/faq'
+            }
+          },
+        ]
       },
       {
-        text: 'About Us',
-        href: '/aboutus'
+        title: 'Company',
+        classes: 'footer__menu-list',
+        items: [
+          {
+            link: {
+              text: 'About Us',
+              href: '/aboutus'
+            }
+          },
+          {
+            link: {
+              text: 'Partners',
+              href: '/partners'
+            }
+          },
+        ]
       },
       {
-        text: 'Reviews',
-        href: '/reviews'
-      },
-      {
-        text: 'FAQ',
-        href: '/faq'
-      },
-      {
-        text: 'Contacts',
-        href: '/contacts'
-      },
+        title: 'Contact Information',
+        classes: 'footer__menu-list',
+        items: [
+          {
+            title: 'Phone',
+            text: '<a href="tel:+1844-447-0007" class="google_ads_link"><span>+ 1 844-447-0007</span></a>'
+          },
+          {
+            title: 'E-mail',
+            text: '<a href="mailto:info@flyer-club.com" class="mail"><span>info@flyer-club.com</span></a>'
+          },
+          {
+            title: 'Address',
+            text: `<span class="footer-sitemap__address">1603 Capitol Avenue, Suite 413 #B102, Cheyenne, WY, 82001</span>`
+          },
+        ]
+      }
     ]
   }
 }) %>

@@ -1,0 +1,17 @@
+<li class="menu-list__item">
+  <% if (env.title) { %>
+    <p class="menu-list__title">
+      <%- env.title %>
+    </p>
+  <% } %>
+  <% if (env.link) { %>
+    <a href="<%= env.link.href %>" class="menu-list__link <%= env.link.classes %>">
+      <%= env.link.text %>
+    </a>
+  <% } %>
+  <% if (env.text) { %>
+    <p class="menu-list__text">
+      <%- env.text %>
+    </p>
+  <% } %>
+</li>

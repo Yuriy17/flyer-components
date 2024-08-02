@@ -5,28 +5,12 @@
         <div class="footer__info-logo">
           <img class="footer__info-logo-image" src="<%= process.env['VITE_STATIC_PATH'] %>/icons/logo.svg" alt="logo" width="240" height="78" />
         </div>
-        <div class="footer-sitemap__container">
-          <p class="footer-sitemap__title">
-            Contact Information
-          </p>
-          <div class="footer-sitemap">
-            <a href="tel:+1844-447-0007" class="google_ads_link">
-              <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/phone2.svg" alt="phone2" width="24" height="24" />
-              <span>+ 1 844-447-0007</span>
-            </a>
-            <a href="mailto:info@flyer-club.com" class="mail">
-              <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/mail2.svg" alt="mail2" width="24" height="24" />
-              <span>info@flyer-club.com</span>
-            </a>
-            <span>
-              <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/system-uicons_location.svg" alt="system-uicons" width="24" height="24" />
-              <span>1603 Capitol Avenue,
-                Suite 413 #B102, Cheyenne, WY, 82001</span>
-            </span>
-          </div>
-        </div>
-        <%- include('templates/layouts/socials.ejs') %>
         <%- include('templates/layouts/menu/footerMenu.ejs') %>
+        <div class="footer__socials">
+          <p class="footer__socials-title">Follow us on social media</p>
+          <%- include('templates/layouts/socials.ejs') %>
+        </div>
+
       </div>
 
       <div class="footer__price_disclaimer">
