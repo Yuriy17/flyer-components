@@ -12,8 +12,10 @@ import { initForm } from './assets/js/services/form/initForm.js';
 import { initHideCards } from './assets/js/services/initHideCards';
 import { initFlightDialog } from './assets/js/services/dialog/initFlightDialog';
 import { initFlightSearch } from './assets/js/services/form/airportSearch/initFlightSearch';
+import { fadeOut, preloader } from './assets/js/services/initPreloader';
 
 document.addEventListener('DOMContentLoaded', async () => {
+  await fadeOut(preloader);
   initShoelaceComponents({
     components: [
       ShoelaceComponents.button,
