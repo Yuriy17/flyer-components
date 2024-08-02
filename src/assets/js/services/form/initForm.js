@@ -18,17 +18,20 @@ export const initForm = async (formElement) => {
     };
     let libsObject;
     const dynamicGroupsElement = formElement.querySelector('.dynamic-groups');
+    const fieldLibsNames = ['phone'];
     if (dynamicGroupsElement) {
       const dynamicGroupElement = await addDynamicGroupCallback({ dynamicGroupsElement });
       const addFieldButton = dynamicGroupElement?.querySelector('.dynamic-group__button-add');
       addFieldButton?.addEventListener('click', () => addDynamicGroupCallback({ dynamicGroupsElement }));
-    } else {
-      // Initialize static lib fields
-      libsObject = setupStaticFields({
-        fieldNames: ['phone', 'passenger', `flight[0]['date']`],
-        formElement,
-      });
-    }
+      fieldLibsNames.push('passenger', `flight[0]['date']`);
+
+    } 
+    // Initialize static lib fields
+    
+    libsObject = setupStaticFields({
+      fieldNames: fieldLibsNames,
+      formElement,
+    });
 
     formElement.addEventListener('submit', (event) => {
       event.preventDefault();

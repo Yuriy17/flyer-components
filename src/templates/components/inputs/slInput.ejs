@@ -9,9 +9,6 @@
   <% if(env.autocomplete){ %>autocomplete="<%=env.autocomplete%>" <% } %>
 >
   <% if(env.staticContentObject){ %>
-    <% if(env.staticContentObject.tooltipPath){ %>
-      <%- include(env.staticContentObject.tooltipPath) %>
-    <% } %>
     <% if(env.staticContentObject.path){ %>
       <%- include(env.staticContentObject.path, {
         env: env.staticContentObject.pathObject
@@ -19,5 +16,10 @@
     <% } %>
   <% } else{ %>
     <%- env.content %>
+  <% } %>
+  <% if(env.tooltip){ %>
+    <sl-tooltip content="" slot="suffix" hoist>
+      <div class="field-status"></div>
+    </sl-tooltip>
   <% } %>
 </sl-input>

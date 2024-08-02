@@ -11,6 +11,11 @@
     <% } else{ %>
       <%- env.content %>
     <% } %>
+    <% if(env.tooltip){ %>
+      <sl-tooltip content="" slot="suffix" hoist>
+        <div class="field-status"></div>
+      </sl-tooltip>
+    <% } %>
   </div>
   <% if(env.staticDropdownContentObject){ %>    
     <%- include(env.staticDropdownContentObject.dropdownContentPath, {

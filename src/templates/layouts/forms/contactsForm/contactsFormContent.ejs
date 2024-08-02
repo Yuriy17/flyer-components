@@ -1,7 +1,7 @@
 <div class="form__fields">
   <%- include('templates/components/inputs/slInput.ejs', {
     env: {
-      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      tooltip: true,
       classes: 'form__input form__field',
       name: 'first-name',
       id: 'contactsFirstName',
@@ -13,7 +13,7 @@
   }) %>
   <%- include('templates/components/inputs/slInput.ejs', {
     env: {
-      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      tooltip: true,
       classes: 'form__input form__field',
       name: 'last-name',
       id: 'contactsLastName',
@@ -25,7 +25,7 @@
   }) %>
   <%- include('templates/components/inputs/slInput.ejs', {
     env: {
-      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      tooltip: true,
       classes: 'form__input form__field',
       name: 'email',
       id: 'contactsEmail',
@@ -37,7 +37,8 @@
   }) %>
   <%- include('templates/components/form/formField.ejs', {
     env: {
-      staticContentPath: 'templates/layouts/formFields/phoneField.ejs',
+      tooltip: true,
+      staticContentPath: 'templates/layouts/formFields/formField.ejs',
       classes: 'form__input',
       validate: 'required;phone',
       inputProps: {

@@ -1,7 +1,7 @@
 <div class="form__fields">
   <%- include('templates/components/inputs/slInput.ejs', {
     env: {
-      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      tooltip: true,
       classes: 'form__input form__field',
       name: 'city',
       id: 'subscribeCity',
@@ -13,7 +13,7 @@
   }) %>
   <%- include('templates/components/inputs/slInput.ejs', {
     env: {
-      staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+      tooltip: true,
       classes: 'form__input form__field',
       name: 'email',
       id: 'subscribeEmail',

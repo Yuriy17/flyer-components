@@ -20,24 +20,24 @@ export const phone = ({ value, libsObject }) =>
 
 export const date = ({ ruleValue, libsObject }) => {
   console.log("🚀 ~ date ~ ruleValue:", ruleValue);
-  if (libsObject['date']) {
+  if (libsObject && libsObject['date']) {
     const { selectedDates } = libsObject['date'];
-    console.log("🚀 ~ date ~ selectedDates:", selectedDates);
+    console.log('🚀 ~ date ~ selectedDates:', selectedDates);
 
     if (selectedDates && selectedDates.length) {
       switch (ruleValue) {
         case '1':
-          if (selectedDates.length  < 1) {
+          if (selectedDates.length < 1) {
             return 'Please select date';
           }
           break;
         case '2':
-          if(selectedDates.length < 2) {
-            if (selectedDates.length  < 1) {
+          if (selectedDates.length < 2) {
+            if (selectedDates.length < 1) {
               return 'Please select range of dates';
             }
             return 'Please select second date of range';
-          } 
+          }
           break;
         default:
           break;

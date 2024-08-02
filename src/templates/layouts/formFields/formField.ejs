@@ -10,8 +10,8 @@
   <% if(env.initParams){ %>data-params="<%=env.initParams%>" <% } %>
   <% if(env.name){ %>name="<%=env.name%>" <% } %>
   <% if(env.id){ %>id="<%=env.id%>" <% } %>
+  <% if(env.value){ %>value="<%=env.value%>" <% } %>
   <% if(env.type){ %>type="<%=env.type%>" <% } %>
   <% if(env.readonly){ %>readonly="<%=env.readonly%>" <% } %>
   <% if(env.placeholder){ %>placeholder="<%=env.placeholder%>" <% } %>
 />
-<%- include('templates/layouts/tooltips/fieldTooltip.ejs') %>

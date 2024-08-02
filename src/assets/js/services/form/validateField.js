@@ -5,34 +5,36 @@ export const validateField = ({ field, rules, infoElement, libsObject }) => {
   if (field.tagName === 'DIV') {
     input = field.querySelector('input');
   }
-  const value = input.classList.contains('form__checkbox') ? input.checked : input.value;
-
-  let errorMessage = '';
-
-  rules.forEach((rule) => {
-    const [ruleName, ruleValue] = rule.split(':');
-
-    const validationFunction = validationRules[ruleName];
-    if (validationFunction) {
-      const result = validationFunction({ value, ruleValue, libsObject });
-
-      if (result !== true) {
-        errorMessage = result;
+  if (input) {
+    const value = input.classList.contains('form__checkbox') ? input.checked : input.value;
+  
+    let errorMessage = '';
+  
+    rules.forEach((rule) => {
+      const [ruleName, ruleValue] = rule.split(':');
+  
+      const validationFunction = validationRules[ruleName];
+      if (validationFunction) {
+        const result = validationFunction({ value, ruleValue, libsObject });
+  
+        if (result !== true) {
+          errorMessage = result;
+        }
       }
+    });
+  
+    if (errorMessage) {
+      // field.setCustomValidity(errorMessage);
+      field.classList.add('form__field_error');
+      field.classList.remove('form__field_success');
+      infoElement?.setAttribute('content', errorMessage);
+    } else {
+      // field.setCustomValidity('');
+      field.classList.remove('form__field_error');
+      field.classList.add('form__field_success');
+      infoElement?.setAttribute('content', 'validation success!');
     }
-  });
-
-  if (errorMessage) {
-    // field.setCustomValidity(errorMessage);
-    field.classList.add('form__field_error');
-    field.classList.remove('form__field_success');
-    infoElement?.setAttribute('content', errorMessage);
-  } else {
-    // field.setCustomValidity('');
-    field.classList.remove('form__field_error');
-    field.classList.add('form__field_success');
-    infoElement?.setAttribute('content', 'validation success!');
+  
+    return !errorMessage;
   }
-
-  return !errorMessage;
 };

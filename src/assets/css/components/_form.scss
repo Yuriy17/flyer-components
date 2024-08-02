@@ -117,8 +117,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
     .iti {
       max-width: calc(100% - 15px);
+      &__country-list {
+          max-height: 129px;
+      }
       &__flag {
         transform: scale(0.8);
       }
@@ -156,7 +160,7 @@
     }
     &.form__field_error::before,
     &.form__field_success::before {
-      display: none;
+      display: none; 
     }
   }
   sl-input.form__field_error,
@@ -172,7 +176,8 @@
     }
     &::part(input),
     .iti__tel-input,
-    &.form__date input {
+    &.form__date input,
+    &.form__input input {
       &::placeholder {
         color: #e31d1c;
       }
@@ -300,9 +305,11 @@
     }
   }
   &__input {
-    border: none;
-    background: transparent;
-    outline: none;
+    &, input {
+      border: none;
+      background: transparent;
+      outline: none;
+    }
   }
 }
 

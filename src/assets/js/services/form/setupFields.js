@@ -100,40 +100,44 @@ export const fieldsSetupValidation = ({ fields, validationStarted, trigger, addL
   if (fields && fields.length) {
     if (addListener) {
       fields.forEach((field) => {
+        console.log("🚀 ~ fields.forEach ~ field:", field);
         const isSlComponent = field.tagName.includes('SL-');
         let isTextType = false;
         let eventName, input;
 
         if (isSlComponent) {
           input = field;
+          console.log("🚀 ~ fields.forEach ~ input:", input);
         } else {
-          input = field.querySelector(' input');
+          input = field.querySelector('input');
+          console.log("🚀 ~ fields.forEach ~ input:", input);
         }
-
-        switch (input.getAttribute('type')) {
-          case 'text':
-          case 'number':
-          case 'email':
-          case 'password':
-          case 'search':
-          case 'url':
-            isTextType = true;
-            break;
-
-          default:
-            break;
+        if (input) {
+          switch (input.getAttribute('type')) {
+            case 'text':
+            case 'number':
+            case 'email':
+            case 'password':
+            case 'search':
+            case 'url':
+              isTextType = true;
+              break;
+  
+            default:
+              break;
+          }
+  
+          if (isTextType) {
+            eventName = isSlComponent ? 'sl-input' : 'input';
+          } else {
+            eventName = isSlComponent ? 'sl-change' : 'change';
+          }
+  
+          input.addEventListener(eventName, (e) => {
+            e.stopPropagation()
+            checkFieldRules({ field, validationStarted, libsObject });
+          });
         }
-
-        if (isTextType) {
-          eventName = isSlComponent ? 'sl-input' : 'input';
-        } else {
-          eventName = isSlComponent ? 'sl-change' : 'change';
-        }
-
-        input.addEventListener(eventName, (e) => {
-          e.stopPropagation()
-          checkFieldRules({ field, validationStarted, libsObject });
-        });
       });
     }
 

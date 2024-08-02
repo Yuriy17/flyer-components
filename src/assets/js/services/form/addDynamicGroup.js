@@ -7,7 +7,7 @@ import fieldTooltipTemplate from 'src/templates/layouts/tooltips/fieldTooltip.ej
 import toHiddenInputsTemplate from 'src/templates/layouts/formFields/toHiddenInputs.ejs';
 import fromHiddenInputsTemplate from 'src/templates/layouts/formFields/fromHiddenInputs.ejs';
 import formFieldTemplate from 'src/templates/components/form/formField.ejs';
-import dateFieldTemplate from 'src/templates/layouts/formFields/dateField.ejs';
+import fieldTemplate from 'src/templates/layouts/formFields/formField.ejs';
 import { insertPosition } from '../../helpers/constants';
 
 export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }) => {
@@ -26,6 +26,7 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
           formName,
           fromContent: Input({
             templateProps: {
+              tooltip: true,
               classes: 'form__input form__field',
               name: `flight[${groupIndex}]["from"]`,
               id: `${formName}From${groupIndex}`,
@@ -33,7 +34,7 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
               label: 'From',
               placeholder: 'New York (NY)',
               autocomplete: true,
-              content: `${fieldTooltipTemplate()}${fromHiddenInputsTemplate({
+              content: `${fromHiddenInputsTemplate({
                 groupIndex,
                 cityAirportVal: '',
                 cityCodeVal: '',
@@ -43,6 +44,7 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
           }),
           toContent: Input({
             templateProps: {
+              tooltip: true,
               classes: 'form__input form__field',
               name: `flight[${groupIndex}]["to"]`,
               id: `${formName}To${groupIndex}`,
@@ -50,7 +52,7 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
               label: 'To',
               placeholder: 'Los Angeles (LA)',
               autocomplete: true,
-              content: `${fieldTooltipTemplate()}${toHiddenInputsTemplate({
+              content: `${toHiddenInputsTemplate({
                 groupIndex,
                 cityAirportToVal: '',
                 cityCodeToVal: '',
@@ -59,7 +61,8 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
             },
           }),
           dateContent: formFieldTemplate({
-            content: dateFieldTemplate({
+            tooltip: true,
+            content: fieldTemplate({
               name: `flight[${groupIndex}]['date']`,
               id: `${formName}Date${groupIndex}`,
               label: 'Date',

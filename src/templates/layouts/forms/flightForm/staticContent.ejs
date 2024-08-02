@@ -1,13 +1,13 @@
 <%- include('templates/components/form/formField.ejs', {
   env: {
-    staticContentPath: 'templates/layouts/formFields/passengerField.ejs',
+    staticContentPath: 'templates/layouts/formFields/formField.ejs',
     classes: 'form__input form__passenger',
     staticDropdownContentObject: {
       dropdownContentPath: 'templates/layouts/dropdowns/passengerDropdownContent.ejs',
       passengersData: [
-        { label: 'Adults', aged: '(12+ years)', id: 'adults', value: '1', class: 'adults' },
-        { label: 'Children', aged: '(2-11 years)', id: 'children', value: '0', class: 'children' },
-        { label: 'Infants', aged: '(Under 2 years)', id: 'infants', value: '0', class: 'infants' },
+        { label: 'Adults', aged: '(12+ years)', id: `adults${env.formName}`, value: '1', class: 'adults' },
+        { label: 'Children', aged: '(2-11 years)', id: `children${env.formName}`, value: '0', class: 'children' },
+        { label: 'Infants', aged: '(Under 2 years)', id: `infants${env.formName}`, value: '0', class: 'infants' },
       ],
     },
     inputProps: {
@@ -22,9 +22,7 @@
 
 <%- include('templates/components/inputs/slInput.ejs', {
   env: {
-    staticContentObject: {
-      tooltipPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
-    },
+    tooltip: true,
     classes: 'form__input form__field',
     name: 'first-name',
     id: `${env.formName}FirstName`,
@@ -37,7 +35,7 @@
 
 <%- include('templates/components/inputs/slInput.ejs', {
   env: {
-    staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+    tooltip: true,
     classes: 'form__input form__field',
     name: 'last-name',
     id: `${env.formName}LastName`,
@@ -50,7 +48,8 @@
 
 <%- include('templates/components/form/formField.ejs', {
   env: {
-    staticContentPath: 'templates/layouts/formFields/phoneField.ejs',
+    tooltip: true,
+    staticContentPath: 'templates/layouts/formFields/formField.ejs',
     classes: 'form__input',
     validate: 'required;phone',
     inputProps: {
@@ -66,7 +65,7 @@
 
 <%- include('templates/components/inputs/slInput.ejs', {
   env: {
-    staticContentPath: 'templates/layouts/tooltips/fieldTooltip.ejs',
+    tooltip: true,
     classes: 'form__input form__field',
     name: 'email',
     id: `${env.formName}Email`,
