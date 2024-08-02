@@ -9,7 +9,6 @@ import { airLlocale, airMinDate, airStartDate } from '../../helpers/constants';
 export const setupField = ({ formElement, fieldName }) => {
   const field = formElement.querySelector(`[name="${fieldName}"]`);
   let fieldObject;
-  console.log("🚀 ~ setupField ~ field:", field);
 
   if(field) {
     const fieldBlock = field.parentElement;
@@ -41,7 +40,6 @@ export const setupField = ({ formElement, fieldName }) => {
           //   libsObject: datepicker,
           // });
           // console.log("🚀 ~ setupField ~ x:", x);
-          console.log("🚀 ~ setupField ~ field:", field);
           field.dispatchEvent(new Event('change'));
         },
         onShow: (isFinished) => isFinished || fieldBlock.classList.add('active'),
@@ -57,10 +55,8 @@ export const setupField = ({ formElement, fieldName }) => {
           dateConfig[ruleName] = ruleValue || true;
         });
       }
-      console.log("🚀 ~ setupField ~ dateConfig:", dateConfig);
       // Initialize AirDatepicker for date fields
       fieldObject = new AirDatepicker(field, dateConfig);
-      console.log("🚀 ~ setupField ~ fieldObject:", fieldObject);
 
     } else if(fieldName.includes('passenger')) { 
       // const content = fieldBlock.querySelector('.block-drop-down');

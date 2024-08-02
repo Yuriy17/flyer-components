@@ -20,10 +20,7 @@ export const initForm = async (formElement) => {
     const dynamicGroupsElement = formElement.querySelector('.dynamic-groups');
     if (dynamicGroupsElement) {
       const dynamicGroupElement = await addDynamicGroupCallback({ dynamicGroupsElement });
-      console.log("🚀 ~ initForm ~ dynamicGroupElement:", dynamicGroupElement);
       const addFieldButton = dynamicGroupElement?.querySelector('.dynamic-group__button-add');
-      console.log("🚀 ~ initForm ~ addFieldButton:", addFieldButton);
-      console.log("🚀 ~ initForm ~ dynamicGroupElement:", dynamicGroupElement);
       addFieldButton?.addEventListener('click', () => addDynamicGroupCallback({ dynamicGroupsElement }));
     } else {
       // Initialize static lib fields

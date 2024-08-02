@@ -11,6 +11,25 @@
   @include grid-mn('xmd') {
     padding: 40px;
   }
+
+  &__text {
+    margin: 16px 0 0;
+    color: var(--Steel-Blue, #667085);
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    a {
+      color: var(--Azure-Blue, #0a74d7);
+      font-family: Montserrat;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      text-decoration-line: underline;
+    }
+  }
   sl-button[type='submit'] {
     margin-top: 32px;
   }

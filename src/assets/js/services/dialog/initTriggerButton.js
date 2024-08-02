@@ -12,7 +12,7 @@ export const initTriggerButton = ({ dialogFlight }) => {
         });
     };
 
-    if (innerWidth < gridBreakpoints.xmd && !isMobileClickListenerAdded) {
+    if (innerWidth < gridBreakpoints.xlg && !isMobileClickListenerAdded) {
       addClickLitener({ triggerButton: document.querySelector('.drawer-burger__content > .btn-primary') });
       isMobileClickListenerAdded = true;
     } else if (!isDesktopClickListenerAdded && innerWidth >= gridBreakpoints.xmd) {
