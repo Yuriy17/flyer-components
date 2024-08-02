@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
   initBurger();
   initLazyLoadImage();
-  // initReviews({ url: `${import.meta.env.VITE_STATIC_PATH}/data/reviews.json` });
+  initReviews({ url: `${import.meta.env.VITE_STATIC_PATH}/data/reviews.json` });
   initHeroSlider();
   initStartCosts({
     items: [
