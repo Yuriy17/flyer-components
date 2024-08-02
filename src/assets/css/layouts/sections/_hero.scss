@@ -144,6 +144,9 @@
 
   &__title {
     margin: 20px 0 0;
+    a {
+      color: var(--Azure-Blue, #0a74d7);
+    }
   }
 
   // .hero__bg

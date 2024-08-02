@@ -61,6 +61,9 @@ h1 {
   text-transform: capitalize;
   text-align: center;
   font-size: 28px;
+  a {
+    color: var(--Azure-Blue, #0a74d7);
+  }
   @include grid-mn('xsm') {
     font-size: 36px;
   }
