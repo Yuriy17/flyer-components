@@ -25,3 +25,8 @@
     max-width: 100%;
   }
 }
+.dynamic-groups {
+  display: flex;
+  flex-direction: column;
+      gap: 8px;
+}

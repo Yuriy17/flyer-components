@@ -13,7 +13,7 @@ export const initForm = async (formElement) => {
         formElement,
       });
       dynamicFieldCounter++;
-      console.log('🚀 ~ addDynamicGroupCallback ~ dynamicField:', dynamicField);
+
       return dynamicField;
     };
     let libsObject;

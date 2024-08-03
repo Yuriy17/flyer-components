@@ -100,17 +100,14 @@ export const fieldsSetupValidation = ({ fields, validationStarted, trigger, addL
   if (fields && fields.length) {
     if (addListener) {
       fields.forEach((field) => {
-        console.log("🚀 ~ fields.forEach ~ field:", field);
         const isSlComponent = field.tagName.includes('SL-');
         let isTextType = false;
         let eventName, input;
 
         if (isSlComponent) {
           input = field;
-          console.log("🚀 ~ fields.forEach ~ input:", input);
         } else {
           input = field.querySelector('input');
-          console.log("🚀 ~ fields.forEach ~ input:", input);
         }
         if (input) {
           switch (input.getAttribute('type')) {

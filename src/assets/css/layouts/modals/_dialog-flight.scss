@@ -18,7 +18,6 @@
     max-width: 100%;
     @include grid-mn('md') {
       height: unset;
-      max-height: unset;
       border-radius: 20px;
       --width: 628px;
     }

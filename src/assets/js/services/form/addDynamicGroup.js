@@ -12,9 +12,38 @@ import { insertPosition } from '../../helpers/constants';
 
 export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }) => {
   const formName = formElement.getAttribute('id');
-  // const dynamicGroups = formElement.querySelectorAll('.dynamic-group');
 
   if (parentElement) {
+    const buttonAddConfig = {
+      classes: 'btn-prefix-icon dynamic-group__button dynamic-group__button-add',
+      icon: {
+        src: `${import.meta.env.VITE_STATIC_PATH}/icons/plus-blue.svg`,
+        slot: 'prefix',
+        alt: 'plus icon',
+      },
+      variant: 'primary',
+      content: 'Add flight',
+      outline: 'true',
+    };
+
+    const buttonDeleteConfig = {
+      classes: 'btn-prefix-icon dynamic-group__button dynamic-group__button-delete',
+      icon: {
+        src: `${import.meta.env.VITE_STATIC_PATH}/icons/trash-white.svg`,
+        slot: 'prefix',
+        alt: 'plus icon',
+      },
+      variant: 'danger',
+      content: 'Delete',
+    };
+    const dynamicGroupElements = parentElement.querySelectorAll('.dynamic-group');
+    let addButton;
+    if(dynamicGroupElements && dynamicGroupElements.length) {
+      addButton = dynamicGroupElements[0].querySelector('.dynamic-group__button-add');
+      if (addButton && dynamicGroupElements.length === 7) {
+        addButton.disabled = true;
+      } 
+    }
     const dynamicGroup = await DynamicGroup({
       parentElement,
       insertPositionType: insertPosition.beforeend,
@@ -75,27 +104,8 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
             validate: `required;date:1`,
           }),
         }),
-        buttonAdd: buttonTemplate({
-          classes: 'btn-prefix-icon dynamic-group__button dynamic-group__button-add',
-          icon: {
-            src: `${import.meta.env.VITE_STATIC_PATH}/icons/plus-blue.svg`,
-            slot: 'prefix',
-            alt: 'plus icon',
-          },
-          variant: 'primary',
-          content: 'Add flight',
-          outline: 'true',
-        }),
-        buttonDelete: buttonTemplate({
-          classes: 'btn-prefix-icon dynamic-group__button dynamic-group__button-delete',
-          icon: {
-            src: `${import.meta.env.VITE_STATIC_PATH}/icons/trash-white.svg`,
-            slot: 'prefix',
-            alt: 'plus icon',
-          },
-          variant: 'danger',
-          content: 'Delete',
-        }),
+        buttonAdd: buttonTemplate(buttonAddConfig),
+        buttonDelete: buttonTemplate(buttonDeleteConfig),
       },
       isReturnElement: true,
       callbackAfterPaste: (dynamicGroup) => {
@@ -104,6 +114,9 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
           deleteButton.addEventListener('click', () => {
             if (groupIndex > 0) {
               dynamicGroup.remove();
+            }
+            if(addButton && addButton.disabled) {
+              addButton.disabled = false;
             }
           });
 
@@ -127,7 +140,6 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
         });
       },
     });
-    console.log('🚀 ~ addDynamicGroup ~ dynamicGroup:', dynamicGroup);
 
     return dynamicGroup;
   }
