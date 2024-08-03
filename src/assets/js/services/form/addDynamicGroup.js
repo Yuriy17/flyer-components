@@ -40,7 +40,7 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
     let addButton;
     if(dynamicGroupElements && dynamicGroupElements.length) {
       addButton = dynamicGroupElements[0].querySelector('.dynamic-group__button-add');
-      if (addButton && dynamicGroupElements.length === 7) {
+      if (addButton && dynamicGroupElements.length === 4) {
         addButton.disabled = true;
       } 
     }

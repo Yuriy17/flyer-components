@@ -93,7 +93,11 @@ const initDialogFlightForm = ({ dialogFlightForm }) => {
 
         btMinus &&
           btMinus.addEventListener('click', () => {
-            updatePassengerCount({ increment: -1, input, allPassengersInputElement, passengerCountElements });
+            if (input.classList.contains('adults') && (Number(input.value) === 1)) {
+              alert('minimal count of adults is 1')
+            } else {
+              updatePassengerCount({ increment: -1, input, allPassengersInputElement, passengerCountElements });
+            }
           });
 
         btPlus &&
