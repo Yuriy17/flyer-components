@@ -10,6 +10,9 @@ export const initShoelaceComponents = ({ components }) => {
   if (components?.length) {
     components.forEach((component) => {
       switch (component) {
+        case ShoelaceComponents.tags:
+          import('@shoelace-style/shoelace/dist/components/tag/tag.js');
+          break;
         case ShoelaceComponents.radioGroup:
           import('@shoelace-style/shoelace/dist/components/radio-group/radio-group.js');
           import('@shoelace-style/shoelace/dist/components/radio/radio.js');

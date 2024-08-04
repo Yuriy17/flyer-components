@@ -63,6 +63,7 @@ export const insertPosition = {
 export const ShoelaceComponents = {
   button: 'button',
   tooltip: 'tooltip',
+  tags: 'tags',
   checkbox: 'checkbox',
   dialog: 'dialog',
   drawer: 'drawer',

@@ -95,22 +95,24 @@ const initSlider = ({
   });
 };
 
-export const initHeroSlider = async () => {
-  const sliderBlock = document.querySelector('.hero__slider-content');
-  if (sliderBlock) {
-    initSlider({
-      sliderBlock,
-    });
-    setHigherHeights(sliderBlock.querySelectorAll('.swiper-slide  .card__content'));
-    //   const debouncedInitSlider = debounce(initSlider, 500);
-    //   const params = {
-    //     reviewBlocks,
-    //     reviews,
-    //     reviewsSection,
-    //     TrustScore,
-    //     ReviewsCount,
-    //   };
-    //   initSlider(params);
-    //   addEventListener('resize', () => debouncedInitSlider(params));
+export const initHeroSlider = async ({ heroSection }) => {
+  if(heroSection) {
+    const sliderBlock = heroSection.querySelector('.hero__slider-content');
+    if (sliderBlock) {
+      initSlider({
+        sliderBlock,
+      });
+      setHigherHeights(sliderBlock.querySelectorAll('.swiper-slide  .card__content'));
+      //   const debouncedInitSlider = debounce(initSlider, 500);
+      //   const params = {
+      //     reviewBlocks,
+      //     reviews,
+      //     reviewsSection,
+      //     TrustScore,
+      //     ReviewsCount,
+      //   };
+      //   initSlider(params);
+      //   addEventListener('resize', () => debouncedInitSlider(params));
+    }
   }
 };

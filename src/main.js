@@ -13,11 +13,13 @@ import { initHideCards } from './assets/js/services/initHideCards';
 import { initFlightDialog } from './assets/js/services/dialog/initFlightDialog';
 import { initDialogFlightForm } from './assets/js/services/form/airportSearch/initDialogFlightForm.js';
 import { fadeOut, preloader } from './assets/js/services/initPreloader';
+import { initDialogPartners } from './assets/js/services/dialog/initDialogPartners';
 
 document.addEventListener('DOMContentLoaded', async () => {
   await fadeOut(preloader);
   initShoelaceComponents({
     components: [
+      ShoelaceComponents.tags,
       ShoelaceComponents.button,
       ShoelaceComponents.drawer,
       ShoelaceComponents.dropdown,
@@ -33,16 +35,25 @@ document.addEventListener('DOMContentLoaded', async () => {
   initBurger();
   initLazyLoadImage();
   initReviews({ url: `${import.meta.env.VITE_STATIC_PATH}/data/reviews.json` });
-  initHeroSlider();
-  initStartCosts({
-    items: [
-      {
-        selector: '.hero .price__cost',
-        duration: 2000,
-        symbol: '$',
-      },
-    ],
-  });
+  const heroSection = document.querySelector('.hero');
+  if (heroSection) {
+    initHeroSlider({
+      heroSection
+    });
+    initStartCosts({
+      items: [
+        {
+          element: heroSection.querySelector('.price__cost'),
+          duration: 2000,
+          symbol: '$',
+        },
+      ],
+    });
+    const heroPartnersButton = heroSection.querySelector('.hero-partners__button');
+    initDialogPartners({
+      triggerButton: heroPartnersButton,
+    });
+  }
   initHideCards();
 
   initForm(document.querySelector('.contacts__form'));
@@ -53,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (dialogFlight) {
     initFlightDialog({ dialogFlight });
     const dialogFlightForms = dialogFlight.querySelectorAll('sl-tab-panel > .form');
-    dialogFlightForms;
+
     if (dialogFlightForms) {
       for (let index = 0; index < dialogFlightForms.length; index++) {
         const dialogFlightForm = dialogFlightForms[index];

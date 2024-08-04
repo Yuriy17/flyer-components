@@ -1,0 +1,47 @@
+.dialog-partners {
+  &::part(body) {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+.partners-data {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  // .partners-data__tags
+
+  &__tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow: auto;
+    padding-bottom: 10px;
+  }
+
+  // .partners-data__info
+
+  &__info {
+  }
+}
+.partners-category {
+  // .partners-category__title
+
+  &__title {
+  }
+
+  // .partners-category__list
+
+  &__list {
+  }
+
+  // .partners-category__item
+
+  &__item {
+  }
+
+  // .partners-category__link
+
+  &__link {
+  }
+}

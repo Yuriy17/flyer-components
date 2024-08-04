@@ -2,14 +2,12 @@ import { animateValue } from '../utils/utils';
 
 export const initStartCosts = ({ items }) => {
   const regExp = new RegExp(/(\$+)|(\*+)|(,+)/g);
-  items.forEach(({ selector, duration, symbol }) => {
-    const obj = document.querySelector(selector);
-
-    if (obj) {
+  items.forEach(({ element, duration, symbol }) => {
+    if (element) {
       animateValue({
-        obj,
-        start: Number(obj.textContent.replaceAll(regExp, '')) - 100,
-        end: Number(obj.textContent.replaceAll(regExp, '')),
+        element,
+        start: Number(element.textContent.replaceAll(regExp, '')) - 100,
+        end: Number(element.textContent.replaceAll(regExp, '')),
         duration,
         symbol,
       });

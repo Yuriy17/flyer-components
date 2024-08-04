@@ -26,24 +26,28 @@ export function fromHTML(html, trim = true) {
 }
 
 export function animateValue({ obj, start, end, duration, symbol }) {
-  let startTimestamp = null;
-  const step = (timestamp) => {
-    if (!startTimestamp) startTimestamp = timestamp;
-    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-
-    let progress_value = Math.floor(progress * (end - start) + start);
-    if (symbol == '$') {
-      progress_value = symbol + new Intl.NumberFormat('en-US').format(progress_value);
-    } else {
-      progress_value = symbol + progress_value;
-    }
-
-    obj.innerHTML = progress_value + '*';
-    if (progress < 1) {
-      window.requestAnimationFrame(step);
-    }
-  };
-  window.requestAnimationFrame(step);
+  if (obj) {    
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+  
+      let progress_value = Math.floor(progress * (end - start) + start);
+      if (symbol == '$') {
+        progress_value = symbol + new Intl.NumberFormat('en-US').format(progress_value);
+      } else {
+        progress_value = symbol + progress_value;
+      }
+  
+      obj.innerHTML = progress_value + '*';
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  } else {
+    console.warn('animateValue obj not found');
+  }
 }
 
 const initSetHigherHeights = ({ blockArrayElements }) => {
