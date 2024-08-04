@@ -20,6 +20,12 @@
   <% if(env.tooltip){ %>
     <sl-tooltip content="" slot="suffix" hoist>
       <div class="field-status"></div>
+      <% if(env.classes.includes('search-input')){ %>
+        <div class="loading-container hidden"></div>
+      <% } %>
     </sl-tooltip>
+  <% } %>
+  <% if(env.classes.includes('search-input')){ %>
+    <div class="autocom-box" slot="help-text"></div>
   <% } %>
 </sl-input>

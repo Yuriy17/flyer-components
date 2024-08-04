@@ -117,11 +117,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
+
     .iti {
       max-width: calc(100% - 15px);
       &__country-list {
-          max-height: 129px;
+        max-height: 129px;
       }
       &__flag {
         transform: scale(0.8);
@@ -163,7 +163,7 @@
     }
     &.form__field_error::before,
     &.form__field_success::before {
-      display: none; 
+      display: none;
     }
   }
   sl-input.form__field_error,
@@ -308,7 +308,8 @@
     }
   }
   &__input {
-    &, input {
+    &,
+    input {
       border: none;
       background: transparent;
       outline: none;
@@ -336,5 +337,83 @@
   &__error-text {
     display: none;
     color: #e31d1c;
+  }
+}
+.search-input {
+  &.active {
+    li:hover h5 {
+      color: rgba(0, 109, 210, 0.72) !important;
+    }
+    .autocom-box {
+      opacity: 1;
+      pointer-events: auto;
+      position: absolute;
+      width: 100%;
+      top: 100%;
+      z-index: 10;
+      li {
+        display: block;
+        h5 {
+          text-align: left;
+          font-size: 10px;
+          @include grid-mn('xsm') {
+          }
+        }
+        h4 {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .autocom-box {
+    border-radius: 0 0 12px 12px;
+    overflow: auto;
+    position: relative;
+    z-index: 400 !important;
+    max-height: 180px;
+    @include grid-mn('xsm') {
+      max-height: 240px;
+    }
+    li {
+      list-style: none;
+      display: none;
+      width: 100%;
+      cursor: default;
+      font-size: 14px;
+      background: #f4f8fd;
+      padding: 5px 12px;
+      @include grid-mn('xsm') {
+        padding: 5px 20px;
+      }
+      h4 {
+        font-weight: 600;
+        color: #242424 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 18px;
+        &:hover {
+          background: #d7e6f9;
+          cursor: pointer;
+          h4 {
+            color: #006dd2 !important;
+          }
+          h5 {
+            color: rgba(0, 109, 210, 0.72) !important;
+          }
+        }
+        @include grid-mn('xsm') {
+          line-height: 24px;
+        }
+      }
+      h5 {
+        font-weight: 400;
+        line-height: 18px;
+        color: rgba(36, 36, 36, 0.72);
+        text-align: left;
+        @include grid-mn('xsm') {
+          line-height: 24px;
+        }
+      }
+    }
   }
 }

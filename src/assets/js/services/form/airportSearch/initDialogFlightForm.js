@@ -10,6 +10,8 @@
 //     }
 //   });
 
+import { initAirportSearchForm } from "./initAirportSearchForm";
+
 //   document.querySelectorAll('.fly-trip-type').forEach((item) => item.classList.remove('active'));
 
 //   el.closest('.fly-trip-type-block').querySelector('.fly-trip-type').classList.add('active');
@@ -70,7 +72,10 @@ const handleRadioChange = ({ value, allPassengersInputElement }) => {
   const allPassengerValues = allPassengersInputElement.value.split('|');
   allPassengersInputElement.value = `${allPassengerValues[0]}| ${value}`;
 };
-const initDialogFlightForm = ({ dialogFlightForm }) => {
+export const initDialogFlightForm = ({ dialogFlightForm }) => {
+  initAirportSearchForm({
+    formElement: dialogFlightForm
+  });
   const allPassengersFieldElement = dialogFlightForm.querySelector('.form__passenger');
 
   if (allPassengersFieldElement) {
@@ -112,7 +117,8 @@ const initDialogFlightForm = ({ dialogFlightForm }) => {
   }
 };
 
-export const initFlightSearch = ({ containerElement }) => {
+// eslint-disable-next-line no-unused-vars
+const initFlightSearch = ({ containerElement }) => {
   if (containerElement) {
     const dialogFlightForms = containerElement.querySelectorAll('.dialog-flight__form.form');
 

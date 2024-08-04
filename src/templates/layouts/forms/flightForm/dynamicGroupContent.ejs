@@ -12,7 +12,7 @@
             originEntityIdVal: '',
           }
         },
-        classes: 'form__input form__field',
+        classes: 'form__input form__field search-input',
         name: `flight[${env.groupIndex}]["from"]`,
         id: `${env.formName}FirstName${env.groupIndex}`,
         validate: 'minLength:2;required;letters',
@@ -40,7 +40,7 @@
             destinationEntityId: '',
           }
         },
-        classes: 'form__input form__field',
+        classes: 'form__input form__field search-input',
         name: `flight[${env.groupIndex}]["to"]`,
         id: `${env.formName}To${env.groupIndex}`,
         validate: 'minLength:2;required;letters',

@@ -11,7 +11,7 @@ import { initLazyLoadImage } from './assets/js/services/initLazyLoadImage';
 import { initForm } from './assets/js/services/form/initForm.js';
 import { initHideCards } from './assets/js/services/initHideCards';
 import { initFlightDialog } from './assets/js/services/dialog/initFlightDialog';
-import { initFlightSearch } from './assets/js/services/form/airportSearch/initFlightSearch';
+import { initDialogFlightForm } from './assets/js/services/form/airportSearch/initDialogFlightForm.js';
 import { fadeOut, preloader } from './assets/js/services/initPreloader';
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -45,16 +45,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
   initHideCards();
   const dialogFlight = document.querySelector('.dialog-flight');
-  initFlightDialog({ dialogFlight });
+
+  if (dialogFlight) {
+    initFlightDialog({ dialogFlight });
+    const dialogFlightForms = dialogFlight.querySelectorAll('sl-tab-panel > .form');
+    dialogFlightForms && dialogFlightForms.forEach((dialogFlightForm) => {
+      initForm(dialogFlightForm);
+      initDialogFlightForm({
+        dialogFlightForm,
+      });
+    })
+  }
   initForm(document.querySelector('.contacts__form'));
   initForm(document.querySelector('.subscribe__form'));
-  initForm(dialogFlight?.querySelector('.dialog-flight__form_round-trip'));
-  initForm(dialogFlight?.querySelector('.dialog-flight__form_one-way'));
-  initForm(dialogFlight?.querySelector('.dialog-flight__form_multi-city'));
 
-  initFlightSearch({
-    containerElement: dialogFlight,
-  });
 
 
 
