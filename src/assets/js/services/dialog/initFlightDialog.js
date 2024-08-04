@@ -1,5 +1,3 @@
-// import { initAirportSearchForm } from '../form/airportSearch/initAirportSearchForm';
-// import { initMainForm } from '../legacy/initMainForm';
 import { initTriggerButton } from './initTriggerButton';
 
 export const initFlightDialog = ({ dialogFlight }) => {

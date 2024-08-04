@@ -12,7 +12,7 @@
             originEntityIdVal: '',
           }
         },
-        classes: 'form__input form__field search-input',
+        classes: 'form__input form__field search-input input_from',
         name: `flight[${env.groupIndex}]["from"]`,
         id: `${env.formName}FirstName${env.groupIndex}`,
         validate: 'minLength:2;required;letters',
@@ -32,9 +32,9 @@
       env: {
         tooltip: 'true',
         staticContentObject: {
+          path: 'templates/layouts/formFields/toHiddenInputs.ejs',
           pathObject: {
             groupIndex: env.groupIndex,
-            path: 'templates/layouts/formFields/toHiddenInputs.ejs',
             cityAirportToVal: '',
             cityCodeToVal: '',
             destinationEntityId: '',

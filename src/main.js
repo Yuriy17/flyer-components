@@ -44,24 +44,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     ],
   });
   initHideCards();
+
+  initForm(document.querySelector('.contacts__form'));
+  initForm(document.querySelector('.subscribe__form'));
+  
   const dialogFlight = document.querySelector('.dialog-flight');
 
   if (dialogFlight) {
     initFlightDialog({ dialogFlight });
     const dialogFlightForms = dialogFlight.querySelectorAll('sl-tab-panel > .form');
-    dialogFlightForms && dialogFlightForms.forEach((dialogFlightForm) => {
-      initForm(dialogFlightForm);
-      initDialogFlightForm({
-        dialogFlightForm,
-      });
-    })
+    dialogFlightForms;
+    if (dialogFlightForms) {
+      for (let index = 0; index < dialogFlightForms.length; index++) {
+        const dialogFlightForm = dialogFlightForms[index];
+        await initForm(dialogFlightForm);
+        initDialogFlightForm({
+          dialogFlightForm,
+        });
+      }
+    }
   }
-  initForm(document.querySelector('.contacts__form'));
-  initForm(document.querySelector('.subscribe__form'));
-
-
-
-
 
   // initFlightSearch();
   // initValidation();

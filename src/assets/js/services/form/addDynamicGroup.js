@@ -9,6 +9,7 @@ import fromHiddenInputsTemplate from 'src/templates/layouts/formFields/fromHidde
 import formFieldTemplate from 'src/templates/components/form/formField.ejs';
 import fieldTemplate from 'src/templates/layouts/formFields/formField.ejs';
 import { insertPosition } from '../../helpers/constants';
+import { initAirportSearchForm } from './airportSearch/initAirportSearchForm';
 
 export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }) => {
   const formName = formElement.getAttribute('id');
@@ -56,7 +57,7 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
           fromContent: Input({
             templateProps: {
               tooltip: true,
-              classes: 'form__input form__field',
+              classes: 'form__input form__field input_from search-input',
               name: `flight[${groupIndex}]["from"]`,
               id: `${formName}From${groupIndex}`,
               validate: 'minLength:2;required;letters',
@@ -74,7 +75,7 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
           toContent: Input({
             templateProps: {
               tooltip: true,
-              classes: 'form__input form__field',
+              classes: 'form__input form__field search-input',
               name: `flight[${groupIndex}]["to"]`,
               id: `${formName}To${groupIndex}`,
               validate: 'minLength:2;required;letters',
@@ -115,7 +116,7 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
             if (groupIndex > 0) {
               dynamicGroup.remove();
             }
-            if(addButton && addButton.disabled) {
+            if (addButton && addButton.disabled) {
               addButton.disabled = false;
             }
           });
@@ -137,6 +138,10 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
         setupField({
           formElement,
           fieldName: `flight[${groupIndex}]['date']`,
+        });
+        
+        initAirportSearchForm({
+          containerElement: dynamicGroup
         });
       },
     });

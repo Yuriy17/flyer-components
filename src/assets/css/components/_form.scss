@@ -371,6 +371,8 @@
     position: relative;
     z-index: 400 !important;
     max-height: 180px;
+    left: 0;
+    box-shadow: 0px 4px 4px 0px rgba(10, 116, 215, 0.1);
     @include grid-mn('xsm') {
       max-height: 240px;
     }
@@ -380,8 +382,19 @@
       width: 100%;
       cursor: default;
       font-size: 14px;
-      background: #f4f8fd;
+      background: #fff;
+      // background: #f4f8fd;
       padding: 5px 12px;
+      &:hover {
+        background: #d7e6f9;
+        cursor: pointer;
+        h4 {
+          color: #006dd2 !important;
+        }
+        h5 {
+          color: rgba(0, 109, 210, 0.72) !important;
+        }
+      }
       @include grid-mn('xsm') {
         padding: 5px 20px;
       }
@@ -391,16 +404,7 @@
         margin: 0 !important;
         padding: 0 !important;
         line-height: 18px;
-        &:hover {
-          background: #d7e6f9;
-          cursor: pointer;
-          h4 {
-            color: #006dd2 !important;
-          }
-          h5 {
-            color: rgba(0, 109, 210, 0.72) !important;
-          }
-        }
+
         @include grid-mn('xsm') {
           line-height: 24px;
         }
@@ -410,6 +414,7 @@
         line-height: 18px;
         color: rgba(36, 36, 36, 0.72);
         text-align: left;
+        margin: 0;
         @include grid-mn('xsm') {
           line-height: 24px;
         }

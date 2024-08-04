@@ -74,7 +74,7 @@ const handleRadioChange = ({ value, allPassengersInputElement }) => {
 };
 export const initDialogFlightForm = ({ dialogFlightForm }) => {
   initAirportSearchForm({
-    formElement: dialogFlightForm
+    containerElement: dialogFlightForm,
   });
   const allPassengersFieldElement = dialogFlightForm.querySelector('.form__passenger');
 

@@ -20,7 +20,15 @@ export const updateListBox = (listBox, inputSearchElement, airportList) => {
   listBox.classList.add('active');
   listBox.innerHTML = airportList;
 
-  listBox.querySelectorAll('li').forEach((item) => item.addEventListener('click', () => handleAirportSelection(item)));
+  listBox.querySelectorAll('li').forEach((item) =>
+    item.addEventListener('click', () =>
+      handleAirportSelection({
+        item,
+        inputSearchElement,
+        listBox,
+      })
+    )
+  );
 };
 
 // Debounced fetch function
