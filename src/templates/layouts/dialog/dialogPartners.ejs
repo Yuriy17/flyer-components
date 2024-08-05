@@ -6,58 +6,9 @@
       classes: 'search-panel', 
       id: 'partnersSearchPanel',
       placeholder: 'Search company', 
+      prefixPath: 'templates/layouts/dialog/searchIcon.ejs',
       autocomplete: true 
     } 
   }) %>
-  <%- include('templates/layouts/dialog/dialogPartnersContent.ejs', {
-    env: {
-      tags: [
-        {
-          text: 'All',
-          value: 'all',
-          active: true 
-        },
-        {
-          text: 'tag-1',
-          value: 'tag1' 
-        },
-        {
-          text: 'tag-2',
-          value: 'tag2' 
-        },
-        {
-          text: 'tag-3',
-          value: 'tag3' 
-        },
-        {
-          text: 'tag-4',
-          value: 'tag4' 
-        },
-        {
-          text: 'tag-5',
-          value: 'tag5' 
-        },
-        {
-          text: 'tag-6',
-          value: 'tag6' 
-        },
-        {
-          text: 'tag-7',
-          value: 'tag7' 
-        },
-        {
-          text: 'tag-8',
-          value: 'tag8' 
-        },
-        {
-          text: 'tag-9',
-          value: 'tag9' 
-        },
-        {
-          text: 'tag-10',
-          value: 'tag-0' 
-        },
-      ]
-    }
-  }) %>
+  
 </sl-dialog>

@@ -105,7 +105,7 @@ export const pasteByInsertPosition = ({ insertPositionType, parentElement, child
         if (isChildElement) {
           parentElement.append(child);
         } else {
-          parentElement.innerHtml = child;
+          parentElement.innerHTML = child;
         }
         break;
   

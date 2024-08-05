@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const heroPartnersButton = heroSection.querySelector('.hero-partners__button');
     initDialogPartners({
       triggerButton: heroPartnersButton,
+      url: `${import.meta.env.VITE_STATIC_PATH}/data/partnersData.json`,
     });
   }
   initHideCards();

@@ -3,12 +3,17 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding: 15px 23px 0;
+  }
+  &::part(panel) {
+    border-radius: 20px;
   }
 }
 .partners-data {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex-grow: 1;
   // .partners-data__tags
 
   &__tags {
@@ -18,21 +23,70 @@
     overflow: auto;
     padding-bottom: 10px;
   }
+    // .partners-data__tag
+
+  &__tag {
+    border-radius: 10px;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 24px */
+    &[variant="neutral"] {
+      &::part(base){
+        color: var(--Steel-Blue, #667085);
+        background: #EAEAEA;
+      }
+    }
+    &[variant="primary"] {
+      &::part(base){
+        color: var(--White, #FFF);
+        background: var(--Azure-Blue, #0A74D7);
+      }
+    }
+  }
 
   // .partners-data__info
 
   &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 1;
+    overflow: auto;
+    max-height: calc(100vh - 210px);
   }
 }
 .partners-category {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding-right: 12px;
   // .partners-category__title
 
   &__title {
+    width: 100%;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--Light-Gray, #CECECE);
+    color: var(--Dark-blue, #2a3243);
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
   }
 
   // .partners-category__list
 
   &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
   }
 
   // .partners-category__item
@@ -43,5 +97,25 @@
   // .partners-category__link
 
   &__link {
+    color: var(--Azure-Blue, #0a74d7);
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 24px */
+    text-decoration-line: underline;
+    &::after {
+      content: url($STATIC_PATH + '/icons/arrow-top-right-blue-1.svg');
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+.search-panel {
+  &::part(base) {
+    --sl-input-height-medium: 44px;
+    border-radius: 20px;
+    border: 0.6px solid var(--Slate-Gray, #7c8089);
   }
 }

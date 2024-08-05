@@ -2,14 +2,15 @@
 import '@shoelace-style/shoelace/dist/themes/light.css';
 import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path';
 // Set the base path to the folder where Shoelace is installed
-setBasePath('/node_modules/@shoelace-style/shoelace/dist');
+// setBasePath('/node_modules/@shoelace-style/shoelace/dist');
+setBasePath('/shoelace');
 
 import { ShoelaceComponents } from '../../helpers/constants';
 
 export const initShoelaceComponents = ({ components }) => {
   if (components?.length) {
     components.forEach((component) => {
-      switch (component) {
+      switch(component) {
         case ShoelaceComponents.tags:
           import('@shoelace-style/shoelace/dist/components/tag/tag.js');
           break;

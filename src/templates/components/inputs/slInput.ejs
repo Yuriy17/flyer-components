@@ -28,4 +28,10 @@
   <% if(env.classes.includes('search-input')){ %>
     <div class="autocom-box" slot="help-text"></div>
   <% } %>
+  <% if(env.prefix) { %><%- env.prefix %><% } %>
+  <% if(env.prefixPath) { %>
+    <%- include(env.prefixPath, {
+      env:{slot: 'prefix'}
+    }) %>
+  <% } %>
 </sl-input>
