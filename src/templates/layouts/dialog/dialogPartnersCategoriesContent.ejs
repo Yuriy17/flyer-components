@@ -1,16 +1,19 @@
 <% for(var i=0; i < env.category.length; i++) { %>
-  <div class="partners-category">
-    <div class="partners-category__title">
-      <%= env.category[i].title %>
+  <% if (env.category[i].links.length) { %>
+    
+    <div class="partners-category">
+      <div class="partners-category__title">
+        <%= env.category[i].title %>
+      </div>
+      <ul class="partners-category__list">
+        <% for(var y=0; y < env.category[i].links.length; y++) { %>
+          <li class="partners-category__item">
+            <a href="<%= env.category[i].links[y].href %>" class="partners-category__link">
+              <%= env.category[i].links[y].text %>
+            </a>
+          </li>
+          <% } %>
+      </ul>
     </div>
-    <ul class="partners-category__list">
-      <% for(var y=0; y < env.category[i].links.length; y++) { %>
-        <li class="partners-category__item">
-          <a href="<%= env.category[i].links[y].href %>" class="partners-category__link">
-            <%= env.category[i].links[y].text %>
-          </a>
-        </li>
-        <% } %>
-    </ul>
-  </div>
   <% } %>
+<% } %>

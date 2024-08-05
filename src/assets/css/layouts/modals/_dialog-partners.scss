@@ -2,18 +2,27 @@
   &::part(body) {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 24px;
     padding: 15px 23px 0;
   }
   &::part(panel) {
     border-radius: 20px;
+    --width: 794px;
+    @include grid-mn('md') {
+      --height: 780px;
+      max-height: 780px;
+      min-height: 780px;
+    }
   }
 }
 .partners-data {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 30px;
   flex-grow: 1;
+      @include grid-mn('md') {
+  gap: 40px;
+    }
   // .partners-data__tags
 
   &__tags {
@@ -23,7 +32,7 @@
     overflow: auto;
     padding-bottom: 10px;
   }
-    // .partners-data__tag
+  // .partners-data__tag
 
   &__tag {
     border-radius: 10px;
@@ -32,16 +41,16 @@
     font-style: normal;
     font-weight: 600;
     line-height: 150%; /* 24px */
-    &[variant="neutral"] {
-      &::part(base){
+    &[variant='neutral'] {
+      &::part(base) {
         color: var(--Steel-Blue, #667085);
-        background: #EAEAEA;
+        background: #eaeaea;
       }
     }
-    &[variant="primary"] {
-      &::part(base){
-        color: var(--White, #FFF);
-        background: var(--Azure-Blue, #0A74D7);
+    &[variant='primary'] {
+      &::part(base) {
+        color: var(--White, #fff);
+        background: var(--Azure-Blue, #0a74d7);
       }
     }
   }
@@ -54,7 +63,11 @@
     gap: 20px;
     flex-grow: 1;
     overflow: auto;
-    max-height: calc(100vh - 210px);
+    max-height: calc(100vh - 240px);
+          @include grid-mn('md') {
+  column-count: 2;
+      max-height: calc(780px - 257px);
+    }
   }
 }
 .partners-category {
@@ -68,7 +81,7 @@
   &__title {
     width: 100%;
     padding-bottom: 4px;
-    border-bottom: 1px solid var(--Light-Gray, #CECECE);
+    border-bottom: 1px solid var(--Light-Gray, #cecece);
     color: var(--Dark-blue, #2a3243);
     font-family: Inter;
     font-size: 16px;
@@ -117,5 +130,14 @@
     --sl-input-height-medium: 44px;
     border-radius: 20px;
     border: 0.6px solid var(--Slate-Gray, #7c8089);
+  }
+  &::part(input) {
+    --sl-color-primary-500: var(--Dark-blue, #2a3243);
+    color: var(--Dark-blue, #2a3243);
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
   }
 }
