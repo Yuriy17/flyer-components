@@ -14,7 +14,6 @@ export const createAirportList = (locations) => {
 };
 
 export const updateListBox = (listBox, inputSearchElement, airportList) => {
-  console.log("🚀 ~ updateListBox ~ airportList:", airportList);
   if(!airportList) {
     listBox.innerHTML = '';
     return;
