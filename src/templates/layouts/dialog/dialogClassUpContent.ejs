@@ -1,0 +1,46 @@
+<form  novalidate method="post" class="classup-form form" name="subscription">
+  <div class="classup-form__header">
+    <p class="classup-form__title">
+      <span>Business & First Class</span>&nbsp;<span class="classup-form__title_active">Up To 70%</span>
+    </p>
+    <p class="classup-form__description">
+      Fill out the form and receive exclusive flight offers with discounts by email every week
+    </p>
+  </div>
+
+  <div class="classup-form__inputs form__fields">
+    <%- include('templates/components/inputs/slInput.ejs', {
+      env: {
+        tooltip: true,
+        classes: 'form__input form__field',
+        name: 'city',
+        id: 'classupCity',
+        validate: 'minLength:3;maxLength:40;required;letters',
+        label: 'Your city',
+        placeholder: 'Enter city',
+        autocomplete: true
+      }
+    }) %>
+    <%- include('templates/components/inputs/slInput.ejs', {
+      env: {
+        tooltip: true,
+        classes: 'form__input form__field',
+        name: 'email',
+        id: 'classupEmail',
+        validate: 'email;required',
+        label: 'Your email',
+        placeholder: 'Enter your email',
+        autocomplete: true
+      }
+    }) %>
+  </div>
+  <%- include('templates/layouts/texts/formTermsText.ejs') %>
+  <%- include('templates/components/button/slButton.ejs', {
+    env: {
+      classes: 'btn-primary btn-sm',
+      type: 'submit',
+      variant: 'primary',
+      content: 'Subscribe',
+    }
+  }) %>
+</form>

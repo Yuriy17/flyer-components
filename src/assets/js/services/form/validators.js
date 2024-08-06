@@ -1,5 +1,7 @@
 export const minLength = ({ value, ruleValue }) => value.length >= parseInt(ruleValue) || `Must be at least ${ruleValue} characters long.`;
 
+export const maxLength = ({ value, ruleValue }) => value.length < parseInt(ruleValue) || `Must be less then ${ruleValue} characters long.`;
+
 export const required = ({ value }) => (value && value.toString().trim() !== '') || 'This field is required.';
 
 export const letters = ({ value }) =>
@@ -16,7 +18,7 @@ export const email = ({value}) => value && !!String(value)
       
 export const phone = ({ value, libsObject }) =>
   (value && libsObject['phone'].isValidNumber(value)) ||
-  'Please enter your phone number, including the country code <b>(e.g., +1 (234) 567-8901).</b>';
+  'Please enter your phone number, including the country code (e.g., +1 (234) 567-8901).';
 
 export const date = ({ ruleValue, libsObject }) => {
   console.log("🚀 ~ date ~ ruleValue:", ruleValue);
@@ -57,3 +59,9 @@ export const date = ({ ruleValue, libsObject }) => {
   // if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) monthLength[1] = 29;
   // return day > 0 && day <= monthLength[month - 1];
 };
+
+export const countChars = ({ value, ruleValue }) => value.replaceAll(' ', '').length == parseInt(ruleValue) || `Must be count of ${ruleValue} characters.`;
+
+export const checked = ({ value }) => (value && value.checked) || 'This field should be checked.';
+
+export const number = ({ value }) => (value && !isNaN(value.replaceAll(' ', ''))) || 'This field should be number type.';

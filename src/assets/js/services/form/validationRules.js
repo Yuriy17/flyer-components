@@ -1,4 +1,4 @@
-import { minLength, required, email, phone, letters, date } from './validators.js';
+import { minLength, required, email, phone, letters, date, maxLength, countChars, checked, number } from './validators.js';
 
 export const validationRules = {
   minLength,
@@ -7,4 +7,8 @@ export const validationRules = {
   phone,
   letters,
   date,
+  maxLength,
+  countChars,
+  checked,
+  number,
 };

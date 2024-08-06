@@ -11,9 +11,10 @@ import { initLazyLoadImage } from './assets/js/services/initLazyLoadImage';
 import { initForm } from './assets/js/services/form/initForm.js';
 import { initHideCards } from './assets/js/services/initHideCards';
 import { initFlightDialog } from './assets/js/services/dialog/initFlightDialog';
-import { initDialogFlightForm } from './assets/js/services/form/airportSearch/initDialogFlightForm.js';
+
 import { fadeOut, preloader } from './assets/js/services/initPreloader';
 import { initDialogPartners } from './assets/js/services/dialog/initDialogPartners';
+import { initDialogClassUp } from './assets/js/services/dialog/initDialogClassUp';
 
 document.addEventListener('DOMContentLoaded', async () => {
   await fadeOut(preloader);
@@ -60,22 +61,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   initForm(document.querySelector('.contacts__form'));
   initForm(document.querySelector('.subscribe__form'));
   
-  const dialogFlight = document.querySelector('.dialog-flight');
-
-  if (dialogFlight) {
-    initFlightDialog({ dialogFlight });
-    const dialogFlightForms = dialogFlight.querySelectorAll('sl-tab-panel > .form');
-
-    if (dialogFlightForms) {
-      for (let index = 0; index < dialogFlightForms.length; index++) {
-        const dialogFlightForm = dialogFlightForms[index];
-        await initForm(dialogFlightForm);
-        initDialogFlightForm({
-          dialogFlightForm,
-        });
-      }
-    }
-  }
+  initFlightDialog({ dialogFlight: document.querySelector('.dialog-flight') });
+  initDialogClassUp({
+    dialogClassUpElement: document.querySelector('.dialog-classup'),
+  });
 
   // initFlightSearch();
   // initValidation();

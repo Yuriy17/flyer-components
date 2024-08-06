@@ -8,16 +8,15 @@
   &::part(panel) {
     border-radius: 20px;
     --width: 648px;
+		--height: 100vh;
+		height: var(--height);
+    max-height: 100vh;
     @include grid-mn('md') {
       --height: 748px;
-      max-height: 748px;
-      min-height: 748px;
     }
-    @include grid-mn('md') {
+    @include grid-mn('xmd') {
       --width: 794px;
       --height: 864px;
-      max-height: 864px;
-      min-height: 864px;
     }
   }
 }

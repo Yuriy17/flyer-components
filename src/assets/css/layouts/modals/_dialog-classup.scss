@@ -1,0 +1,133 @@
+.dialog-classup {
+  .icon-menu {
+    margin-top: 35px;
+  }
+  &::part(title) {
+        --header-spacing: 12px;
+  }
+  &::part(body) {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 20px 32px 0px;
+    @include grid-mn('md') {
+      padding: 0 32px 0px;
+    }
+  }
+  &::part(panel) {
+    border-radius: 20px;
+    --width: 478px;
+    --height: 730px;
+    height: var(--height);
+    max-height: 100vh;
+    @include grid-mn('md') {
+      --height: 524px;
+    }
+    @include grid-mn('xmd') {
+      --width: 794px;
+      --height: 864px;
+    }
+  }
+}
+.classup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 0;
+
+  // .classup-form__header
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  // .classup-form__title
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    color: #000;
+    text-align: center;
+    margin: 0;
+
+    /* Mobile/SemiBold 20 */
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 30px */
+    @include grid-mn('md') {
+      font-size: 20px;
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  // .classup-form__title_active
+
+  &__title_active {
+    color: var(--Orange, #fd9f00);
+  }
+
+  // .classup-form__description
+
+  &__description {
+    margin: 0;
+    color: #000;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 27px */
+        @include grid-mn('md') {
+      font-size: 16px;
+        }
+  }
+
+  // .classup-form__inputs
+
+  &__inputs {
+  }
+}
+.form {
+  // .form__fields
+
+  &__fields {
+    flex-direction: row;
+    @include grid-mn('md') {
+      flex-direction: column;
+      &,
+      .form__fields-search > sl-input,
+      .dynamic-group > div.form__input,
+      > sl-input,
+      > div.form__input,
+      > .form__field-dropdown {
+        width: 100%;
+      }
+    }
+  }
+
+  &__text {
+    margin: 0;
+    color: var(--Dark-blue, #2a3243);
+    &,
+    a {
+      /* Mobile/Medium 18 */
+      font-family: Montserrat;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 27px */
+              @include grid-mn('md') {
+      font-size: 16px;
+        }
+    }
+  }
+  sl-button[type='submit'] {
+    margin: 0;
+  }
+}
