@@ -34,17 +34,16 @@ export const initDialogClassUp = ({ dialogClassUpElement }) => {
       dialogClassUpElement,
     });
     const closeButton = dialogClassUpElement.querySelector('.icon-menu');
-    closeButton &&
-      closeButton.addEventListener('click', () => {
-        dialogClassUpElement.hide();
-        modalShowed = 1;
-        const closeModalCount = localStorage.getItem('closeModalCount');
-        if (closeModalCount && closeModalCount != 2) {
-          localStorage.setItem('closeModalCount', Number(localStorage.getItem('closeModalCount')) + 1);
-        } else {
-          localStorage.setItem('closeModalCount', 1);
-        }
-      });
+    closeButton && closeButton.addEventListener('click', () => dialogClassUpElement.hide());
+    dialogClassUpElement.addEventListener('sl-hide', () => {
+      modalShowed = 1;
+      const closeModalCount = localStorage.getItem('closeModalCount');
+      if (closeModalCount && closeModalCount != 2) {
+        localStorage.setItem('closeModalCount', Number(localStorage.getItem('closeModalCount')) + 1);
+      } else {
+        localStorage.setItem('closeModalCount', 1);
+      }
+    });
     initForm(dialogClassUpElement.querySelector('.form'));
   }
 };
