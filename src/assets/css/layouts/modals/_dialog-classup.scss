@@ -23,10 +23,6 @@
     @include grid-mn('md') {
       --height: 524px;
     }
-    @include grid-mn('xmd') {
-      --width: 794px;
-      --height: 864px;
-    }
   }
 }
 .classup-form {
