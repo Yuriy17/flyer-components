@@ -14,7 +14,11 @@ export const createAirportList = (locations) => {
 };
 
 export const updateListBox = (listBox, inputSearchElement, airportList) => {
-  if (!airportList) return;
+  console.log("🚀 ~ updateListBox ~ airportList:", airportList);
+  if(!airportList) {
+    listBox.innerHTML = '';
+    return;
+  }
 
   inputSearchElement.classList.add('active');
   listBox.classList.add('active');
