@@ -3,7 +3,9 @@
 .hero {
   max-width: 100%;
   width: 100%;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
   position: relative;
 
   padding: map.get($header-height, 'xs') 0 91px 0;
@@ -68,11 +70,10 @@
       padding-top: 240px;
     }
     @include grid-mn('xxl') {
-
     }
-    @include grid-mx('md') {
-      padding: 21px 0px 0;
-    }
+    // @include grid-mx('md') {
+    //   padding: 21px 0px 0;
+    // }
   }
 
   // .hero__info
@@ -190,13 +191,16 @@
       flex-direction: column-reverse;
       gap: 28px;
       max-width: 100%;
-      &.container {
-        @include grid-mx('md') {
-          padding: 12px 14px 0;
+      // &.container {
+      //   @include grid-mx('md') {
+      //     padding: 12px 14px 0;
+      //   }
+      // }
+      .price {
+        display: none;
+        @include grid-mn('md') {
+          display: flex;
         }
-      }
-      @include grid-mn('md') {
-        // flex-direction: row-reverse;
       }
       @include grid-mn('xmd') {
         gap: 20px;

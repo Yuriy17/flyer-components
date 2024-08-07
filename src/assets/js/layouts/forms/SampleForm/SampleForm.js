@@ -1,13 +1,13 @@
-import { Form } from '../../components/form/Form';
-import { Input } from '../../components/Input';
-import { Select } from '../../components/Select';
-import { Textarea } from '../../components/Textarea';
-import { Checkbox } from '../../components/Checkbox';
-import { Button } from '../../components/Button';
+import { Form } from '../../../components/form/Form';
+import { Input } from '../../../components/Input';
+import { Select } from '../../../components/Select';
+import { Textarea } from '../../../components/Textarea';
+import { Checkbox } from '../../../components/Checkbox';
+import { Button } from '../../../components/Button';
 import sampleFormContentTemplate from 'src/templates/layouts/forms/sampleForm/sampleFormContent.ejs';
-import { FormField } from '../../components/form/FormField';
+import { FormField } from '../../../components/form/FormField';
 import { formConf } from './sampleFormConf';
-import { initForm } from '../../services/form/initForm';
+import { initForm } from '../../../services/form/initForm';
 
 // https://github.com/shoelace-style/shoelace/discussions/1163#discussioncomment-4832774
 export const SampleForm = ({ parentElement }) => {

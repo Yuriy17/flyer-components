@@ -5,7 +5,7 @@ import formTemplate from 'src/templates/layouts/forms/mainForm/form.ejs';
 import formFieldTemplate from 'src/templates/layouts/forms/mainForm/formField.ejs';
 import inputTypeTemplate from 'src/templates/layouts/forms/mainForm/typeBlock.ejs';
 import { baseUrl } from 'src/assets/js/helpers/constants';
-import { inputTel } from '../services/legacy/phones';
+import { inputTel } from '../../services/legacy/phones';
 
 
 export const MainForm = ({ passengersData, formType }) => {

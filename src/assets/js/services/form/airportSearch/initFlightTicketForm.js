@@ -72,14 +72,14 @@ const handleRadioChange = ({ value, allPassengersInputElement }) => {
   const allPassengerValues = allPassengersInputElement.value.split('|');
   allPassengersInputElement.value = `${allPassengerValues[0]}| ${value}`;
 };
-export const initDialogFlightForm = ({ dialogFlightForm }) => {
+export const initFlightTicketForm = ({ flightTicketForm }) => {
   initAirportSearchForm({
-    containerElement: dialogFlightForm,
+    containerElement: flightTicketForm,
   });
-  const allPassengersFieldElement = dialogFlightForm.querySelector('.form__passenger');
+  const allPassengersFieldElement = flightTicketForm.querySelector('.form__passenger');
 
   if (allPassengersFieldElement) {
-    const radioTypeTickets = dialogFlightForm.querySelector('.passenger-block__class');
+    const radioTypeTickets = flightTicketForm.querySelector('.passenger-block__class');
     const allPassengersInputElement = allPassengersFieldElement.querySelector('input');
     const passengersDropdownElement = allPassengersFieldElement.parentElement;
     const passengerCountElements = passengersDropdownElement.querySelectorAll('.passenger-count');
@@ -98,8 +98,8 @@ export const initDialogFlightForm = ({ dialogFlightForm }) => {
 
         btMinus &&
           btMinus.addEventListener('click', () => {
-            if (input.classList.contains('adults') && (Number(input.value) === 1)) {
-              alert('minimal count of adults is 1')
+            if (input.classList.contains('adults') && Number(input.value) === 1) {
+              alert('minimal count of adults is 1');
             } else {
               updatePassengerCount({ increment: -1, input, allPassengersInputElement, passengerCountElements });
             }
@@ -124,7 +124,7 @@ const initFlightSearch = ({ containerElement }) => {
 
     if (dialogFlightForms && dialogFlightForms.length) {
       dialogFlightForms.forEach((dialogFlightForm) => {
-        initDialogFlightForm({
+        initFlightTicketForm({
           dialogFlightForm,
         });
 

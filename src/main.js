@@ -10,11 +10,12 @@ import { initBurger } from './assets/js/services/dialog/initBurger.js';
 import { initLazyLoadImage } from './assets/js/services/initLazyLoadImage';
 import { initForm } from './assets/js/services/form/initForm.js';
 import { initHideCards } from './assets/js/services/initHideCards';
-import { initFlightDialog } from './assets/js/services/dialog/initFlightDialog';
+import { initDialogFreeQuote } from './assets/js/services/dialog/initDialogFreeQuote.js';
 
 import { fadeOut, preloader } from './assets/js/services/initPreloader';
 import { initDialogPartners } from './assets/js/services/dialog/initDialogPartners';
 import { initDialogClassUp } from './assets/js/services/dialog/initDialogClassUp';
+import { initFlightTicketForms } from './assets/js/layouts/forms/initFlightTicketForms';
 
 document.addEventListener('DOMContentLoaded', async () => {
   await fadeOut(preloader);
@@ -55,13 +56,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       triggerButton: heroPartnersButton,
       url: `${import.meta.env.VITE_STATIC_PATH}/data/partnersData.json`,
     });
+      initFlightTicketForms({
+        flightTicketFormContainer: heroSection.querySelector('.find-ticket'),
+      });
   }
   initHideCards();
 
   initForm(document.querySelector('.contacts__form'));
   initForm(document.querySelector('.subscribe__form'));
-  
-  initFlightDialog({ dialogFlight: document.querySelector('.dialog-flight') });
+
+  initDialogFreeQuote({ dialogFreeQuote: document.querySelector('.dialog-free-quote') });
   initDialogClassUp({
     dialogClassUpElement: document.querySelector('.dialog-classup'),
   });

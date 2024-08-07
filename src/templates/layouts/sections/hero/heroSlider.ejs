@@ -12,14 +12,16 @@
   </div>
   <div class="hero__nav">
     <div class="swiper-scrollbar"></div>
-    <div class="hero__nav-block">
-      <div class="swiper-button-prev">
-        <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/rounded-arrow-left.svg" alt="rounded-arrow-left"> 
+    <% if (env.arrows === true) { %>     
+      <div class="hero__nav-block">
+        <div class="swiper-button-prev">
+          <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/rounded-arrow-left.svg" alt="rounded-arrow-left"> 
+        </div>
+        <div class="swiper-button-next">
+          <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/rounded-arrow-right.svg" alt="rounded-arrow-right">
+        </div>
       </div>
-      <div class="swiper-button-next">
-        <img src="<%= process.env['VITE_STATIC_PATH'] %>/icons/rounded-arrow-right.svg" alt="rounded-arrow-right">
-      </div>
-    </div>
+    <% } %>
   </div>
 
 </div>

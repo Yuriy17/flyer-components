@@ -8,7 +8,11 @@
     <%- include('templates/layouts/sections/preheader/preheader.ejs') %> 
     <%- include('templates/layouts/header.ejs') %> 
     <main>
-      <%- include('templates/layouts/sections/hero/hero.ejs') %>
+      <%- include('templates/layouts/sections/hero/hero.ejs', {
+        env: {
+          price: '1,467'
+        }
+      }) %>
       <%- include('templates/layouts/breadcrumbs/breadcrumbs.ejs', { 
         env: {
           breadcrumbs: [
@@ -32,7 +36,7 @@
       <%- include('templates/layouts/sections/services/services.ejs') %>
       <%- include('templates/layouts/sections/subscribe/subscribe.ejs') %>
     </main>
-    <%- include('templates/layouts/dialog/dialogFlight.ejs') %>
+    <%- include('templates/layouts/dialog/dialogFreeQuote.ejs') %>
     <%- include('templates/layouts/dialog/dialogPartners.ejs') %>
     <%- include('templates/layouts/dialog/dialogClassUp.ejs') %>
     <%- include('templates/layouts/footer.ejs') %>
