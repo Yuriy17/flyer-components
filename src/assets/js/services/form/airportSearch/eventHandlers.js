@@ -21,6 +21,7 @@ export const handleAirportSelection = ({ item, inputSearchElement, listBox }) =>
 };
 
 const updateInputFields = (parent, inputBox, airportName, countryName, cityCode, entityId) => {
+  console.log("🚀 ~ updateInputFields ~ entityId:", entityId);
   const isFromInput = inputBox.classList.contains('input_from');
   // const prefix = isFromInput ? 'from' : 'to';
 

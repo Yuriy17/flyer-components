@@ -7,8 +7,8 @@ export const createAirportList = (locations) => {
   return locations
     .filter(({ country }) => !isSanctionedPlace(country))
     .map(
-      ({ name, country, iataCityCode, id }) =>
-        `<li class="${id}" data-iata-city-code="${iataCityCode}"><h5>${name} (<span>${id}</span>)</h5><h4>${country}</h4></li>`
+      ({ name, country, iataCityCode, id, entityId }) =>
+        `<li class="${entityId}" data-iata-city-code="${iataCityCode}"><h5>${name} (<span>${id}</span>)</h5><h4>${country}</h4></li>`
     )
     .join('');
 };

@@ -7,7 +7,7 @@ export const required = ({ value }) => (value && value.toString().trim() !== '')
 export const letters = ({ value }) =>
   (value &&
     !!String(value)
-      .match(/^[a-zA-Z\s]*$/)) ||
+      .match(/^[a-zA-Z()\-\s]*$/)) ||
   'Only letters and spaces are allowed.';
 
 export const email = ({value}) => value && !!String(value)

@@ -7,13 +7,22 @@
   border-radius: 10px;
   overflow: hidden;
   width: 319px;
-  height: 376px;
+  // height: 376px;
   display: flex;
   flex-direction: column;
 
   @include grid-mn('md') {
-    width: 316px;
-    height: 375px;
+    width: 314px;
+  }
+  
+  @include grid-mn('xmd') {
+    width: 288px;
+  }
+    @include grid-mn('xlg') {
+    width: 289px;
+  }
+      @include grid-mn('xxl') {
+    width: 375px;
   }
   &__img {
     transition: all 0.3s ease-in-out;
@@ -22,9 +31,11 @@
     &-block {
       position: relative;
       flex-grow: 1;
+      height: 249px;
+      min-height: 249px;
+          max-height: 249px;
       @include grid-mn('md') {
-        min-height: 302px;
-        height: 302px;
+
       }
       img {
         display: block;
@@ -71,8 +82,8 @@
 
   &__info {
     display: flex;
-    padding: 16px;
-    gap: 8px;
+    padding: 0;
+    gap: 6px;
     flex-direction: column;
     width: 100%;
     @include grid-mn('md') {

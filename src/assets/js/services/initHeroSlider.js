@@ -52,6 +52,7 @@ const initSlider = ({
   //   reviewNav,
   // });
 
+  console.log("🚀 ~ swiper ~ sliderBlock.querySelector('.swiper'):", sliderBlock.querySelector('.swiper'));
   // init Swiper:
   // eslint-disable-next-line no-unused-vars
   const swiper = new Swiper(sliderBlock.querySelector('.swiper'), {
@@ -97,7 +98,7 @@ const initSlider = ({
 
 export const initHeroSlider = async ({ heroSection }) => {
   if(heroSection) {
-    const sliderBlock = heroSection.querySelector('.hero__slider-content');
+    const sliderBlock = heroSection.querySelector('.hero__slider');
     if (sliderBlock) {
       initSlider({
         sliderBlock,

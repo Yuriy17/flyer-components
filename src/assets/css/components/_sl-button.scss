@@ -44,7 +44,7 @@ sl-button {
       font-size: 18px;
       font-weight: 600;
       line-height: normal;
-            @include grid-mn('xmd') {
+            @include grid-mn('md') {
         font-size: 16px;
       }
     }

@@ -3,16 +3,6 @@
     <%- include("templates/components/adaptivePicture/adaptivePicture.ejs", {
       env: env.image
     }) %>
-    <%- include("templates/components/button/slButton.ejs", {
-      env: {
-        classes: "btn-light btn-arrow btn-xl",
-        content: "Get Your Exclusive Quote",
-        icon: {
-          src: `${process.env['VITE_STATIC_PATH']}/icons/arrow-top-right-blue.svg`,
-          alt: "arrow-top-right-blue icon"
-        }
-      }
-    })%>
   </div>
   <div class="card__content">
     <div class="card__info">
@@ -25,5 +15,15 @@
         <p class="card__class-price"><%- env.classPrice %></p>
       </div>
     </div>
+    <%- include("templates/components/button/slButton.ejs", {
+        env: {
+          classes: "btn-primary btn-arrow btn-xl",
+          content: "Get Your Exclusive Quote",
+          icon: {
+            src: `${process.env['VITE_STATIC_PATH']}/icons/arrow-top-right-blue.svg`,
+            alt: "arrow-top-right-blue icon"
+          }
+        }
+      })%>
   </div> 
 </div>

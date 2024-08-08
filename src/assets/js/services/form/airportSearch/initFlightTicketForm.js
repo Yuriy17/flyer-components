@@ -117,6 +117,27 @@ export const initFlightTicketForm = ({ flightTicketForm }) => {
   }
 };
 
+const initSwitch = () => {
+        
+  const parent = event.target.closest('.container-field-row');
+  const [inputFrom, inputTo] = [parent.querySelector('.input_from'), parent.querySelector('.input_to')];
+  const [cityAirportFrom, cityAirportTo] = [
+    parent.querySelector('.cityAirport'),
+    parent.querySelector('.cityAirportTo'),
+  ];
+  const [cityCodeFrom, cityCodeTo] = [parent.querySelector('.cityCode'), parent.querySelector('.cityCodeTo')];
+  const [entityIdFrom, entityIdTo] = [
+    parent.querySelector('.originEntityId'),
+    parent.querySelector('.destinationEntityId'),
+  ];
+
+  [inputFrom.value, inputTo.value] = [inputTo.value, inputFrom.value];
+  [cityAirportFrom.value, cityAirportTo.value] = [cityAirportTo.value, cityAirportFrom.value];
+  [cityCodeFrom.value, cityCodeTo.value] = [cityCodeTo.value, cityCodeFrom.value];
+  [entityIdFrom.value, entityIdTo.value] = [entityIdTo.value, entityIdFrom.value];
+  
+}
+
 // eslint-disable-next-line no-unused-vars
 const initFlightSearch = ({ containerElement }) => {
   if (containerElement) {

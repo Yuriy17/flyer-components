@@ -218,10 +218,9 @@
   div.form__input {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 73px;
+    height: 69px;
     border-radius: 10px;
-    padding: 9px 16px;
+    padding: 12px 13px;
     background: var(--White, #fff);
     border: 1px solid var(--White, #fff);
     box-shadow: 0px 0px 4px 0px rgba(20, 46, 70, 0.15);
@@ -259,6 +258,9 @@
   sl-input {
     &::part(form-control-label) {
       --sl-spacing-3x-small: 0;
+    }
+    &::part(form-control-input){
+      margin-top: auto;
     }
     &::part(base) {
       position: static;

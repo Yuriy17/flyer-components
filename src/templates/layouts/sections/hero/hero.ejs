@@ -1,33 +1,33 @@
 <section id="hero" class="hero">
   <%- include('heroBg.ejs') %>
-  <div class="container">
-    <div class="hero__content">
-      <div class="hero__info">
-        <p class="hero__subtitle">
-          Discover Unmatched Comfort:
-        </p>
-        <p class="hero__text">
-          Get Up to 70% Off Business Class Trips!
-        </p>
-        <h1 class="hero__title">
-          Business Class <br> Flights with <a href="/">Flyer Club</a>
-        </h1>
-        <%- include('templates/components/button/slButton.ejs', {
-          env: {
-            classes: 'btn-primary btn-xl',
-            content: 'Get Your Exclusive Quote',
-          }
-        })%>
-      </div>
-      <%- include('templates/layouts/sections/hero/heroPrice.ejs', {
+  <div class="hero__content">
+    <div class="hero__info">
+      <p class="hero__text">
+        Indulge in Comfort: Enjoy <b>20-70%</b><br>
+        Savings on Business Class Travel.
+      </p>
+      <p class="hero__text">Secure Your Exclusive Quote!</p> 
+      <h1 class="hero__title">
+        Business Class Flights<br>
+        with <a href="/">Flyer Club</a>
+      </h1>
+      <%- include('templates/components/button/slButton.ejs', {
         env: {
-          price: env.price
+          classes: 'btn-primary btn-xl',
+          content: 'Call Us + 1 844-447-0007 ',
         }
-      }) %>
+      })%>
     </div>
+    <%- include('templates/layouts/sections/hero/heroPrice.ejs', {
+      env: {
+        price: env.price
+      }
+    }) %>
   </div>
-  <%- include('templates/layouts/forms/findTicketForm/findTicketForm.ejs') %>
-  <div class="hero__slider-content container">
+  <div class="hero__container">
+
+    <%- include('templates/layouts/forms/findTicketForm/findTicketForm.ejs') %>
+
     <%- include('templates/layouts/sections/hero/heroSlider.ejs', {
       env: {
         arrows: false,
@@ -94,7 +94,7 @@
         }]
       }
     }) %>
-    
+
     <%- include('templates/layouts/sections/hero/heroPrice.ejs', {
       env: {
         price: env.price

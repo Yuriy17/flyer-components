@@ -5,10 +5,9 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 40px;
   position: relative;
 
-  padding: map.get($header-height, 'xs') 0 91px 0;
+  padding: map.get($header-height, 'xs') 0 81px 0;
   // min-height: 100vh;
   min-height: map.get($hero-height, 'xs');
   margin-top: -(map.get($header-height, 'xs'));
@@ -52,28 +51,48 @@
     }
   }
 
-  > .container {
+  // .hero__container
+  &__container {
     // padding-top: 40px;
-
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
     overflow: hidden;
+    padding: 0 16px;
+    position: relative;
 
     @include grid-mn('md') {
-      padding-top: 64px;
+      padding-top: 0;
+      gap: 24px;
     }
     @include grid-mn('xmd') {
-      padding-top: 40px;
+      // padding-top: 40px;
     }
     @include grid-mn('xlg') {
-      padding-top: 160px;
+      // padding-top: 160px;
     }
     @include grid-mn('xl') {
-      padding-top: 240px;
+      // padding-top: 240px;
     }
     @include grid-mn('xxl') {
     }
     // @include grid-mx('md') {
     //   padding: 21px 0px 0;
     // }
+    > .price {
+      display: none;
+      @include grid-mn('md') {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: auto;
+        left: 60px;
+        bottom: 89px;
+        gap: 10px;
+        z-index: 7;
+      }
+    }
   }
 
   // .hero__info
@@ -83,6 +102,10 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    margin-top: 40px;
+    @include grid-mn('md') {
+      margin-top: 36px;
+    }
     @include grid-mn('xlg') {
       align-items: flex-start;
       width: 484px;
@@ -122,17 +145,24 @@
 
   &__text {
     color: var(--White-Smoke, #fafafa);
-    font-family: Montserrat;
     text-align: center;
+    font-family: Montserrat;
+    font-size: 20px;
     font-style: normal;
     font-weight: 500;
-    line-height: 140%;
-    font-size: 20px;
+    line-height: 140%; /* 28px */
     margin: 0 auto;
-    max-width: 275px;
+    max-width: 375px;
+    & + & {
+      font-weight: 600;
+      margin-top: 20px;
+      @include grid-mn('md') {
+        font-size: 22px;
+      }
+    }
     @include grid-mn('md') {
       margin: 0;
-      font-size: 28px;
+      font-size: 24px;
       max-width: unset;
     }
     @include grid-mn('xmd') {
@@ -144,7 +174,7 @@
   // .hero__title
 
   &__title {
-    margin: 20px 0 0;
+    margin: 16px 0 0;
     a {
       color: var(--Azure-Blue, #0a74d7);
     }
@@ -162,17 +192,25 @@
     z-index: 1;
     position: relative;
     display: flex;
-    justify-content: space-between;
-    gap: 12px;
+    gap: 24px;
+    flex-direction: column;
+    .price {
+      @include grid-mn('md') {
+        display: none;
+      }
+    }
   }
 
   &__slider {
     position: relative;
     width: 100%;
-    // @include grid-mn('md') {
-    //   width: calc(100% - 175px);
-
-    // }
+    padding: 0;
+    margin: 0 0 0 16px;
+    overflow: hidden;
+    @include grid-mn('md') {
+      overflow: hidden;
+      margin: 0 0 0 239px;
+    }
     // @include grid-mn('xmd') {
     //   width: calc(100% - 191px);
     // }
@@ -228,7 +266,7 @@
   }
   &__nav {
     position: relative;
-    height: 64px;
+    min-height: 44px;
     &-block {
       position: relative;
       height: 100%;
@@ -313,8 +351,6 @@
 
   // .price__text
 
-  &__text {
-  }
   &__text,
   &__title {
     color: var(--White-Smoke, #fafafa);
@@ -322,8 +358,9 @@
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
-    line-height: normal;
+    line-height: 0.7;
     @include grid-mn('md') {
+      line-height: normal;
       font-size: 20px;
     }
   }
@@ -340,6 +377,7 @@
     text-transform: uppercase;
     @include grid-mn('md') {
       font-size: 44px;
+      line-height: 1;
     }
     @include grid-mn('xmd') {
       font-size: 40px;
@@ -352,38 +390,38 @@
 
 .hero-card {
   position: relative;
-  width: 200px;
-  height: 260px;
+  width: 243px;
+  height: 199px;
   border-radius: 10px;
   overflow: hidden;
   @include grid-mn('md') {
-    width: 267px;
-    height: 305px;
   }
   @include grid-mn('xmd') {
-    width: 240px;
-    height: 264px;
   }
   @include grid-mn('xlg') {
-    width: 267px;
-    height: 305px;
   }
 
+  > picture {
+    display: block;
+    height: 106px;
+    overflow: hidden;
+  }
   &__image {
     display: block;
-    height: auto;
+    // height: auto;
     width: 100%;
     max-width: 100%;
     object-fit: cover;
+    object-position: center;
   }
 
   // .hero-card__content
 
   &__content {
-    position: absolute;
-    left: 0;
-    top: auto;
-    bottom: 0;
+    // position: absolute;
+    // left: 0;
+    // top: auto;
+    // bottom: 0;
     border-radius: 0px 0px 10px 10px;
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.6) 100%), rgba(0, 9, 28, 0.7);
     backdrop-filter: blur(2.7586207389831543px);
@@ -391,7 +429,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 5px;
+    gap: 0;
     padding: 10px 12px;
     p {
       margin: 0;
@@ -486,7 +524,7 @@
   z-index: 1;
   top: auto;
   left: 50%;
-  bottom: -60px;
+  bottom: -67px;
   transform: translateX(-50%);
   display: flex;
   width: calc(100% - 28px);
@@ -504,7 +542,9 @@
   background: var(--White, #fff);
   box-shadow: 0px 4px 10px 0px rgba(20, 46, 70, 0.1);
   @include grid-mn('md') {
+        bottom: -63px;
     padding: 16px;
+        width: calc(100% - 80px);
   }
   @include grid-mn('xmd') {
     padding: 24px 24px 11px;
@@ -548,7 +588,7 @@
     margin: 0;
     width: 100%;
     @include grid-mn('md') {
-      gap: 24px;
+      gap: 18px;
     }
     @include grid-mn('xmd') {
       gap: 44px;

@@ -4,7 +4,7 @@ import { createAirportList, updateListBox } from './airportUtils.js';
 
 export const fetchAirports = async ({ query, listBox, inputSearchElement }) => {
   try {
-    const response = await fetch(`${base_api_url}api/search_location?query=${query}`);
+    const response = await fetch(`${base_api_url}api/v2/location?query=${query}`);
     const data = await response.json();
 
     if (!response.ok) {

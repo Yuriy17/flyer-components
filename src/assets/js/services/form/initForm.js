@@ -64,6 +64,7 @@ export const initForm = async (formElement) => {
           // await setPreloader('loading');
           const formEl = new FormData(formElement);
           const json = Object.fromEntries(formEl.entries());
+          console.log("🚀 ~ formElement.addEventListener ~ json:", json);
 
           // TODO: uncomment when added logic for findPersonInPipedrive vars if require
           // let findPersonInPipedrive = 0;

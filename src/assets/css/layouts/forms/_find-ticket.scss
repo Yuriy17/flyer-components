@@ -1,8 +1,9 @@
 .find-ticket {
   display: flex;
-  width: 330px;
-  margin: 0 auto;
-  padding: 24px;
+  width: 343px;
+  max-width: 100%;
+  margin: 45px auto 0;
+  padding: 24px 19px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -11,16 +12,35 @@
   position: relative;
   z-index: 1;
   @include grid-mn('md') {
+      margin: 33px auto 0;
+    padding: 24px;
     width: 629px;
   }
   // .find-ticket__nav
 
   &__form {
-    padding: 0 5px;
+    padding: 0;
+    @include grid-mn('md') {
+      gap: 16px;
+    }
     sl-input::part(form-control),
     div.form__input {
       box-shadow: 0px 4px 4px 0px rgba(10, 116, 215, 0.1);
       border: none;
+    }
+    sl-input::part(form-control),  div.form__input {
+      height: 79px;
+    }
+    sl-input{
+      &::part(form-control-help-text){
+        margin: 0;
+      }
+    }
+    .form__text {
+      margin: 0;
+    }
+    sl-button[type=submit] {
+      margin-top: 0;
     }
   }
   // .find-ticket__form
@@ -28,7 +48,7 @@
     height: 100%;
     max-width: 100%;
     &::part(nav) {
-      margin: 0 -20px;
+      margin: 0 -5px;
       @include grid-mn('md') {
         margin: 0;
       }
@@ -43,8 +63,9 @@
       display: flex;
       gap: 9px;
       border-bottom: none;
-      padding: 0 5px 24px;
+      padding: 0 0 17px;
       @include grid-mn('md') {
+            gap: 18px;
         justify-content: center;
       }
     }
@@ -55,7 +76,7 @@
       &::part(base) {
         padding: 0 0 0px;
         @include grid-mn('md') {
-          padding: 0 0 20px;
+          // padding: 0 0 20px;
         }
       }
     }
@@ -107,7 +128,7 @@
       position: absolute;
       top: 50%;
       left: auto;
-      right: 16px;
+      right: 4px;
       transform: translateY(-50%);
       z-index: 1;
       @include grid-mn('md') {

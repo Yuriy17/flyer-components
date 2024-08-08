@@ -1,0 +1,14 @@
+<% env.dropdowns.forEach(({title, classes, dropdownItems}) => { %>
+  <sl-dropdown 
+    <% if(classes){ %>class="<%= classes %>"<% } %>
+  >
+    <sl-button slot="trigger" caret><%= title %></sl-button>
+    <sl-menu>
+      <% for (let i = 0; i < dropdownItems.length; i++) { %>
+        <sl-menu-item value="cut">
+          <a href="<%= dropdownItems[i].href %>"><%= dropdownItems[i].text %></a>
+        </sl-menu-item>
+      <% } %>
+    </sl-menu>
+  </sl-dropdown>
+<% }); %>

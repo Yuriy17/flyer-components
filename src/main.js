@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initLazyLoadImage();
   initReviews({ url: `${import.meta.env.VITE_STATIC_PATH}/data/reviews.json` });
   const heroSection = document.querySelector('.hero');
+  console.log("🚀 ~ document.addEventListener ~ heroSection:", heroSection);
   if (heroSection) {
     initHeroSlider({
       heroSection
