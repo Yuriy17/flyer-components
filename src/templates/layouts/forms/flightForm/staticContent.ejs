@@ -5,9 +5,9 @@
     staticDropdownContentObject: {
       dropdownContentPath: 'templates/layouts/dropdowns/passengerDropdownContent.ejs',
       passengersData: [
-        { label: 'Adults', aged: '(12+ years)', id: `adults${env.formName}`, value: '1', class: 'adults' },
-        { label: 'Children', aged: '(2-11 years)', id: `children${env.formName}`, value: '0', class: 'children' },
-        { label: 'Infants', aged: '(Under 2 years)', id: `infants${env.formName}`, value: '0', class: 'infants' },
+        { label: 'Adults', aged: '(12+ years)', id: `${env.formName}Adults`, value: '1', class: 'adults', name: 'adults' },
+        { label: 'Children', aged: '(2-11 years)', id: `${env.formName}Children`, value: '0', class: 'children', name: 'children' },
+        { label: 'Infants', aged: '(Under 2 years)', id: `${env.formName}Infants`, value: '0', class: 'infants', name: 'infants' },
       ],
     },
     inputProps: {
@@ -68,6 +68,7 @@
     tooltip: true,
     classes: 'form__input form__field',
     name: 'email',
+    type: 'email',
     id: `${env.formName}Email`,
     validate: 'email;required',
     label: 'Email address',

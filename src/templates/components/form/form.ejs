@@ -1,6 +1,7 @@
 <form 
   <% if(env.formName){ %>id="<%=env.formName%>"<% } %>
   <% if(env.classes){ %>class="<%=env.classes%>"<% } %>
+  <% if(env.value){ %>data-value="<%=env.value%>"<% } %>
 >
   <% if(env.staticContentPath){ %>
     <%- include(env.staticContentPath) %>

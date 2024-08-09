@@ -13,27 +13,30 @@
     <sl-tab-panel name="round-trip">
       <%- include('templates/components/form/form.ejs', {
         env: {
-          classes: 'find-ticket__form find-ticket__form_round-trip form',
+          classes: 'find-ticket__form find-ticket__form_round-trip form mainForm',
           staticContentPath: 'templates/layouts/forms/flightForm/flightFormContentRoundTrip.ejs',
           formName: 'roundTrip',
+          value: 'Round-trip'
         }
       }) %>
     </sl-tab-panel>
     <sl-tab-panel name="one-way">
       <%- include('templates/components/form/form.ejs', {
         env: {
-          classes: 'find-ticket__form find-ticket__form_one-way form',
+          classes: 'find-ticket__form find-ticket__form_one-way form mainForm',
           staticContentPath: 'templates/layouts/forms/flightForm/flightFormContentOneWay.ejs',
           formName: 'oneWay',
+          value: 'One-way'
         }
       }) %>
     </sl-tab-panel>
     <sl-tab-panel name="multi-city">
       <%- include('templates/components/form/form.ejs', {
         env: {
-          classes: 'find-ticket__form find-ticket__form_multi-city form',
+          classes: 'find-ticket__form find-ticket__form_multi-city form mainForm',
           staticContentPath: 'templates/layouts/forms/flightForm/flightFormContentMultiCity.ejs',
           formName: 'multiCity',
+          value: 'Multi-city'
         }
       }) %>
     </sl-tab-panel>

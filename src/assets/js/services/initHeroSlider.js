@@ -52,7 +52,6 @@ const initSlider = ({
   //   reviewNav,
   // });
 
-  console.log("🚀 ~ swiper ~ sliderBlock.querySelector('.swiper'):", sliderBlock.querySelector('.swiper'));
   // init Swiper:
   // eslint-disable-next-line no-unused-vars
   const swiper = new Swiper(sliderBlock.querySelector('.swiper'), {

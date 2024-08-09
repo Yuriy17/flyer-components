@@ -7,7 +7,7 @@ export const required = ({ value }) => (value && value.toString().trim() !== '')
 export const letters = ({ value }) =>
   (value &&
     !!String(value)
-      .match(/^[a-zA-Z()\-\s]*$/)) ||
+      .match(/^[a-zA-Z()\-.\s]*$/)) ||
   'Only letters and spaces are allowed.';
 
 export const email = ({value}) => value && !!String(value)
@@ -16,15 +16,14 @@ export const email = ({value}) => value && !!String(value)
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 ) || 'Please enter a valid email address. Example: yourname@example.com';
       
-export const phone = ({ value, libsObject }) =>
-  (value && libsObject['phone'].isValidNumber(value)) ||
+export const phone = ({ value, libObjects, fieldName }) =>
+  (value && libObjects && libObjects[fieldName]?.isValidNumber(value)) ||
   'Please enter your phone number, including the country code (e.g., +1 (234) 567-8901).';
 
-export const date = ({ ruleValue, libsObject }) => {
-  console.log("🚀 ~ date ~ ruleValue:", ruleValue);
-  if (libsObject && libsObject['date']) {
-    const { selectedDates } = libsObject['date'];
-    console.log('🚀 ~ date ~ selectedDates:', selectedDates);
+export const date = ({ ruleValue, libObjects, fieldName }) => {
+  console.log('🚀 ~ date ~ libObjects:', libObjects);
+  if (libObjects && libObjects[fieldName]) {
+    const { selectedDates } = libObjects[fieldName];
 
     if (selectedDates && selectedDates.length) {
       switch (ruleValue) {
@@ -46,7 +45,7 @@ export const date = ({ ruleValue, libsObject }) => {
       }
     }
   }
-  
+
   return true;
   // console.log('🚀 ~ setupField ~ datepicker:', datepicker.formatDate(datepicker.viewDate, ));
   // if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) return false;

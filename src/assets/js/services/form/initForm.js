@@ -8,33 +8,41 @@ export const initForm = async (formElement) => {
   if (formElement) {
     let validationStarted = false;
     let dynamicFieldCounter = 0;
+    let libObjects = {};
 
     const addDynamicGroupCallback = async ({ dynamicGroupsElement }) => {
-      const dynamicField = await addDynamicGroup({
+      const { dynamicGroup, dynamicLibObjects } = await addDynamicGroup({
         parentElement: dynamicGroupsElement,
         groupIndex: dynamicFieldCounter,
         formElement,
       });
+      dynamicLibObjects && Object.assign(libObjects, dynamicLibObjects);
+
       dynamicFieldCounter++;
 
-      return dynamicField;
+      return dynamicGroup;
     };
-    let libsObject;
+
     const dynamicGroupsElement = formElement.querySelector('.dynamic-groups');
-    const fieldLibsNames = ['phone', `flight[0]['date']`];
+    // const fieldLibsNames = ['phone', 'date'];
+    const initLibsObject = () => {
+      // Initialize static lib fields
+      const fieldNames = Object.keys(formElement.elements).filter((word) => isNaN(word));
+      Object.assign(
+        libObjects,
+        setupStaticFields({
+          fieldNames: fieldNames,
+          formElement,
+        })
+      );
+    };
+    initLibsObject();
     if (dynamicGroupsElement) {
       const dynamicGroupElement = await addDynamicGroupCallback({ dynamicGroupsElement });
       const addFieldButton = dynamicGroupElement?.querySelector('.dynamic-group__button-add');
+
       addFieldButton?.addEventListener('click', () => addDynamicGroupCallback({ dynamicGroupsElement }));
-      fieldLibsNames.push('passenger');
- 
-    } 
-    // Initialize static lib fields
-    
-    libsObject = setupStaticFields({
-      fieldNames: fieldLibsNames,
-      formElement,
-    });
+    }
 
     formElement.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -46,53 +54,45 @@ export const initForm = async (formElement) => {
         validationStarted: true,
         trigger: true,
         addListener: !validationStarted,
-        libsObject,
+        libObjects,
       });
       formElement.dataset.validationStarted = 'true';
       validationStarted = true;
-      alert(`Form is ${isValidate ? 'valid' : 'invalid'}`);
+      console.log(`Form is ${isValidate ? 'valid' : 'invalid'}`);
       if (isValidate) {
         await unfade(preloader);
+        try {
+          const formName = formElement.getAttribute('name');
+          let messageTitle = 'We appreciate your inquiry!';
+          let message = 'You will be contacted by one of our travel experts shortly.';
+          let isSubscription = 0;
 
-        const formName = formElement.getAttribute('name');
-        const formType = formElement.classList.contains('mainForm');
-        let messageTitle = 'We appreciate your inquiry!';
-        let message = 'You will be contacted by one of our travel experts shortly.';
-        let isSubscription = 0;
+          if (formElement.classList.contains('mainForm')) {
+            // await setPreloader('loading');
 
-        if (!formType) {
-          // await setPreloader('loading');
-          const formEl = new FormData(formElement);
-          const json = Object.fromEntries(formEl.entries());
-          console.log("🚀 ~ formElement.addEventListener ~ json:", json);
+            const formEl = new FormData(formElement);
+            const formElements = Object.fromEntries(formEl.entries());
 
-          // TODO: uncomment when added logic for findPersonInPipedrive vars if require
-          // let findPersonInPipedrive = 0;
+            // const passengerValue = document.querySelector('.number_passengers-all').textContent.trim();
+            const passengerValue = formElements.passenger.split('|')[0].trim();
 
-          if (formName === 'subscription') {
-            isSubscription = 1;
-            messageTitle = 'Thanks for the subscription!';
-            message = 'Please find confirmation email in your inbox.';
-            localStorage.setItem('subscribed', '1');
-          } else {
-            await formSubmit(json);
-            await addLeadToSalesForce(json);
-          }
-        } else {
-          // await setPreloader('loading');
-
-          const passengerValue = document.querySelector('.number_passengers-all').textContent.trim();
-          const formEl = new FormData(formElement);
-          const formElements = Object.fromEntries(formEl.entries());
-          const rowsOfDeparture = document.querySelectorAll('[data-container-field-row-id]');
-          const totalDepartureCount = rowsOfDeparture[rowsOfDeparture.length - 1].getAttribute('data-container-field-row-id');
-          const objFrom = [],
-            objTo = [],
-            objDepartureDate = [],
-            objReturnDate = [];
-
-          for (let i = 0; i <= totalDepartureCount; i++) {
-            if (document.querySelector(`[data-container-field-row-id="${i}"]`)) {
+            const objFrom = [],
+              objTo = [],
+              objDepartureDate = [],
+              objReturnDate = [];
+            let totalDepartureCount = 1;
+            const formResultObj = { ...formElements };
+            formResultObj.fly_trip_type = formElement.dataset.value;
+            const splitedPhone = formResultObj.phone.replaceAll('-', '').split(' ');
+            splitedPhone.shift();
+            formResultObj.phone = splitedPhone.join(''); 
+            formResultObj.passenger && delete formResultObj.passenger;
+                        
+            if (dynamicGroupsElement) {
+              const rowsOfDeparture = dynamicGroupsElement.querySelectorAll('.dynamic-group');
+              totalDepartureCount = rowsOfDeparture.length;
+            }
+            for (let i = 0; i < totalDepartureCount; i++) {
               objFrom.push({
                 cityName: formElements[`flight[${i}]['from']`],
                 airportName: formElements[`flight[${i}]['cityAirport']`],
@@ -105,66 +105,99 @@ export const initForm = async (formElement) => {
                 cityCode: formElements[`flight[${i}]['cityCodeTo']`],
                 entityId: formElements[`flight[${i}]['destinationEntityId']`],
               });
+              const dateNameField = `flight[${i}]['date']`;
+              formResultObj[dateNameField] && delete formResultObj[dateNameField];
+              const dateValues = libObjects[dateNameField].selectedDates;
+              const startDate = dateValues[0].toLocaleDateString();
+              if (dateValues.length === 2) {
+                const endDate = dateValues[1].toLocaleDateString();
+                objReturnDate.push({
+                  date: endDate,
+                });
+                formResultObj[`flight[${i}]['date_end']`] = endDate;
+              }
+              formResultObj[`flight[${i}]['date_start']`] = startDate;
               objDepartureDate.push({
-                date: formElements[`flight[${i}]['date_start']`],
+                date: startDate,
               });
             }
-          }
-          objReturnDate.push({
-            date: formElements["flight[0]['date_end']"],
-          });
+            
+            console.log("🚀 ~ formElement.addEventListener ~ formResultObj:", formResultObj);
 
-          const formData = {
-            flyTripType: {
-              flyTripType: formElements.fly_trip_type,
-            },
-            from: objFrom,
-            to: objTo,
-            departureDate: objDepartureDate,
-            returnDate: objReturnDate,
-            passenger: {
-              type: formElements.type_ticket,
-              allPassenger: passengerValue[0],
-              adults: formElements.adults,
-              children: formElements.children,
-              infants: formElements.infants,
-            },
-          };
-          localStorage.setItem('flightTicketInfo', JSON.stringify(formData));
-          if (formName !== 'flightTickets') {
-            // await setPreloader('searching');
-            // await findFlights({
-            //   flyTripType: formElements.fly_trip_type,
-            //   from: objFrom,
-            //   to: objTo,
-            //   departureDate: objDepartureDate,
-            //   returnDate: objReturnDate,
-            //   type_ticket: formElements.type_ticket,
-            //   adults: formElements.adults,
-            //   children: formElements.children,
-            //   infants: formElements.infants,
-            //   sortBy: 'fastest',
-            // });
-            // await redirectToHowToBook();
-            return;
+            const formData = {
+              flyTripType: {
+                flyTripType: formElement.dataset.value,
+              },
+              from: objFrom,
+              to: objTo,
+              departureDate: objDepartureDate,
+              returnDate: objReturnDate,
+              passenger: {
+                type: formElement.dataset.value,
+                allPassenger: passengerValue,
+                adults: formElements.adults,
+                children: formElements.children,
+                infants: formElements.infants,
+              },
+            };
+
+
+            localStorage.setItem('flightTicketInfo', JSON.stringify(formData));
+            await fadeOut(preloader);
+            // if (formName !== 'flightTickets') {
+              // await setPreloader('searching');
+              // await findFlights({
+              //   flyTripType: formElements.fly_trip_type,
+              //   from: objFrom,
+              //   to: objTo,
+              //   departureDate: objDepartureDate,
+              //   returnDate: objReturnDate,
+              //   type_ticket: formElement.dataset.value,
+              //   adults: formElements.adults,
+              //   children: formElements.children,
+              //   infants: formElements.infants,
+              //   sortBy: 'fastest',
+              // });
+              // await redirectToHowToBook();
+            //   return;
+            // } else {
+              // await setPreloader('loading');
+            //   const formEl = new FormData(formElement);
+            //   const json = Object.fromEntries(formEl.entries());
+
+            //   // let findPersonInPipedrive = 0;
+            //   isSubscription = 0;
+            //   // await formSubmitTicket(json);
+            //   await addLeadToSalesForce(json);
+            // }
           } else {
             // await setPreloader('loading');
             const formEl = new FormData(formElement);
             const json = Object.fromEntries(formEl.entries());
-
+            // TODO: uncomment when added logic for findPersonInPipedrive vars if require
             // let findPersonInPipedrive = 0;
-            isSubscription = 0;
-            // await formSubmitTicket(json);
-            await addLeadToSalesForce(json);
+
+            if (formName === 'subscription') {
+              isSubscription = 1;
+              messageTitle = 'Thanks for the subscription!';
+              message = 'Please find confirmation email in your inbox.';
+              localStorage.setItem('subscribed', '1');
+            } else {
+              await formSubmit(json);
+              await addLeadToSalesForce(json);
+            }
           }
-        }
-        if (isSubscription === 0) {
-          // await redirectToThankYou();
-        } else {
-          let modalSuccess = document.querySelector('.modal-success');
-          modalSuccess.querySelector('.success-title').textContent = messageTitle;
-          modalSuccess.querySelector('.section-contact__description').textContent = message;
-          modalSuccess.style.display = 'block';
+          if (isSubscription === 0) {
+            // await redirectToThankYou();
+          } else {
+            let modalSuccess = document.querySelector('.modal-success');
+            modalSuccess.querySelector('.success-title').textContent = messageTitle;
+            modalSuccess.querySelector('.section-contact__description').textContent = message;
+            modalSuccess.style.display = 'block';
+            await fadeOut(preloader);
+          }
+        } catch (error) {
+          console.log('🚀 ~ formElement.addEventListener ~ error:', error);
           await fadeOut(preloader);
         }
       }

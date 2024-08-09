@@ -1,4 +1,4 @@
-import { fieldsSetupValidation, setupField, setupStaticFields } from './setupFields';
+import { fieldsSetupValidation, setupStaticFields } from './setupFields';
 import { DynamicGroup } from '../../components/form/DynamicGroup';
 import dynamicGroupContentTemplate from 'src/templates/layouts/forms/flightForm/dynamicGroupContent.ejs';
 import buttonTemplate from 'src/templates/components/button/slButton.ejs';
@@ -14,7 +14,8 @@ import { initAirportSearchForm } from './airportSearch/initAirportSearchForm';
 export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }) => {
   const formName = formElement.getAttribute('id');
 
-  if (parentElement) {
+  if(parentElement) {
+    let dynamicLibObjects;
     const buttonAddConfig = {
       classes: 'btn-prefix-icon dynamic-group__button dynamic-group__button-add',
       icon: {
@@ -124,20 +125,15 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
         const fields = dynamicGroup.querySelectorAll('[data-validate]');
 
         // Initialize AirDatepicker for dynamic fields
-        const libsObject = setupStaticFields({
+        dynamicLibObjects = setupStaticFields({
           fieldNames: [`flight[${groupIndex}]['date']`],
           formElement,
         });
         fieldsSetupValidation({
           fields,
           validationStarted: !!formElement.dataset.validationStarted,
-          libsObject,
+          libsObject: dynamicLibObjects,
           addListener: true,
-        });
-
-        setupField({
-          formElement,
-          fieldName: `flight[${groupIndex}]['date']`,
         });
         
         initAirportSearchForm({
@@ -146,6 +142,9 @@ export const addDynamicGroup = async ({ groupIndex, formElement, parentElement }
       },
     });
 
-    return dynamicGroup;
+    return {
+      dynamicGroup,
+      dynamicLibObjects,
+    };
   }
 };

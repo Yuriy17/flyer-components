@@ -131,10 +131,17 @@
         --iti-arrow-padding: 0;
         --iti-spacer-horizontal: 0;
       }
-      &__tel-input {
+      input.iti__tel-input {
         padding-left: 30px;
-        background: transparent;
+
         padding-right: 0;
+
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+          -webkit-box-shadow: 0 0 0 30px white inset!important;
+        }
       }
     }
   }
@@ -259,7 +266,7 @@
     &::part(form-control-label) {
       --sl-spacing-3x-small: 0;
     }
-    &::part(form-control-input){
+    &::part(form-control-input) {
       margin-top: auto;
     }
     &::part(base) {
