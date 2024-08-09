@@ -108,9 +108,9 @@ export const initForm = async (formElement) => {
               const dateNameField = `flight[${i}]['date']`;
               formResultObj[dateNameField] && delete formResultObj[dateNameField];
               const dateValues = libObjects[dateNameField].selectedDates;
-              const startDate = dateValues[0].toLocaleDateString();
+              const startDate = dateValues[0].toLocaleDateString('en-US');
               if (dateValues.length === 2) {
-                const endDate = dateValues[1].toLocaleDateString();
+                const endDate = dateValues[1].toLocaleDateString('en-US');
                 objReturnDate.push({
                   date: endDate,
                 });

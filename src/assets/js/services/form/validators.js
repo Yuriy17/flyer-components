@@ -21,7 +21,6 @@ export const phone = ({ value, libObjects, fieldName }) =>
   'Please enter your phone number, including the country code (e.g., +1 (234) 567-8901).';
 
 export const date = ({ ruleValue, libObjects, fieldName }) => {
-  console.log('🚀 ~ date ~ libObjects:', libObjects);
   if (libObjects && libObjects[fieldName]) {
     const { selectedDates } = libObjects[fieldName];
 
