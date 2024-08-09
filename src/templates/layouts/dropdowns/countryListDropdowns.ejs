@@ -1,5 +1,6 @@
-<% env.dropdowns.forEach(({title, classes, dropdownItems}) => { %>
+<% env.dropdowns.forEach(({title, classes, hoist, dropdownItems}) => { %>
   <sl-dropdown 
+    <% if(hoist) { %>hoist<% } %>
     <% if(classes){ %>class="<%= classes %>"<% } %>
   >
     <sl-button slot="trigger" caret><%= title %></sl-button>

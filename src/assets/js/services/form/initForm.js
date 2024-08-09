@@ -72,7 +72,7 @@ export const initForm = async (formElement) => {
 
             const formEl = new FormData(formElement);
             const formElements = Object.fromEntries(formEl.entries());
-
+            Object.keys(formElements).forEach((key) => (formElements[key] = formElements[key].trim()));
             // const passengerValue = document.querySelector('.number_passengers-all').textContent.trim();
             const passengerValue = formElements.passenger.split('|')[0].trim();
 

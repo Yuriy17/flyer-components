@@ -3,6 +3,7 @@
     staticContentPath: 'templates/layouts/formFields/formField.ejs',
     classes: 'form__input form__passenger',
     staticDropdownContentObject: {
+      hoist: true,
       dropdownContentPath: 'templates/layouts/dropdowns/passengerDropdownContent.ejs',
       passengersData: [
         { label: 'Adults', aged: '(12+ years)', id: `${env.formName}Adults`, value: '1', class: 'adults', name: 'adults' },

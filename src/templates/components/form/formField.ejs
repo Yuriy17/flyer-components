@@ -1,4 +1,6 @@
-<% if(env.staticDropdownContentObject){ %><sl-dropdown  class="form__field-dropdown"><% } %>
+<% if(env.staticDropdownContentObject){ %>
+  <sl-dropdown <% if(env.staticDropdownContentObject.hoist) {%>hoist<% } %> class="form__field-dropdown">
+<% } %>
   <div 
     class="form__field <%= env.classes %>"
     <% if(env.validate){ %>data-validate="<%=env.validate%>" <% } %>
@@ -22,4 +24,6 @@
       env: env.staticDropdownContentObject
     }) %>
   <% } %>
-<% if(env.staticDropdownContentObject){ %></sl-dropdown><% } %>
+<% if(env.staticDropdownContentObject){ %>
+  </sl-dropdown>
+  <% } %>
